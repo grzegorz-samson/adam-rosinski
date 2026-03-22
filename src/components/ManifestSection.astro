@@ -1,0 +1,33 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+import { site } from "../data/site";
+---
+<section id="about-preview" class="shell section-space">
+  <div class="glass-panel p-6 md:p-10">
+    <SectionHeading
+      eyebrow="manifest / biography"
+      title="Dźwięk jako medium percepcji, przestrzeni i decyzji technologicznych."
+      intro="Zamiast urzędowego biogramu — krótki tekst, który spina praktykę i badania."
+    />
+
+    <div class="prose-copy mt-8 grid gap-8 lg:grid-cols-2">
+      <div>
+        <p>
+          {site.shortBio}
+        </p>
+        <p class="mt-4">
+          Punktem styku tych działań jest pytanie o to, jak słyszymy, jak projektujemy warunki słyszenia i jak narzędzia techniczne wpływają na artystyczny kształt doświadczenia dźwiękowego.
+        </p>
+      </div>
+
+      <div>
+        <p>
+          Ta strona jest pomyślana nie jak klasyczne CV naukowca, lecz jak interfejs, który wizualnie tłumaczy relacje między percepcją, rejestracją, przestrzenią i edukacją.
+        </p>
+        <p class="mt-4">
+          W następnych iteracjach można rozwinąć ją o pełne archiwum publikacji, projekty studyjne, materiały audio i dokumentację badawczą.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

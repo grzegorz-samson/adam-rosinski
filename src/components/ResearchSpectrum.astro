@@ -1,0 +1,46 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+import PillTag from "./PillTag.astro";
+
+interface Entry {
+  id: string;
+  data: {
+    title: string;
+    summary: string;
+    tags: string[];
+  };
+}
+
+interface Props {
+  areas: Entry[];
+}
+const { areas } = Astro.props;
+---
+
+<section id="research" class="shell section-space">
+  <SectionHeading
+    eyebrow="research spectrum"
+    title="Pole badawcze zbudowane między percepcją, przestrzenią i praktyką nagraniową."
+    intro="Zamiast zwykłej listy zainteresowań — spektrum tematów, które łączą analityczne myślenie o słyszeniu z realnymi technologiami audio i praktyką studyjną."
+  />
+
+  <div class="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+    {areas.map((area, index) => (
+      <article class={`soft-card flex h-full flex-col p-5 ${index % 2 === 0 ? "xl:translate-y-6" : ""}`}>
+        <div class="mb-6 flex items-center justify-between">
+          <span class="text-sm text-zinc-500">0{index + 1}</span>
+          <span class="mode-dot bg-cyan-300/80"></span>
+        </div>
+
+        <h3 class="text-xl font-semibold text-white">{area.data.title}</h3>
+        <p class="muted mt-4 text-sm leading-7">{area.data.summary}</p>
+
+        <div class="mt-6 flex flex-wrap gap-2">
+          {area.data.tags.map((tag, tagIndex) => (
+            <PillTag label={tag} tone={tagIndex === 0 ? "cyan" : "neutral"} />
+          ))}
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
