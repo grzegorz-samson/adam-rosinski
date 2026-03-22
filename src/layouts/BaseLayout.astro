@@ -4,11 +4,13 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  bodyClass?: string;
 }
 
 const {
   title = "Adam Rosiński — Sound Director / Researcher",
   description = "Landing page badacza i reżysera dźwięku: percepcja, przestrzeń, rejestracja wielokanałowa i nowe technologie.",
+  bodyClass = "",
 } = Astro.props;
 ---
 
@@ -22,7 +24,7 @@ const {
     <meta name="theme-color" content="#070b12" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
-  <body>
+  <body class={bodyClass}>
     <slot />
   </body>
 </html>

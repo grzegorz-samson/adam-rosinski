@@ -1,0 +1,496 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+import { quickLinks } from "../data/links";
+
+const areas = (await getCollection("research-areas")).sort((a, b) => a.data.order - b.data.order);
+const publications = (await getCollection("publications")).sort((a, b) => b.data.year - a.data.year);
+const featured = publications.slice(0, 3);
+---
+
+<BaseLayout
+  title="Alternative Landing — Adam Rosiński"
+  description="Alternatywna wersja landing page: bardziej editorial, jasna i spokojna niż wersja główna."
+  bodyClass="alt-landing"
+>
+  <main class="alt-shell">
+    <section class="alt-hero">
+      <div class="alt-topbar">
+        <a href="/" class="alt-wordmark">{site.name}</a>
+        <div class="alt-actions">
+          <a href="/" class="alt-link">Obecna wersja</a>
+          <a href="#kontakt-alt" class="alt-button alt-button-secondary">Kontakt</a>
+        </div>
+      </div>
+
+      <div class="alt-hero-grid">
+        <div>
+          <p class="alt-kicker">Alternative Direction / Editorial Layout</p>
+          <h1>{site.name}</h1>
+          <p class="alt-role">{site.role}</p>
+          <p class="alt-lead">
+            W tej wersji strona działa bardziej jak esej wizualny niż interfejs laboratoryjny:
+            mniej paneli i sygnałów, więcej rytmu typograficznego, hierarchii treści i spokojnej ekspozycji dorobku.
+          </p>
+
+          <div class="alt-cta-row">
+            <a href="#obszary-alt" class="alt-button">Obszary pracy</a>
+            <a href="#publikacje-alt" class="alt-link">Wybrane publikacje</a>
+          </div>
+        </div>
+
+        <aside class="alt-hero-note">
+          <p class="alt-note-label">Oś strony</p>
+          <p>
+            Percepcja słuchowa, przestrzeń akustyczna, techniki rejestracji i praktyka dydaktyczna
+            zostały tu ułożone jako cztery równoległe wątki jednej działalności.
+          </p>
+
+          <dl class="alt-metrics">
+            <div>
+              <dt>Instytucja</dt>
+              <dd>{site.institution}</dd>
+            </div>
+            <div>
+              <dt>Lokalizacja</dt>
+              <dd>{site.location}</dd>
+            </div>
+            <div>
+              <dt>Email</dt>
+              <dd><a href={`mailto:${site.email}`}>{site.email}</a></dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section id="obszary-alt" class="alt-section">
+      <div class="alt-section-head">
+        <p class="alt-kicker">Research Constellation</p>
+        <h2>Tematy nie jako lista, tylko jako mapa zależności.</h2>
+      </div>
+
+      <div class="alt-areas">
+        {areas.map((area, index) => (
+          <article class="alt-area-card">
+            <p class="alt-area-index">{String(index + 1).padStart(2, "0")}</p>
+            <h3>{area.data.title}</h3>
+            <p>{area.data.summary}</p>
+            <div class="alt-tags">
+              {area.data.tags.map((tag) => <span>{tag}</span>)}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="alt-section alt-statement">
+      <div>
+        <p class="alt-kicker">Statement</p>
+        <h2>Dźwięk jako narzędzie poznania, projektowania i kompozycji uwagi.</h2>
+      </div>
+      <div class="alt-statement-copy">
+        <p>{site.shortBio}</p>
+        <p>
+          Zamiast akcentować technologię jako osobny temat, ta wersja pokazuje ją jako medium,
+          które wpływa na sposób słyszenia, organizowania przestrzeni i budowania doświadczenia odbiorcy.
+        </p>
+        <p>
+          To kierunek bardziej instytucjonalno-redakcyjny. Sprawdzi się, jeśli strona ma być
+          bliżej portfolio akademickiego lub autorskiego statementu niż ekspresyjnego landing page'a.
+        </p>
+      </div>
+    </section>
+
+    <section id="publikacje-alt" class="alt-section">
+      <div class="alt-section-head">
+        <p class="alt-kicker">Selected Publications</p>
+        <h2>Trzy publikacje jako reprezentatywne wejście do dorobku.</h2>
+      </div>
+
+      <div class="alt-publications">
+        {featured.map((publication) => (
+          <article class="alt-publication-card">
+            <div class="alt-publication-meta">
+              <span>{publication.data.year}</span>
+              <a href={publication.data.href} target="_blank" rel="noreferrer">Źródło</a>
+            </div>
+            <h3>{publication.data.title}</h3>
+            <p>{publication.data.summary}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="alt-publication-footer">
+        <a href="/publications" class="alt-link">Pełna lista publikacji</a>
+      </div>
+    </section>
+
+    <section class="alt-section alt-columns">
+      <article>
+        <p class="alt-kicker">Practice</p>
+        <h3>Studio i rejestracja</h3>
+        <p>
+          Rejestracja dźwięku pojawia się tu jako projektowanie perspektywy słuchowej, a nie tylko
+          techniczne utrwalenie materiału.
+        </p>
+      </article>
+
+      <article>
+        <p class="alt-kicker">Space</p>
+        <h3>Myślenie wielokanałowe</h3>
+        <p>
+          Stereo, surround i rozwiązania multichannel budują własny język przestrzeni, kierunku
+          i relacji między źródłem a otoczeniem.
+        </p>
+      </article>
+
+      <article>
+        <p class="alt-kicker">Education</p>
+        <h3>Dydaktyka i narzędzia</h3>
+        <p>
+          Technologie audio są częścią procesu nauczania, a nie wyłącznie zestawem pomocniczych narzędzi.
+        </p>
+      </article>
+    </section>
+
+    <section id="kontakt-alt" class="alt-section alt-contact">
+      <div>
+        <p class="alt-kicker">Contact / Collaboration</p>
+        <h2>Wersja bardziej spokojna, czytelna i instytucjonalna.</h2>
+        <p>
+          Jeśli chcesz, mogę przygotować też trzeci wariant: bardziej minimalistyczny albo bardziej
+          eksperymentalny niż te dwa obecne kierunki.
+        </p>
+      </div>
+
+      <div class="alt-contact-box">
+        <p><strong>{site.institution}</strong></p>
+        <p>{site.location}</p>
+        <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+        <div class="alt-contact-links">
+          {quickLinks.map((link) => (
+            <a href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style is:global>
+  body.alt-landing {
+    background:
+      radial-gradient(circle at top left, rgba(238, 180, 90, 0.18), transparent 28%),
+      linear-gradient(180deg, #f6f0e7 0%, #f4eee5 38%, #efe7dc 100%);
+    color: #1d1812;
+    font-family: Georgia, "Times New Roman", serif;
+  }
+
+  .alt-landing a {
+    color: inherit;
+  }
+
+  .alt-shell {
+    width: min(1180px, calc(100% - 3rem));
+    margin: 0 auto;
+    padding: 2rem 0 5rem;
+  }
+
+  .alt-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 0 2.5rem;
+  }
+
+  .alt-wordmark {
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-family: "Segoe UI", sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .alt-actions,
+  .alt-cta-row,
+  .alt-contact-links,
+  .alt-tags,
+  .alt-publication-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  .alt-button,
+  .alt-button-secondary,
+  .alt-link {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 0.92rem;
+  }
+
+  .alt-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: #1f4d46;
+    color: #f6f0e7;
+    padding: 0.9rem 1.2rem;
+    text-decoration: none;
+  }
+
+  .alt-button-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: 1px solid rgba(29, 24, 18, 0.18);
+    padding: 0.9rem 1.2rem;
+    text-decoration: none;
+    background: transparent;
+    color: inherit;
+  }
+
+  .alt-link {
+    text-decoration: underline;
+    text-decoration-color: rgba(29, 24, 18, 0.35);
+    text-underline-offset: 0.25em;
+  }
+
+  .alt-hero {
+    padding: 1rem 0 4rem;
+  }
+
+  .alt-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.75fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .alt-kicker,
+  .alt-note-label,
+  .alt-area-index {
+    font-family: "Segoe UI", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.76rem;
+    color: rgba(29, 24, 18, 0.64);
+  }
+
+  .alt-hero h1,
+  .alt-section h2 {
+    text-wrap: balance;
+  }
+
+  .alt-hero h1 {
+    margin-top: 1rem;
+    font-size: clamp(3.6rem, 8vw, 7.2rem);
+    line-height: 0.95;
+    font-weight: 600;
+    max-width: 11ch;
+  }
+
+  .alt-role {
+    margin-top: 1.25rem;
+    font-size: clamp(1.15rem, 2vw, 1.55rem);
+    line-height: 1.5;
+    max-width: 30ch;
+  }
+
+  .alt-lead,
+  .alt-statement-copy p,
+  .alt-publication-card p,
+  .alt-columns p,
+  .alt-contact p,
+  .alt-area-card p,
+  .alt-hero-note p,
+  .alt-contact-box p {
+    font-size: 1.04rem;
+    line-height: 1.9;
+    color: rgba(29, 24, 18, 0.84);
+  }
+
+  .alt-lead {
+    margin-top: 1.6rem;
+    max-width: 58ch;
+  }
+
+  .alt-cta-row {
+    margin-top: 2rem;
+    align-items: center;
+  }
+
+  .alt-hero-note,
+  .alt-publication-card,
+  .alt-area-card,
+  .alt-contact-box,
+  .alt-columns article {
+    background: rgba(255, 250, 244, 0.62);
+    border: 1px solid rgba(29, 24, 18, 0.1);
+    border-radius: 1.75rem;
+    box-shadow: 0 18px 40px rgba(102, 74, 42, 0.08);
+  }
+
+  .alt-hero-note {
+    padding: 1.5rem;
+    position: sticky;
+    top: 1.5rem;
+  }
+
+  .alt-metrics {
+    margin-top: 1.5rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .alt-metrics dt {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgba(29, 24, 18, 0.56);
+  }
+
+  .alt-metrics dd {
+    margin-top: 0.35rem;
+    line-height: 1.7;
+  }
+
+  .alt-section {
+    padding: 2rem 0 3rem;
+    border-top: 1px solid rgba(29, 24, 18, 0.12);
+  }
+
+  .alt-section-head {
+    display: grid;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+    max-width: 54rem;
+  }
+
+  .alt-section h2 {
+    font-size: clamp(2rem, 3.6vw, 3.5rem);
+    line-height: 1.05;
+    font-weight: 600;
+  }
+
+  .alt-areas {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .alt-area-card,
+  .alt-publication-card,
+  .alt-columns article {
+    padding: 1.35rem;
+  }
+
+  .alt-area-card h3,
+  .alt-publication-card h3,
+  .alt-columns h3 {
+    margin-top: 0.85rem;
+    font-size: 1.45rem;
+    line-height: 1.2;
+  }
+
+  .alt-tags {
+    margin-top: 1rem;
+  }
+
+  .alt-tags span {
+    border-bottom: 1px solid rgba(29, 24, 18, 0.16);
+    padding-bottom: 0.15rem;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 0.82rem;
+    color: rgba(29, 24, 18, 0.68);
+  }
+
+  .alt-statement {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 2rem;
+  }
+
+  .alt-statement-copy {
+    display: grid;
+    gap: 1.2rem;
+  }
+
+  .alt-publications {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .alt-publication-meta {
+    justify-content: space-between;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    color: rgba(29, 24, 18, 0.62);
+  }
+
+  .alt-publication-footer {
+    margin-top: 1.25rem;
+  }
+
+  .alt-columns {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .alt-contact {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .alt-contact-box {
+    padding: 1.5rem;
+  }
+
+  .alt-contact-links {
+    margin-top: 1.2rem;
+  }
+
+  @media (max-width: 1100px) {
+    .alt-areas,
+    .alt-publications,
+    .alt-columns {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 840px) {
+    .alt-shell {
+      width: min(100% - 1.5rem, 1180px);
+    }
+
+    .alt-hero-grid,
+    .alt-statement,
+    .alt-contact,
+    .alt-areas,
+    .alt-publications,
+    .alt-columns {
+      grid-template-columns: 1fr;
+    }
+
+    .alt-topbar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .alt-hero-note {
+      position: static;
+    }
+  }
+</style>
