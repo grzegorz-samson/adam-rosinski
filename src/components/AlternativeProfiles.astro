@@ -1,0 +1,112 @@
+---
+import { quickLinks } from "../data/links";
+
+const profileDescriptions: Record<string, string> = {
+  "Profil UWM": "Profil instytucjonalny z informacjami o afiliacji, działalności i obecności na Wydziale Sztuki.",
+  "Google Scholar": "Zestawienie publikacji, cytowań i indeksowanych prac dostępnych w ekosystemie Google Scholar.",
+  SciProfiles: "Profil badawczy porządkujący aktywność naukową, publikacje i powiązania tematyczne.",
+};
+---
+
+<section id="profile-naukowe-alt" class="alt-section">
+  <div class="alt-heading">
+    <p class="alt-kicker">Profile naukowe</p>
+    <h2>Badania</h2>
+    <p>
+      Profile instytucjonalne i bibliograficzne pozwalają szybko przejść do publikacji, dorobku oraz informacji afiliacyjnych.
+    </p>
+  </div>
+
+  <div class="alt-grid">
+    {quickLinks.map((link) => (
+      <a href={link.href} target="_blank" rel="noreferrer" class="alt-profile-card">
+        <p class="alt-kicker">{link.label}</p>
+        <h3>{link.label}</h3>
+        <p>{profileDescriptions[link.label] ?? "Zewnętrzny profil dokumentujący działalność naukową i publikacyjną."}</p>
+        <span>Zobacz profil</span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .alt-section {
+    padding: 4.5rem 0;
+  }
+
+  .alt-heading {
+    max-width: 58rem;
+    margin-bottom: 2rem;
+  }
+
+  .alt-kicker {
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: #56d8ff;
+  }
+
+  .alt-heading h2 {
+    margin-top: 0.8rem;
+    color: #fff;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  .alt-heading p:last-child,
+  .alt-profile-card p:last-of-type {
+    margin-top: 1rem;
+    color: #a1a1aa;
+    line-height: 1.85;
+  }
+
+  .alt-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .alt-profile-card {
+    display: block;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 1.5rem;
+    color: inherit;
+    text-decoration: none;
+    backdrop-filter: blur(12px);
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      background 180ms ease;
+  }
+
+  .alt-profile-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(86, 216, 255, 0.4);
+    background: rgba(255, 255, 255, 0.055);
+  }
+
+  .alt-profile-card h3 {
+    margin-top: 0.9rem;
+    color: #fff;
+    font-size: 1.32rem;
+    line-height: 1.25;
+  }
+
+  .alt-profile-card span {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #56d8ff;
+    font-weight: 600;
+  }
+
+  @media (max-width: 1080px) {
+    .alt-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,38 @@
+<svg width="800" height="1000" viewBox="0 0 800 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="1000" rx="48" fill="#090D15"/>
+  <rect x="32" y="32" width="736" height="936" rx="34" fill="url(#bg)"/>
+  <circle cx="574" cy="266" r="142" fill="url(#sphere)"/>
+  <circle cx="574" cy="266" r="184" stroke="#56D8FF" stroke-width="2" opacity="0.22"/>
+  <circle cx="574" cy="266" r="114" stroke="#F5F7FA" stroke-width="2" opacity="0.3"/>
+  <path d="M430 266H718" stroke="#F5F7FA" stroke-width="2" opacity="0.35"/>
+  <path d="M574 122V410" stroke="#F5F7FA" stroke-width="2" opacity="0.35"/>
+  <path d="M474 178C512 206 536 236 548 266C560 296 562 336 552 374" stroke="#56D8FF" stroke-width="3" opacity="0.82"/>
+  <path d="M676 178C638 206 614 236 602 266C590 296 588 336 598 374" stroke="#FFB347" stroke-width="3" opacity="0.72"/>
+  <text x="96" y="128" fill="#56D8FF" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="6">
+    MULTICHANNEL RECORDING
+  </text>
+  <text x="96" y="678" fill="#F5F7FA" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700">
+    <tspan x="96" dy="0">Spherical</tspan>
+    <tspan x="96" dy="70">Microphone</tspan>
+    <tspan x="96" dy="70">Prototype</tspan>
+  </text>
+  <text x="96" y="884" fill="#C6CDD8" font-family="Arial, Helvetica, sans-serif" font-size="28" letter-spacing="4">
+    DESIGN / RECORDING / COMPOSITION
+  </text>
+  <text x="96" y="936" fill="#8A95A6" font-family="Arial, Helvetica, sans-serif" font-size="30">
+    Adam Rosinski
+  </text>
+  <defs>
+    <linearGradient id="bg" x1="82" y1="70" x2="726" y2="944" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E1826"/>
+      <stop offset="0.56" stop-color="#161223"/>
+      <stop offset="1" stop-color="#1D140E"/>
+    </linearGradient>
+    <radialGradient id="sphere" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(538 214) rotate(55.3889) scale(242.764)">
+      <stop stop-color="#E7ECF4"/>
+      <stop offset="0.25" stop-color="#9BC8FF"/>
+      <stop offset="0.56" stop-color="#5E7FE3"/>
+      <stop offset="1" stop-color="#1B243A"/>
+    </radialGradient>
+  </defs>
+</svg>

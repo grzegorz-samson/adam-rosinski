@@ -1,0 +1,364 @@
+---
+import { withBase } from "../utils/withBase";
+
+const modes = [
+  {
+    key: "percepcja",
+    title: "Percepcja",
+    intro:
+      "Dźwięk nie pojawia się dla słuchacza jako neutralny strumień danych. Jest organizowany, grupowany i rozdzielany w dynamiczne struktury percepcyjne.",
+    href: withBase("/about"),
+    cta: "Zobacz więcej",
+    accent: "cyan",
+  },
+  {
+    key: "rejestracja",
+    title: "Rejestracja",
+    intro:
+      "Rejestracja projektuje punkt słyszenia, kierunek uwagi i relacje między źródłem a przestrzenią. Mikrofon staje się narzędziem interpretacji.",
+    href: withBase("/publications"),
+    cta: "Przejdź do publikacji",
+    accent: "amber",
+  },
+  {
+    key: "przestrzen",
+    title: "Przestrzeń",
+    intro:
+      "Przestrzeń akustyczna działa jednocześnie jako właściwość fizyczna i doświadczenie słuchowe. W nagraniu może być odwzorowywana, interpretowana albo komponowana.",
+    href: withBase("/publications"),
+    cta: "Zobacz obszar",
+    accent: "emerald",
+  },
+  {
+    key: "edukacja",
+    title: "Edukacja",
+    intro:
+      "Nowe technologie audio współtworzą współczesne środowisko dydaktyczne: laboratorium, studio i narzędzie myślenia o muzyce oraz słyszeniu.",
+    href: withBase("/projects"),
+    cta: "Zobacz praktykę",
+    accent: "neutral",
+  },
+];
+---
+
+<section id="pole-sluchowe-alt" class="alt-section">
+  <div class="alt-panel">
+    <div class="alt-grid">
+      <div>
+        <h2>Obszary pracy</h2>
+        <p class="alt-copy">
+          Cztery uzupełniające się pola tworzą wspólny obszar pracy: od badań nad słyszeniem, przez techniki rejestracji,
+          po myślenie o przestrzeni akustycznej i wykorzystanie technologii audio w dydaktyce.
+        </p>
+
+        <div class="alt-buttons" data-alt-mode-buttons>
+          {modes.map((mode, index) => (
+            <article class={`alt-mode-button ${index === 0 ? "is-active" : ""}`} data-alt-mode-card={mode.key}>
+              <div class="alt-mode-row">
+                <button
+                  type="button"
+                  class="alt-mode-trigger"
+                  data-alt-mode={mode.key}
+                  aria-pressed={index === 0 ? "true" : "false"}
+                >
+                  <span class={`alt-dot alt-dot-${mode.accent}`}></span>
+                  <span class="alt-mode-copy">
+                    <strong>{mode.title}</strong>
+                    <small>{mode.intro}</small>
+                  </span>
+                </button>
+                <a href={mode.href} class="alt-mode-link">{mode.cta}</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div class="alt-visual">
+        <svg viewBox="0 0 700 520" class="alt-svg" aria-hidden="true">
+          <g opacity="0.12" stroke="white">
+            <circle cx="350" cy="260" r="70"></circle>
+            <circle cx="350" cy="260" r="145"></circle>
+            <circle cx="350" cy="260" r="220"></circle>
+          </g>
+
+          <g data-alt-group="percepcja">
+            <path class="alt-line" d="M90 150 C 180 220, 240 180, 350 260 S 520 330, 615 205" fill="none" stroke="rgba(103,232,249,0.92)" stroke-width="3"></path>
+            <path class="alt-line" d="M110 355 C 195 305, 255 325, 350 260 S 505 225, 585 330" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2"></path>
+            <circle class="alt-node" cx="95" cy="150" r="8" fill="rgba(103,232,249,0.95)"></circle>
+            <circle class="alt-node" cx="220" cy="196" r="7" fill="rgba(255,255,255,0.82)"></circle>
+            <circle class="alt-node" cx="350" cy="260" r="10" fill="rgba(251,191,36,0.95)"></circle>
+            <circle class="alt-node" cx="485" cy="288" r="7" fill="rgba(255,255,255,0.82)"></circle>
+            <circle class="alt-node" cx="610" cy="205" r="8" fill="rgba(103,232,249,0.95)"></circle>
+          </g>
+
+          <g data-alt-group="rejestracja" opacity="0.22">
+            <path class="alt-line" d="M145 260 L 560 260" fill="none" stroke="rgba(251,191,36,0.92)" stroke-width="3"></path>
+            <path class="alt-line" d="M350 80 L 350 440" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="2"></path>
+            <path class="alt-line" d="M220 130 L 480 390" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="2"></path>
+            <path class="alt-line" d="M220 390 L 480 130" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="2"></path>
+            <circle class="alt-node" cx="350" cy="260" r="14" fill="rgba(251,191,36,0.95)"></circle>
+            <circle class="alt-node" cx="350" cy="150" r="7" fill="rgba(255,255,255,0.82)"></circle>
+            <circle class="alt-node" cx="455" cy="260" r="7" fill="rgba(255,255,255,0.82)"></circle>
+            <circle class="alt-node" cx="350" cy="370" r="7" fill="rgba(255,255,255,0.82)"></circle>
+            <circle class="alt-node" cx="245" cy="260" r="7" fill="rgba(255,255,255,0.82)"></circle>
+          </g>
+
+          <g data-alt-group="przestrzen" opacity="0.22">
+            <circle class="alt-node" cx="350" cy="260" r="18" fill="rgba(110,231,183,0.92)"></circle>
+            <circle class="alt-node" cx="350" cy="95" r="7" fill="rgba(255,255,255,0.85)"></circle>
+            <circle class="alt-node" cx="520" cy="260" r="7" fill="rgba(255,255,255,0.85)"></circle>
+            <circle class="alt-node" cx="350" cy="425" r="7" fill="rgba(255,255,255,0.85)"></circle>
+            <circle class="alt-node" cx="180" cy="260" r="7" fill="rgba(255,255,255,0.85)"></circle>
+            <path class="alt-line" d="M350 95 Q 450 160, 520 260 Q 445 350, 350 425 Q 250 350, 180 260 Q 245 160, 350 95Z" fill="none" stroke="rgba(110,231,183,0.78)" stroke-width="3"></path>
+          </g>
+
+          <g data-alt-group="edukacja" opacity="0.22">
+            <rect x="175" y="135" width="110" height="82" rx="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"></rect>
+            <rect x="300" y="135" width="110" height="82" rx="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"></rect>
+            <rect x="425" y="135" width="110" height="82" rx="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"></rect>
+            <rect x="175" y="300" width="110" height="82" rx="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"></rect>
+            <rect x="300" y="300" width="110" height="82" rx="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"></rect>
+            <rect x="425" y="300" width="110" height="82" rx="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"></rect>
+            <path class="alt-line" d="M285 176 L 300 176" fill="none" stroke="rgba(255,255,255,0.24)" stroke-width="2"></path>
+            <path class="alt-line" d="M410 176 L 425 176" fill="none" stroke="rgba(255,255,255,0.24)" stroke-width="2"></path>
+            <path class="alt-line" d="M355 217 L 355 300" fill="none" stroke="rgba(255,255,255,0.24)" stroke-width="2"></path>
+            <circle class="alt-node" cx="355" cy="260" r="9" fill="rgba(255,255,255,0.85)"></circle>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline define:vars={{ modes }}>
+  const initAltAuditoryField = () => {
+    const buttons = Array.from(document.querySelectorAll("[data-alt-mode]"));
+    const groups = Array.from(document.querySelectorAll("[data-alt-group]"));
+    const cards = Array.from(document.querySelectorAll("[data-alt-mode-card]"));
+    if (!buttons.length || !groups.length) return;
+
+    const setMode = (key) => {
+      buttons.forEach((button) => {
+        const active = button.getAttribute("data-alt-mode") === key;
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+
+      cards.forEach((card) => {
+        const active = card.getAttribute("data-alt-mode-card") === key;
+        card.classList.toggle("is-active", active);
+      });
+
+      groups.forEach((group) => {
+        const active = group.getAttribute("data-alt-group") === key;
+        group.setAttribute("opacity", active ? "1" : "0.16");
+      });
+    };
+
+    buttons.forEach((button) => {
+      if (button.dataset.bound === "true") return;
+      button.dataset.bound = "true";
+      button.addEventListener("click", () => setMode(button.getAttribute("data-alt-mode")));
+    });
+
+    setMode("percepcja");
+  };
+
+  initAltAuditoryField();
+</script>
+
+<style>
+  .alt-section {
+    padding: 4.5rem 0;
+  }
+
+  .alt-panel {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 1.5rem;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
+  }
+
+  .alt-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .alt-kicker {
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: #56d8ff;
+  }
+
+  h2 {
+    margin-top: 0.8rem;
+    color: #fff;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  .alt-copy {
+    margin-top: 1rem;
+    max-width: 52rem;
+    color: #a1a1aa;
+    line-height: 1.85;
+  }
+
+  .alt-buttons {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .alt-mode-button {
+    display: grid;
+    gap: 0.85rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    transition:
+      border-color 180ms ease,
+      background 180ms ease,
+      transform 180ms ease;
+  }
+
+  .alt-mode-trigger {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    gap: 0.8rem;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .alt-mode-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .alt-mode-button.is-active {
+    border-color: rgba(86, 216, 255, 0.35);
+    background: rgba(86, 216, 255, 0.09);
+  }
+
+  .alt-mode-button:hover {
+    transform: translateY(-2px);
+  }
+
+  .alt-mode-button strong {
+    display: block;
+    color: #fff;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+
+  .alt-mode-button small {
+    display: block;
+    margin-top: 0.35rem;
+    color: #d4d4d8;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+
+  .alt-mode-copy {
+    flex: 1 1 auto;
+  }
+
+  .alt-dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 999px;
+  }
+
+  .alt-dot-cyan {
+    background: #56d8ff;
+  }
+
+  .alt-dot-amber {
+    background: #ffb347;
+  }
+
+  .alt-dot-emerald {
+    background: #34d399;
+  }
+
+  .alt-dot-neutral {
+    background: rgba(255, 255, 255, 0.75);
+  }
+
+  .alt-mode-link {
+    flex: 0 0 auto;
+    align-self: center;
+    margin-left: auto;
+    color: #56d8ff;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .alt-mode-link:hover {
+    color: #fff;
+  }
+
+  @media (max-width: 720px) {
+    .alt-mode-row,
+    .alt-mode-trigger {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .alt-mode-link {
+      margin-left: 0;
+      padding-left: 1.35rem;
+    }
+  }
+
+  .alt-visual {
+    display: grid;
+    place-items: center;
+    position: relative;
+    min-height: 33rem;
+    padding: 0.5rem 0;
+    align-self: center;
+  }
+
+  .alt-svg {
+    display: block;
+    width: min(100%, 36rem);
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .alt-node,
+  .alt-line {
+    transition: opacity 220ms ease, transform 220ms ease, stroke-width 220ms ease;
+  }
+
+  @media (max-width: 1080px) {
+    .alt-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .alt-panel {
+      padding: 1.2rem;
+    }
+  }
+</style>

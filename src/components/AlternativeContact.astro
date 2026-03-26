@@ -1,0 +1,80 @@
+---
+import { site } from "../data/site";
+---
+
+<footer id="kontakt-alt" class="alt-footer">
+  <div class="alt-grid">
+    <div>
+      <p class="alt-kicker">Kontakt</p>
+      <h2>Współpraca badawcza, konsultacje, projekty artystyczne i działania dydaktyczne.</h2>
+    </div>
+
+    <div class="alt-info">
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+      <p>{site.location}</p>
+      <p>{site.institution}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .alt-footer {
+    padding: 4.5rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .alt-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    align-items: end;
+  }
+
+  .alt-kicker {
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: #56d8ff;
+  }
+
+  h2 {
+    margin-top: 0.8rem;
+    color: #fff;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  p {
+    margin-top: 1rem;
+    color: #a1a1aa;
+    line-height: 1.85;
+  }
+
+  .alt-info {
+    display: grid;
+    gap: 0.5rem;
+    justify-items: end;
+    text-align: right;
+    font-size: 0.95rem;
+  }
+
+  .alt-info a:first-child {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  @media (max-width: 1080px) {
+    .alt-grid {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .alt-info {
+      justify-items: start;
+      text-align: left;
+    }
+  }
+</style>

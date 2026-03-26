@@ -1,0 +1,29 @@
+<svg width="800" height="1000" viewBox="0 0 800 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="1000" rx="48" fill="#081019"/>
+  <rect x="32" y="32" width="736" height="936" rx="34" fill="url(#bg)"/>
+  <circle cx="628" cy="236" r="178" fill="#56D8FF" fill-opacity="0.18"/>
+  <circle cx="572" cy="206" r="110" stroke="#56D8FF" stroke-width="3" opacity="0.8"/>
+  <circle cx="516" cy="286" r="84" stroke="#8A7DFF" stroke-width="3" opacity="0.75"/>
+  <circle cx="650" cy="320" r="66" stroke="#FFB347" stroke-width="3" opacity="0.72"/>
+  <text x="96" y="120" fill="#56D8FF" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="6">
+    AUDITORY PERCEPTION
+  </text>
+  <text x="96" y="624" fill="#F5F7FA" font-family="Arial, Helvetica, sans-serif" font-size="60" font-weight="700">
+    <tspan x="96" dy="0">Multivariantism</tspan>
+    <tspan x="96" dy="72">of Auditory</tspan>
+    <tspan x="96" dy="72">Perceptions</tspan>
+  </text>
+  <text x="96" y="856" fill="#C6CDD8" font-family="Arial, Helvetica, sans-serif" font-size="28" letter-spacing="4">
+    SCENE ANALYSIS / PERCEPTION / THEORY
+  </text>
+  <text x="96" y="910" fill="#8A95A6" font-family="Arial, Helvetica, sans-serif" font-size="30">
+    Adam Rosinski
+  </text>
+  <defs>
+    <linearGradient id="bg" x1="78" y1="64" x2="722" y2="930" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E1D2B"/>
+      <stop offset="0.48" stop-color="#11152A"/>
+      <stop offset="1" stop-color="#20130F"/>
+    </linearGradient>
+  </defs>
+</svg>

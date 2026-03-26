@@ -1,6 +1,7 @@
 ---
 import SectionHeading from "./SectionHeading.astro";
 import PublicationCard from "./PublicationCard.astro";
+import { withBase } from "../utils/withBase";
 
 interface Entry {
   id: string;
@@ -26,7 +27,7 @@ const { publications } = Astro.props;
       title="Wybrane publikacje jako punkty wejścia do jego pola pracy."
       intro="Sekcja może później przejść w pełną podstronę z filtrami, DOI, abstraktami i metadanymi."
     />
-    <a href="/publications" class="button-secondary self-start">See all publications</a>
+    <a href={withBase("/publications")} class="button-secondary self-start">See all publications</a>
   </div>
 
   <div class="mt-12 grid gap-5 md:grid-cols-2">

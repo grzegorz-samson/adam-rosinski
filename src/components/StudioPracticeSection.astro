@@ -1,11 +1,12 @@
 ---
 import SectionHeading from "./SectionHeading.astro";
+import { withBase } from "../utils/withBase";
 ---
 <section id="practice" class="shell section-space">
   <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
     <div class="glass-panel relative overflow-hidden p-3">
       <img
-        src="/images/placeholder-studio.svg"
+        src={withBase("/images/placeholder-studio.svg")}
         alt="Abstrakcyjna ilustracja przestrzeni studyjnej i pola akustycznego"
         class="h-full min-h-[22rem] w-full rounded-[1.35rem] object-cover"
       />
