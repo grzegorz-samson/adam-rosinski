@@ -1,0 +1,162 @@
+---
+const cards = [
+  {
+    title: "Rejestracja studyjna",
+    role:
+      "Projektowanie perspektywy słuchowej, planu i relacji źródeł w nagraniu; od decyzji mikrofonowych po finalny obraz przestrzenny.",
+    category: "Studio",
+    year: "Praktyka",
+  },
+  {
+    title: "Myślenie wielokanałowe",
+    role:
+      "Praca z systemami stereo, surround i multichannel jako osobnym językiem organizowania przestrzeni, kierunku i percepcji słuchowej.",
+    category: "Przestrzeń",
+    year: "Badania",
+  },
+  {
+    title: "Technologie w dydaktyce",
+    role:
+      "Wykorzystanie środowisk audio i narzędzi cyfrowych jako pełnoprawnego medium uczenia słyszenia, analizy i praktyki realizatorskiej.",
+    category: "Edukacja",
+    year: "Uczelnia",
+  },
+  {
+    title: "Prototypy i eksperyment",
+    role:
+      "Rozwijanie rozwiązań związanych z mikrofonami, rejestracją przestrzenną i przekładaniem wyników badań na praktyczne formy pracy z dźwiękiem.",
+    category: "R&D",
+    year: "Rozwój",
+  },
+];
+---
+
+<section id="praktyka-alt" class="alt-section">
+  <div class="alt-heading">
+    <p class="alt-kicker">Praktyka studyjna</p>
+    <h2>Praktyka studyjna</h2>
+    <p>
+      Ten blok pokazuje, w jaki sposób badania nad słyszeniem przekładają się na decyzje dotyczące nagrań,
+      przestrzeni akustycznej oraz sposobu pracy w środowiskach audio.
+    </p>
+  </div>
+
+  <div class="alt-grid">
+    {cards.map((card) => (
+      <article class="alt-card">
+        <div class="alt-card-head">
+          <div>
+            <p class="alt-kicker">{card.category}</p>
+            <h3>{card.title}</h3>
+          </div>
+          <span>{card.year}</span>
+        </div>
+        <p>{card.role}</p>
+        <div class="alt-bar"><span></span></div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .alt-section {
+    padding: 4.5rem 0;
+  }
+
+  .alt-heading {
+    max-width: 58rem;
+    margin-bottom: 2rem;
+  }
+
+  .alt-kicker,
+  .alt-card-head span {
+    font-family: "JetBrains Mono", "Consolas", monospace;
+  }
+
+  .alt-kicker {
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: #56d8ff;
+  }
+
+  .alt-heading h2 {
+    margin-top: 0.8rem;
+    color: #fff;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  .alt-heading p:last-child,
+  .alt-card p {
+    margin-top: 1rem;
+    color: #a1a1aa;
+    line-height: 1.85;
+  }
+
+  .alt-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .alt-card {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 1.5rem;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
+  }
+
+  .alt-card-head {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .alt-card-head h3 {
+    margin-top: 0.9rem;
+    color: #fff;
+    font-size: 1.32rem;
+    line-height: 1.25;
+  }
+
+  .alt-card-head span {
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #71717a;
+  }
+
+  .alt-bar {
+    margin-top: 1.4rem;
+    height: 0.35rem;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .alt-bar span {
+    display: block;
+    width: 66%;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #56d8ff, #8a7dff, #ffb347);
+    transition: width 220ms ease;
+  }
+
+  .alt-card:hover .alt-bar span {
+    width: 100%;
+  }
+
+  @media (max-width: 1080px) {
+    .alt-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

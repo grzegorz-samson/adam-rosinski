@@ -1,0 +1,97 @@
+---
+import { site } from "../data/site";
+---
+
+<section id="o-mnie-alt" class="alt-section">
+  <div class="alt-bento">
+    <div class="alt-copy">
+      <p class="alt-kicker">O mnie</p>
+      <h2>Badania nad słyszeniem rozwijane na styku teorii, technologii i praktyki nagraniowej.</h2>
+      <p>
+        Adam Rosiński prowadzi działalność badawczą i artystyczną skoncentrowaną na percepcji słuchowej, organizacji sceny akustycznej,
+        rejestracji przestrzennej i współczesnych technologiach audio. W jego pracy spotykają się refleksja nad sposobem słyszenia,
+        praktyka studyjna oraz projektowanie warunków odbioru dźwięku.
+      </p>
+    </div>
+
+    <div class="alt-metrics">
+      <article class="alt-metric-card">
+        <span>Afiliacja</span>
+        <strong>{site.institution}</strong>
+      </article>
+      <article class="alt-metric-card">
+        <span>Specjalizacja</span>
+        <strong>Percepcja, przestrzeń, rejestracja</strong>
+      </article>
+      <article class="alt-metric-card">
+        <span>Lokalizacja</span>
+        <strong>{site.location}</strong>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .alt-section {
+    padding: 4.5rem 0;
+  }
+
+  .alt-bento {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    gap: 2rem;
+  }
+
+  .alt-kicker,
+  .alt-metric-card span {
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: #56d8ff;
+  }
+
+  .alt-copy h2 {
+    margin-top: 0.8rem;
+    color: #fff;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  .alt-copy p {
+    margin-top: 1rem;
+    max-width: 52rem;
+    color: #a1a1aa;
+    line-height: 1.85;
+  }
+
+  .alt-metrics {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .alt-metric-card {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 1.3rem;
+    backdrop-filter: blur(12px);
+  }
+
+  .alt-metric-card strong {
+    display: block;
+    margin-top: 0.55rem;
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 1080px) {
+    .alt-bento {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

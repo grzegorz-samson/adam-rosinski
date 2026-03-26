@@ -1,0 +1,292 @@
+---
+import { site } from "../data/site";
+import { withBase } from "../utils/withBase";
+---
+
+<section class="alt-hero-shell">
+  <div class="alt-hero-frame">
+    <canvas id="alt-hero-canvas" class="alt-hero-canvas" aria-hidden="true"></canvas>
+
+    <div class="alt-hero-content">
+      <div class="alt-hero-grid">
+        <div class="alt-hero-main">
+          <p class="alt-kicker">Badacz dźwięku / reżyseria / nowe technologie</p>
+          <h1>{site.name}</h1>
+          <p class="alt-role">{site.role}</p>
+          <p class="alt-lead">
+            Badania nad dźwiękiem jako zjawiskiem percepcyjnym, przestrzennym i technologicznym łączę z praktyką rejestracji,
+            projektowaniem warunków słyszenia oraz dydaktyką muzyczną.
+          </p>
+
+          <div class="alt-hero-actions">
+            <a href="#publikacje-alt" class="alt-button alt-button-primary">Zobacz publikacje</a>
+            <a href="#praktyka-alt" class="alt-button alt-button-secondary">Poznaj praktykę</a>
+          </div>
+        </div>
+
+        <div class="alt-side-stack">
+          <figure class="alt-portrait-card">
+            <div class="alt-portrait-stage">
+              <img src={withBase("/images/adam-rosinski-portrait-masked.png")} alt="" class="alt-portrait-image alt-portrait-image-background" aria-hidden="true" />
+              <img src={withBase("/images/adam-rosinski-portrait-masked.png")} alt="Adam Rosiński" class="alt-portrait-image alt-portrait-image-foreground" />
+            </div>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  const initAltHeroCanvas = () => {
+    const canvas = document.getElementById("alt-hero-canvas");
+    const portrait = document.querySelector(".alt-portrait-stage");
+    if (!(canvas instanceof HTMLCanvasElement) || canvas.dataset.bound === "true") return;
+    canvas.dataset.bound = "true";
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let raf = 0;
+
+    const resize = () => {
+      const ratio = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * ratio;
+      canvas.height = rect.height * ratio;
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    };
+
+    const draw = (time) => {
+      const rect = canvas.getBoundingClientRect();
+      const width = rect.width;
+      const height = rect.height;
+
+      ctx.clearRect(0, 0, width, height);
+
+      for (let line = 0; line < 7; line += 1) {
+        ctx.beginPath();
+        const amplitude = 12 + line * 8;
+        const offsetY = height * (0.24 + line * 0.08);
+        for (let x = 0; x <= width; x += 8) {
+          const wave = Math.sin(x * 0.01 + time * 0.0013 + line) * amplitude;
+          const drift = Math.cos(x * 0.006 - time * 0.0009 + line * 0.45) * (8 + line * 2);
+          const y = offsetY + wave + drift;
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = ["rgba(86,216,255,0.7)", "rgba(138,125,255,0.55)", "rgba(255,179,71,0.45)"][line % 3];
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+      }
+
+      raf = requestAnimationFrame(draw);
+    };
+
+    resize();
+    raf = requestAnimationFrame(draw);
+
+    window.addEventListener("resize", resize);
+    window.addEventListener("beforeunload", () => cancelAnimationFrame(raf), { once: true });
+  };
+
+  initAltHeroCanvas();
+</script>
+
+<style>
+  .alt-hero-shell {
+    padding-top: 2rem;
+  }
+
+  .alt-hero-frame {
+    position: relative;
+    min-height: 560px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
+  }
+
+  .alt-hero-canvas {
+    position: absolute;
+    inset: 0;
+  }
+
+  .alt-hero-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .alt-hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    min-height: 560px;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem;
+  }
+
+  .alt-kicker {
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: #56d8ff;
+  }
+
+  .alt-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+    gap: 2rem;
+    align-items: stretch;
+  }
+
+  .alt-hero-main {
+    align-self: start;
+  }
+
+  .alt-hero-main h1 {
+    margin-top: 1rem;
+    max-width: 11ch;
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    background: linear-gradient(90deg, #56d8ff, #8a7dff, #ffb347);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .alt-role {
+    margin-top: 1rem;
+    color: #fff;
+    font-size: 1.35rem;
+    line-height: 1.5;
+  }
+
+  .alt-lead {
+    margin-top: 1.5rem;
+    max-width: 40rem;
+    color: #a1a1aa;
+    font-size: 1.1rem;
+    line-height: 1.85;
+  }
+
+  .alt-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .alt-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 0.85rem 1.2rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .alt-button-primary {
+    background: #fff;
+    color: #05070b;
+  }
+
+  .alt-button-secondary {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+
+  .alt-side-stack {
+    position: relative;
+    display: grid;
+    align-self: stretch;
+  }
+
+  .alt-side-stack::before {
+    content: "";
+    position: absolute;
+    inset: -2% -10% 4% 0%;
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at 58% 28%, rgba(86, 216, 255, 0.14), transparent 28%),
+      radial-gradient(circle at 64% 30%, rgba(138, 125, 255, 0.18), transparent 36%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .alt-portrait-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .alt-portrait-stage {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 24rem;
+    overflow: hidden;
+    border-radius: 24px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(5, 7, 11, 0.28));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .alt-portrait-image {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+    filter: grayscale(1) contrast(1.05) brightness(0.9);
+  }
+
+  .alt-portrait-image-background {
+    opacity: 0.22;
+    transform: scale(1.12) translateY(0.75rem);
+    filter: grayscale(1) blur(28px) contrast(0.92) brightness(0.72);
+  }
+
+  .alt-portrait-image-foreground {
+    opacity: 1;
+    transform: scale(1.03) translateY(0.35rem);
+    filter: grayscale(1) contrast(1.08) brightness(0.96) drop-shadow(0 24px 36px rgba(0, 0, 0, 0.28));
+  }
+
+  @media (max-width: 1080px) {
+    .alt-hero-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .alt-hero-content {
+      padding: 1.2rem;
+    }
+
+    .alt-hero-main h1 {
+      font-size: clamp(2.4rem, 12vw, 4rem);
+    }
+
+    .alt-portrait-image {
+      object-position: center bottom;
+    }
+
+    .alt-portrait-stage {
+      min-height: 20rem;
+    }
+
+  }
+</style>
