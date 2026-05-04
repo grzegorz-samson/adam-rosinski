@@ -1,10 +1,21 @@
 ---
 import SectionHeading from "./SectionHeading.astro";
 import PublicationCard from "./PublicationCard.astro";
-import { localizedPath } from "../utils/i18n";
+import { withBase } from "../utils/withBase";
 
+interface Entry {
+  id: string;
+  data: {
+    title: string;
+    year: number;
+    summary: string;
+    tags: string[];
+    href: string;
+    featured: boolean;
+  };
+}
 interface Props {
-  publications: Array<unknown>;
+  publications: Entry[];
 }
 const { publications } = Astro.props;
 ---
@@ -13,10 +24,10 @@ const { publications } = Astro.props;
   <div class="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
     <SectionHeading
       eyebrow="selected publications"
-      title="Selected publications as entry points into the research field."
-      intro="The landing page keeps only a focused subset. The full list lives on the dedicated publications page."
+      title="Wybrane publikacje jako punkty wejścia do jego pola pracy."
+      intro="Sekcja może później przejść w pełną podstronę z filtrami, DOI, abstraktami i metadanymi."
     />
-    <a href={localizedPath("/publications")} class="button-secondary self-start">See all publications</a>
+    <a href={withBase("/publications")} class="button-secondary self-start">See all publications</a>
   </div>
 
   <div class="mt-12 grid gap-5 md:grid-cols-2">

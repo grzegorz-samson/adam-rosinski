@@ -1,38 +1,33 @@
 ---
 import SectionHeading from "./SectionHeading.astro";
-import { getContent } from "../data/content";
-import { localizedPath } from "../utils/i18n";
-
-const content = getContent("en");
+import { site } from "../data/site";
 ---
 <section id="about-preview" class="shell section-space">
   <div class="glass-panel p-6 md:p-10">
     <SectionHeading
       eyebrow="manifest / biography"
-      title="Sound as a medium of perception, space, and technological decision-making."
-      intro="Instead of a formal academic biography, the landing page uses a short text that connects research with practice."
+      title="Dźwięk jako medium percepcji, przestrzeni i decyzji technologicznych."
+      intro="Zamiast urzędowego biogramu — krótki tekst, który spina praktykę i badania."
     />
 
     <div class="prose-copy mt-8 grid gap-8 lg:grid-cols-2">
       <div>
         <p>
-          {content.site.tagline}
+          {site.shortBio}
         </p>
         <p class="mt-4">
-          The common thread is the question of how we hear, how we design listening conditions, and how technical tools affect the artistic shape of sonic experience.
+          Punktem styku tych działań jest pytanie o to, jak słyszymy, jak projektujemy warunki słyszenia i jak narzędzia techniczne wpływają na artystyczny kształt doświadczenia dźwiękowego.
         </p>
       </div>
 
       <div>
         <p>
-          The website is structured less like a static academic CV and more like an interface that explains the relation between perception, recording, space, and education.
+          Ta strona jest pomyślana nie jak klasyczne CV naukowca, lecz jak interfejs, który wizualnie tłumaczy relacje między percepcją, rejestracją, przestrzenią i edukacją.
         </p>
         <p class="mt-4">
-          The new multipage structure then expands that interface into detailed subpages, publication listings, the audio demonstrator, and project-oriented material.
+          W następnych iteracjach można rozwinąć ją o pełne archiwum publikacji, projekty studyjne, materiały audio i dokumentację badawczą.
         </p>
       </div>
     </div>
-
-    <a href={localizedPath("/about")} class="site-inline-link">Open about page</a>
   </div>
 </section>

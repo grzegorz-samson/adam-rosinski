@@ -2,52 +2,12 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import PageHero from "../components/PageHero.astro";
-import { getContent } from "../data/content";
-
-const content = getContent("en");
+import ContactSection from "../components/ContactSection.astro";
 ---
-
-<BaseLayout title="Contact | Adam Rosinski" description={content.site.description} lang="en" canonicalPath="/contact" alternatePath="/contact" bodyClass="site-body">
+<BaseLayout title="Contact — Adam Rosiński">
   <SiteHeader />
   <main>
-    <PageHero
-      eyebrow="Contact"
-      title="Research collaboration, consultation, and teaching-related communication."
-      intro="The public site keeps contact lightweight: profile links, institutional context, and clear collaboration topics."
-    />
-
-    <section class="site-section">
-      <div class="site-shell">
-        <div class="site-grid-2">
-          <article class="glass-panel p-6 md:p-8">
-            <h2 class="site-title-md">Institutional context</h2>
-            <p class="site-copy" style="margin-top: 1rem;">{content.site.institution}</p>
-            <p class="site-copy">{content.site.location}</p>
-          </article>
-
-          <article class="glass-panel p-6 md:p-8">
-            <h2 class="site-title-md">Research profiles</h2>
-            <div style="display: grid; gap: 0.9rem; margin-top: 1rem;">
-              {content.profiles.map((profile) => (
-                <a href={profile.href} target="_blank" rel="noreferrer" class="site-inline-link" style="margin-top: 0;">
-                  {profile.label}
-                </a>
-              ))}
-            </div>
-          </article>
-        </div>
-
-        <div class="grid gap-5 md:grid-cols-3" style="margin-top: 1.5rem;">
-          {content.contactTopics.map((topic) => (
-            <article class="soft-card p-6">
-              <h2 class="site-title-md">{topic.title}</h2>
-              <p class="site-copy" style="margin-top: 1rem;">{topic.summary}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
+    <ContactSection />
   </main>
   <SiteFooter />
 </BaseLayout>

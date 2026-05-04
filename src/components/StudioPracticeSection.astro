@@ -1,17 +1,13 @@
 ---
 import SectionHeading from "./SectionHeading.astro";
-import { getContent } from "../data/content";
-import { localizedPath } from "../utils/i18n";
 import { withBase } from "../utils/withBase";
-
-const content = getContent("en");
 ---
 <section id="practice" class="shell section-space">
   <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
     <div class="glass-panel relative overflow-hidden p-3">
       <img
         src={withBase("/images/placeholder-studio.svg")}
-        alt="Abstract studio and acoustic-field illustration"
+        alt="Abstrakcyjna ilustracja przestrzeni studyjnej i pola akustycznego"
         class="h-full min-h-[22rem] w-full rounded-[1.35rem] object-cover"
       />
     </div>
@@ -19,20 +15,30 @@ const content = getContent("en");
     <div class="glass-panel p-6 md:p-8">
       <SectionHeading
         eyebrow="studio / practice / technology"
-        title="Studio practice and research are not separate worlds here."
-        intro="Recording is treated at the same time as a technical, artistic, and cognitive process. This section keeps that overlap visible."
+        title="Praktyka studyjna i badania nie są tu osobnymi światami."
+        intro="Rejestracja dźwięku jest jednocześnie procesem technicznym, artystycznym i poznawczym. Ta sekcja ma podkreślać związek między praktyką, projektowaniem narzędzi i refleksją badawczą."
       />
 
       <div class="mt-10 grid gap-4 md:grid-cols-3">
-        {content.practiceCards.map((card) => (
-          <article class="soft-card p-5">
-            <h3 class="text-lg font-semibold text-white">{card.title}</h3>
-            <p class="muted mt-3 text-sm leading-7">{card.summary}</p>
-          </article>
-        ))}
+        <article class="soft-card p-5">
+          <h3 class="text-lg font-semibold text-white">Studio recording</h3>
+          <p class="muted mt-3 text-sm leading-7">
+            Praca z nagraniem jako świadomym projektowaniem punktu słyszenia, planu i relacji źródeł.
+          </p>
+        </article>
+        <article class="soft-card p-5">
+          <h3 class="text-lg font-semibold text-white">Multichannel thinking</h3>
+          <p class="muted mt-3 text-sm leading-7">
+            Zainteresowanie systemami stereo, surround i wielokanałowymi formami kształtowania przestrzeni.
+          </p>
+        </article>
+        <article class="soft-card p-5">
+          <h3 class="text-lg font-semibold text-white">Teaching with technology</h3>
+          <p class="muted mt-3 text-sm leading-7">
+            Technologie audio jako środowisko dydaktyczne, a nie tylko zbiór narzędzi pomocniczych.
+          </p>
+        </article>
       </div>
-
-      <a href={localizedPath("/practice")} class="site-inline-link">Open practice page</a>
     </div>
   </div>
 </section>

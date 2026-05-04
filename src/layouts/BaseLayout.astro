@@ -1,45 +1,28 @@
 ---
 import "../styles/global.css";
-import { localizedPath, type Locale } from "../utils/i18n";
 import { withBase } from "../utils/withBase";
 
 interface Props {
   title?: string;
   description?: string;
-  lang?: Locale;
-  canonicalPath?: string;
-  alternatePath?: string;
   bodyClass?: string;
 }
 
 const {
-  title = "Adam Rosinski - Sound director / researcher",
-  description = "English-first research website focused on perception, spatial audio, recording, and teaching.",
-  lang = "en",
-  canonicalPath = "/",
-  alternatePath,
+  title = "Adam Rosiński — Sound Director / Researcher",
+  description = "Landing page badacza i reżysera dźwięku: percepcja, przestrzeń, rejestracja wielokanałowa i nowe technologie.",
   bodyClass = "",
 } = Astro.props;
-
-const canonicalHref = Astro.site
-  ? new URL(localizedPath(canonicalPath, lang), Astro.site).toString()
-  : null;
-const alternateLocale: Locale = lang === "en" ? "pl" : "en";
-const alternateHref = Astro.site && alternatePath
-  ? new URL(localizedPath(alternatePath, alternateLocale), Astro.site).toString()
-  : null;
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang="pl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#070b12" />
-    {canonicalHref && <link rel="canonical" href={canonicalHref} />}
-    {alternateHref && <link rel="alternate" hrefLang={alternateLocale} href={alternateHref} />}
     <link rel="icon" type="image/svg+xml" href={withBase("/favicon.svg")} />
   </head>
   <body class={bodyClass}>

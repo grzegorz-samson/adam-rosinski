@@ -1,26 +1,15 @@
 ---
-import { getContent } from "../data/content";
-import { localizedPath } from "../utils/i18n";
-
-const content = getContent("en");
+import { site } from "../data/site";
+import { withBase } from "../utils/withBase";
 ---
-
-<footer class="site-footer">
-  <div class="site-shell site-footer-inner">
-    <div>
-      <p class="site-eyebrow">Research website</p>
-      <p class="site-footer-title">{content.site.displayName}</p>
-      <p class="site-footer-copy">{content.site.institution}</p>
-    </div>
-
-    <div class="site-footer-links">
-      <a href={localizedPath("/")}>Home</a>
-      <a href={localizedPath("/research")}>Research</a>
-      <a href={localizedPath("/publications")}>Publications</a>
-      <a href={localizedPath("/contact")}>Contact</a>
-      {content.profiles.map((profile) => (
-        <a href={profile.href} target="_blank" rel="noreferrer">{profile.label}</a>
-      ))}
+<footer class="border-t border-white/8 py-8">
+  <div class="shell flex flex-col gap-4 text-sm text-zinc-400 md:flex-row md:items-center md:justify-between">
+    <p>© {new Date().getFullYear()} {site.name}</p>
+    <div class="flex flex-wrap gap-4">
+      <a href={withBase("/")} class="hover:text-white">Main</a>
+      <a href={site.links.uwm} target="_blank" rel="noreferrer" class="hover:text-white">UWM</a>
+      <a href={site.links.scholar} target="_blank" rel="noreferrer" class="hover:text-white">Scholar</a>
+      <a href={site.links.sciprofiles} target="_blank" rel="noreferrer" class="hover:text-white">SciProfiles</a>
     </div>
   </div>
 </footer>

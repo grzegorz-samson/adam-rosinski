@@ -2,34 +2,27 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import PageHero from "../components/PageHero.astro";
-import { getContent } from "../data/content";
-
-const content = getContent("en");
+import SectionHeading from "../components/SectionHeading.astro";
 ---
-
-<BaseLayout title="Projects | Adam Rosinski" description={content.site.description} lang="en" canonicalPath="/projects" alternatePath="/projects" bodyClass="site-body">
+<BaseLayout title="Projects — Adam Rosiński">
   <SiteHeader />
-  <main>
-    <PageHero
-      eyebrow="Projects"
-      title="Projects and structured directions for future expansion."
-      intro="This page remains intentionally compact, but it already maps the kinds of case studies and demonstrators that belong in the multipage structure."
+  <main class="shell section-space">
+    <SectionHeading
+      eyebrow="projects / studio"
+      title="Miejsce na projekty, studio i dokumentację praktyki."
+      intro="Ta podstrona jest szkicem. Możesz tu dodać opisy projektów studyjnych, prototypów technologicznych, materiałów audio i galerii."
     />
 
-    <section class="site-section">
-      <div class="site-shell">
-        <div class="grid gap-5 md:grid-cols-3">
-          {content.projectCards.map((project) => (
-            <article class="soft-card p-6">
-              <p class="site-eyebrow">{project.status}</p>
-              <h2 class="site-title-md" style="margin-top: 0.75rem;">{project.title}</h2>
-              <p class="site-copy" style="margin-top: 1rem;">{project.summary}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
+    <div class="mt-12 grid gap-5 md:grid-cols-3">
+      {["Studio recording", "Spatial audio", "Technology & education"].map((title) => (
+        <article class="soft-card p-6">
+          <h3 class="text-xl font-semibold text-white">{title}</h3>
+          <p class="muted mt-4 text-sm leading-7">
+            Placeholder na case study, opis procesu, media, dokumentację i kontekst badawczy.
+          </p>
+        </article>
+      ))}
+    </div>
   </main>
   <SiteFooter />
 </BaseLayout>
