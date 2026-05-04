@@ -1,166 +1,36 @@
 ---
-import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import AlternativeHero from "../components/AlternativeHero.astro";
-import AlternativeAbout from "../components/AlternativeAbout.astro";
-import AlternativeAuditoryField from "../components/AlternativeAuditoryField.astro";
-import AlternativeAudioDemo from "../components/AlternativeAudioDemo.astro";
-import AlternativePublications from "../components/AlternativePublications.astro";
-import AlternativePractice from "../components/AlternativePractice.astro";
-import AlternativeProfiles from "../components/AlternativeProfiles.astro";
-import AlternativeContact from "../components/AlternativeContact.astro";
-import { withBase } from "../utils/withBase";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import HeroSection from "../components/HeroSection.astro";
+import ResearchSpectrum from "../components/ResearchSpectrum.astro";
+import AuditoryField from "../components/AuditoryField.astro";
+import PublicationsSection from "../components/PublicationsSection.astro";
+import StudioPracticeSection from "../components/StudioPracticeSection.astro";
+import ManifestSection from "../components/ManifestSection.astro";
+import ContactSection from "../components/ContactSection.astro";
+import { getContent } from "../data/content";
 
-const publications = (await getCollection("publications")).sort((a, b) => b.data.year - a.data.year);
+const content = getContent("en");
+const publications = content.publications.filter((item) => item.featured).slice(0, 4);
 ---
 
 <BaseLayout
-  title="Adam Rosiński — badania nad dźwiękiem, percepcją i przestrzenią"
-  description="Adam Rosiński: badania nad percepcją słuchową, sceną akustyczną, rejestracją przestrzenną, praktyką studyjną i technologiami audio."
-  bodyClass="alt-lab"
+  title={`${content.site.displayName} | Research and audio practice`}
+  description={content.site.description}
+  lang="en"
+  canonicalPath="/"
+  alternatePath="/"
 >
-  <header class="alt-nav">
-    <div class="alt-shell alt-nav-inner">
-      <a href={withBase("/")} class="alt-wordmark">Adam Rosiński / dźwięk i badania</a>
-
-      <nav class="alt-nav-links" aria-label="Nawigacja strony">
-        <a href="#o-mnie-alt">O mnie</a>
-        <a href="#pole-sluchowe-alt">Obszary pracy</a>
-        <a href="#demo-alt">Demonstrator</a>
-        <a href="#publikacje-alt">Publikacje</a>
-        <a href="#praktyka-alt">Praktyka</a>
-        <a href="#profile-naukowe-alt">Profile</a>
-        <a href="#kontakt-alt">Kontakt</a>
-      </nav>
-
-      <div class="alt-nav-actions">
-        <a href={withBase("/alternative")} class="alt-nav-secondary">Wersja klasyczna</a>
-        <a href="#kontakt-alt" class="alt-nav-cta">Nawiąż kontakt</a>
-      </div>
-    </div>
-  </header>
-
-  <main class="alt-shell">
-    <AlternativeHero />
-    <AlternativeAbout />
-    <AlternativeAuditoryField />
-    <AlternativeAudioDemo />
-    <AlternativePublications publications={publications} />
-    <AlternativePractice />
-    <AlternativeProfiles />
-    <AlternativeContact />
+  <SiteHeader />
+  <main>
+    <HeroSection />
+    <ResearchSpectrum />
+    <AuditoryField />
+    <PublicationsSection publications={publications} />
+    <StudioPracticeSection />
+    <ManifestSection />
+    <ContactSection />
   </main>
+  <SiteFooter />
 </BaseLayout>
-
-<style is:global>
-  body.alt-lab {
-    background-image:
-      radial-gradient(circle at top, rgba(86, 216, 255, 0.08), transparent 30%),
-      radial-gradient(circle at 80% 20%, rgba(255, 179, 71, 0.06), transparent 22%),
-      linear-gradient(180deg, #05070b 0%, #0a0d14 50%, #05070b 100%);
-    color: #d4d4d8;
-    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-  }
-
-  body.alt-lab::before {
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-    background-size: 34px 34px;
-    mask-image: none;
-    opacity: 0.9;
-  }
-
-  .alt-shell {
-    width: min(1280px, calc(100% - 3rem));
-    margin: 0 auto;
-  }
-
-  .alt-nav {
-    position: sticky;
-    top: 0;
-    z-index: 40;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(5, 7, 11, 0.76);
-    backdrop-filter: blur(16px);
-  }
-
-  .alt-nav-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1rem 0;
-  }
-
-  .alt-wordmark,
-  .alt-nav-secondary {
-    font-family: "JetBrains Mono", "Consolas", monospace;
-  }
-
-  .alt-wordmark {
-    color: #fff;
-    font-size: 0.85rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    text-decoration: none;
-  }
-
-  .alt-nav-links,
-  .alt-nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .alt-nav-links a,
-  .alt-nav-secondary {
-    color: #a1a1aa;
-    font-size: 0.94rem;
-    text-decoration: none;
-  }
-
-  .alt-nav-links a:hover,
-  .alt-nav-secondary:hover {
-    color: #fff;
-  }
-
-  .alt-nav-cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 999px;
-    padding: 0.75rem 1rem;
-    color: #f4f4f5;
-    font-size: 0.92rem;
-    text-decoration: none;
-  }
-
-  .alt-nav-cta:hover {
-    border-color: rgba(86, 216, 255, 0.48);
-    color: #56d8ff;
-  }
-
-  @media (max-width: 1080px) {
-    .alt-nav-links {
-      display: none;
-    }
-  }
-
-  @media (max-width: 720px) {
-    .alt-shell {
-      width: min(100% - 1.5rem, 1280px);
-    }
-
-    .alt-nav-inner {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .alt-nav-actions {
-      width: 100%;
-      flex-wrap: wrap;
-    }
-  }
-</style>

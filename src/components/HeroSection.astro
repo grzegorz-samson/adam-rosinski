@@ -1,5 +1,9 @@
 ---
-import { site } from "../data/site";
+import { getContent } from "../data/content";
+import { localizedPath } from "../utils/i18n";
+
+const content = getContent("en");
+const site = content.site;
 ---
 <section class="shell relative min-h-[92vh] py-14 md:py-24">
   <div class="glass-panel relative overflow-hidden px-6 py-10 md:px-10 md:py-14">
@@ -9,7 +13,7 @@ import { site } from "../data/site";
       <div class="relative z-10 max-w-3xl">
         <p class="eyebrow">sound · perception · space · technology</p>
         <h1 class="mt-5 text-5xl font-semibold leading-none tracking-tight text-balance text-white md:text-7xl">
-          {site.name}
+          {site.displayName}
         </h1>
         <p class="mt-4 max-w-2xl text-lg font-medium text-zinc-200 md:text-2xl">
           {site.role}
@@ -19,19 +23,19 @@ import { site } from "../data/site";
         </p>
 
         <div class="mt-8 flex flex-wrap gap-3">
-          <a href="#research" class="button-primary">Poznaj badania</a>
-          <a href="#publications" class="button-secondary">Zobacz publikacje</a>
-          <a href="#contact" class="button-secondary">Nawiąż kontakt</a>
+          <a href={localizedPath("/research")} class="button-primary">Explore research</a>
+          <a href={localizedPath("/publications")} class="button-secondary">See publications</a>
+          <a href={localizedPath("/contact")} class="button-secondary">Get in touch</a>
         </div>
 
         <dl class="mt-12 grid gap-6 border-t border-white/10 pt-8 md:grid-cols-3">
           <div>
             <dt class="text-xs uppercase tracking-[0.2em] text-zinc-500">Focus</dt>
-            <dd class="mt-2 text-sm leading-6 text-zinc-200">Auditory scene analysis, percepcja i przestrzeń dźwięku.</dd>
+            <dd class="mt-2 text-sm leading-6 text-zinc-200">Auditory scene analysis, listening, and spatial perception.</dd>
           </div>
           <div>
             <dt class="text-xs uppercase tracking-[0.2em] text-zinc-500">Practice</dt>
-            <dd class="mt-2 text-sm leading-6 text-zinc-200">Studio recording, techniki mikrofonowe, wielokanałowość.</dd>
+            <dd class="mt-2 text-sm leading-6 text-zinc-200">Studio recording, microphone techniques, and multichannel thinking.</dd>
           </div>
           <div>
             <dt class="text-xs uppercase tracking-[0.2em] text-zinc-500">Context</dt>

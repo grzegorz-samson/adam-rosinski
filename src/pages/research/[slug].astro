@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import PageHero from "../../components/PageHero.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
+import { getContent } from "../../data/content";
+
+export function getStaticPaths() {
+  const content = getContent("en");
+  return content.researchAreas.map((area) => ({
+    params: { slug: area.slug },
+    props: { area },
+  }));
+}
+
+const { area } = Astro.props;
+---
+
+<BaseLayout
+  title={`${area.title} | Adam Rosinski`}
+  description={area.summary}
+  lang="en"
+  canonicalPath={`/research/${area.slug}`}
+  alternatePath={`/research/${area.slug}`}
+  bodyClass="site-body"
+>
+  <SiteHeader />
+  <main>
+    <PageHero eyebrow="Research area" title={area.title} intro={area.summary} />
+
+    <section class="site-section">
+      <div class="site-shell">
+        <div class="site-grid-2">
+          <article class="glass-panel p-6 md:p-8">
+            <SectionIntro title="Overview" />
+            <p class="site-copy">{area.description}</p>
+          </article>
+
+          <article class="glass-panel p-6 md:p-8">
+            <SectionIntro title="Current focus" />
+            <ul style="padding-left: 1rem; color: #dbe5f4; line-height: 1.9;">
+              {area.focus.map((item) => <li>{item}</li>)}
+            </ul>
+            <div class="site-tag-row">
+              {area.tags.map((tag) => <span class="site-tag">{tag}</span>)}
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <SiteFooter />
+</BaseLayout>

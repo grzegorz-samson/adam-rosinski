@@ -1,30 +1,21 @@
 ---
 import SectionHeading from "./SectionHeading.astro";
 import PillTag from "./PillTag.astro";
+import { getContent } from "../data/content";
+import { localizedPath } from "../utils/i18n";
 
-interface Entry {
-  id: string;
-  data: {
-    title: string;
-    summary: string;
-    tags: string[];
-  };
-}
-
-interface Props {
-  areas: Entry[];
-}
-const { areas } = Astro.props;
+const content = getContent("en");
+const areas = content.researchAreas;
 ---
 
 <section id="research" class="shell section-space">
   <SectionHeading
     eyebrow="research spectrum"
-    title="Pole badawcze zbudowane między percepcją, przestrzenią i praktyką nagraniową."
-    intro="Zamiast zwykłej listy zainteresowań — spektrum tematów, które łączą analityczne myślenie o słyszeniu z realnymi technologiami audio i praktyką studyjną."
+    title="A research field structured between perception, space, and recording practice."
+    intro="Instead of a generic list of interests, the landing page presents a compact spectrum of themes that connect listening research with audio technology and studio practice."
   />
 
-  <div class="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+  <div class="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
     {areas.map((area, index) => (
       <article class={`soft-card flex h-full flex-col p-5 ${index % 2 === 0 ? "xl:translate-y-6" : ""}`}>
         <div class="mb-6 flex items-center justify-between">
@@ -32,14 +23,18 @@ const { areas } = Astro.props;
           <span class="mode-dot bg-cyan-300/80"></span>
         </div>
 
-        <h3 class="text-xl font-semibold text-white">{area.data.title}</h3>
-        <p class="muted mt-4 text-sm leading-7">{area.data.summary}</p>
+        <h3 class="text-xl font-semibold text-white">{area.title}</h3>
+        <p class="muted mt-4 text-sm leading-7">{area.summary}</p>
 
         <div class="mt-6 flex flex-wrap gap-2">
-          {area.data.tags.map((tag, tagIndex) => (
+          {area.tags.map((tag, tagIndex) => (
             <PillTag label={tag} tone={tagIndex === 0 ? "cyan" : "neutral"} />
           ))}
         </div>
+
+        <a href={localizedPath(`/research/${area.slug}`)} class="site-inline-link mt-auto">
+          {area.cta}
+        </a>
       </article>
     ))}
   </div>

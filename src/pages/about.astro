@@ -2,26 +2,54 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import SectionHeading from "../components/SectionHeading.astro";
-import { site } from "../data/site";
+import PageHero from "../components/PageHero.astro";
+import SectionIntro from "../components/SectionIntro.astro";
+import { getContent } from "../data/content";
+
+const content = getContent("en");
 ---
-<BaseLayout title="About — Adam Rosiński">
+
+<BaseLayout title="About | Adam Rosinski" description={content.site.description} lang="en" canonicalPath="/about" alternatePath="/about" bodyClass="site-body">
   <SiteHeader />
-  <main class="shell section-space">
-    <SectionHeading
-      eyebrow="about"
-      title="Rozbudowana sekcja bio / statement"
-      intro="Ta podstrona może później pomieścić klasyczny biogram, listę afiliacji, nagród, działalności dydaktycznej i projektów."
+  <main>
+    <PageHero
+      eyebrow="About"
+      title="Research profile rooted in listening, recording, and musical structure."
+      intro="This page expands the short landing-page summary and frames the website as a research-led studio profile."
     />
 
-    <div class="glass-panel mt-12 p-6 md:p-10">
-      <div class="prose-copy max-w-4xl">
-        <p>{site.shortBio}</p>
-        <p class="mt-4">
-          W wersji finalnej warto rozdzielić ten obszar na: bio, zainteresowania badawcze, dydaktykę, praktykę realizatorską i współpracę projektową.
-        </p>
+    <section class="site-section">
+      <div class="site-shell">
+        <div class="site-grid-2">
+          <article class="glass-panel p-6 md:p-8">
+            <SectionIntro title="Profile summary" intro={content.site.role} />
+            <p class="site-copy">{content.site.tagline}</p>
+          </article>
+
+          <article class="glass-panel p-6 md:p-8">
+            <SectionIntro title="Institution" intro={content.site.institution} />
+            <p class="site-copy">Location: {content.site.location}</p>
+            <div class="site-tag-row">
+              <span class="site-tag">research</span>
+              <span class="site-tag">studio practice</span>
+              <span class="site-tag">education</span>
+            </div>
+          </article>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <section class="site-section">
+      <div class="site-shell">
+        <div class="glass-panel p-6 md:p-10">
+          <SectionIntro
+            eyebrow="Approach"
+            title="Research and practice are presented together."
+            intro="The website is organized as a compact research environment: short entry points on the landing page, detailed subpages for each strand, and an audio demonstrator that keeps listening at the center."
+          />
+        </div>
+      </div>
+    </section>
   </main>
   <SiteFooter />
 </BaseLayout>

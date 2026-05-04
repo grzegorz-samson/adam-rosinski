@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import PageHero from "../components/PageHero.astro";
+import { getContent } from "../data/content";
+
+const content = getContent("en");
+---
+
+<BaseLayout title="Practice | Adam Rosinski" description={content.site.description} lang="en" canonicalPath="/practice" alternatePath="/practice" bodyClass="site-body">
+  <SiteHeader />
+  <main>
+    <PageHero
+      eyebrow="Practice"
+      title="Practice, technology, and teaching developed in parallel."
+      intro="This page groups the applied side of the website: studio-oriented work, technical evaluation, and pedagogical use of demonstrators."
+    />
+
+    <section class="site-section">
+      <div class="site-shell">
+        <div class="grid gap-5 md:grid-cols-3">
+          {content.practiceCards.map((card) => (
+            <article class="soft-card p-6">
+              <h2 class="site-title-md">{card.title}</h2>
+              <p class="site-copy" style="margin-top: 1rem;">{card.summary}</p>
+              <ul style="padding-left: 1rem; color: #dbe5f4; margin-top: 1rem; line-height: 1.9;">
+                {card.bullets.map((bullet) => <li>{bullet}</li>)}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <SiteFooter />
+</BaseLayout>

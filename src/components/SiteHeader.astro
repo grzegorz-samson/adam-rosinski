@@ -1,24 +1,41 @@
 ---
-import { navigation, site } from "../data/site";
-import { withBase } from "../utils/withBase";
+import { getContent } from "../data/content";
+import { localizedPath, stripLocale } from "../utils/i18n";
+
+const content = getContent("en");
+const currentPath = stripLocale(Astro.url.pathname);
+
+function isActive(href: string): boolean {
+  if (href === "/") {
+    return currentPath === "/";
+  }
+
+  return currentPath === href || currentPath.startsWith(`${href}/`);
+}
 ---
-<header class="sticky top-0 z-50 border-b border-white/8 bg-slate-950/70 backdrop-blur-xl">
-  <div class="shell flex items-center justify-between gap-6 py-4">
-    <a href={withBase("/")} class="text-sm font-semibold tracking-[0.18em] text-white uppercase">
-      {site.name}
+
+<header class="site-header">
+  <div class="site-shell site-header-inner">
+    <a href={localizedPath("/")} class="site-wordmark">
+      <span>{content.site.displayName}</span>
+      <small>research / audio / practice</small>
     </a>
 
-    <nav class="hidden items-center gap-6 md:flex">
-      {navigation.map((item) => (
-        <a href={item.href} class="text-sm text-zinc-300 transition hover:text-white">
+    <nav class="site-nav" aria-label="Primary">
+      {content.navigation.map((item) => (
+        <a
+          href={localizedPath(item.href)}
+          class:list={["site-nav-link", isActive(item.href) && "is-active"]}
+        >
           {item.label}
         </a>
       ))}
     </nav>
 
-    <div class="hidden items-center gap-3 md:flex">
-      <a href={withBase("/")} class="text-sm text-zinc-300 transition hover:text-white">Main</a>
-      <a href="#contact" class="button-secondary">Collaborate</a>
+    <div class="site-header-actions">
+      <a href={localizedPath("/pl", "en")} class="site-header-secondary">PL soon</a>
+      <a href={localizedPath("/alternative")} class="site-header-secondary">Classic</a>
+      <a href={localizedPath("/contact")} class="site-button-primary">Collaborate</a>
     </div>
   </div>
 </header>

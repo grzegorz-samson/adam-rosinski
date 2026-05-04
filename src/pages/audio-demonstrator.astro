@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import PageHero from "../components/PageHero.astro";
+import AudioDemo from "../components/AudioDemo.astro";
+
+---
+
+<BaseLayout title="Audio demonstrator | Adam Rosinski" description="Interactive audio demonstrator with waveform and spectrum views." lang="en" canonicalPath="/audio-demonstrator" alternatePath="/audio-demonstrator" bodyClass="site-body">
+  <SiteHeader />
+  <main>
+    <PageHero
+      eyebrow="Audio demonstrator"
+      title="A listening-oriented page built around one synthetic signal."
+      intro="The visual layer is always active. The tone itself starts only after user interaction, so the page stays compatible with browser autoplay rules."
+    />
+
+    <section class="site-section">
+      <div class="site-shell">
+        <div class="glass-panel p-6 md:p-8">
+          <AudioDemo />
+        </div>
+      </div>
+    </section>
+  </main>
+  <SiteFooter />
+</BaseLayout>

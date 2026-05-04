@@ -1,40 +1,46 @@
 ---
-import PillTag from "./PillTag.astro";
+import { withBase } from "../utils/withBase";
+
+interface PublicationItem {
+  slug?: string;
+  title: string;
+  year: number;
+  summary: string;
+  tags: string[];
+  href: string;
+  type?: string;
+  cover?: string;
+}
+
+interface LegacyPublication {
+  id: string;
+  data: PublicationItem;
+}
 
 interface Props {
-  publication: {
-    id: string;
-    data: {
-      title: string;
-      year: number;
-      summary: string;
-      tags: string[];
-      href: string;
-    };
-  };
+  publication: PublicationItem | LegacyPublication;
 }
 
 const { publication } = Astro.props;
+const item = "data" in publication ? publication.data : publication;
 ---
-<article class="soft-card flex h-full flex-col p-6">
-  <div class="flex items-center justify-between gap-4">
-    <span class="text-sm text-zinc-500">{publication.data.year}</span>
-    <a
-      href={publication.data.href}
-      target="_blank"
-      rel="noreferrer"
-      class="text-sm text-cyan-200 transition hover:text-white"
-    >
-      Open source ↗
-    </a>
+
+<article class="site-card publication-card">
+  {item.cover && <img src={withBase(item.cover)} alt="" class="publication-card-cover" loading="lazy" />}
+
+  <div class="publication-card-meta">
+    <span>{item.year}</span>
+    {item.type && <span>{item.type}</span>}
   </div>
 
-  <h3 class="mt-4 text-xl font-semibold leading-snug text-white">{publication.data.title}</h3>
-  <p class="muted mt-4 text-sm leading-7">{publication.data.summary}</p>
+  <h3 class="site-title-md">{item.title}</h3>
+  <p class="site-copy">{item.summary}</p>
 
-  <div class="mt-6 flex flex-wrap gap-2">
-    {publication.data.tags.map((tag, index) => (
-      <PillTag label={tag} tone={index === 0 ? "amber" : "neutral"} />
-    ))}
+  <div class="site-tag-row">
+    {item.tags.map((tag) => <span class="site-tag">{tag}</span>)}
   </div>
+
+  <a href={item.href} target="_blank" rel="noreferrer" class="site-inline-link">
+    Open publication
+  </a>
 </article>

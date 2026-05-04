@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import PageHero from "../components/PageHero.astro";
+import ResearchCard from "../components/ResearchCard.astro";
+import { getContent } from "../data/content";
+
+const content = getContent("en");
+---
+
+<BaseLayout title="Research | Adam Rosinski" description={content.site.description} lang="en" canonicalPath="/research" alternatePath="/research" bodyClass="site-body">
+  <SiteHeader />
+  <main>
+    <PageHero
+      eyebrow="Research"
+      title="Research areas with dedicated subpages."
+      intro="The structure follows four strands: perception, recording, spatial audio, and education."
+    />
+
+    <section class="site-section">
+      <div class="site-shell">
+        <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {content.researchAreas.map((area, index) => <ResearchCard area={area} index={index} />)}
+        </div>
+      </div>
+    </section>
+  </main>
+  <SiteFooter />
+</BaseLayout>

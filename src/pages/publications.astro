@@ -1,25 +1,30 @@
 ---
-import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import SectionHeading from "../components/SectionHeading.astro";
+import PageHero from "../components/PageHero.astro";
 import PublicationCard from "../components/PublicationCard.astro";
+import { getContent } from "../data/content";
 
-const publications = (await getCollection("publications")).sort((a, b) => b.data.year - a.data.year);
+const content = getContent("en");
 ---
-<BaseLayout title="Publications — Adam Rosiński">
+
+<BaseLayout title="Publications | Adam Rosinski" description={content.site.description} lang="en" canonicalPath="/publications" alternatePath="/publications" bodyClass="site-body">
   <SiteHeader />
-  <main class="shell section-space">
-    <SectionHeading
-      eyebrow="publications"
-      title="Pełniejsza lista publikacji"
-      intro="Na tym etapie to nadal starter. Możesz rozwinąć tę stronę o DOI, filtrowanie, cytowania, abstrakty i grupowanie po typie publikacji."
+  <main>
+    <PageHero
+      eyebrow="Publications"
+      title="Selected publication list"
+      intro="The publication layer is now data-driven and can be extended later with DOI, citation, or filtering metadata."
     />
 
-    <div class="mt-12 grid gap-5 md:grid-cols-2">
-      {publications.map((publication) => <PublicationCard publication={publication} />)}
-    </div>
+    <section class="site-section">
+      <div class="site-shell">
+        <div class="grid gap-5 md:grid-cols-2">
+          {content.publications.map((publication) => <PublicationCard publication={publication} />)}
+        </div>
+      </div>
+    </section>
   </main>
   <SiteFooter />
 </BaseLayout>
