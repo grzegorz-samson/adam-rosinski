@@ -21,6 +21,5 @@ export const navigation = [
   { label: "Audio Demonstrator", href: "/audio-demonstrator" },
   { label: "Publications", href: "/publications" },
   { label: "Practice", href: "/practice" },
-  { label: "Profiles", href: "/profiles" },
   { label: "Contact", href: "/contact" },
 ];
