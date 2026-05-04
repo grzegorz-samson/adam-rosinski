@@ -1,7 +1,7 @@
 ---
 title: "Variable Properties of Auditory Scene Analysis in Music"
 year: 2025
-summary: "Artykuł poświęcony zmiennym właściwościom analizy sceny słuchowej w muzyce i sposobom organizacji percepcyjnej materiału dźwiękowego."
+summary: "An article on the variable properties of auditory scene analysis in music and the perceptual organization of sonic material."
 tags:
   - "auditory scene analysis"
   - "music"

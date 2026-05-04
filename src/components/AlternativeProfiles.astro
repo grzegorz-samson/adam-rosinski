@@ -2,18 +2,18 @@
 import { quickLinks } from "../data/links";
 
 const profileDescriptions: Record<string, string> = {
-  "Profil UWM": "Profil instytucjonalny z informacjami o afiliacji, działalności i obecności na Wydziale Sztuki.",
-  "Google Scholar": "Zestawienie publikacji, cytowań i indeksowanych prac dostępnych w ekosystemie Google Scholar.",
-  SciProfiles: "Profil badawczy porządkujący aktywność naukową, publikacje i powiązania tematyczne.",
+  "University Profile": "Institutional profile with affiliation details, activity outline, and academic context.",
+  "Google Scholar": "Publication list, citations, and indexed work visible in the Google Scholar ecosystem.",
+  SciProfiles: "Research profile organizing academic activity, publications, and thematic connections.",
 };
 ---
 
-<section id="profile-naukowe-alt" class="alt-section">
+<section id="profiles-alt" class="alt-section">
   <div class="alt-heading">
-    <p class="alt-kicker">Profile naukowe</p>
-    <h2>Badania</h2>
+    <p class="alt-kicker">Research profiles</p>
+    <h2>Research visibility</h2>
     <p>
-      Profile instytucjonalne i bibliograficzne pozwalają szybko przejść do publikacji, dorobku oraz informacji afiliacyjnych.
+      Institutional and bibliographic profiles provide quick access to publications, academic output, and affiliation details.
     </p>
   </div>
 
@@ -22,8 +22,8 @@ const profileDescriptions: Record<string, string> = {
       <a href={link.href} target="_blank" rel="noreferrer" class="alt-profile-card">
         <p class="alt-kicker">{link.label}</p>
         <h3>{link.label}</h3>
-        <p>{profileDescriptions[link.label] ?? "Zewnętrzny profil dokumentujący działalność naukową i publikacyjną."}</p>
-        <span>Zobacz profil</span>
+        <p>{profileDescriptions[link.label] ?? "External profile documenting research and publication activity."}</p>
+        <span>View profile</span>
       </a>
     ))}
   </div>
@@ -78,10 +78,7 @@ const profileDescriptions: Record<string, string> = {
     color: inherit;
     text-decoration: none;
     backdrop-filter: blur(12px);
-    transition:
-      transform 180ms ease,
-      border-color 180ms ease,
-      background 180ms ease;
+    transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
   }
 
   .alt-profile-card:hover {

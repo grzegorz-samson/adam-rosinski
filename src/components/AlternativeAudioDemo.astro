@@ -1,24 +1,24 @@
-<section id="demo-alt" class="alt-section">
+<section id="audio-demo-alt" class="alt-section">
   <div class="alt-module audio-visualizer-module">
     <div class="alt-head">
       <div>
-        <p class="alt-kicker">Demonstrator audio</p>
-        <h3>Generator audio</h3>
+        <p class="alt-kicker">Audio demonstrator</p>
+        <h3>Audio generator</h3>
       </div>
 
-      <button class="alt-button alt-button-primary alt-demo-toggle" type="button">Włącz dźwięk</button>
+      <button class="alt-button alt-button-primary alt-demo-toggle" type="button">Enable sound</button>
     </div>
 
     <div class="alt-dual-grid">
       <section class="alt-panel-visual">
-        <p class="alt-kicker">Przebieg czasowy</p>
+        <p class="alt-kicker">Waveform</p>
         <div class="alt-frame">
           <canvas class="alt-canvas-waveform" aria-hidden="true"></canvas>
         </div>
       </section>
 
       <section class="alt-panel-visual">
-        <p class="alt-kicker">Widmo częstotliwościowe</p>
+        <p class="alt-kicker">Frequency spectrum</p>
         <div class="alt-frame">
           <canvas class="alt-canvas-frequency" aria-hidden="true"></canvas>
         </div>
@@ -27,8 +27,8 @@
 
     <div class="alt-footer">
       <p>
-        Demonstrator renderuje równolegle dwie reprezentacje tego samego sygnału: po lewej zmienność amplitudy w czasie,
-        po prawej rozkład energii w paśmie częstotliwości. Wizualizacja działa od razu, a przycisk uruchamia odsłuch.
+        The demonstrator renders two parallel representations of the same signal: amplitude over time on the left,
+        and frequency-energy distribution on the right. The visualization is always active, while the button starts playback.
       </p>
     </div>
   </div>
@@ -65,10 +65,10 @@
       this.demoToggle?.addEventListener("click", async () => {
         if (!this.audioEnabled) {
           await this.enableAudio();
-          this.demoToggle.textContent = "Wyłącz dźwięk";
+          this.demoToggle.textContent = "Disable sound";
         } else {
           this.disableAudio();
-          this.demoToggle.textContent = "Włącz dźwięk";
+          this.demoToggle.textContent = "Enable sound";
         }
       });
     }

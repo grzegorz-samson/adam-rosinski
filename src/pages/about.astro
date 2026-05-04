@@ -1,27 +1,19 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import SiteHeader from "../components/SiteHeader.astro";
-import SiteFooter from "../components/SiteFooter.astro";
-import SectionHeading from "../components/SectionHeading.astro";
-import { site } from "../data/site";
----
-<BaseLayout title="About — Adam Rosiński">
-  <SiteHeader />
-  <main class="shell section-space">
-    <SectionHeading
-      eyebrow="about"
-      title="Rozbudowana sekcja bio / statement"
-      intro="Ta podstrona może później pomieścić klasyczny biogram, listę afiliacji, nagród, działalności dydaktycznej i projektów."
-    />
+import AltLabLayout from "../layouts/AltLabLayout.astro";
+import AltPageHero from "../components/AltPageHero.astro";
+import AlternativeAbout from "../components/AlternativeAbout.astro";
 
-    <div class="glass-panel mt-12 p-6 md:p-10">
-      <div class="prose-copy max-w-4xl">
-        <p>{site.shortBio}</p>
-        <p class="mt-4">
-          W wersji finalnej warto rozdzielić ten obszar na: bio, zainteresowania badawcze, dydaktykę, praktykę realizatorską i współpracę projektową.
-        </p>
-      </div>
-    </div>
-  </main>
-  <SiteFooter />
-</BaseLayout>
+---
+
+<AltLabLayout
+  title="About | Adam Rosinski"
+  description="Research profile developed between listening theory, technology, and recording practice."
+  activePath="/about"
+>
+  <AltPageHero
+    kicker="About"
+    title="A research profile shaped by listening, recording, and acoustic thought."
+    intro="This page expands the profile summary from the landing page and keeps the same visual language as the main site."
+  />
+  <AlternativeAbout />
+</AltLabLayout>

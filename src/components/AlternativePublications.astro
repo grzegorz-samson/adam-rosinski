@@ -19,34 +19,34 @@ const { publications } = Astro.props;
 const publicationCovers: Record<string, { src: string; alt: string; label: string }> = {
   "Microphone Techniques in Stereo and Surround Recording": {
     src: withBase("/images/microphone-techniques-cover.jpg"),
-    alt: "Okładka publikacji Microphone Techniques in Stereo and Surround Recording",
-    label: "Monografia",
+    alt: "Cover of Microphone Techniques in Stereo and Surround Recording",
+    label: "Monograph",
   },
   "Multivariantism of Auditory Perceptions as a Significant Element of the Auditory Scene Analysis Concept": {
     src: withBase("/images/covers/multivariantism.svg"),
-    alt: "Okładka publikacji Multivariantism of Auditory Perceptions as a Significant Element of the Auditory Scene Analysis Concept",
-    label: "Artykuł",
+    alt: "Cover of Multivariantism of Auditory Perceptions as a Significant Element of the Auditory Scene Analysis Concept",
+    label: "Article",
   },
   "Variable Properties of Auditory Scene Analysis in Music": {
     src: withBase("/images/covers/variable-properties.svg"),
-    alt: "Okładka publikacji Variable Properties of Auditory Scene Analysis in Music",
-    label: "Artykuł",
+    alt: "Cover of Variable Properties of Auditory Scene Analysis in Music",
+    label: "Article",
   },
   "A spherical microphone prototype for multichannel recording": {
     src: withBase("/images/covers/spherical-microphone.svg"),
-    alt: "Okładka publikacji A spherical microphone prototype for multichannel recording",
-    label: "Artykuł",
+    alt: "Cover of A spherical microphone prototype for multichannel recording",
+    label: "Article",
   },
 };
 ---
 
-<section id="publikacje-alt" class="alt-section">
+<section id="publications-alt" class="alt-section">
   <div class="alt-heading">
-    <p class="alt-kicker">Publikacje i książki</p>
-    <h2>Wybrane publikacje</h2>
+    <p class="alt-kicker">Publications and books</p>
+    <h2>Selected publications</h2>
     <p>
-      Percepcja słuchowa, analiza sceny akustycznej, techniki mikrofonowe i projektowanie narzędzi audio tworzą tu spójny
-      zestaw zagadnień rozwijanych w publikacjach i praktyce.
+      Auditory perception, auditory-scene analysis, microphone techniques, and audio-tool design come together here
+      as one coherent body of topics developed in publication and practice.
     </p>
   </div>
 
@@ -54,8 +54,8 @@ const publicationCovers: Record<string, { src: string; alt: string; label: strin
     {publications.map((publication) => {
       const cover = publicationCovers[publication.data.title] ?? {
         src: withBase("/images/covers/microphone-techniques.svg"),
-        alt: `Okładka publikacji ${publication.data.title}`,
-        label: "Publikacja",
+        alt: `Cover for ${publication.data.title}`,
+        label: "Publication",
       };
 
       return (
@@ -78,7 +78,7 @@ const publicationCovers: Record<string, { src: string; alt: string; label: strin
                 <span>{tag}</span>
               ))}
             </div>
-            <a href={publication.data.href} target="_blank" rel="noreferrer" class="alt-publication-link">Przejdź do źródła</a>
+            <a href={publication.data.href} target="_blank" rel="noreferrer" class="alt-publication-link">Open source</a>
           </div>
         </article>
       );
@@ -131,10 +131,7 @@ const publicationCovers: Record<string, { src: string; alt: string; label: strin
     padding: 1.25rem;
     backdrop-filter: blur(18px);
     box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
-    transition:
-      transform 180ms ease,
-      border-color 180ms ease,
-      background 180ms ease;
+    transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
   }
 
   .alt-publication-card:hover {

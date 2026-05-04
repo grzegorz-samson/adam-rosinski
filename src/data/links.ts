@@ -1,6 +1,6 @@
 export const quickLinks = [
   {
-    label: "Profil UWM",
+    label: "University Profile",
     href: "https://ws.uwm.edu.pl/pracownicy-ogloszenia-i-aktualnosci/dr-adam-rosinski",
   },
   {

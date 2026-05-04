@@ -1,0 +1,19 @@
+---
+import AltLabLayout from "../layouts/AltLabLayout.astro";
+import AltPageHero from "../components/AltPageHero.astro";
+import AlternativeAudioDemo from "../components/AlternativeAudioDemo.astro";
+
+---
+
+<AltLabLayout
+  title="Audio Demonstrator | Adam Rosinski"
+  description="Interactive waveform and spectrum view driven by one synthetic signal."
+  activePath="/audio-demonstrator"
+>
+  <AltPageHero
+    kicker="Audio Demonstrator"
+    title="A compact listening demonstrator built into the website."
+    intro="The page isolates the waveform and spectrum module while keeping the same interface language and visual atmosphere as the main landing page."
+  />
+  <AlternativeAudioDemo />
+</AltLabLayout>

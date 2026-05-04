@@ -10,17 +10,17 @@ import { withBase } from "../utils/withBase";
     <div class="alt-hero-content">
       <div class="alt-hero-grid">
         <div class="alt-hero-main">
-          <p class="alt-kicker">Badacz dźwięku / reżyseria / nowe technologie</p>
+          <p class="alt-kicker">Sound research / recording / new technologies</p>
           <h1>{site.name}</h1>
           <p class="alt-role">{site.role}</p>
           <p class="alt-lead">
-            Badania nad dźwiękiem jako zjawiskiem percepcyjnym, przestrzennym i technologicznym łączę z praktyką rejestracji,
-            projektowaniem warunków słyszenia oraz dydaktyką muzyczną.
+            Research into sound as a perceptual, spatial, and technological phenomenon is connected here with recording practice,
+            the design of listening conditions, and music-oriented teaching.
           </p>
 
           <div class="alt-hero-actions">
-            <a href="#publikacje-alt" class="alt-button alt-button-primary">Zobacz publikacje</a>
-            <a href="#praktyka-alt" class="alt-button alt-button-secondary">Poznaj praktykę</a>
+            <a href={withBase("/publications")} class="alt-button alt-button-primary">View publications</a>
+            <a href={withBase("/practice")} class="alt-button alt-button-secondary">Explore practice</a>
           </div>
         </div>
 
@@ -28,7 +28,7 @@ import { withBase } from "../utils/withBase";
           <figure class="alt-portrait-card">
             <div class="alt-portrait-stage">
               <img src={withBase("/images/adam-rosinski-portrait-masked.png")} alt="" class="alt-portrait-image alt-portrait-image-background" aria-hidden="true" />
-              <img src={withBase("/images/adam-rosinski-portrait-masked.png")} alt="Adam Rosiński" class="alt-portrait-image alt-portrait-image-foreground" />
+              <img src={withBase("/images/adam-rosinski-portrait-masked.png")} alt="Adam Rosinski" class="alt-portrait-image alt-portrait-image-foreground" />
             </div>
           </figure>
         </div>
@@ -40,7 +40,6 @@ import { withBase } from "../utils/withBase";
 <script is:inline>
   const initAltHeroCanvas = () => {
     const canvas = document.getElementById("alt-hero-canvas");
-    const portrait = document.querySelector(".alt-portrait-stage");
     if (!(canvas instanceof HTMLCanvasElement) || canvas.dataset.bound === "true") return;
     canvas.dataset.bound = "true";
 
@@ -112,9 +111,6 @@ import { withBase } from "../utils/withBase";
   .alt-hero-canvas {
     position: absolute;
     inset: 0;
-  }
-
-  .alt-hero-canvas {
     display: block;
     width: 100%;
     height: 100%;
@@ -237,8 +233,7 @@ import { withBase } from "../utils/withBase";
     min-height: 24rem;
     overflow: hidden;
     border-radius: 24px;
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(5, 7, 11, 0.28));
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(5, 7, 11, 0.28));
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
@@ -287,6 +282,5 @@ import { withBase } from "../utils/withBase";
     .alt-portrait-stage {
       min-height: 20rem;
     }
-
   }
 </style>

@@ -1,7 +1,7 @@
 ---
 title: "Multivariantism of Auditory Perceptions as a Significant Element of the Auditory Scene Analysis Concept"
 year: 2024
-summary: "Tekst rozwijający temat wielowariantowości odbioru słuchowego jako ważnego elementu analizy sceny słuchowej."
+summary: "A study of multivariant auditory perception as a significant element of auditory scene analysis."
 tags:
   - "auditory perception"
   - "multivariantism"

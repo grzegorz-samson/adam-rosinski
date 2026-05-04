@@ -1,13 +1,21 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import SiteHeader from "../components/SiteHeader.astro";
-import SiteFooter from "../components/SiteFooter.astro";
-import ContactSection from "../components/ContactSection.astro";
+import AltLabLayout from "../layouts/AltLabLayout.astro";
+import AltPageHero from "../components/AltPageHero.astro";
+import AlternativeContact from "../components/AlternativeContact.astro";
+import AlternativeProfiles from "../components/AlternativeProfiles.astro";
+
 ---
-<BaseLayout title="Contact — Adam Rosiński">
-  <SiteHeader />
-  <main>
-    <ContactSection />
-  </main>
-  <SiteFooter />
-</BaseLayout>
+
+<AltLabLayout
+  title="Contact | Adam Rosinski"
+  description="Research collaboration, consultation, artistic projects, and teaching-related contact."
+  activePath="/contact"
+>
+  <AltPageHero
+    kicker="Contact"
+    title="Research collaboration, consultation, and teaching-related work."
+    intro="The contact page keeps the same restrained structure as the landing page: direct context, affiliation, and profile links without turning into a directory."
+  />
+  <AlternativeProfiles />
+  <AlternativeContact />
+</AltLabLayout>
