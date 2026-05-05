@@ -1,0 +1,208 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>For Students | Adam Rosiński</title><meta name="description" content="Interactive waveform and spectrum view driven by one synthetic signal."><meta name="theme-color" content="#070b12"><link rel="icon" type="image/svg+xml" href="/adam-rosinski/favicon.svg"><link rel="stylesheet" href="/adam-rosinski/_astro/about.BDAZ2Jlp.css">
+<style>.alt-page-section[data-astro-cid-kswumtog]{padding-top:2rem}.alt-page-panel[data-astro-cid-kswumtog]{border:1px solid rgba(255,255,255,.1);border-radius:28px;background:#ffffff0a;padding:2rem;backdrop-filter:blur(18px);box-shadow:0 18px 60px #00000057}h1[data-astro-cid-kswumtog]{color:#fff;font-size:clamp(2.4rem,6vw,4.8rem);line-height:1.02;letter-spacing:-.03em;text-wrap:balance}
+.alt-section[data-astro-cid-4y4mvxse]{padding:4.5rem 0}.alt-module[data-astro-cid-4y4mvxse]{border:1px solid rgba(255,255,255,.1);border-radius:28px;background:#ffffff0a;padding:1.5rem;backdrop-filter:blur(18px);box-shadow:0 18px 60px #00000057}.alt-head[data-astro-cid-4y4mvxse],.alt-footer[data-astro-cid-4y4mvxse]{display:grid;gap:1rem}.alt-head[data-astro-cid-4y4mvxse]{grid-template-columns:minmax(0,1fr) auto;align-items:center}.alt-kicker[data-astro-cid-4y4mvxse]{font-family:JetBrains Mono,Consolas,monospace;font-size:.76rem;text-transform:uppercase;letter-spacing:.22em;color:#56d8ff}.alt-head[data-astro-cid-4y4mvxse] h3[data-astro-cid-4y4mvxse],.alt-panel-visual[data-astro-cid-4y4mvxse] h3[data-astro-cid-4y4mvxse]{margin-top:.9rem;color:#fff;font-size:1.32rem;line-height:1.25}.alt-dual-grid[data-astro-cid-4y4mvxse]{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1.4rem}.alt-frame[data-astro-cid-4y4mvxse]{position:relative;height:15rem;margin-top:1.4rem;overflow:hidden;border-radius:20px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(180deg,rgba(255,255,255,.05),transparent),#090d14}.alt-canvas-waveform[data-astro-cid-4y4mvxse],.alt-canvas-frequency[data-astro-cid-4y4mvxse]{position:absolute;inset:0;width:100%;height:100%}.alt-footer[data-astro-cid-4y4mvxse]{margin-top:1.2rem;align-items:start}.alt-footer[data-astro-cid-4y4mvxse] p[data-astro-cid-4y4mvxse]{color:#a1a1aa;line-height:1.85}.alt-button[data-astro-cid-4y4mvxse]{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border-radius:999px;padding:.85rem 1.2rem;font-size:.95rem;font-weight:600;border:none;cursor:pointer}.alt-button-primary[data-astro-cid-4y4mvxse]{background:#fff;color:#05070b}.alt-demo-toggle[data-astro-cid-4y4mvxse]{justify-self:end;width:auto;min-width:3.25rem;min-height:3.25rem;padding-inline:.95rem;white-space:nowrap}.alt-demo-icon[data-astro-cid-4y4mvxse]{display:inline-flex;align-items:center;justify-content:center}.alt-demo-icon[data-astro-cid-4y4mvxse].is-hidden{display:none}@media(max-width:1080px){.alt-head[data-astro-cid-4y4mvxse],.alt-footer[data-astro-cid-4y4mvxse]{align-items:start}.alt-head[data-astro-cid-4y4mvxse]{grid-template-columns:1fr}.alt-demo-toggle[data-astro-cid-4y4mvxse]{justify-self:start}.alt-dual-grid[data-astro-cid-4y4mvxse]{grid-template-columns:1fr}}
+</style></head> <body class="alt-lab">  <header class="alt-nav"> <div class="alt-shell alt-nav-inner"> <a href="/adam-rosinski/" class="alt-wordmark"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-audio-waveform"> <path d="M2 13a2 2 0 0 0 2-2V7a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0V4a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0v-4a2 2 0 0 1 2-2"></path>  </svg> <span>Adam Rosiński / research and sound</span> </a> <nav class="alt-nav-links" aria-label="Site navigation"> <a href="/adam-rosinski/about" class="alt-nav-link"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-user-round"> <circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 0 0-16 0"></path>  </svg> <span>Bio</span> </a><a href="/adam-rosinski/work-areas" class="alt-nav-link"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-radar"> <path d="M19.07 4.93A10 10 0 0 0 6.99 3.34"></path><path d="M4 6h.01"></path><path d="M2.29 9.62A10 10 0 1 0 21.31 8.35"></path><path d="M16.24 7.76A6 6 0 1 0 8.23 16.67"></path><path d="M12 18h.01"></path><path d="M17.99 11.66A6 6 0 0 1 15.77 16.67"></path><circle cx="12" cy="12" r="2"></circle><path d="m13.41 10.59 5.66-5.66"></path>  </svg> <span>Work Areas</span> </a><a href="/adam-rosinski/audio-demonstrator" class="alt-nav-link is-active"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-headphones"> <path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"></path>  </svg> <span>For Students</span> </a><a href="/adam-rosinski/publications" class="alt-nav-link"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-book-open"> <path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>  </svg> <span>Publications</span> </a><a href="/adam-rosinski/practice" class="alt-nav-link"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-briefcase-business"> <path d="M12 12h.01"></path><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path><path d="M22 13a18.15 18.15 0 0 1-20 0"></path><rect width="20" height="14" x="2" y="6" rx="2"></rect>  </svg> <span>Practice</span> </a> </nav> <div class="alt-nav-actions"> <a href="/adam-rosinski/contact" class="alt-nav-cta"> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-mail"> <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect>  </svg> <span>Contact</span> </a> </div> </div> </header> <main class="alt-shell">  <section class="alt-page-section" data-astro-cid-kswumtog> <div class="alt-page-panel" data-astro-cid-kswumtog> <h1 data-astro-cid-kswumtog>For Students</h1> </div> </section>  <section id="audio-demo-alt" class="alt-section" data-astro-cid-4y4mvxse> <div class="alt-module audio-visualizer-module" data-astro-cid-4y4mvxse> <div class="alt-head" data-astro-cid-4y4mvxse> <div data-astro-cid-4y4mvxse> <p class="alt-kicker" data-astro-cid-4y4mvxse>Audio demonstrator</p> <h3 data-astro-cid-4y4mvxse>Audio generator</h3> </div> <button class="alt-button alt-button-primary alt-demo-toggle" type="button" aria-label="Enable sound" data-astro-cid-4y4mvxse> <span class="alt-demo-icon alt-demo-icon-muted" aria-hidden="true" data-astro-cid-4y4mvxse> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-4y4mvxse="true" class="lucide lucide-volume-x"> <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path><line x1="22" x2="16" y1="9" y2="15"></line><line x1="16" x2="22" y1="9" y2="15"></line>  </svg> </span> <span class="alt-demo-icon alt-demo-icon-live is-hidden" aria-hidden="true" data-astro-cid-4y4mvxse> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-4y4mvxse="true" class="lucide lucide-volume-2"> <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path><path d="M16 9a5 5 0 0 1 0 6"></path><path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path>  </svg> </span> </button> </div> <div class="alt-dual-grid" data-astro-cid-4y4mvxse> <section class="alt-panel-visual" data-astro-cid-4y4mvxse> <p class="alt-kicker" data-astro-cid-4y4mvxse>Waveform</p> <div class="alt-frame" data-astro-cid-4y4mvxse> <canvas class="alt-canvas-waveform" aria-hidden="true" data-astro-cid-4y4mvxse></canvas> </div> </section> <section class="alt-panel-visual" data-astro-cid-4y4mvxse> <p class="alt-kicker" data-astro-cid-4y4mvxse>Frequency spectrum</p> <div class="alt-frame" data-astro-cid-4y4mvxse> <canvas class="alt-canvas-frequency" aria-hidden="true" data-astro-cid-4y4mvxse></canvas> </div> </section> </div> <div class="alt-footer" data-astro-cid-4y4mvxse> <p data-astro-cid-4y4mvxse>
+The demonstrator renders two parallel representations of the same signal: amplitude over time on the left,
+        and frequency-energy distribution on the right. The visualization is always active, while the button starts playback.
+</p> </div> </div> </section> <script>
+  class AlternativeAudioVisualizer {
+    constructor(container) {
+      this.container = container;
+      this.waveformCanvas = container.querySelector(".alt-canvas-waveform");
+      this.waveformCtx = this.waveformCanvas?.getContext("2d");
+      this.frequencyCanvas = container.querySelector(".alt-canvas-frequency");
+      this.frequencyCtx = this.frequencyCanvas?.getContext("2d");
+      this.demoToggle = container.querySelector(".alt-demo-toggle");
+      this.mutedIcon = container.querySelector(".alt-demo-icon-muted");
+      this.liveIcon = container.querySelector(".alt-demo-icon-live");
+      this.audioCtx = null;
+      this.oscillator = null;
+      this.gain = null;
+      this.audioEnabled = false;
+      this.phase = 0;
+      this.currentFrequency = 220;
+      this.targetFrequency = 260;
+      this.lastFrameTime = 0;
+      this.lastModulationAt = 0;
+      this.raf = 0;
+
+      this.resizeCanvases();
+      this.bind();
+      this.setToggleState(false);
+      this.startVisuals();
+      window.addEventListener("resize", () => this.resizeCanvases());
+      window.addEventListener("beforeunload", () => this.destroy(), { once: true });
+    }
+
+    bind() {
+      this.demoToggle?.addEventListener("click", async () => {
+        if (!this.audioEnabled) {
+          await this.enableAudio();
+          this.setToggleState(true);
+        } else {
+          this.disableAudio();
+          this.setToggleState(false);
+        }
+      });
+    }
+
+    setToggleState(isEnabled) {
+      this.demoToggle?.setAttribute("aria-label", isEnabled ? "Disable sound" : "Enable sound");
+      this.mutedIcon?.classList.toggle("is-hidden", isEnabled);
+      this.liveIcon?.classList.toggle("is-hidden", !isEnabled);
+    }
+
+    resizeCanvas(canvas, ctx) {
+      if (!(canvas instanceof HTMLCanvasElement) || !ctx) return;
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = canvas.offsetWidth * ratio;
+      canvas.height = canvas.offsetHeight * ratio;
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    }
+
+    resizeCanvases() {
+      this.resizeCanvas(this.waveformCanvas, this.waveformCtx);
+      this.resizeCanvas(this.frequencyCanvas, this.frequencyCtx);
+    }
+
+    startVisuals() {
+      if (this.raf) return;
+      this.raf = requestAnimationFrame((time) => this.draw(time));
+    }
+
+    async enableAudio() {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) return;
+
+      if (!this.audioCtx) {
+        this.audioCtx = new AudioContextClass();
+      }
+
+      if (this.audioCtx.state === "suspended") {
+        await this.audioCtx.resume();
+      }
+
+      if (this.oscillator) return;
+
+      this.oscillator = this.audioCtx.createOscillator();
+      this.gain = this.audioCtx.createGain();
+      this.oscillator.type = "sine";
+      this.oscillator.frequency.value = this.currentFrequency;
+      this.gain.gain.value = 0.05;
+      this.oscillator.connect(this.gain);
+      this.gain.connect(this.audioCtx.destination);
+      this.oscillator.start();
+      this.audioEnabled = true;
+    }
+
+    disableAudio() {
+      this.audioEnabled = false;
+      this.oscillator?.stop();
+      this.oscillator?.disconnect();
+      this.gain?.disconnect();
+      this.oscillator = null;
+      this.gain = null;
+    }
+
+    updateSignal(time, deltaSeconds) {
+      if (!this.lastModulationAt || time - this.lastModulationAt > 900) {
+        this.targetFrequency = 180 + Math.random() * 360;
+        this.lastModulationAt = time;
+      }
+
+      const smoothing = Math.min(deltaSeconds * 2.4, 1);
+      this.currentFrequency += (this.targetFrequency - this.currentFrequency) * smoothing;
+      this.phase += deltaSeconds * this.currentFrequency * Math.PI * 2;
+
+      if (this.audioEnabled && this.oscillator && this.audioCtx) {
+        this.oscillator.frequency.setTargetAtTime(this.currentFrequency, this.audioCtx.currentTime, 0.12);
+      }
+    }
+
+    drawWaveform(width, height) {
+      if (!this.waveformCtx) return;
+
+      this.waveformCtx.fillStyle = "rgba(10,13,20,0.24)";
+      this.waveformCtx.fillRect(0, 0, width, height);
+      this.waveformCtx.strokeStyle = "#56d8ff";
+      this.waveformCtx.lineWidth = 2;
+      this.waveformCtx.beginPath();
+
+      const samples = 256;
+      let x = 0;
+      for (let i = 0; i < samples; i += 1) {
+        const progress = i / (samples - 1);
+        const angle = this.phase + progress * ((this.currentFrequency / 140) * Math.PI * 2);
+        const harmonic = Math.sin(angle * 2.02) * 0.18;
+        const overtone = Math.sin(angle * 3.1) * 0.08;
+        const value = Math.sin(angle) * 0.72 + harmonic + overtone;
+        const y = height * 0.5 + value * height * 0.28;
+        if (i === 0) this.waveformCtx.moveTo(x, y);
+        else this.waveformCtx.lineTo(x, y);
+        x += width / (samples - 1);
+      }
+
+      this.waveformCtx.stroke();
+    }
+
+    drawSpectrum(width, height) {
+      if (!this.frequencyCtx) return;
+
+      this.frequencyCtx.fillStyle = "rgba(10,13,20,0.24)";
+      this.frequencyCtx.fillRect(0, 0, width, height);
+
+      const bars = 44;
+      const fundamental = Math.min(this.currentFrequency / 900, 1);
+      const secondary = Math.min(fundamental * 2.1, 1);
+      const tertiary = Math.min(fundamental * 3.15, 1);
+      const barWidth = width / bars;
+
+      for (let i = 0; i < bars; i += 1) {
+        const t = i / (bars - 1);
+        const peakA = Math.exp(-Math.pow((t - fundamental) / 0.07, 2)) * 0.95;
+        const peakB = Math.exp(-Math.pow((t - secondary) / 0.09, 2)) * 0.55;
+        const peakC = Math.exp(-Math.pow((t - tertiary) / 0.11, 2)) * 0.32;
+        const shimmer = 0.08 + (Math.sin(this.phase * 0.2 + i * 0.7) + 1) * 0.04;
+        const level = Math.min(peakA + peakB + peakC + shimmer, 1);
+        const barHeight = Math.max(level * height, 8);
+        this.frequencyCtx.fillStyle = `rgba(${120 + level * 120}, ${105 + level * 40}, 80, 0.92)`;
+        this.frequencyCtx.fillRect(i * barWidth, height - barHeight, Math.max(barWidth - 3, 4), barHeight);
+      }
+    }
+
+    draw(time) {
+      const deltaSeconds = this.lastFrameTime ? (time - this.lastFrameTime) / 1000 : 0.016;
+      this.lastFrameTime = time;
+      this.updateSignal(time, deltaSeconds);
+
+      if (this.waveformCtx && this.waveformCanvas instanceof HTMLCanvasElement) {
+        const width = this.waveformCanvas.getBoundingClientRect().width;
+        const height = this.waveformCanvas.getBoundingClientRect().height;
+        this.drawWaveform(width, height);
+      }
+
+      if (this.frequencyCtx && this.frequencyCanvas instanceof HTMLCanvasElement) {
+        const width = this.frequencyCanvas.getBoundingClientRect().width;
+        const height = this.frequencyCanvas.getBoundingClientRect().height;
+        this.drawSpectrum(width, height);
+      }
+
+      this.raf = requestAnimationFrame((nextTime) => this.draw(nextTime));
+    }
+
+    destroy() {
+      if (this.raf) cancelAnimationFrame(this.raf);
+      this.disableAudio();
+    }
+  }
+
+  const initAlternativeAudioVisualizers = () => {
+    document.querySelectorAll(".audio-visualizer-module").forEach((container) => {
+      if (container.dataset.bound === "true") return;
+      container.dataset.bound = "true";
+      new AlternativeAudioVisualizer(container);
+    });
+  };
+
+  initAlternativeAudioVisualizers();
+</script>   </main>  </body></html> 
