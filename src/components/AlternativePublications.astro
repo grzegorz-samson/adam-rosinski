@@ -1,68 +1,67 @@
 ---
 import BookOpen from "@lucide/astro/icons/book-open";
 import ExternalLink from "@lucide/astro/icons/external-link";
+import { getPublicationMetaLabel, type PublicationCategory } from "../data/publicationTaxonomy";
 import { withBase } from "../utils/withBase";
 
 interface Entry {
-  data: {
-    title: string;
-    year: number;
-    summary: string;
-    tags: string[];
-    href: string;
-  };
+  title: string;
+  year: number;
+  category: PublicationCategory;
+  type: string;
+  language: string;
+  summary: string;
+  tags: string[];
+  relatedAreas: string[];
+  href: string;
+  publisher?: string;
+  journal?: string;
+  volume?: string;
+  issue?: string;
+  pages?: string;
+  doi?: string;
+  isbn?: string;
+  cover?: string | null;
+  sourceVerified?: boolean;
 }
 
 interface Props {
   publications: Entry[];
+  kicker?: string;
+  title?: string;
+  description?: string;
 }
 
-const { publications } = Astro.props;
-const publicationCovers: Record<string, { src: string; alt: string; label: string }> = {
-  "Microphone Techniques in Stereo and Surround Recording": {
-    src: withBase("/images/covers/microphone-techniques.jpg"),
-    alt: "Cover of Microphone Techniques in Stereo and Surround Recording",
-    label: "Monograph",
-  },
-  "Multivariantism of Auditory Perceptions as a Significant Element of the Auditory Scene Analysis Concept": {
-    src: withBase("/images/covers/multivariantism.jpg"),
-    alt: "Cover of Multivariantism of Auditory Perceptions as a Significant Element of the Auditory Scene Analysis Concept",
-    label: "Article",
-  },
-  "Variable Properties of Auditory Scene Analysis in Music": {
-    src: withBase("/images/covers/variable-properties.jpg"),
-    alt: "Cover of Variable Properties of Auditory Scene Analysis in Music",
-    label: "Article",
-  },
-  "A spherical microphone prototype for multichannel recording": {
-    src: withBase("/images/covers/spherical-microphone.jpg"),
-    alt: "Cover of A spherical microphone prototype for multichannel recording",
-    label: "Article",
-  },
-};
+const {
+  publications,
+  kicker = "Publications and books",
+  title = "Selected publications",
+  description = "A compact shelf of publications connecting auditory perception, recording, spatial listening, and audio-tool design.",
+} = Astro.props;
 ---
 
 <section id="publications-alt" class="alt-section">
   <div class="alt-heading">
-    <p class="alt-kicker">Publications and books</p>
-    <h2>Selected publications</h2>
-    <p>
-      Auditory perception, auditory-scene analysis, microphone techniques, and audio-tool design come together here
-      as one coherent body of topics developed in publication and practice.
-    </p>
+    <p class="alt-kicker">{kicker}</p>
+    <h2>{title}</h2>
+    <p>{description}</p>
   </div>
 
   <div class="alt-grid">
     {publications.map((publication) => {
-      const cover = publicationCovers[publication.data.title] ?? {
-        src: withBase("/images/covers/microphone-techniques.jpg"),
-        alt: `Cover for ${publication.data.title}`,
-        label: "Publication",
+      const coverSrc = publication.cover
+        ? withBase(publication.cover)
+        : withBase("/images/covers/microphone-techniques.jpg");
+      const cover = {
+        src: coverSrc,
+        alt: `Cover for ${publication.title}`,
+        label: getPublicationMetaLabel(publication.category, publication.type),
       };
+      const sourceLine = publication.publisher ?? publication.journal ?? publication.doi ?? publication.isbn;
 
       return (
         <article class="alt-publication-card">
-          <a href={publication.data.href} target="_blank" rel="noreferrer" class="alt-cover-link">
+          <a href={publication.href} target="_blank" rel="noreferrer" class="alt-cover-link">
             <div class="alt-cover-frame">
               <img src={cover.src} alt={cover.alt} class="alt-cover-image" loading="lazy" />
             </div>
@@ -72,19 +71,24 @@ const publicationCovers: Record<string, { src: string; alt: string; label: strin
             <div class="alt-meta">
               <span>
                 <BookOpen size={13} stroke-width={1.75} aria-hidden="true" />
-                {publication.data.year}
+                {publication.year}
               </span>
               <span>{cover.label}</span>
             </div>
-            <h3>{publication.data.title}</h3>
-            <p>{publication.data.summary}</p>
+            <h3>{publication.title}</h3>
+            <p>{publication.summary}</p>
+            <div class="alt-publication-notes">
+              <span>{publication.language}</span>
+              {publication.pages && <span>{publication.pages} pp.</span>}
+            </div>
+            {sourceLine && <p class="alt-source-line">{sourceLine}</p>}
             <div class="alt-tag-row">
-              {publication.data.tags.map((tag) => (
+              {publication.tags.map((tag) => (
                 <span>{tag}</span>
               ))}
             </div>
-            <a href={publication.data.href} target="_blank" rel="noreferrer" class="alt-publication-link alt-link-with-icon">
-              <span>Open source</span>
+            <a href={publication.href} target="_blank" rel="noreferrer" class="alt-publication-link alt-link-with-icon">
+              <span>{publication.sourceVerified === false ? "View source page" : "View publication"}</span>
               <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
             </a>
           </div>
@@ -184,6 +188,22 @@ const publicationCovers: Record<string, { src: string; alt: string; label: strin
     color: #fff;
     font-size: 1.32rem;
     line-height: 1.25;
+  }
+
+  .alt-publication-notes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 0.85rem;
+    color: #8d92a6;
+    font-size: 0.84rem;
+  }
+
+  .alt-source-line {
+    margin-top: 0.65rem;
+    color: #d4d4d8;
+    font-size: 0.92rem;
+    line-height: 1.5;
   }
 
   .alt-publication-link {

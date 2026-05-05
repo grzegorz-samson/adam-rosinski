@@ -1,0 +1,354 @@
+---
+import BookOpen from "@lucide/astro/icons/book-open";
+import ExternalLink from "@lucide/astro/icons/external-link";
+import LibraryBig from "@lucide/astro/icons/library-big";
+import { getPublicationMetaLabel } from "../data/publicationTaxonomy";
+import type { PublicationRecord } from "../data/publications";
+
+interface Props {
+  monographs: PublicationRecord[];
+  journalArticles: PublicationRecord[];
+  editorialWork: PublicationRecord[];
+  bookChapters: PublicationRecord[];
+}
+
+const { monographs, journalArticles, editorialWork, bookChapters } = Astro.props;
+
+const sections = [
+  {
+    id: "monographs",
+    title: "Monographs",
+    description: "Books and major long-form research outputs.",
+    items: monographs,
+  },
+  {
+    id: "journal-articles",
+    title: "Journal articles",
+    description: "Articles, proceedings papers, and prototype-oriented studies.",
+    items: journalArticles,
+  },
+  {
+    id: "editorial-work",
+    title: "Editorial work",
+    description: "Edited volumes, series work, and publication leadership.",
+    items: editorialWork,
+  },
+  {
+    id: "book-chapters",
+    title: "Book chapters",
+    description: "Chapters connected with perception, sound practice, and music education.",
+    items: bookChapters,
+  },
+];
+
+function getDetailLines(publication: PublicationRecord): string[] {
+  const lines: string[] = [];
+
+  if (publication.publisher) {
+    lines.push(publication.publisher);
+  }
+
+  if (publication.journal) {
+    const parts = [publication.journal, publication.volume, publication.issue && `No. ${publication.issue}`].filter(Boolean);
+    lines.push(parts.join(", "));
+  }
+
+  if (publication.book) {
+    lines.push(`In: ${publication.book}`);
+  }
+
+  const publicationDetails = [publication.pages && `${publication.pages} pp.`, publication.language, publication.isbn && `ISBN ${publication.isbn}`]
+    .filter(Boolean)
+    .join(" · ");
+
+  if (publicationDetails) {
+    lines.push(publicationDetails);
+  }
+
+  if (publication.doi) {
+    lines.push(`DOI ${publication.doi}`);
+  }
+
+  return lines;
+}
+---
+
+<section class="catalog-section" aria-labelledby="catalog-title">
+  <div class="catalog-heading">
+    <p class="catalog-kicker">Full bibliography</p>
+    <h2 id="catalog-title">Publication categories</h2>
+    <p>
+      The page opens with the four monographs as the visual shelf. Below that is the full publication catalogue,
+      grouped by publication type and expanded with bibliographic context.
+    </p>
+  </div>
+
+  <nav class="catalog-nav" aria-label="Publication categories">
+    {sections.map((section) => (
+      <a href={`#${section.id}`} class="catalog-chip">
+        <span>{section.title}</span>
+        <span>{section.items.length}</span>
+      </a>
+    ))}
+  </nav>
+
+  <div class="catalog-groups">
+    {sections.map((section) => (
+      <section id={section.id} class="catalog-group" aria-labelledby={`${section.id}-title`}>
+        <div class="catalog-group-header">
+          <div>
+            <p class="catalog-group-count">{section.items.length} items</p>
+            <h3 id={`${section.id}-title`}>{section.title}</h3>
+            <p>{section.description}</p>
+          </div>
+        </div>
+
+        <div class="catalog-grid">
+          {section.items.map((publication) => (
+            <article class="catalog-item">
+              <div class="catalog-item-meta">
+                <span>
+                  <BookOpen size={13} stroke-width={1.75} aria-hidden="true" />
+                  {publication.year}
+                </span>
+                <span>{getPublicationMetaLabel(publication.category, publication.type)}</span>
+              </div>
+
+              <h4>{publication.title}</h4>
+              <p class="catalog-summary">{publication.summary}</p>
+
+              <div class="catalog-detail-list">
+                {getDetailLines(publication).map((line) => (
+                  <p>{line}</p>
+                ))}
+              </div>
+
+              <div class="catalog-foot">
+                <div class="catalog-tags">
+                  {publication.tags.map((tag) => (
+                    <span>{tag}</span>
+                  ))}
+                </div>
+
+                <div class="catalog-links">
+                  {publication.sourceVerified === false && (
+                    <span class="catalog-legacy">
+                      <LibraryBig size={13} stroke-width={1.8} aria-hidden="true" />
+                      Legacy source
+                    </span>
+                  )}
+                  <a href={publication.href} target="_blank" rel="noreferrer" class="catalog-link alt-link-with-icon">
+                    <span>{publication.sourceVerified === false ? "Source page" : "Open publication"}</span>
+                    <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</section>
+
+<style>
+  .catalog-section {
+    padding: 0 0 4.5rem;
+  }
+
+  .catalog-heading {
+    max-width: 58rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .catalog-kicker,
+  .catalog-group-count,
+  .catalog-item-meta {
+    font-family: "JetBrains Mono", "Consolas", monospace;
+  }
+
+  .catalog-kicker {
+    color: #56d8ff;
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+  }
+
+  .catalog-heading h2 {
+    margin-top: 0.8rem;
+    color: #fff;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.03;
+    letter-spacing: -0.03em;
+  }
+
+  .catalog-heading p:last-child,
+  .catalog-group-header p,
+  .catalog-summary,
+  .catalog-detail-list p {
+    color: #a1a1aa;
+    line-height: 1.8;
+  }
+
+  .catalog-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .catalog-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    color: #d4d4d8;
+    text-decoration: none;
+  }
+
+  .catalog-chip:hover {
+    border-color: rgba(86, 216, 255, 0.24);
+    color: #fff;
+  }
+
+  .catalog-chip span:last-child {
+    color: #56d8ff;
+    font-size: 0.82rem;
+  }
+
+  .catalog-groups {
+    display: grid;
+    gap: 1.6rem;
+  }
+
+  .catalog-group {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1.4rem;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.26);
+  }
+
+  .catalog-group-header {
+    margin-bottom: 1.25rem;
+  }
+
+  .catalog-group-count {
+    color: #56d8ff;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+  }
+
+  .catalog-group h3 {
+    margin-top: 0.55rem;
+    color: #fff;
+    font-size: 1.7rem;
+    letter-spacing: -0.02em;
+  }
+
+  .catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .catalog-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    min-height: 100%;
+    padding: 1.15rem;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(9, 12, 18, 0.55);
+  }
+
+  .catalog-item-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.8rem;
+    color: #71717a;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+
+  .catalog-item-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .catalog-item h4 {
+    color: #fff;
+    font-size: 1.18rem;
+    line-height: 1.35;
+  }
+
+  .catalog-detail-list {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .catalog-detail-list p {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  .catalog-foot {
+    display: grid;
+    gap: 0.85rem;
+    margin-top: auto;
+  }
+
+  .catalog-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .catalog-tags span {
+    padding: 0.33rem 0.62rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #a1a1aa;
+    font-size: 0.8rem;
+    line-height: 1;
+  }
+
+  .catalog-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .catalog-legacy {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: #f4b56a;
+    font-size: 0.82rem;
+  }
+
+  .catalog-link {
+    color: #56d8ff;
+    text-decoration: none;
+  }
+
+  .catalog-link:hover {
+    color: #fff;
+  }
+
+  @media (max-width: 980px) {
+    .catalog-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

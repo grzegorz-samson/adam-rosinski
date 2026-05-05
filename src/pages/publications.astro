@@ -1,19 +1,29 @@
 ---
-import { getCollection } from "astro:content";
 import AltLabLayout from "../layouts/AltLabLayout.astro";
 import AltPageHero from "../components/AltPageHero.astro";
 import AlternativePublications from "../components/AlternativePublications.astro";
+import PublicationsCatalog from "../components/PublicationsCatalog.astro";
 import AlternativeProfiles from "../components/AlternativeProfiles.astro";
-
-const publications = (await getCollection("publications")).sort((a, b) => b.data.year - a.data.year);
+import { publicationsByCategory, selectedPublications } from "../data/publications";
 ---
 
 <AltLabLayout
   title="Publications | Adam Rosiński"
-  description="Selected publications on auditory perception, recording, and spatial audio."
+  description="Books, articles, editorial work, and chapters on auditory perception, recording, and spatial audio."
   activePath="/publications"
 >
   <AltPageHero title="Publications" />
-  <AlternativePublications publications={publications} />
+  <AlternativePublications
+    publications={selectedPublications}
+    kicker="Books"
+    title="Books"
+    description="The four monographs remain the clearest visual entry point into Adam Rosiński’s publication work, so they stay at the top as the opening shelf."
+  />
+  <PublicationsCatalog
+    monographs={publicationsByCategory.monographs}
+    journalArticles={publicationsByCategory.journalArticles}
+    editorialWork={publicationsByCategory.editorialWork}
+    bookChapters={publicationsByCategory.bookChapters}
+  />
   <AlternativeProfiles />
 </AltLabLayout>

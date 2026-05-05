@@ -1,5 +1,4 @@
 ---
-import { getCollection } from "astro:content";
 import AltLabLayout from "../layouts/AltLabLayout.astro";
 import AlternativeHero from "../components/AlternativeHero.astro";
 import AlternativeAuditoryField from "../components/AlternativeAuditoryField.astro";
@@ -8,8 +7,7 @@ import AlternativePublications from "../components/AlternativePublications.astro
 import AlternativePractice from "../components/AlternativePractice.astro";
 import AlternativeProfiles from "../components/AlternativeProfiles.astro";
 import AlternativeContact from "../components/AlternativeContact.astro";
-
-const publications = (await getCollection("publications")).sort((a, b) => b.data.year - a.data.year);
+import { selectedPublications } from "../data/publications";
 ---
 
 <AltLabLayout
@@ -18,7 +16,11 @@ const publications = (await getCollection("publications")).sort((a, b) => b.data
   activePath="/"
 >
   <AlternativeHero />
-  <AlternativePublications publications={publications} />
+  <AlternativePublications
+    publications={selectedPublications}
+    title="Selected publications"
+    description="The opening shelf focuses on the four monographs that frame Adam Rosiński’s work across auditory perception, recording, and sound technology."
+  />
   <AlternativeProfiles />
   <AlternativeAuditoryField />
   <AlternativeAudioDemo />
