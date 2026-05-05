@@ -1,76 +1,94 @@
 ---
+import Ear from "@lucide/astro/icons/ear";
+import Mic from "@lucide/astro/icons/mic";
+import Orbit from "@lucide/astro/icons/orbit";
+import GraduationCap from "@lucide/astro/icons/graduation-cap";
+import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
 import { withBase } from "../utils/withBase";
 
 const modes = [
   {
-    key: "percepcja",
-    title: "Percepcja",
+    key: "perception",
+    title: "Perception",
+    icon: Ear,
     intro:
-      "Dźwięk nie pojawia się dla słuchacza jako neutralny strumień danych. Jest organizowany, grupowany i rozdzielany w dynamiczne struktury percepcyjne.",
-    href: withBase("/about"),
-    cta: "Zobacz więcej",
+      "Sound does not arrive as a neutral stream of data. It is grouped, separated, and organized into dynamic perceptual structures.",
+    href: withBase("/work-areas"),
+    cta: "Open page",
     accent: "cyan",
   },
   {
-    key: "rejestracja",
-    title: "Rejestracja",
+    key: "recording",
+    title: "Recording",
+    icon: Mic,
     intro:
-      "Rejestracja projektuje punkt słyszenia, kierunek uwagi i relacje między źródłem a przestrzenią. Mikrofon staje się narzędziem interpretacji.",
-    href: withBase("/publications"),
-    cta: "Przejdź do publikacji",
+      "Recording designs a listening position, a direction of attention, and a relation between source and space. The microphone becomes an interpretive tool.",
+    href: withBase("/work-areas"),
+    cta: "Open page",
     accent: "amber",
   },
   {
-    key: "przestrzen",
-    title: "Przestrzeń",
+    key: "space",
+    title: "Space",
+    icon: Orbit,
     intro:
-      "Przestrzeń akustyczna działa jednocześnie jako właściwość fizyczna i doświadczenie słuchowe. W nagraniu może być odwzorowywana, interpretowana albo komponowana.",
-    href: withBase("/publications"),
-    cta: "Zobacz obszar",
+      "Acoustic space functions both as a physical property and as a listening experience. In recording it can be mapped, interpreted, or composed.",
+    href: withBase("/work-areas"),
+    cta: "Open page",
     accent: "emerald",
   },
   {
-    key: "edukacja",
-    title: "Edukacja",
+    key: "education",
+    title: "Education",
+    icon: GraduationCap,
     intro:
-      "Nowe technologie audio współtworzą współczesne środowisko dydaktyczne: laboratorium, studio i narzędzie myślenia o muzyce oraz słyszeniu.",
-    href: withBase("/projects"),
-    cta: "Zobacz praktykę",
+      "Audio technologies also shape a contemporary educational environment: laboratory, studio, and a way of thinking about music and listening.",
+    href: withBase("/work-areas"),
+    cta: "Open page",
     accent: "neutral",
   },
 ];
 ---
 
-<section id="pole-sluchowe-alt" class="alt-section">
+<section id="work-areas-alt" class="alt-section">
   <div class="alt-panel">
     <div class="alt-grid">
       <div>
-        <h2>Obszary pracy</h2>
+        <h2>Work Areas</h2>
         <p class="alt-copy">
-          Cztery uzupełniające się pola tworzą wspólny obszar pracy: od badań nad słyszeniem, przez techniki rejestracji,
-          po myślenie o przestrzeni akustycznej i wykorzystanie technologii audio w dydaktyce.
+          Four complementary fields create a shared area of work: from research on listening, through recording techniques,
+          to thinking about acoustic space and the use of audio technologies in teaching.
         </p>
 
         <div class="alt-buttons" data-alt-mode-buttons>
-          {modes.map((mode, index) => (
-            <article class={`alt-mode-button ${index === 0 ? "is-active" : ""}`} data-alt-mode-card={mode.key}>
-              <div class="alt-mode-row">
-                <button
-                  type="button"
-                  class="alt-mode-trigger"
-                  data-alt-mode={mode.key}
-                  aria-pressed={index === 0 ? "true" : "false"}
-                >
-                  <span class={`alt-dot alt-dot-${mode.accent}`}></span>
-                  <span class="alt-mode-copy">
-                    <strong>{mode.title}</strong>
-                    <small>{mode.intro}</small>
-                  </span>
-                </button>
-                <a href={mode.href} class="alt-mode-link">{mode.cta}</a>
-              </div>
-            </article>
-          ))}
+          {modes.map((mode, index) => {
+            const Icon = mode.icon;
+
+            return (
+              <article class={`alt-mode-button ${index === 0 ? "is-active" : ""}`} data-alt-mode-card={mode.key}>
+                <div class="alt-mode-row">
+                  <button
+                    type="button"
+                    class="alt-mode-trigger"
+                    data-alt-mode={mode.key}
+                    aria-pressed={index === 0 ? "true" : "false"}
+                  >
+                    <span class={`alt-mode-icon alt-mode-icon-${mode.accent}`}>
+                      <Icon size={18} stroke-width={1.8} aria-hidden="true" />
+                    </span>
+                    <span class="alt-mode-copy">
+                      <strong>{mode.title}</strong>
+                      <small>{mode.intro}</small>
+                    </span>
+                  </button>
+                  <a href={mode.href} class="alt-mode-link alt-link-with-icon">
+                    <span>{mode.cta}</span>
+                    <ArrowUpRight size={15} stroke-width={1.8} aria-hidden="true" />
+                  </a>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
 
@@ -82,7 +100,7 @@ const modes = [
             <circle cx="350" cy="260" r="220"></circle>
           </g>
 
-          <g data-alt-group="percepcja">
+          <g data-alt-group="perception">
             <path class="alt-line" d="M90 150 C 180 220, 240 180, 350 260 S 520 330, 615 205" fill="none" stroke="rgba(103,232,249,0.92)" stroke-width="3"></path>
             <path class="alt-line" d="M110 355 C 195 305, 255 325, 350 260 S 505 225, 585 330" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2"></path>
             <circle class="alt-node" cx="95" cy="150" r="8" fill="rgba(103,232,249,0.95)"></circle>
@@ -92,7 +110,7 @@ const modes = [
             <circle class="alt-node" cx="610" cy="205" r="8" fill="rgba(103,232,249,0.95)"></circle>
           </g>
 
-          <g data-alt-group="rejestracja" opacity="0.22">
+          <g data-alt-group="recording" opacity="0.22">
             <path class="alt-line" d="M145 260 L 560 260" fill="none" stroke="rgba(251,191,36,0.92)" stroke-width="3"></path>
             <path class="alt-line" d="M350 80 L 350 440" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="2"></path>
             <path class="alt-line" d="M220 130 L 480 390" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="2"></path>
@@ -104,7 +122,7 @@ const modes = [
             <circle class="alt-node" cx="245" cy="260" r="7" fill="rgba(255,255,255,0.82)"></circle>
           </g>
 
-          <g data-alt-group="przestrzen" opacity="0.22">
+          <g data-alt-group="space" opacity="0.22">
             <circle class="alt-node" cx="350" cy="260" r="18" fill="rgba(110,231,183,0.92)"></circle>
             <circle class="alt-node" cx="350" cy="95" r="7" fill="rgba(255,255,255,0.85)"></circle>
             <circle class="alt-node" cx="520" cy="260" r="7" fill="rgba(255,255,255,0.85)"></circle>
@@ -113,7 +131,7 @@ const modes = [
             <path class="alt-line" d="M350 95 Q 450 160, 520 260 Q 445 350, 350 425 Q 250 350, 180 260 Q 245 160, 350 95Z" fill="none" stroke="rgba(110,231,183,0.78)" stroke-width="3"></path>
           </g>
 
-          <g data-alt-group="edukacja" opacity="0.22">
+          <g data-alt-group="education" opacity="0.22">
             <rect x="175" y="135" width="110" height="82" rx="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"></rect>
             <rect x="300" y="135" width="110" height="82" rx="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"></rect>
             <rect x="425" y="135" width="110" height="82" rx="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"></rect>
@@ -162,7 +180,7 @@ const modes = [
       button.addEventListener("click", () => setMode(button.getAttribute("data-alt-mode")));
     });
 
-    setMode("percepcja");
+    setMode("perception");
   };
 
   initAltAuditoryField();
@@ -226,10 +244,7 @@ const modes = [
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(255, 255, 255, 0.05);
     padding: 1rem;
-    transition:
-      border-color 180ms ease,
-      background 180ms ease,
-      transform 180ms ease;
+    transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
   }
 
   .alt-mode-trigger {
@@ -280,26 +295,38 @@ const modes = [
     flex: 1 1 auto;
   }
 
-  .alt-dot {
-    width: 0.55rem;
-    height: 0.55rem;
+  .alt-mode-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 2.15rem;
+    height: 2.15rem;
     border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    background: rgba(255, 255, 255, 0.045);
   }
 
-  .alt-dot-cyan {
-    background: #56d8ff;
+  .alt-mode-icon-cyan {
+    color: #56d8ff;
+    border-color: rgba(86, 216, 255, 0.22);
+    background: rgba(86, 216, 255, 0.08);
   }
 
-  .alt-dot-amber {
-    background: #ffb347;
+  .alt-mode-icon-amber {
+    color: #ffb347;
+    border-color: rgba(255, 179, 71, 0.22);
+    background: rgba(255, 179, 71, 0.08);
   }
 
-  .alt-dot-emerald {
-    background: #34d399;
+  .alt-mode-icon-emerald {
+    color: #34d399;
+    border-color: rgba(52, 211, 153, 0.22);
+    background: rgba(52, 211, 153, 0.08);
   }
 
-  .alt-dot-neutral {
-    background: rgba(255, 255, 255, 0.75);
+  .alt-mode-icon-neutral {
+    color: rgba(255, 255, 255, 0.78);
   }
 
   .alt-mode-link {

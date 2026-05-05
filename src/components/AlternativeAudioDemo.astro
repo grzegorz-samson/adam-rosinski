@@ -1,24 +1,36 @@
-<section id="demo-alt" class="alt-section">
+---
+import Volume2 from "@lucide/astro/icons/volume-2";
+import VolumeX from "@lucide/astro/icons/volume-x";
+---
+
+<section id="audio-demo-alt" class="alt-section">
   <div class="alt-module audio-visualizer-module">
     <div class="alt-head">
       <div>
-        <p class="alt-kicker">Demonstrator audio</p>
-        <h3>Generator audio</h3>
+        <p class="alt-kicker">Audio demonstrator</p>
+        <h3>Audio generator</h3>
       </div>
 
-      <button class="alt-button alt-button-primary alt-demo-toggle" type="button">Włącz dźwięk</button>
+      <button class="alt-button alt-button-primary alt-demo-toggle" type="button" aria-label="Enable sound">
+        <span class="alt-demo-icon alt-demo-icon-muted" aria-hidden="true">
+          <VolumeX size={18} stroke-width={1.9} />
+        </span>
+        <span class="alt-demo-icon alt-demo-icon-live is-hidden" aria-hidden="true">
+          <Volume2 size={18} stroke-width={1.9} />
+        </span>
+      </button>
     </div>
 
     <div class="alt-dual-grid">
       <section class="alt-panel-visual">
-        <p class="alt-kicker">Przebieg czasowy</p>
+        <p class="alt-kicker">Waveform</p>
         <div class="alt-frame">
           <canvas class="alt-canvas-waveform" aria-hidden="true"></canvas>
         </div>
       </section>
 
       <section class="alt-panel-visual">
-        <p class="alt-kicker">Widmo częstotliwościowe</p>
+        <p class="alt-kicker">Frequency spectrum</p>
         <div class="alt-frame">
           <canvas class="alt-canvas-frequency" aria-hidden="true"></canvas>
         </div>
@@ -27,8 +39,8 @@
 
     <div class="alt-footer">
       <p>
-        Demonstrator renderuje równolegle dwie reprezentacje tego samego sygnału: po lewej zmienność amplitudy w czasie,
-        po prawej rozkład energii w paśmie częstotliwości. Wizualizacja działa od razu, a przycisk uruchamia odsłuch.
+        The demonstrator renders two parallel representations of the same signal: amplitude over time on the left,
+        and frequency-energy distribution on the right. The visualization is always active, while the button starts playback.
       </p>
     </div>
   </div>
@@ -43,6 +55,8 @@
       this.frequencyCanvas = container.querySelector(".alt-canvas-frequency");
       this.frequencyCtx = this.frequencyCanvas?.getContext("2d");
       this.demoToggle = container.querySelector(".alt-demo-toggle");
+      this.mutedIcon = container.querySelector(".alt-demo-icon-muted");
+      this.liveIcon = container.querySelector(".alt-demo-icon-live");
       this.audioCtx = null;
       this.oscillator = null;
       this.gain = null;
@@ -56,6 +70,7 @@
 
       this.resizeCanvases();
       this.bind();
+      this.setToggleState(false);
       this.startVisuals();
       window.addEventListener("resize", () => this.resizeCanvases());
       window.addEventListener("beforeunload", () => this.destroy(), { once: true });
@@ -65,12 +80,18 @@
       this.demoToggle?.addEventListener("click", async () => {
         if (!this.audioEnabled) {
           await this.enableAudio();
-          this.demoToggle.textContent = "Wyłącz dźwięk";
+          this.setToggleState(true);
         } else {
           this.disableAudio();
-          this.demoToggle.textContent = "Włącz dźwięk";
+          this.setToggleState(false);
         }
       });
+    }
+
+    setToggleState(isEnabled) {
+      this.demoToggle?.setAttribute("aria-label", isEnabled ? "Disable sound" : "Enable sound");
+      this.mutedIcon?.classList.toggle("is-hidden", isEnabled);
+      this.liveIcon?.classList.toggle("is-hidden", !isEnabled);
     }
 
     resizeCanvas(canvas, ctx) {
@@ -308,6 +329,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 0.5rem;
     border-radius: 999px;
     padding: 0.85rem 1.2rem;
     font-size: 0.95rem;
@@ -324,7 +346,20 @@
   .alt-demo-toggle {
     justify-self: end;
     width: auto;
+    min-width: 3.25rem;
+    min-height: 3.25rem;
+    padding-inline: 0.95rem;
     white-space: nowrap;
+  }
+
+  .alt-demo-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .alt-demo-icon.is-hidden {
+    display: none;
   }
 
   @media (max-width: 1080px) {

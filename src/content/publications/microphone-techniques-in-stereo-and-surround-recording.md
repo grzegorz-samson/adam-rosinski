@@ -1,7 +1,7 @@
 ---
 title: "Microphone Techniques in Stereo and Surround Recording"
 year: 2022
-summary: "Monografia poświęcona technikom mikrofonowym w rejestracji stereo i surround, łącząca wiedzę technologiczną z perspektywą muzyczną i realizatorską."
+summary: "A monograph on microphone techniques in stereo and surround recording, linking technical knowledge with musical and production-oriented listening."
 tags:
   - "microphones"
   - "stereo"

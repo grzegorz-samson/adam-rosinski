@@ -1,7 +1,7 @@
 export const quickLinks = [
   {
-    label: "Profil UWM",
-    href: "https://ws.uwm.edu.pl/pracownicy-ogloszenia-i-aktualnosci/dr-adam-rosinski",
+    label: "ORCID",
+    href: "https://orcid.org/0000-0002-1776-9540",
   },
   {
     label: "Google Scholar",

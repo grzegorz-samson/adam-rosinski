@@ -1,7 +1,7 @@
 ---
 title: "A spherical microphone prototype for multichannel recording"
 year: 2026
-summary: "Publikacja o prototypie sferycznego mikrofonu do rejestracji wielokanałowej, łącząca projekt technologiczny z zastosowaniami artystycznymi i kompozytorskimi."
+summary: "A publication on a spherical microphone prototype for multichannel recording, linking technological design with artistic and compositional applications."
 tags:
   - "prototype"
   - "multichannel"

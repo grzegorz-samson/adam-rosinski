@@ -1,17 +1,12 @@
 ---
-import { site } from "../data/site";
 ---
 
-<footer id="kontakt-alt" class="alt-footer">
+<footer id="contact-alt" class="alt-footer">
   <div class="alt-grid">
     <div>
-      <p class="alt-kicker">Kontakt</p>
-      <h2>Współpraca badawcza, konsultacje, projekty artystyczne i działania dydaktyczne.</h2>
-    </div>
-
-    <div class="alt-info">
-      <p>{site.location}</p>
-      <p>{site.institution}</p>
+      <p class="alt-kicker">Contact</p>
+      <h2>Research collaboration, consultation, artistic projects, and teaching-related work.</h2>
+      <p class="alt-copy">[email placeholder]</p>
     </div>
   </div>
 </footer>
@@ -52,23 +47,7 @@ import { site } from "../data/site";
     line-height: 1.85;
   }
 
-  .alt-info {
-    display: grid;
-    gap: 0.5rem;
-    justify-items: end;
-    text-align: right;
-    font-size: 0.95rem;
-  }
-
-  @media (max-width: 1080px) {
-    .alt-grid {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .alt-info {
-      justify-items: start;
-      text-align: left;
-    }
+  .alt-copy {
+    max-width: 42rem;
   }
 </style>
