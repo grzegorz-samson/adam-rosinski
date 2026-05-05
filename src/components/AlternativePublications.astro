@@ -1,4 +1,6 @@
 ---
+import BookOpen from "@lucide/astro/icons/book-open";
+import ExternalLink from "@lucide/astro/icons/external-link";
 import { withBase } from "../utils/withBase";
 
 interface Entry {
@@ -18,22 +20,22 @@ interface Props {
 const { publications } = Astro.props;
 const publicationCovers: Record<string, { src: string; alt: string; label: string }> = {
   "Microphone Techniques in Stereo and Surround Recording": {
-    src: withBase("/images/microphone-techniques-cover.jpg"),
+    src: withBase("/images/covers/microphone-techniques.jpg"),
     alt: "Cover of Microphone Techniques in Stereo and Surround Recording",
     label: "Monograph",
   },
   "Multivariantism of Auditory Perceptions as a Significant Element of the Auditory Scene Analysis Concept": {
-    src: withBase("/images/covers/multivariantism.svg"),
+    src: withBase("/images/covers/multivariantism.jpg"),
     alt: "Cover of Multivariantism of Auditory Perceptions as a Significant Element of the Auditory Scene Analysis Concept",
     label: "Article",
   },
   "Variable Properties of Auditory Scene Analysis in Music": {
-    src: withBase("/images/covers/variable-properties.svg"),
+    src: withBase("/images/covers/variable-properties.jpg"),
     alt: "Cover of Variable Properties of Auditory Scene Analysis in Music",
     label: "Article",
   },
   "A spherical microphone prototype for multichannel recording": {
-    src: withBase("/images/covers/spherical-microphone.svg"),
+    src: withBase("/images/covers/spherical-microphone.jpg"),
     alt: "Cover of A spherical microphone prototype for multichannel recording",
     label: "Article",
   },
@@ -53,7 +55,7 @@ const publicationCovers: Record<string, { src: string; alt: string; label: strin
   <div class="alt-grid">
     {publications.map((publication) => {
       const cover = publicationCovers[publication.data.title] ?? {
-        src: withBase("/images/covers/microphone-techniques.svg"),
+        src: withBase("/images/covers/microphone-techniques.jpg"),
         alt: `Cover for ${publication.data.title}`,
         label: "Publication",
       };
@@ -68,7 +70,10 @@ const publicationCovers: Record<string, { src: string; alt: string; label: strin
 
           <div class="alt-publication-copy">
             <div class="alt-meta">
-              <span>{publication.data.year}</span>
+              <span>
+                <BookOpen size={13} stroke-width={1.75} aria-hidden="true" />
+                {publication.data.year}
+              </span>
               <span>{cover.label}</span>
             </div>
             <h3>{publication.data.title}</h3>
@@ -78,7 +83,10 @@ const publicationCovers: Record<string, { src: string; alt: string; label: strin
                 <span>{tag}</span>
               ))}
             </div>
-            <a href={publication.data.href} target="_blank" rel="noreferrer" class="alt-publication-link">Open source</a>
+            <a href={publication.data.href} target="_blank" rel="noreferrer" class="alt-publication-link alt-link-with-icon">
+              <span>Open source</span>
+              <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
+            </a>
           </div>
         </article>
       );
@@ -203,6 +211,12 @@ const publicationCovers: Record<string, { src: string; alt: string; label: strin
     text-transform: uppercase;
     letter-spacing: 0.14em;
     color: #71717a;
+  }
+
+  .alt-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
   }
 
   .alt-tag-row {

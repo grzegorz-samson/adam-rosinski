@@ -1,10 +1,14 @@
 ---
+import GraduationCap from "@lucide/astro/icons/graduation-cap";
+import FingerprintPattern from "@lucide/astro/icons/fingerprint-pattern";
+import BadgeInfo from "@lucide/astro/icons/badge-info";
+import ExternalLink from "@lucide/astro/icons/external-link";
 import { quickLinks } from "../data/links";
 
-const profileDescriptions: Record<string, string> = {
-  "University Profile": "Institutional profile with affiliation details, activity outline, and academic context.",
-  "Google Scholar": "Publication list, citations, and indexed work visible in the Google Scholar ecosystem.",
-  SciProfiles: "Research profile organizing academic activity, publications, and thematic connections.",
+const profileIcons = {
+  ORCID: FingerprintPattern,
+  "Google Scholar": GraduationCap,
+  SciProfiles: BadgeInfo,
 };
 ---
 
@@ -12,20 +16,26 @@ const profileDescriptions: Record<string, string> = {
   <div class="alt-heading">
     <p class="alt-kicker">Research profiles</p>
     <h2>Research visibility</h2>
-    <p>
-      Institutional and bibliographic profiles provide quick access to publications, academic output, and affiliation details.
-    </p>
+    <p>External research profiles provide direct access to publications, scholarly records, and indexed academic output.</p>
   </div>
 
   <div class="alt-grid">
-    {quickLinks.map((link) => (
-      <a href={link.href} target="_blank" rel="noreferrer" class="alt-profile-card">
-        <p class="alt-kicker">{link.label}</p>
-        <h3>{link.label}</h3>
-        <p>{profileDescriptions[link.label] ?? "External profile documenting research and publication activity."}</p>
-        <span>View profile</span>
-      </a>
-    ))}
+    {quickLinks.map((link) => {
+      const Icon = profileIcons[link.label as keyof typeof profileIcons] ?? BadgeInfo;
+
+      return (
+        <a href={link.href} target="_blank" rel="noreferrer" class="alt-profile-card">
+          <div class="alt-profile-head">
+            <div class="alt-profile-title-row">
+              <Icon size={18} stroke-width={1.75} aria-hidden="true" />
+              <h3>{link.label}</h3>
+            </div>
+            <ExternalLink size={16} stroke-width={1.75} aria-hidden="true" />
+          </div>
+          <span class="alt-profile-link-label">View profile</span>
+        </a>
+      );
+    })}
   </div>
 </section>
 
@@ -56,8 +66,7 @@ const profileDescriptions: Record<string, string> = {
     text-wrap: balance;
   }
 
-  .alt-heading p:last-child,
-  .alt-profile-card p:last-of-type {
+  .alt-heading p:last-child {
     margin-top: 1rem;
     color: #a1a1aa;
     line-height: 1.85;
@@ -87,14 +96,34 @@ const profileDescriptions: Record<string, string> = {
     background: rgba(255, 255, 255, 0.055);
   }
 
+  .alt-profile-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .alt-profile-title-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    min-width: 0;
+  }
+
+  .alt-profile-title-row > svg,
+  .alt-profile-head > svg {
+    color: #56d8ff;
+    opacity: 0.88;
+    flex: 0 0 auto;
+  }
+
   .alt-profile-card h3 {
-    margin-top: 0.9rem;
     color: #fff;
     font-size: 1.32rem;
     line-height: 1.25;
   }
 
-  .alt-profile-card span {
+  .alt-profile-link-label {
     display: inline-block;
     margin-top: 1rem;
     color: #56d8ff;

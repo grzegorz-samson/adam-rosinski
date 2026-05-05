@@ -1,32 +1,55 @@
 ---
-import { site } from "../data/site";
+import Radar from "@lucide/astro/icons/radar";
+import Orbit from "@lucide/astro/icons/orbit";
+import BookOpen from "@lucide/astro/icons/book-open";
+
+const metrics = [
+  {
+    label: "Focus",
+    value: "Auditory perception and spatial listening",
+    icon: Radar,
+  },
+  {
+    label: "Methods",
+    value: "Recording practice, multichannel techniques, and audio experiment",
+    icon: Orbit,
+  },
+  {
+    label: "Output",
+    value: "Research articles, demonstrators, and student-facing materials",
+    icon: BookOpen,
+  },
+];
 ---
 
 <section id="about-alt" class="alt-section">
   <div class="alt-bento">
     <div class="alt-copy">
-      <p class="alt-kicker">About</p>
+      <p class="alt-kicker">Bio</p>
       <h2>Research on listening developed between theory, technology, and recording practice.</h2>
       <p>
-        Adam Rosinski works across research and artistic practice with a focus on auditory perception, auditory-scene organization,
+        Adam Rosiński works across research and artistic practice with a focus on auditory perception, auditory-scene organization,
         spatial recording, and contemporary audio technologies. His work connects reflection on how we hear with studio practice
         and the design of listening conditions.
       </p>
     </div>
 
     <div class="alt-metrics">
-      <article class="alt-metric-card">
-        <span>Affiliation</span>
-        <strong>{site.institution}</strong>
-      </article>
-      <article class="alt-metric-card">
-        <span>Specialization</span>
-        <strong>Perception, space, and recording</strong>
-      </article>
-      <article class="alt-metric-card">
-        <span>Location</span>
-        <strong>{site.location}</strong>
-      </article>
+      {metrics.map((metric) => {
+        const Icon = metric.icon;
+
+        return (
+          <article class="alt-metric-card">
+            <div class="alt-metric-top">
+              <span>{metric.label}</span>
+              <span class="alt-icon-badge">
+                <Icon size={17} stroke-width={1.75} aria-hidden="true" />
+              </span>
+            </div>
+            <strong>{metric.value}</strong>
+          </article>
+        );
+      })}
     </div>
   </div>
 </section>
@@ -78,6 +101,13 @@ import { site } from "../data/site";
     background: rgba(255, 255, 255, 0.04);
     padding: 1.3rem;
     backdrop-filter: blur(12px);
+  }
+
+  .alt-metric-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
   }
 
   .alt-metric-card strong {

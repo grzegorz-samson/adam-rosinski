@@ -14,16 +14,16 @@ const publications = (await getCollection("publications")).sort((a, b) => b.data
 ---
 
 <AltLabLayout
-  title="Adam Rosinski - Research, listening, and audio practice"
+  title="Adam Rosiński - Research, listening, and audio practice"
   description="Research website focused on listening, recording, spatial audio, and contemporary sound technologies."
   activePath="/"
 >
   <AlternativeHero />
   <AlternativeAbout />
+  <AlternativePublications publications={publications} />
+  <AlternativeProfiles />
   <AlternativeAuditoryField />
   <AlternativeAudioDemo />
-  <AlternativePublications publications={publications} />
   <AlternativePractice />
-  <AlternativeProfiles />
   <AlternativeContact />
 </AltLabLayout>

@@ -1,18 +1,14 @@
 ---
 interface Props {
-  kicker: string;
   title: string;
-  intro: string;
 }
 
-const { kicker, title, intro } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <section class="alt-page-section">
   <div class="alt-page-panel">
-    <p class="alt-kicker">{kicker}</p>
     <h1>{title}</h1>
-    <p class="alt-copy">{intro}</p>
   </div>
 </section>
 
@@ -30,28 +26,11 @@ const { kicker, title, intro } = Astro.props;
     box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
   }
 
-  .alt-kicker {
-    font-family: "JetBrains Mono", "Consolas", monospace;
-    font-size: 0.76rem;
-    text-transform: uppercase;
-    letter-spacing: 0.22em;
-    color: #56d8ff;
-  }
-
   h1 {
-    margin-top: 0.8rem;
     color: #fff;
     font-size: clamp(2.4rem, 6vw, 4.8rem);
     line-height: 1.02;
     letter-spacing: -0.03em;
     text-wrap: balance;
-  }
-
-  .alt-copy {
-    margin-top: 1rem;
-    max-width: 52rem;
-    color: #a1a1aa;
-    line-height: 1.85;
-    font-size: 1.02rem;
   }
 </style>

@@ -1,5 +1,12 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import AudioWaveform from "@lucide/astro/icons/audio-waveform";
+import UserRound from "@lucide/astro/icons/user-round";
+import Radar from "@lucide/astro/icons/radar";
+import Headphones from "@lucide/astro/icons/headphones";
+import BookOpen from "@lucide/astro/icons/book-open";
+import BriefcaseBusiness from "@lucide/astro/icons/briefcase-business";
+import Mail from "@lucide/astro/icons/mail";
 import { navigation, site } from "../data/site";
 import { withBase } from "../utils/withBase";
 
@@ -14,23 +21,43 @@ const { title, description, activePath = "/" } = Astro.props;
 function isActive(href: string) {
   return activePath === href;
 }
+
+const navIcons = {
+  "/about": UserRound,
+  "/work-areas": Radar,
+  "/audio-demonstrator": Headphones,
+  "/publications": BookOpen,
+  "/practice": BriefcaseBusiness,
+  "/contact": Mail,
+};
 ---
 
 <BaseLayout title={title} description={description} bodyClass="alt-lab">
   <header class="alt-nav">
     <div class="alt-shell alt-nav-inner">
-      <a href={withBase("/")} class="alt-wordmark">{site.name} / research and sound</a>
+      <a href={withBase("/")} class="alt-wordmark">
+        <AudioWaveform size={16} stroke-width={1.75} aria-hidden="true" />
+        <span>{site.name} / research and sound</span>
+      </a>
 
       <nav class="alt-nav-links" aria-label="Site navigation">
-        {navigation.map((item) => (
-          <a href={withBase(item.href)} class:list={["alt-nav-link", isActive(item.href) && "is-active"]}>
-            {item.label}
-          </a>
-        ))}
+        {navigation.map((item) => {
+          const Icon = navIcons[item.href as keyof typeof navIcons];
+
+          return (
+            <a href={withBase(item.href)} class:list={["alt-nav-link", isActive(item.href) && "is-active"]}>
+              <Icon size={14} stroke-width={1.75} aria-hidden="true" />
+              <span>{item.label}</span>
+            </a>
+          );
+        })}
       </nav>
 
       <div class="alt-nav-actions">
-        <a href={withBase("/contact")} class="alt-nav-cta">Contact</a>
+        <a href={withBase("/contact")} class="alt-nav-cta">
+          <Mail size={15} stroke-width={1.75} aria-hidden="true" />
+          <span>Contact</span>
+        </a>
       </div>
     </div>
   </header>
@@ -86,6 +113,14 @@ function isActive(href: string) {
     font-family: "JetBrains Mono", "Consolas", monospace;
   }
 
+  .alt-wordmark,
+  .alt-nav-link,
+  .alt-nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
   .alt-wordmark {
     color: #fff;
     font-size: 0.85rem;
@@ -110,6 +145,19 @@ function isActive(href: string) {
   .alt-nav-link:hover,
   .alt-nav-link.is-active {
     color: #fff;
+  }
+
+  .alt-nav-link svg,
+  .alt-nav-cta svg,
+  .alt-wordmark svg {
+    flex: 0 0 auto;
+    opacity: 0.78;
+  }
+
+  .alt-nav-link:hover svg,
+  .alt-nav-link.is-active svg,
+  .alt-nav-cta:hover svg {
+    opacity: 1;
   }
 
   .alt-nav-cta {

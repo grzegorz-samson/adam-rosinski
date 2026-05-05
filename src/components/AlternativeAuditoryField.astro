@@ -1,10 +1,16 @@
 ---
+import Ear from "@lucide/astro/icons/ear";
+import Mic from "@lucide/astro/icons/mic";
+import Orbit from "@lucide/astro/icons/orbit";
+import GraduationCap from "@lucide/astro/icons/graduation-cap";
+import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
 import { withBase } from "../utils/withBase";
 
 const modes = [
   {
     key: "perception",
     title: "Perception",
+    icon: Ear,
     intro:
       "Sound does not arrive as a neutral stream of data. It is grouped, separated, and organized into dynamic perceptual structures.",
     href: withBase("/work-areas"),
@@ -14,6 +20,7 @@ const modes = [
   {
     key: "recording",
     title: "Recording",
+    icon: Mic,
     intro:
       "Recording designs a listening position, a direction of attention, and a relation between source and space. The microphone becomes an interpretive tool.",
     href: withBase("/work-areas"),
@@ -23,6 +30,7 @@ const modes = [
   {
     key: "space",
     title: "Space",
+    icon: Orbit,
     intro:
       "Acoustic space functions both as a physical property and as a listening experience. In recording it can be mapped, interpreted, or composed.",
     href: withBase("/work-areas"),
@@ -32,6 +40,7 @@ const modes = [
   {
     key: "education",
     title: "Education",
+    icon: GraduationCap,
     intro:
       "Audio technologies also shape a contemporary educational environment: laboratory, studio, and a way of thinking about music and listening.",
     href: withBase("/work-areas"),
@@ -52,25 +61,34 @@ const modes = [
         </p>
 
         <div class="alt-buttons" data-alt-mode-buttons>
-          {modes.map((mode, index) => (
-            <article class={`alt-mode-button ${index === 0 ? "is-active" : ""}`} data-alt-mode-card={mode.key}>
-              <div class="alt-mode-row">
-                <button
-                  type="button"
-                  class="alt-mode-trigger"
-                  data-alt-mode={mode.key}
-                  aria-pressed={index === 0 ? "true" : "false"}
-                >
-                  <span class={`alt-dot alt-dot-${mode.accent}`}></span>
-                  <span class="alt-mode-copy">
-                    <strong>{mode.title}</strong>
-                    <small>{mode.intro}</small>
-                  </span>
-                </button>
-                <a href={mode.href} class="alt-mode-link">{mode.cta}</a>
-              </div>
-            </article>
-          ))}
+          {modes.map((mode, index) => {
+            const Icon = mode.icon;
+
+            return (
+              <article class={`alt-mode-button ${index === 0 ? "is-active" : ""}`} data-alt-mode-card={mode.key}>
+                <div class="alt-mode-row">
+                  <button
+                    type="button"
+                    class="alt-mode-trigger"
+                    data-alt-mode={mode.key}
+                    aria-pressed={index === 0 ? "true" : "false"}
+                  >
+                    <span class={`alt-mode-icon alt-mode-icon-${mode.accent}`}>
+                      <Icon size={18} stroke-width={1.8} aria-hidden="true" />
+                    </span>
+                    <span class="alt-mode-copy">
+                      <strong>{mode.title}</strong>
+                      <small>{mode.intro}</small>
+                    </span>
+                  </button>
+                  <a href={mode.href} class="alt-mode-link alt-link-with-icon">
+                    <span>{mode.cta}</span>
+                    <ArrowUpRight size={15} stroke-width={1.8} aria-hidden="true" />
+                  </a>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
 
@@ -277,26 +295,38 @@ const modes = [
     flex: 1 1 auto;
   }
 
-  .alt-dot {
-    width: 0.55rem;
-    height: 0.55rem;
+  .alt-mode-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 2.15rem;
+    height: 2.15rem;
     border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    background: rgba(255, 255, 255, 0.045);
   }
 
-  .alt-dot-cyan {
-    background: #56d8ff;
+  .alt-mode-icon-cyan {
+    color: #56d8ff;
+    border-color: rgba(86, 216, 255, 0.22);
+    background: rgba(86, 216, 255, 0.08);
   }
 
-  .alt-dot-amber {
-    background: #ffb347;
+  .alt-mode-icon-amber {
+    color: #ffb347;
+    border-color: rgba(255, 179, 71, 0.22);
+    background: rgba(255, 179, 71, 0.08);
   }
 
-  .alt-dot-emerald {
-    background: #34d399;
+  .alt-mode-icon-emerald {
+    color: #34d399;
+    border-color: rgba(52, 211, 153, 0.22);
+    background: rgba(52, 211, 153, 0.08);
   }
 
-  .alt-dot-neutral {
-    background: rgba(255, 255, 255, 0.75);
+  .alt-mode-icon-neutral {
+    color: rgba(255, 255, 255, 0.78);
   }
 
   .alt-mode-link {

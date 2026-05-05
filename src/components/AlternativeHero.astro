@@ -1,4 +1,7 @@
 ---
+import Sparkles from "@lucide/astro/icons/sparkles";
+import FileText from "@lucide/astro/icons/file-text";
+import ArrowRight from "@lucide/astro/icons/arrow-right";
 import { site } from "../data/site";
 import { withBase } from "../utils/withBase";
 ---
@@ -10,7 +13,10 @@ import { withBase } from "../utils/withBase";
     <div class="alt-hero-content">
       <div class="alt-hero-grid">
         <div class="alt-hero-main">
-          <p class="alt-kicker">Sound research / recording / new technologies</p>
+          <p class="alt-kicker alt-kicker-with-icon">
+            <Sparkles size={15} stroke-width={1.7} aria-hidden="true" />
+            <span>Sound research / recording / new technologies</span>
+          </p>
           <h1>{site.name}</h1>
           <p class="alt-role">{site.role}</p>
           <p class="alt-lead">
@@ -19,8 +25,14 @@ import { withBase } from "../utils/withBase";
           </p>
 
           <div class="alt-hero-actions">
-            <a href={withBase("/publications")} class="alt-button alt-button-primary">View publications</a>
-            <a href={withBase("/practice")} class="alt-button alt-button-secondary">Explore practice</a>
+            <a href={withBase("/publications")} class="alt-button alt-button-primary">
+              <FileText size={17} stroke-width={1.85} aria-hidden="true" />
+              <span>View publications</span>
+            </a>
+            <a href={withBase("/practice")} class="alt-button alt-button-secondary">
+              <span>Explore practice</span>
+              <ArrowRight size={17} stroke-width={1.85} aria-hidden="true" />
+            </a>
           </div>
         </div>
 
@@ -28,7 +40,7 @@ import { withBase } from "../utils/withBase";
           <figure class="alt-portrait-card">
             <div class="alt-portrait-stage">
               <img src={withBase("/images/adam-rosinski-portrait-masked.png")} alt="" class="alt-portrait-image alt-portrait-image-background" aria-hidden="true" />
-              <img src={withBase("/images/adam-rosinski-portrait-masked.png")} alt="Adam Rosinski" class="alt-portrait-image alt-portrait-image-foreground" />
+              <img src={withBase("/images/adam-rosinski-portrait-masked.png")} alt="Adam Rosiński" class="alt-portrait-image alt-portrait-image-foreground" />
             </div>
           </figure>
         </div>
@@ -135,6 +147,12 @@ import { withBase } from "../utils/withBase";
     color: #56d8ff;
   }
 
+  .alt-kicker-with-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
   .alt-hero-grid {
     display: grid;
     grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
@@ -184,11 +202,16 @@ import { withBase } from "../utils/withBase";
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 0.55rem;
     border-radius: 999px;
     padding: 0.85rem 1.2rem;
     font-size: 0.95rem;
     font-weight: 600;
     text-decoration: none;
+  }
+
+  .alt-button svg {
+    flex: 0 0 auto;
   }
 
   .alt-button-primary {
@@ -245,19 +268,19 @@ import { withBase } from "../utils/withBase";
     height: 100%;
     object-fit: contain;
     object-position: center bottom;
-    filter: grayscale(1) contrast(1.05) brightness(0.9);
+    filter: contrast(1.05) brightness(0.9);
   }
 
   .alt-portrait-image-background {
     opacity: 0.22;
     transform: scale(1.12) translateY(0.75rem);
-    filter: grayscale(1) blur(28px) contrast(0.92) brightness(0.72);
+    filter: blur(28px) contrast(0.92) brightness(0.72);
   }
 
   .alt-portrait-image-foreground {
     opacity: 1;
     transform: scale(1.03) translateY(0.35rem);
-    filter: grayscale(1) contrast(1.08) brightness(0.96) drop-shadow(0 24px 36px rgba(0, 0, 0, 0.28));
+    filter: contrast(1.08) brightness(0.96) drop-shadow(0 24px 36px rgba(0, 0, 0, 0.28));
   }
 
   @media (max-width: 1080px) {

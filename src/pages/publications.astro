@@ -3,19 +3,17 @@ import { getCollection } from "astro:content";
 import AltLabLayout from "../layouts/AltLabLayout.astro";
 import AltPageHero from "../components/AltPageHero.astro";
 import AlternativePublications from "../components/AlternativePublications.astro";
+import AlternativeProfiles from "../components/AlternativeProfiles.astro";
 
 const publications = (await getCollection("publications")).sort((a, b) => b.data.year - a.data.year);
 ---
 
 <AltLabLayout
-  title="Publications | Adam Rosinski"
+  title="Publications | Adam Rosiński"
   description="Selected publications on auditory perception, recording, and spatial audio."
   activePath="/publications"
 >
-  <AltPageHero
-    kicker="Publications"
-    title="Books and articles connected to listening, recording, and analysis."
-    intro="The publication page keeps the same card-based visual library from the landing page, but expands it into a full list."
-  />
+  <AltPageHero title="Publications" />
   <AlternativePublications publications={publications} />
+  <AlternativeProfiles />
 </AltLabLayout>

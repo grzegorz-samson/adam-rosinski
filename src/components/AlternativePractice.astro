@@ -1,7 +1,13 @@
 ---
+import Mic from "@lucide/astro/icons/mic";
+import Orbit from "@lucide/astro/icons/orbit";
+import GraduationCap from "@lucide/astro/icons/graduation-cap";
+import Wrench from "@lucide/astro/icons/wrench";
+
 const cards = [
   {
     title: "Studio recording",
+    icon: Mic,
     role:
       "Designing listening perspective, plan, and source relations in recording, from microphone decisions to the final spatial image.",
     category: "Studio",
@@ -9,6 +15,7 @@ const cards = [
   },
   {
     title: "Multichannel thinking",
+    icon: Orbit,
     role:
       "Working with stereo, surround, and multichannel systems as a distinct language for organizing space, direction, and auditory perception.",
     category: "Space",
@@ -16,6 +23,7 @@ const cards = [
   },
   {
     title: "Technology in teaching",
+    icon: GraduationCap,
     role:
       "Using audio environments and digital tools as a full medium for teaching listening, analysis, and production practice.",
     category: "Education",
@@ -23,6 +31,7 @@ const cards = [
   },
   {
     title: "Prototypes and experiment",
+    icon: Wrench,
     role:
       "Developing solutions connected to microphones, spatial recording, and translating research results into practical audio workflows.",
     category: "R&D",
@@ -42,19 +51,28 @@ const cards = [
   </div>
 
   <div class="alt-grid">
-    {cards.map((card) => (
-      <article class="alt-card">
-        <div class="alt-card-head">
-          <div>
-            <p class="alt-kicker">{card.category}</p>
-            <h3>{card.title}</h3>
+    {cards.map((card) => {
+      const Icon = card.icon;
+
+      return (
+        <article class="alt-card">
+          <div class="alt-card-head">
+            <div>
+              <p class="alt-kicker">{card.category}</p>
+              <h3>{card.title}</h3>
+            </div>
+            <div class="alt-card-side">
+              <span class="alt-card-year">{card.year}</span>
+              <span class="alt-icon-badge">
+                <Icon size={17} stroke-width={1.75} aria-hidden="true" />
+              </span>
+            </div>
           </div>
-          <span>{card.year}</span>
-        </div>
-        <p>{card.role}</p>
-        <div class="alt-bar"><span></span></div>
-      </article>
-    ))}
+          <p>{card.role}</p>
+          <div class="alt-bar"><span></span></div>
+        </article>
+      );
+    })}
   </div>
 </section>
 
@@ -125,11 +143,17 @@ const cards = [
     line-height: 1.25;
   }
 
-  .alt-card-head span {
+  .alt-card-year {
     font-size: 0.74rem;
     text-transform: uppercase;
     letter-spacing: 0.14em;
     color: #71717a;
+  }
+
+  .alt-card-side {
+    display: grid;
+    justify-items: end;
+    gap: 0.75rem;
   }
 
   .alt-bar {
