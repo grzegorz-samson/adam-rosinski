@@ -2,7 +2,6 @@
 import { getCollection } from "astro:content";
 import AltLabLayout from "../layouts/AltLabLayout.astro";
 import AlternativeHero from "../components/AlternativeHero.astro";
-import AlternativeAbout from "../components/AlternativeAbout.astro";
 import AlternativeAuditoryField from "../components/AlternativeAuditoryField.astro";
 import AlternativeAudioDemo from "../components/AlternativeAudioDemo.astro";
 import AlternativePublications from "../components/AlternativePublications.astro";
@@ -19,7 +18,6 @@ const publications = (await getCollection("publications")).sort((a, b) => b.data
   activePath="/"
 >
   <AlternativeHero />
-  <AlternativeAbout />
   <AlternativePublications publications={publications} />
   <AlternativeProfiles />
   <AlternativeAuditoryField />

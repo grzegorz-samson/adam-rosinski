@@ -1,0 +1,127 @@
+---
+import Radar from "@lucide/astro/icons/radar";
+import Orbit from "@lucide/astro/icons/orbit";
+import BookOpen from "@lucide/astro/icons/book-open";
+
+const metrics = [
+  {
+    label: "Focus",
+    value: "Auditory perception and spatial listening",
+    icon: Radar,
+  },
+  {
+    label: "Methods",
+    value: "Recording practice, multichannel techniques, and audio experiment",
+    icon: Orbit,
+  },
+  {
+    label: "Output",
+    value: "Research articles, demonstrators, and student-facing materials",
+    icon: BookOpen,
+  },
+];
+---
+
+<section id="about-alt" class="alt-section">
+  <div class="alt-bento">
+    <div class="alt-copy">
+      <p class="alt-kicker">Bio</p>
+      <h2>Research on listening developed between theory, technology, and recording practice.</h2>
+      <p>
+        Adam Rosiński works across research and artistic practice with a focus on auditory perception, auditory-scene organization,
+        spatial recording, and contemporary audio technologies. His work connects reflection on how we hear with studio practice
+        and the design of listening conditions.
+      </p>
+    </div>
+
+    <div class="alt-metrics">
+      {metrics.map((metric) => {
+        const Icon = metric.icon;
+
+        return (
+          <article class="alt-metric-card">
+            <div class="alt-metric-top">
+              <span>{metric.label}</span>
+              <span class="alt-icon-badge">
+                <Icon size={17} stroke-width={1.75} aria-hidden="true" />
+              </span>
+            </div>
+            <strong>{metric.value}</strong>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<style>
+  .alt-section {
+    padding: 4.5rem 0;
+  }
+
+  .alt-bento {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    gap: 2rem;
+  }
+
+  .alt-kicker,
+  .alt-metric-card span {
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: #56d8ff;
+  }
+
+  .alt-copy h2 {
+    margin-top: 0.8rem;
+    color: #fff;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  .alt-copy p {
+    margin-top: 1rem;
+    max-width: 52rem;
+    color: #a1a1aa;
+    line-height: 1.85;
+  }
+
+  .alt-metrics {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .alt-metric-card {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 1.3rem;
+    backdrop-filter: blur(12px);
+  }
+
+  .alt-metric-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .alt-metric-card strong {
+    display: block;
+    margin-top: 0.55rem;
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 1080px) {
+    .alt-bento {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,24 +1,13 @@
 ---
-import Radar from "@lucide/astro/icons/radar";
-import Orbit from "@lucide/astro/icons/orbit";
-import BookOpen from "@lucide/astro/icons/book-open";
+import { withBase } from "../utils/withBase";
 
-const metrics = [
-  {
-    label: "Focus",
-    value: "Auditory perception and spatial listening",
-    icon: Radar,
-  },
-  {
-    label: "Methods",
-    value: "Recording practice, multichannel techniques, and audio experiment",
-    icon: Orbit,
-  },
-  {
-    label: "Output",
-    value: "Research articles, demonstrators, and student-facing materials",
-    icon: BookOpen,
-  },
+const keywords = [
+  "musical acoustics",
+  "psychoacoustics",
+  "auditory scene analysis",
+  "sound technology",
+  "recording practice",
+  "music perception",
 ];
 ---
 
@@ -27,30 +16,30 @@ const metrics = [
     <div class="alt-copy">
       <p class="alt-kicker">Bio</p>
       <h2>Research on listening developed between theory, technology, and recording practice.</h2>
-      <p>
-        Adam Rosiński works across research and artistic practice with a focus on auditory perception, auditory-scene organization,
-        spatial recording, and contemporary audio technologies. His work connects reflection on how we hear with studio practice
-        and the design of listening conditions.
+      <p class="alt-lead">
+        Dr <span class="alt-highlight">Adam Rosiński</span> is a Polish researcher in musical arts specialising in
+        <span class="alt-highlight"> musical acoustics</span>, <span class="alt-highlight">psychoacoustics</span>, and
+        <span class="alt-highlight"> sound technology</span>. His work focuses on <span class="alt-highlight">music perception</span>,
+        <span class="alt-highlight"> auditory scene analysis</span>, and the use of contemporary digital tools in recording,
+        analysis, and studio practice.
       </p>
+      <p>
+        He combines perspectives from music theory, cognitive science, and professional sound direction, linking
+        listening research with spatial recording, acoustic environments, and educational use of audio technologies.
+      </p>
+
+      <div class="alt-keyword-row" aria-label="Key research areas">
+        {keywords.map((keyword) => (
+          <span>{keyword}</span>
+        ))}
+      </div>
     </div>
 
-    <div class="alt-metrics">
-      {metrics.map((metric) => {
-        const Icon = metric.icon;
-
-        return (
-          <article class="alt-metric-card">
-            <div class="alt-metric-top">
-              <span>{metric.label}</span>
-              <span class="alt-icon-badge">
-                <Icon size={17} stroke-width={1.75} aria-hidden="true" />
-              </span>
-            </div>
-            <strong>{metric.value}</strong>
-          </article>
-        );
-      })}
-    </div>
+    <figure class="alt-profile-figure">
+      <div class="alt-profile-frame">
+        <img src={withBase("/images/adam-rosinski-portrait-masked.png")} alt="Adam Rosiński" class="alt-profile-image" loading="lazy" />
+      </div>
+    </figure>
   </div>
 </section>
 
@@ -61,12 +50,12 @@ const metrics = [
 
   .alt-bento {
     display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
     gap: 2rem;
+    align-items: start;
   }
 
-  .alt-kicker,
-  .alt-metric-card span {
+  .alt-kicker {
     font-family: "JetBrains Mono", "Consolas", monospace;
     font-size: 0.76rem;
     text-transform: uppercase;
@@ -90,38 +79,75 @@ const metrics = [
     line-height: 1.85;
   }
 
-  .alt-metrics {
-    display: grid;
-    gap: 1rem;
+  .alt-lead {
+    font-size: 1.04rem;
   }
 
-  .alt-metric-card {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
-    background: rgba(255, 255, 255, 0.04);
-    padding: 1.3rem;
-    backdrop-filter: blur(12px);
-  }
-
-  .alt-metric-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-
-  .alt-metric-card strong {
-    display: block;
-    margin-top: 0.55rem;
+  .alt-highlight {
     color: #fff;
-    font-size: 1.05rem;
-    font-weight: 600;
-    line-height: 1.5;
+    background:
+      linear-gradient(90deg, rgba(86, 216, 255, 0.2), rgba(138, 125, 255, 0.18), rgba(255, 179, 71, 0.16));
+    border-radius: 0.55rem;
+    padding: 0.08rem 0.35rem 0.16rem;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  .alt-keyword-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 1.5rem;
+  }
+
+  .alt-keyword-row span {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 0.45rem 0.8rem;
+    color: #d4d4d8;
+    font-size: 0.86rem;
+    line-height: 1;
+  }
+
+  .alt-profile-figure {
+    margin: 0;
+  }
+
+  .alt-profile-frame {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at 60% 22%, rgba(86, 216, 255, 0.14), transparent 28%),
+      radial-gradient(circle at 66% 26%, rgba(138, 125, 255, 0.18), transparent 36%),
+      rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
+    min-height: 28rem;
+    padding: 1.2rem 1.2rem 0;
+  }
+
+  .alt-profile-image {
+    display: block;
+    width: min(100%, 24rem);
+    height: auto;
+    object-fit: contain;
+    object-position: center bottom;
+    filter: contrast(1.04) brightness(0.96) drop-shadow(0 24px 36px rgba(0, 0, 0, 0.28));
   }
 
   @media (max-width: 1080px) {
     .alt-bento {
       grid-template-columns: 1fr;
+    }
+
+    .alt-profile-frame {
+      max-width: 32rem;
+      min-height: 24rem;
     }
   }
 </style>

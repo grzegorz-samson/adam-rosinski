@@ -2,6 +2,7 @@
 import Sparkles from "@lucide/astro/icons/sparkles";
 import FileText from "@lucide/astro/icons/file-text";
 import ArrowRight from "@lucide/astro/icons/arrow-right";
+import UserRound from "@lucide/astro/icons/user-round";
 import { site } from "../data/site";
 import { withBase } from "../utils/withBase";
 ---
@@ -28,6 +29,10 @@ import { withBase } from "../utils/withBase";
             <a href={withBase("/publications")} class="alt-button alt-button-primary">
               <FileText size={17} stroke-width={1.85} aria-hidden="true" />
               <span>View publications</span>
+            </a>
+            <a href={withBase("/about")} class="alt-button alt-button-secondary">
+              <UserRound size={17} stroke-width={1.85} aria-hidden="true" />
+              <span>Bio</span>
             </a>
             <a href={withBase("/practice")} class="alt-button alt-button-secondary">
               <span>Explore practice</span>
