@@ -1,9 +1,14 @@
 ---
 import BookOpen from "@lucide/astro/icons/book-open";
+import ChevronDown from "@lucide/astro/icons/chevron-down";
 import ExternalLink from "@lucide/astro/icons/external-link";
-import LibraryBig from "@lucide/astro/icons/library-big";
+import FileText from "@lucide/astro/icons/file-text";
+import Files from "@lucide/astro/icons/files";
+import Tags from "@lucide/astro/icons/tags";
+import { getDisplayTitle, getSecondaryTitle } from "../data/publicationPresentation";
 import { getPublicationMetaLabel } from "../data/publicationTaxonomy";
 import type { PublicationRecord } from "../data/publications";
+import { withBase } from "../utils/withBase";
 
 interface Props {
   monographs: PublicationRecord[];
@@ -104,47 +109,101 @@ function getDetailLines(publication: PublicationRecord): string[] {
         </div>
 
         <div class="catalog-grid">
-          {section.items.map((publication) => (
-            <article class="catalog-item">
-              <div class="catalog-item-meta">
-                <span>
-                  <BookOpen size={13} stroke-width={1.75} aria-hidden="true" />
-                  {publication.year}
-                </span>
-                <span>{getPublicationMetaLabel(publication.category, publication.type)}</span>
-              </div>
+          {section.items.map((publication) => {
+            const displayTitle = getDisplayTitle(publication);
+            const secondaryTitle = getSecondaryTitle(publication);
+            const coverSrc = publication.cover ? withBase(publication.cover) : null;
 
-              <h4>{publication.title}</h4>
-              <p class="catalog-summary">{publication.summary}</p>
+            return (
+              <details class:list={["catalog-item", section.id === "monographs" && "catalog-item-book"]}>
+                <summary class="catalog-summary-row">
+                  <div class="catalog-summary-main">
+                    {section.id === "monographs" && coverSrc && (
+                      <div class="catalog-book-cover">
+                        <img src={coverSrc} alt={`Cover for ${displayTitle}`} loading="lazy" />
+                      </div>
+                    )}
 
-              <div class="catalog-detail-list">
-                {getDetailLines(publication).map((line) => (
-                  <p>{line}</p>
-                ))}
-              </div>
+                    <div class="catalog-title-stack">
+                      <div class="catalog-item-meta">
+                        <span>
+                          <BookOpen size={13} stroke-width={1.75} aria-hidden="true" />
+                          {publication.year}
+                        </span>
+                        <span>{getPublicationMetaLabel(publication.category, publication.type)}</span>
+                      </div>
 
-              <div class="catalog-foot">
-                <div class="catalog-tags">
-                  {publication.tags.map((tag) => (
-                    <span>{tag}</span>
-                  ))}
+                      <h4>{displayTitle}</h4>
+                      {secondaryTitle && <p class="catalog-secondary-title">{secondaryTitle}</p>}
+                    </div>
+                  </div>
+
+                  <div class="catalog-summary-side">
+                    {publication.sourceVerified === false && (
+                      <span class="catalog-pdf-badge">
+                        <FileText size={13} stroke-width={1.8} aria-hidden="true" />
+                        PDF
+                      </span>
+                    )}
+                    <ChevronDown size={18} stroke-width={1.9} aria-hidden="true" class="catalog-chevron" />
+                  </div>
+                </summary>
+
+                <div class="catalog-expanded">
+                  <div class="catalog-expanded-columns">
+                    <div class="catalog-column-stack">
+                      <section class="catalog-block">
+                        <p class="catalog-block-label">
+                          <FileText size={13} stroke-width={1.8} aria-hidden="true" />
+                          Overview
+                        </p>
+                        <p class="catalog-summary-text">{publication.summary}</p>
+                      </section>
+
+                      <section class="catalog-block">
+                        <p class="catalog-block-label">
+                          <Tags size={13} stroke-width={1.8} aria-hidden="true" />
+                          Keywords
+                        </p>
+                        <div class="catalog-tags">
+                          {publication.tags.map((tag) => (
+                            <span>{tag}</span>
+                          ))}
+                        </div>
+                      </section>
+                    </div>
+
+                    <div class="catalog-column-side">
+                      <section class="catalog-block">
+                        <p class="catalog-block-label">
+                          <Files size={13} stroke-width={1.8} aria-hidden="true" />
+                          Bibliographic details
+                        </p>
+                        <div class="catalog-detail-list">
+                          {getDetailLines(publication).map((line) => (
+                            <p>{line}</p>
+                          ))}
+                        </div>
+                      </section>
+                    </div>
+                  </div>
+
+                  <div class="catalog-links">
+                    {publication.sourceVerified === false && (
+                      <span class="catalog-pdf-note">
+                        <FileText size={13} stroke-width={1.8} aria-hidden="true" />
+                        PDF
+                      </span>
+                    )}
+                    <a href={publication.href} target="_blank" rel="noreferrer" class="catalog-link alt-link-with-icon">
+                      <span>{publication.sourceVerified === false ? "Open source page" : "Open publication"}</span>
+                      <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
+                    </a>
+                  </div>
                 </div>
-
-                <div class="catalog-links">
-                  {publication.sourceVerified === false && (
-                    <span class="catalog-legacy">
-                      <LibraryBig size={13} stroke-width={1.8} aria-hidden="true" />
-                      Legacy source
-                    </span>
-                  )}
-                  <a href={publication.href} target="_blank" rel="noreferrer" class="catalog-link alt-link-with-icon">
-                    <span>{publication.sourceVerified === false ? "Source page" : "Open publication"}</span>
-                    <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
-                  </a>
-                </div>
-              </div>
-            </article>
-          ))}
+              </details>
+            );
+          })}
         </div>
       </section>
     ))}
@@ -163,7 +222,8 @@ function getDetailLines(publication: PublicationRecord): string[] {
 
   .catalog-kicker,
   .catalog-group-count,
-  .catalog-item-meta {
+  .catalog-item-meta,
+  .catalog-block-label {
     font-family: "JetBrains Mono", "Consolas", monospace;
   }
 
@@ -184,8 +244,9 @@ function getDetailLines(publication: PublicationRecord): string[] {
 
   .catalog-heading p:last-child,
   .catalog-group-header p,
-  .catalog-summary,
-  .catalog-detail-list p {
+  .catalog-summary-text,
+  .catalog-detail-list p,
+  .catalog-secondary-title {
     color: #a1a1aa;
     line-height: 1.8;
   }
@@ -253,25 +314,66 @@ function getDetailLines(publication: PublicationRecord): string[] {
 
   .catalog-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
   }
 
   .catalog-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-    min-height: 100%;
-    padding: 1.15rem;
-    border-radius: 24px;
     border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
     background: rgba(9, 12, 18, 0.55);
+    overflow: hidden;
+  }
+
+  .catalog-item[open] {
+    border-color: rgba(86, 216, 255, 0.22);
+    background: rgba(9, 12, 18, 0.72);
+  }
+
+  .catalog-summary-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.2rem;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .catalog-summary-row::-webkit-details-marker {
+    display: none;
+  }
+
+  .catalog-summary-main {
+    display: flex;
+    gap: 1rem;
+    min-width: 0;
+  }
+
+  .catalog-title-stack {
+    min-width: 0;
+  }
+
+  .catalog-book-cover {
+    flex: 0 0 5.25rem;
+    width: 5.25rem;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #0a0d14;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+  }
+
+  .catalog-book-cover img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 4 / 5;
   }
 
   .catalog-item-meta {
     display: flex;
-    justify-content: space-between;
-    gap: 0.8rem;
+    flex-wrap: wrap;
+    gap: 0.8rem 1rem;
     color: #71717a;
     font-size: 0.74rem;
     text-transform: uppercase;
@@ -285,14 +387,81 @@ function getDetailLines(publication: PublicationRecord): string[] {
   }
 
   .catalog-item h4 {
+    margin-top: 0.55rem;
     color: #fff;
-    font-size: 1.18rem;
-    line-height: 1.35;
+    font-size: 1.12rem;
+    line-height: 1.4;
+  }
+
+  .catalog-secondary-title {
+    margin-top: 0.4rem;
+    font-size: 0.92rem;
+  }
+
+  .catalog-summary-side {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  .catalog-pdf-badge,
+  .catalog-pdf-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: #f4b56a;
+    font-size: 0.82rem;
+  }
+
+  .catalog-chevron {
+    color: #8d92a6;
+    transition: transform 180ms ease;
+  }
+
+  .catalog-item[open] .catalog-chevron {
+    transform: rotate(180deg);
+  }
+
+  .catalog-expanded {
+    display: grid;
+    gap: 0;
+    padding: 0 1.2rem 1.2rem;
+  }
+
+  .catalog-expanded-columns {
+    display: grid;
+    gap: 0;
+  }
+
+  .catalog-column-stack,
+  .catalog-column-side {
+    display: grid;
+    gap: 0;
+  }
+
+  .catalog-block {
+    padding: 0.95rem 0;
+  }
+
+  .catalog-block-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.42rem;
+    color: #56d8ff;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+  }
+
+  .catalog-summary-text {
+    margin-top: 0.55rem;
   }
 
   .catalog-detail-list {
     display: grid;
     gap: 0.35rem;
+    margin-top: 0.55rem;
   }
 
   .catalog-detail-list p {
@@ -300,16 +469,11 @@ function getDetailLines(publication: PublicationRecord): string[] {
     font-size: 0.95rem;
   }
 
-  .catalog-foot {
-    display: grid;
-    gap: 0.85rem;
-    margin-top: auto;
-  }
-
   .catalog-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.45rem;
+    margin-top: 0.55rem;
   }
 
   .catalog-tags span {
@@ -327,14 +491,7 @@ function getDetailLines(publication: PublicationRecord): string[] {
     justify-content: space-between;
     align-items: center;
     gap: 0.8rem;
-  }
-
-  .catalog-legacy {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    color: #f4b56a;
-    font-size: 0.82rem;
+    padding-top: 0.95rem;
   }
 
   .catalog-link {
@@ -346,9 +503,34 @@ function getDetailLines(publication: PublicationRecord): string[] {
     color: #fff;
   }
 
-  @media (max-width: 980px) {
-    .catalog-grid {
-      grid-template-columns: 1fr;
+  @media (max-width: 720px) {
+    .catalog-summary-row {
+      flex-direction: column;
+    }
+
+    .catalog-summary-side {
+      justify-content: space-between;
+    }
+
+    .catalog-summary-main {
+      align-items: flex-start;
+    }
+
+    .catalog-book-cover {
+      flex-basis: 4.5rem;
+      width: 4.5rem;
+    }
+  }
+
+  @media (min-width: 960px) {
+    .catalog-expanded-columns {
+      grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+      column-gap: 1.4rem;
+      align-items: start;
+    }
+
+    .catalog-links {
+      margin-top: 0.2rem;
     }
   }
 </style>

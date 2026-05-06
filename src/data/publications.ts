@@ -193,7 +193,7 @@ export const publications: PublicationRecord[] = [
       "perception"
     ],
     "featured": false,
-    "cover": "/images/covers/variable-properties.svg",
+    "cover": "/images/covers/variable-properties.jpg",
     "citation": "Rosiński, Adam. 2025. \"Variable Properties of Auditory Image Analysis: A Case Study of Selected Musical Works.\" Proceedings of the Annual Meeting of the Cognitive Science Society.",
     "sourceVerified": true
   },
@@ -222,7 +222,7 @@ export const publications: PublicationRecord[] = [
       "perception"
     ],
     "featured": true,
-    "cover": "/images/covers/variable-properties.svg",
+    "cover": "/images/covers/variable-properties.jpg",
     "citation": "Rosiński, Adam. 2025. \"An Analysis of Audio Information Streaming in Georg Philipp Telemann’s Sonata in C Major for Recorder and Basso Continuo, Allegro (TWV 41:C2).\" Arts. https://doi.org/10.3390/arts14040076.",
     "sourceVerified": true
   },
@@ -308,7 +308,7 @@ export const publications: PublicationRecord[] = [
       "education"
     ],
     "featured": false,
-    "cover": "/images/covers/variable-properties.svg",
+    "cover": "/images/covers/variable-properties.jpg",
     "citation": "Rosiński, Adam. 2024. \"Influence of Music Education and Interval Size on Grouping of the AB-AB Sequence Sounds.\" Proceedings of the Annual Meeting of the Cognitive Science Society.",
     "sourceVerified": true
   },

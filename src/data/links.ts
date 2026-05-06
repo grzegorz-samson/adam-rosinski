@@ -1,7 +1,7 @@
 export const quickLinks = [
   {
     label: "ORCID",
-    href: "https://orcid.org/0000-0002-1776-9540",
+    href: "https://orcid.org/0000-0001-7455-2527",
   },
   {
     label: "Google Scholar",
