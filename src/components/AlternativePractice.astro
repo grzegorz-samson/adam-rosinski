@@ -42,7 +42,6 @@ const cards = [
 
 <section id="practice-alt" class="alt-section">
   <div class="alt-heading">
-    <p class="alt-kicker">Studio practice</p>
     <h2>Studio practice</h2>
     <p>
       This block shows how research on listening translates into decisions about recording,
@@ -58,7 +57,6 @@ const cards = [
         <article class="alt-card">
           <div class="alt-card-head">
             <div>
-              <p class="alt-kicker">{card.category}</p>
               <h3>{card.title}</h3>
             </div>
             <div class="alt-card-side">
@@ -86,20 +84,11 @@ const cards = [
     margin-bottom: 2rem;
   }
 
-  .alt-kicker,
   .alt-card-head span {
     font-family: "JetBrains Mono", "Consolas", monospace;
   }
 
-  .alt-kicker {
-    font-size: 0.76rem;
-    text-transform: uppercase;
-    letter-spacing: 0.22em;
-    color: #56d8ff;
-  }
-
   .alt-heading h2 {
-    margin-top: 0.8rem;
     color: #fff;
     font-size: clamp(2rem, 4vw, 3.2rem);
     line-height: 1.02;
@@ -137,7 +126,6 @@ const cards = [
   }
 
   .alt-card-head h3 {
-    margin-top: 0.9rem;
     color: #fff;
     font-size: 1.32rem;
     line-height: 1.25;
