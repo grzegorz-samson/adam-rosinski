@@ -112,6 +112,114 @@ const journalArticleStripMap: Record<string, PublicationStrip> = {
   },
 };
 
+const editorialWorkStripMap: Record<string, PublicationStrip> = {
+  "perspectives-of-acoustics-arts-2027": {
+    asset: "/images/publication-strips/editorial-work/01-perspectives-of-acoustics-arts-2027.svg",
+    accent: "#56D8FF",
+    accent2: "#8B7CFF",
+    motif: "Special issue horizon and editorial constellation",
+  },
+  "sound-space-creativity-performing-arts-2025": {
+    asset: "/images/publication-strips/editorial-work/02-sound-space-creativity-performing-arts-2025.svg",
+    accent: "#FFB347",
+    accent2: "#56D8FF",
+    motif: "Stage space and creative sound trajectories",
+  },
+  "przestrzenie-akustyki-professional-acoustics-2": {
+    asset: "/images/publication-strips/editorial-work/03-przestrzenie-akustyki-professional-acoustics-2.svg",
+    accent: "#12D6D6",
+    accent2: "#34D399",
+    motif: "Edited volume spine and acoustic rooms",
+  },
+  "przestrzenie-akustyki-professional-acoustics": {
+    asset: "/images/publication-strips/editorial-work/04-przestrzenie-akustyki-professional-acoustics.svg",
+    accent: "#2EA8FF",
+    accent2: "#FFB347",
+    motif: "Edited volume spine and acoustic spaces",
+  },
+};
+
+const bookChapterStripMap: Record<string, PublicationStrip> = {
+  "pitch-based-stream-segregation": {
+    asset: "/images/publication-strips/book-chapters/01-pitch-based-stream-segregation.svg",
+    accent: "#56D8FF",
+    accent2: "#12D6D6",
+    motif: "Pitch streams and comparative paths",
+  },
+  "keyboard-as-a-stimulator-in-timbre-recognition-training": {
+    asset: "/images/publication-strips/book-chapters/02-keyboard-as-a-stimulator-in-timbre-recognition-training.svg",
+    accent: "#34D399",
+    accent2: "#FFB347",
+    motif: "Keyboard stimulus and timbre pulses",
+  },
+  "influence-of-music-education-and-pitch-scales": {
+    asset: "/images/publication-strips/book-chapters/03-influence-of-music-education-and-pitch-scales.svg",
+    accent: "#34D399",
+    accent2: "#56D8FF",
+    motif: "AB-AB scale grouping and pitch stairway",
+  },
+  "computer-applications-popular-music-composers": {
+    asset: "/images/publication-strips/book-chapters/04-computer-applications-popular-music-composers.svg",
+    accent: "#8B7CFF",
+    accent2: "#56D8FF",
+    motif: "DAW blocks and creative teaching workflow",
+  },
+  "musical-training-grouping-galloping-rhythm": {
+    asset: "/images/publication-strips/book-chapters/05-musical-training-grouping-galloping-rhythm.svg",
+    accent: "#FFB347",
+    accent2: "#34D399",
+    motif: "Galloping rhythm and ABA-ABA grouping",
+  },
+  "perception-of-sound-via-auditory-image-analysis": {
+    asset: "/images/publication-strips/book-chapters/06-perception-of-sound-via-auditory-image-analysis.svg",
+    accent: "#8B7CFF",
+    accent2: "#12D6D6",
+    motif: "Auditory image and conceptual field",
+  },
+  "architectural-acoustics-sonic-identity-of-churches": {
+    asset: "/images/publication-strips/book-chapters/07-architectural-acoustics-sonic-identity-of-churches.svg",
+    accent: "#FFB347",
+    accent2: "#56D8FF",
+    motif: "Church acoustic identity and arches",
+  },
+  "interactive-systems-contemporary-music-education": {
+    asset: "/images/publication-strips/book-chapters/08-interactive-systems-contemporary-music-education.svg",
+    accent: "#34D399",
+    accent2: "#8B7CFF",
+    motif: "Interactive systems and education nodes",
+  },
+  "virtual-sound-sources-binaural-recordings": {
+    asset: "/images/publication-strips/book-chapters/09-virtual-sound-sources-binaural-recordings.svg",
+    accent: "#2EA8FF",
+    accent2: "#FFFFFF",
+    motif: "Binaural head and localisation rays",
+  },
+  "virtual-instruments-timbre-perception": {
+    asset: "/images/publication-strips/book-chapters/10-virtual-instruments-timbre-perception.svg",
+    accent: "#12D6D6",
+    accent2: "#FFB347",
+    motif: "Virtual instruments and timbre envelopes",
+  },
+  "mastering-art-of-shaping-timbre": {
+    asset: "/images/publication-strips/book-chapters/11-mastering-art-of-shaping-timbre.svg",
+    accent: "#FF8A00",
+    accent2: "#56D8FF",
+    motif: "Mastering chain and spectral balance",
+  },
+  "vocal-improvisation-jazz-arrangements": {
+    asset: "/images/publication-strips/book-chapters/12-vocal-improvisation-jazz-arrangements.svg",
+    accent: "#8B7CFF",
+    accent2: "#FFB347",
+    motif: "Jazz vocal phrases and arrangement arcs",
+  },
+  "acoustics-of-sacred-spaces-speech-intelligibility": {
+    asset: "/images/publication-strips/book-chapters/13-acoustics-of-sacred-spaces-speech-intelligibility.svg",
+    accent: "#FFB347",
+    accent2: "#34D399",
+    motif: "Speech intelligibility and sacred impulse paths",
+  },
+};
+
 const genericStrips = {
   monographs: {
     asset: "/images/publication-strips/generic/strip-wave-spectrum.svg",
@@ -149,11 +257,11 @@ export function getPublicationStrip(publication: PublicationRecord): Publication
   }
 
   if (publication.category === "Book series editor") {
-    return genericStrips.editorial;
+    return editorialWorkStripMap[publication.slug] ?? genericStrips.editorial;
   }
 
   if (publication.category === "Book chapter") {
-    return genericStrips.chapters;
+    return bookChapterStripMap[publication.slug] ?? genericStrips.chapters;
   }
 
   return genericStrips.fallback;

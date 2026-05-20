@@ -23,12 +23,6 @@ const { monographs, journalArticles, editorialWork, bookChapters } = Astro.props
 
 const sections = [
   {
-    id: "monographs",
-    title: "Monographs",
-    description: "Books and major long-form research outputs.",
-    items: monographs,
-  },
-  {
     id: "journal-articles",
     title: "Journal articles",
     description: "Articles, proceedings papers, and prototype-oriented studies.",
@@ -109,6 +103,10 @@ function getVenueLine(publication: PublicationRecord): string | null {
   </div>
 
   <nav class="catalog-nav" aria-label="Publication categories">
+    <a href="#selected-publications" class="catalog-chip">
+      <span>Monographs</span>
+      <span>{monographs.length}</span>
+    </a>
     {sections.map((section) => (
       <a href={`#${section.id}`} class="catalog-chip">
         <span>{section.title}</span>
@@ -600,15 +598,13 @@ function getVenueLine(publication: PublicationRecord): string | null {
     padding-inline: 1rem;
     padding-bottom: 1rem;
     border-radius: 18px;
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(233, 240, 248, 0.08)),
-      rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: transparent;
+    border: 0;
   }
 
   .catalog-column-side .catalog-block-label,
   .catalog-column-side .catalog-detail-list p {
-    color: #0b1020;
+    color: #f4f7ff;
   }
 
   .catalog-block {

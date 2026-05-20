@@ -1,0 +1,31 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title desc">
+  <title id="title">The Role of Virtual Instruments in the Development of Timbre Perception â€” visual strip</title>
+  <desc id="desc">virtual instruments, timbre perception envelopes</desc>
+
+  <defs>
+    <linearGradient id="fade" x1="0" x2="1">
+      <stop offset="0%" stop-color="#12D6D6" stop-opacity="0"/>
+      <stop offset="34%" stop-color="#12D6D6" stop-opacity=".08"/>
+      <stop offset="100%" stop-color="#FFB347" stop-opacity=".22"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="72%" cy="50%" r="62%">
+      <stop offset="0%" stop-color="#FFB347" stop-opacity=".30"/>
+      <stop offset="58%" stop-color="#12D6D6" stop-opacity=".08"/>
+      <stop offset="100%" stop-color="#12D6D6" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softGlow" x="-20%" y="-40%" width="140%" height="180%">
+      <feGaussianBlur stdDeviation="2.2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse">
+      <circle cx="1.2" cy="1.2" r="1.2" fill="#FFB347" opacity=".23"/>
+    </pattern>
+    <pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0H0V26" fill="none" stroke="#FFB347" stroke-opacity=".11" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect x="350" y="0" width="550" height="180" fill="url(#glow)"/>
+  <rect x="530" y="18" width="310" height="144" fill="url(#dots)" opacity=".22"/>
+<g stroke="#FFB347" fill="none" opacity=".54"><path d="M430 126C490 46 550 46 610 126S730 154 835 76" stroke-width="2"/><path d="M430 92C520 62 580 72 650 94S760 126 880 60" opacity=".38"/></g><g fill="#12D6D6" opacity=".32"><rect x="500" y="48" width="4" height="88" rx="2"/><rect x="610" y="66" width="4" height="70" rx="2"/><rect x="720" y="84" width="4" height="52" rx="2"/></g>
+</svg>
+
