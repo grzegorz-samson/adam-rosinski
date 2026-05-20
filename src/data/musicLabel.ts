@@ -16,9 +16,9 @@ export interface MusicRelease {
 export const musicLabelIntro = {
   title: "Adam Rosiński Music Label",
   subtitle:
-    "A curated space for sound releases, research recordings, spatial listening projects, and production-oriented audio work.",
+    "Selected releases, research recordings, spatial listening projects, and archival studio work.",
   description:
-    "The label page presents sound not only as documentation, but as a designed listening situation: recorded, mixed, organised, and released in relation to acoustic space, perception, and contemporary audio technologies.",
+    "A curated catalogue of recordings, sound studies, and production work developed across research, studio practice, and listening-oriented projects.",
 };
 
 export const musicReleases: MusicRelease[] = [
@@ -29,7 +29,7 @@ export const musicReleases: MusicRelease[] = [
     type: "Research recording",
     status: "In preparation",
     description:
-      "A developing catalogue of recordings connected with listening, acoustic space, perception, and sound engineering practice.",
+      "A developing body of recordings connected with listening research, acoustic space, and sound engineering practice.",
     roles: ["recording", "editing", "spatial listening"],
     formats: ["stereo", "multichannel", "documentation"],
     tags: ["research", "listening", "recording"],
@@ -55,7 +55,7 @@ export const musicReleases: MusicRelease[] = [
     type: "Archive",
     status: "Archive",
     description:
-      "A space for selected studio, documentary, and production-related materials, to be expanded after source verification.",
+      "Selected studio, documentary, and production-oriented material gathered as an expandable archive of past and ongoing work.",
     roles: ["sound engineering", "post-production", "recording"],
     formats: ["film sound", "studio", "archive"],
     tags: ["studio", "film", "production"],

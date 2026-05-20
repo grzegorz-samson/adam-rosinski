@@ -20,5 +20,4 @@ export const navigation = [
   { label: "Publications", href: "/publications" },
   { label: "Editorial", href: "/editorial-roles" },
   { label: "Label", href: "/music-label" },
-  { label: "Practice", href: "/practice" },
 ];
