@@ -1,10 +1,12 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import AudioWaveform from "@lucide/astro/icons/audio-waveform";
+import Disc3 from "@lucide/astro/icons/disc-3";
 import UserRound from "@lucide/astro/icons/user-round";
 import Radar from "@lucide/astro/icons/radar";
 import Headphones from "@lucide/astro/icons/headphones";
 import BookOpen from "@lucide/astro/icons/book-open";
+import Newspaper from "@lucide/astro/icons/newspaper";
 import BriefcaseBusiness from "@lucide/astro/icons/briefcase-business";
 import Mail from "@lucide/astro/icons/mail";
 import { navigation, site } from "../data/site";
@@ -27,6 +29,8 @@ const navIcons = {
   "/work-areas": Radar,
   "/audio-demonstrator": Headphones,
   "/publications": BookOpen,
+  "/editorial-roles": Newspaper,
+  "/music-label": Disc3,
   "/practice": BriefcaseBusiness,
   "/contact": Mail,
 };
@@ -133,12 +137,12 @@ const navIcons = {
   .alt-nav-actions {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.78rem;
   }
 
   .alt-nav-link {
     color: #a1a1aa;
-    font-size: 0.94rem;
+    font-size: 0.86rem;
     text-decoration: none;
   }
 

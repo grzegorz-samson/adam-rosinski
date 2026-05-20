@@ -5,10 +5,10 @@ import ExternalLink from "@lucide/astro/icons/external-link";
 import FileText from "@lucide/astro/icons/file-text";
 import Files from "@lucide/astro/icons/files";
 import Tags from "@lucide/astro/icons/tags";
+import PublicationVisual from "./PublicationVisual.astro";
 import { getDisplayTitle, getSecondaryTitle } from "../data/publicationPresentation";
 import { getPublicationMetaLabel } from "../data/publicationTaxonomy";
 import type { PublicationRecord } from "../data/publications";
-import { withBase } from "../utils/withBase";
 
 interface Props {
   monographs: PublicationRecord[];
@@ -76,6 +76,24 @@ function getDetailLines(publication: PublicationRecord): string[] {
 
   return lines;
 }
+
+function getVenueLine(publication: PublicationRecord): string | null {
+  if (publication.journal) {
+    return [publication.journal, publication.volume, publication.issue && `No. ${publication.issue}`]
+      .filter(Boolean)
+      .join(", ");
+  }
+
+  if (publication.book) {
+    return `In: ${publication.book}`;
+  }
+
+  if (publication.publisher) {
+    return publication.publisher;
+  }
+
+  return null;
+}
 ---
 
 <section class="catalog-section" aria-labelledby="catalog-title">
@@ -112,17 +130,13 @@ function getDetailLines(publication: PublicationRecord): string[] {
           {section.items.map((publication) => {
             const displayTitle = getDisplayTitle(publication);
             const secondaryTitle = getSecondaryTitle(publication);
-            const coverSrc = publication.cover ? withBase(publication.cover) : null;
+            const venueLine = getVenueLine(publication);
 
             return (
               <details class:list={["catalog-item", section.id === "monographs" && "catalog-item-book"]}>
                 <summary class="catalog-summary-row">
                   <div class="catalog-summary-main">
-                    {section.id === "monographs" && coverSrc && (
-                      <div class="catalog-book-cover">
-                        <img src={coverSrc} alt={`Cover for ${displayTitle}`} loading="lazy" />
-                      </div>
-                    )}
+                    <PublicationVisual publication={publication} sectionId={section.id} title={displayTitle} />
 
                     <div class="catalog-title-stack">
                       <div class="catalog-item-meta">
@@ -135,6 +149,7 @@ function getDetailLines(publication: PublicationRecord): string[] {
 
                       <h4>{displayTitle}</h4>
                       {secondaryTitle && <p class="catalog-secondary-title">{secondaryTitle}</p>}
+                      {venueLine && <p class="catalog-venue-line">{venueLine}</p>}
                     </div>
                   </div>
 
@@ -345,29 +360,13 @@ function getDetailLines(publication: PublicationRecord): string[] {
 
   .catalog-summary-main {
     display: flex;
+    align-items: center;
     gap: 1rem;
     min-width: 0;
   }
 
   .catalog-title-stack {
     min-width: 0;
-  }
-
-  .catalog-book-cover {
-    flex: 0 0 5.25rem;
-    width: 5.25rem;
-    border-radius: 16px;
-    overflow: hidden;
-    background: #0a0d14;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
-  }
-
-  .catalog-book-cover img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    aspect-ratio: 4 / 5;
   }
 
   .catalog-item-meta {
@@ -398,6 +397,13 @@ function getDetailLines(publication: PublicationRecord): string[] {
     font-size: 0.92rem;
   }
 
+  .catalog-venue-line {
+    margin-top: 0.42rem;
+    color: #8d92a6;
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
   .catalog-summary-side {
     display: flex;
     align-items: flex-start;
@@ -410,7 +416,7 @@ function getDetailLines(publication: PublicationRecord): string[] {
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    color: #f4b56a;
+    color: #a1a1aa;
     font-size: 0.82rem;
   }
 
@@ -518,10 +524,6 @@ function getDetailLines(publication: PublicationRecord): string[] {
       align-items: flex-start;
     }
 
-    .catalog-book-cover {
-      flex-basis: 4.5rem;
-      width: 4.5rem;
-    }
   }
 
   @media (min-width: 960px) {

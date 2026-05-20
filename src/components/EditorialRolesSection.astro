@@ -1,0 +1,300 @@
+---
+import BadgeCheck from "@lucide/astro/icons/badge-check";
+import BookOpenCheck from "@lucide/astro/icons/book-open-check";
+import ExternalLink from "@lucide/astro/icons/external-link";
+import Newspaper from "@lucide/astro/icons/newspaper";
+import SearchCheck from "@lucide/astro/icons/search-check";
+import UsersRound from "@lucide/astro/icons/users-round";
+import { editorialIntro, editorialRoles } from "../data/editorialRoles";
+
+const kindIcons = {
+  "Guest Editor": Newspaper,
+  "Edited Volume": BookOpenCheck,
+  "Professional Organisation": UsersRound,
+  "Peer Review": SearchCheck,
+  "Publishing Profile": BadgeCheck,
+};
+
+const featured = editorialRoles.filter((role) => role.featured);
+const allRoles = editorialRoles;
+---
+
+<section class="editorial-section">
+  <div class="editorial-hero">
+    <p class="alt-kicker">Editorial work / professional service</p>
+    <h1>{editorialIntro.title}</h1>
+    <p>{editorialIntro.description}</p>
+  </div>
+
+  <div class="editorial-featured">
+    {featured.map((role) => {
+      const Icon = kindIcons[role.kind] ?? BadgeCheck;
+
+      return (
+        <article class="editorial-featured-card">
+          <div class="editorial-card-top">
+            <span class="alt-icon-badge">
+              <Icon size={18} stroke-width={1.75} aria-hidden="true" />
+            </span>
+            <span>{role.yearOrPeriod}</span>
+          </div>
+
+          <p class="alt-kicker">{role.kind}</p>
+          <h2>{role.title}</h2>
+          <p>{role.description}</p>
+
+          <div class="editorial-tags">
+            {role.tags.map((tag) => <span>{tag}</span>)}
+          </div>
+
+          {role.href && (
+            <a href={role.href} target="_blank" rel="noreferrer" class="alt-link-with-icon">
+              <span>Open source</span>
+              <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
+            </a>
+          )}
+        </article>
+      );
+    })}
+  </div>
+
+  <div class="editorial-heading">
+    <h2>Roles and affiliations</h2>
+    <p>
+      A structured overview of editorial, organisational, and reviewer-related activity.
+      Verification status is shown explicitly to avoid presenting unconfirmed reviewer work as public fact.
+    </p>
+  </div>
+
+  <div class="editorial-role-list">
+    {allRoles.map((role) => {
+      const Icon = kindIcons[role.kind] ?? BadgeCheck;
+
+      return (
+        <article class="editorial-role-card">
+          <div class="editorial-role-icon">
+            <Icon size={18} stroke-width={1.75} aria-hidden="true" />
+          </div>
+
+          <div class="editorial-role-copy">
+            <div class="editorial-role-meta">
+              <span>{role.kind}</span>
+              <span>{role.yearOrPeriod}</span>
+            </div>
+
+            <h3>{role.title}</h3>
+            <p class="editorial-institution">{role.institution}</p>
+            <p>{role.description}</p>
+
+            <div class="editorial-tags">
+              {role.tags.map((tag) => <span>{tag}</span>)}
+            </div>
+          </div>
+
+          <div class="editorial-role-side">
+            <span class:list={["editorial-status", role.status === "To be confirmed" && "is-unconfirmed"]}>
+              {role.status}
+            </span>
+
+            {role.href && (
+              <a href={role.href} target="_blank" rel="noreferrer" aria-label={`Open source for ${role.title}`}>
+                <ExternalLink size={17} stroke-width={1.8} aria-hidden="true" />
+              </a>
+            )}
+          </div>
+        </article>
+      );
+    })}
+  </div>
+</section>
+
+<style>
+  .editorial-section {
+    padding: 2rem 0 5rem;
+  }
+
+  .editorial-hero {
+    max-width: 68rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 32px;
+    background:
+      radial-gradient(circle at 18% 22%, rgba(86, 216, 255, 0.13), transparent 36%),
+      rgba(255, 255, 255, 0.04);
+    padding: clamp(1.5rem, 4vw, 3rem);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
+  }
+
+  .editorial-hero h1 {
+    color: #fff;
+    font-size: clamp(2.6rem, 7vw, 5.8rem);
+    line-height: 0.96;
+    letter-spacing: -0.055em;
+    text-wrap: balance;
+  }
+
+  .editorial-hero p:last-child {
+    margin-top: 1.2rem;
+    color: #a1a1aa;
+    line-height: 1.85;
+  }
+
+  .editorial-featured {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .editorial-featured-card,
+  .editorial-role-card {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
+  }
+
+  .editorial-featured-card {
+    padding: 1.35rem;
+  }
+
+  .editorial-card-top,
+  .editorial-role-meta,
+  .editorial-role-side {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .editorial-card-top > span:last-child,
+  .editorial-role-meta {
+    color: #71717a;
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .editorial-featured-card h2,
+  .editorial-role-card h3 {
+    color: #fff;
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  .editorial-featured-card h2 {
+    margin-top: 0.7rem;
+    font-size: 1.45rem;
+  }
+
+  .editorial-featured-card p:not(.alt-kicker),
+  .editorial-role-card p {
+    margin-top: 0.8rem;
+    color: #a1a1aa;
+    line-height: 1.75;
+  }
+
+  .editorial-heading {
+    margin: 4rem 0 1.5rem;
+    max-width: 58rem;
+  }
+
+  .editorial-heading h2 {
+    color: #fff;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+  }
+
+  .editorial-heading p {
+    margin-top: 1rem;
+    color: #a1a1aa;
+    line-height: 1.85;
+  }
+
+  .editorial-role-list {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .editorial-role-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: start;
+    padding: 1rem;
+  }
+
+  .editorial-role-icon {
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border: 1px solid rgba(86, 216, 255, 0.22);
+    border-radius: 999px;
+    color: #56d8ff;
+    background: rgba(86, 216, 255, 0.07);
+  }
+
+  .editorial-institution {
+    color: #d4d4d8 !important;
+    font-weight: 600;
+  }
+
+  .editorial-role-side {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .editorial-status {
+    display: inline-flex;
+    border: 1px solid rgba(86, 216, 255, 0.24);
+    border-radius: 999px;
+    padding: 0.25rem 0.55rem;
+    color: #56d8ff;
+    background: rgba(86, 216, 255, 0.07);
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .editorial-status.is-unconfirmed {
+    color: #ffb347;
+    border-color: rgba(255, 179, 71, 0.24);
+    background: rgba(255, 179, 71, 0.07);
+  }
+
+  .editorial-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 1rem;
+  }
+
+  .editorial-tags span {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    padding: 0.3rem 0.58rem;
+    color: #cbd5e1;
+    font-size: 0.76rem;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  @media (max-width: 1080px) {
+    .editorial-featured {
+      grid-template-columns: 1fr;
+    }
+
+    .editorial-role-card {
+      grid-template-columns: 1fr;
+    }
+
+    .editorial-role-side {
+      align-items: flex-start;
+    }
+  }
+</style>

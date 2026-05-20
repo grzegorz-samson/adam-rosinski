@@ -5,6 +5,7 @@ import AlternativePublications from "../components/AlternativePublications.astro
 import PublicationsCatalog from "../components/PublicationsCatalog.astro";
 import AlternativeProfiles from "../components/AlternativeProfiles.astro";
 import { publicationsByCategory, selectedPublications } from "../data/publications";
+import { withBase } from "../utils/withBase";
 ---
 
 <AltLabLayout
@@ -25,5 +26,53 @@ import { publicationsByCategory, selectedPublications } from "../data/publicatio
     editorialWork={publicationsByCategory.editorialWork}
     bookChapters={publicationsByCategory.bookChapters}
   />
+  <section class="editorial-cta">
+    <div>
+      <p class="alt-kicker">Editorial work</p>
+      <h2>Special issues, edited volumes, and professional service</h2>
+      <p>
+        A separate overview of Adam Rosiński's editorial roles, publishing initiatives,
+        professional organisations, and reviewer-related activity.
+      </p>
+    </div>
+
+    <a href={withBase("/editorial-roles")} class="alt-nav-cta">View editorial roles</a>
+  </section>
   <AlternativeProfiles />
 </AltLabLayout>
+
+<style>
+  .editorial-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin: 2rem 0 4rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 1.5rem;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
+  }
+
+  .editorial-cta h2 {
+    color: #fff;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+  }
+
+  .editorial-cta p:last-child {
+    margin-top: 0.8rem;
+    color: #a1a1aa;
+    line-height: 1.75;
+  }
+
+  @media (max-width: 820px) {
+    .editorial-cta {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

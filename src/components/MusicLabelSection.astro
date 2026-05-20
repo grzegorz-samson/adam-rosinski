@@ -1,0 +1,282 @@
+---
+import AudioWaveform from "@lucide/astro/icons/audio-waveform";
+import Disc3 from "@lucide/astro/icons/disc-3";
+import ExternalLink from "@lucide/astro/icons/external-link";
+import Headphones from "@lucide/astro/icons/headphones";
+import Radio from "@lucide/astro/icons/radio";
+import { musicLabelIntro, musicReleases } from "../data/musicLabel";
+
+const iconMap = {
+  Release: Disc3,
+  Series: AudioWaveform,
+  Archive: Radio,
+  "Research recording": Headphones,
+  Production: Radio,
+};
+---
+
+<section class="label-section">
+  <div class="label-hero">
+    <div>
+      <p class="alt-kicker">Music label / sound catalogue</p>
+      <h1>{musicLabelIntro.title}</h1>
+      <p>{musicLabelIntro.description}</p>
+    </div>
+
+    <div class="label-orb" aria-hidden="true">
+      <Disc3 size={72} stroke-width={1.25} />
+      <span></span>
+    </div>
+  </div>
+
+  <div class="label-heading">
+    <h2>Featured catalogue</h2>
+    <p>
+      A flexible release system for recordings, spatial sound studies, research material,
+      and production-oriented audio work.
+    </p>
+  </div>
+
+  <div class="release-grid">
+    {musicReleases.map((release) => {
+      const Icon = iconMap[release.type] ?? Disc3;
+
+      return (
+        <article class:list={["release-card", release.featured && "is-featured"]}>
+          <div class="release-cover" aria-hidden="true">
+            <div class="release-cover-top">
+              <Icon size={22} stroke-width={1.6} />
+              <span>{release.year}</span>
+            </div>
+            <strong>{release.title.split(" ").slice(0, 2).map((word) => word[0]).join("")}</strong>
+            <div class="release-wave">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+
+          <div class="release-copy">
+            <div class="release-meta">
+              <span>{release.type}</span>
+              <span>{release.status}</span>
+            </div>
+
+            <h3>{release.title}</h3>
+            <p>{release.description}</p>
+
+            <div class="release-tags">
+              {release.tags.map((tag) => <span>{tag}</span>)}
+            </div>
+
+            {release.href && (
+              <a href={release.href} target="_blank" rel="noreferrer" class="alt-link-with-icon">
+                <span>Open release</span>
+                <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
+              </a>
+            )}
+          </div>
+        </article>
+      );
+    })}
+  </div>
+</section>
+
+<style>
+  .label-section {
+    padding: 2rem 0 5rem;
+  }
+
+  .label-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) 0.8fr;
+    gap: 1.5rem;
+    align-items: stretch;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 32px;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(86, 216, 255, 0.13), transparent 36%),
+      rgba(255, 255, 255, 0.04);
+    padding: clamp(1.5rem, 4vw, 3rem);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
+  }
+
+  .label-hero h1 {
+    color: #fff;
+    font-size: clamp(2.6rem, 7vw, 5.8rem);
+    line-height: 0.96;
+    letter-spacing: -0.055em;
+    text-wrap: balance;
+  }
+
+  .label-hero p:last-child {
+    max-width: 48rem;
+    margin-top: 1.2rem;
+    color: #a1a1aa;
+    line-height: 1.85;
+  }
+
+  .label-orb {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 18rem;
+    border-radius: 28px;
+    overflow: hidden;
+    color: #56d8ff;
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      rgba(255, 255, 255, 0.035);
+    background-size: 28px 28px;
+  }
+
+  .label-orb span {
+    position: absolute;
+    width: 15rem;
+    height: 15rem;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.22;
+  }
+
+  .label-heading {
+    margin: 4rem 0 1.5rem;
+    max-width: 58rem;
+  }
+
+  .label-heading h2 {
+    color: #fff;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+  }
+
+  .label-heading p {
+    margin-top: 1rem;
+    color: #a1a1aa;
+    line-height: 1.85;
+  }
+
+  .release-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .release-card {
+    display: grid;
+    gap: 1.1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 1rem;
+    backdrop-filter: blur(18px);
+    transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+  }
+
+  .release-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(86, 216, 255, 0.32);
+    background: rgba(86, 216, 255, 0.055);
+  }
+
+  .release-card.is-featured {
+    border-color: rgba(86, 216, 255, 0.2);
+  }
+
+  .release-cover {
+    display: grid;
+    aspect-ratio: 1 / 1;
+    border-radius: 24px;
+    padding: 1rem;
+    overflow: hidden;
+    color: #56d8ff;
+    background:
+      radial-gradient(circle at 28% 22%, rgba(86, 216, 255, 0.22), transparent 0 38%),
+      radial-gradient(circle at 80% 80%, rgba(255, 179, 71, 0.14), transparent 0 35%),
+      rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .release-cover-top,
+  .release-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .release-cover strong {
+    align-self: center;
+    color: #fff;
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: clamp(2.2rem, 6vw, 4.2rem);
+    letter-spacing: -0.06em;
+  }
+
+  .release-wave {
+    display: grid;
+    gap: 0.28rem;
+    align-self: end;
+  }
+
+  .release-wave span {
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+    opacity: 0.34;
+  }
+
+  .release-wave span:nth-child(2) {
+    width: 72%;
+  }
+
+  .release-wave span:nth-child(3) {
+    width: 46%;
+  }
+
+  .release-meta {
+    color: #71717a;
+    font-size: 0.66rem;
+  }
+
+  .release-copy h3 {
+    margin-top: 0.9rem;
+    color: #fff;
+    font-size: 1.25rem;
+    line-height: 1.25;
+  }
+
+  .release-copy p {
+    margin-top: 0.8rem;
+    color: #a1a1aa;
+    line-height: 1.75;
+  }
+
+  .release-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 1rem;
+  }
+
+  .release-tags span {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    padding: 0.3rem 0.58rem;
+    color: #cbd5e1;
+    font-size: 0.76rem;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  @media (max-width: 1080px) {
+    .label-hero,
+    .release-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

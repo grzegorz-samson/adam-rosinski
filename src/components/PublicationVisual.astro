@@ -1,0 +1,262 @@
+---
+import BookMarked from "@lucide/astro/icons/book-marked";
+import BookOpen from "@lucide/astro/icons/book-open";
+import Church from "@lucide/astro/icons/church";
+import Disc3 from "@lucide/astro/icons/disc-3";
+import FileMusic from "@lucide/astro/icons/file-music";
+import FileText from "@lucide/astro/icons/file-text";
+import FingerprintPattern from "@lucide/astro/icons/fingerprint-pattern";
+import GraduationCap from "@lucide/astro/icons/graduation-cap";
+import Headphones from "@lucide/astro/icons/headphones";
+import Landmark from "@lucide/astro/icons/landmark";
+import LibraryBig from "@lucide/astro/icons/library-big";
+import MonitorSpeaker from "@lucide/astro/icons/monitor-speaker";
+import Music2 from "@lucide/astro/icons/music-2";
+import Newspaper from "@lucide/astro/icons/newspaper";
+import Piano from "@lucide/astro/icons/piano";
+import Radar from "@lucide/astro/icons/radar";
+import ScanSearch from "@lucide/astro/icons/scan-search";
+import Speaker from "@lucide/astro/icons/speaker";
+import WavesHorizontal from "@lucide/astro/icons/waves-horizontal";
+import type { PublicationRecord } from "../data/publications";
+import { withBase } from "../utils/withBase";
+
+interface Props {
+  publication: PublicationRecord;
+  sectionId: string;
+  title: string;
+}
+
+const { publication, sectionId, title } = Astro.props as Props;
+
+const iconMap = {
+  monographs: BookOpen,
+  "journal-articles": Newspaper,
+  "editorial-work": LibraryBig,
+  "book-chapters": BookMarked,
+};
+
+const Icon = iconMap[sectionId as keyof typeof iconMap] ?? FileText;
+
+const hasSpecificCover =
+  Boolean(publication.cover) &&
+  !publication.cover?.includes("placeholder-studio");
+
+const shouldUseRealCover = sectionId === "monographs" && hasSpecificCover;
+const coverSrc = shouldUseRealCover && publication.cover ? withBase(publication.cover) : null;
+
+function getVenue(publication: PublicationRecord): string {
+  return publication.journal ?? publication.book ?? publication.publisher ?? publication.type ?? "Publication";
+}
+
+function getSemanticIcon(publication: PublicationRecord) {
+  const haystack = [
+    publication.title,
+    publication.summary,
+    publication.journal,
+    publication.book,
+    ...publication.tags,
+    ...publication.relatedAreas,
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  if (haystack.includes("microphone")) return MonitorSpeaker;
+  if (haystack.includes("surround") || haystack.includes("multichannel") || haystack.includes("binaural")) return Headphones;
+  if (haystack.includes("spatial") || haystack.includes("localisation") || haystack.includes("localization")) return Radar;
+  if (haystack.includes("auditory scene") || haystack.includes("auditory image")) return ScanSearch;
+  if (haystack.includes("perception") || haystack.includes("psychoacoustic") || haystack.includes("stream")) return FingerprintPattern;
+  if (haystack.includes("timbre")) return WavesHorizontal;
+  if (haystack.includes("rhythm") || haystack.includes("melody")) return Music2;
+  if (haystack.includes("recording") || haystack.includes("mastering") || haystack.includes("sound production")) return FileMusic;
+  if (haystack.includes("virtual instrument") || haystack.includes("keyboard") || haystack.includes("piano")) return Piano;
+  if (haystack.includes("teaching") || haystack.includes("education") || haystack.includes("training")) return GraduationCap;
+  if (haystack.includes("church") || haystack.includes("sacred")) return Church;
+  if (haystack.includes("digital culture") || haystack.includes("cyberculture") || haystack.includes("multimedia")) return Disc3;
+  if (haystack.includes("philosophy")) return Landmark;
+  if (haystack.includes("acoustics") || haystack.includes("acoustic")) return Speaker;
+  return Icon;
+}
+
+function getAccent(publication: PublicationRecord): string {
+  if (publication.relatedAreas.includes("recording") || publication.relatedAreas.includes("practice")) return "amber";
+  if (publication.relatedAreas.includes("spatial-audio")) return "emerald";
+  if (publication.relatedAreas.includes("education")) return "neutral";
+  return "cyan";
+}
+
+const venue = getVenue(publication);
+const accent = getAccent(publication);
+const SemanticIcon = getSemanticIcon(publication);
+---
+
+<div
+  class:list={[
+    "publication-visual",
+    `publication-visual-${sectionId}`,
+    `publication-visual-${accent}`,
+    coverSrc && "has-cover",
+  ]}
+>
+  {coverSrc ? (
+    <img src={coverSrc} alt={`Cover for ${title}`} loading="lazy" />
+  ) : (
+    <div class="publication-visual-generated" aria-hidden="true">
+      <div class="publication-visual-symbol">
+        <SemanticIcon size={24} stroke-width={1.8} aria-hidden="true" />
+      </div>
+
+      <div class="publication-visual-lines">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  )}
+</div>
+
+<style>
+  .publication-visual {
+    position: relative;
+    flex: 0 0 5rem;
+    width: 5rem;
+    min-height: 5rem;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    background:
+      radial-gradient(circle at 30% 20%, rgba(86, 216, 255, 0.16), transparent 0 45%),
+      rgba(255, 255, 255, 0.045);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 12px 28px rgba(0, 0, 0, 0.26);
+  }
+
+  .publication-visual-monographs {
+    aspect-ratio: 4 / 5;
+  }
+
+  .publication-visual-journal-articles,
+  .publication-visual-editorial-work,
+  .publication-visual-book-chapters {
+    aspect-ratio: 1 / 1;
+  }
+
+  .publication-visual img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .publication-visual-generated {
+    display: grid;
+    height: 100%;
+    min-height: 5rem;
+    padding: 0.62rem;
+  }
+
+  .publication-visual-symbol {
+    display: grid;
+    place-items: center;
+    align-self: center;
+    color: #fff;
+  }
+
+  .publication-visual-lines {
+    display: grid;
+    gap: 0.18rem;
+    align-self: end;
+  }
+
+  .publication-visual-lines span {
+    height: 1px;
+    border-radius: 999px;
+    background: currentColor;
+    opacity: 0.36;
+  }
+
+  .publication-visual-lines span:nth-child(2) {
+    width: 72%;
+  }
+
+  .publication-visual-lines span:nth-child(3) {
+    width: 48%;
+  }
+
+  .publication-visual-journal-articles::after {
+    content: "";
+    position: absolute;
+    inset: auto 0.75rem 0.72rem 0.75rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.22;
+  }
+
+  .publication-visual-book-chapters::before {
+    content: "";
+    position: absolute;
+    inset: 0.65rem auto 0.65rem 0.62rem;
+    width: 2px;
+    border-radius: 999px;
+    background: currentColor;
+    opacity: 0.42;
+  }
+
+  .publication-visual-editorial-work::before {
+    content: "";
+    position: absolute;
+    inset: 0.62rem;
+    border: 1px solid currentColor;
+    border-radius: 12px;
+    opacity: 0.12;
+  }
+
+  .publication-visual-cyan {
+    color: #56d8ff;
+    border-color: rgba(86, 216, 255, 0.2);
+    background:
+      radial-gradient(circle at 30% 20%, rgba(86, 216, 255, 0.18), transparent 0 45%),
+      rgba(86, 216, 255, 0.055);
+  }
+
+  .publication-visual-amber {
+    color: #ffb347;
+    border-color: rgba(255, 179, 71, 0.2);
+    background:
+      radial-gradient(circle at 30% 20%, rgba(255, 179, 71, 0.16), transparent 0 45%),
+      rgba(255, 179, 71, 0.055);
+  }
+
+  .publication-visual-emerald {
+    color: #34d399;
+    border-color: rgba(52, 211, 153, 0.2);
+    background:
+      radial-gradient(circle at 30% 20%, rgba(52, 211, 153, 0.15), transparent 0 45%),
+      rgba(52, 211, 153, 0.055);
+  }
+
+  .publication-visual-neutral {
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  @media (max-width: 720px) {
+    .publication-visual {
+      flex-basis: 4.35rem;
+      width: 4.35rem;
+      min-height: 4.35rem;
+      border-radius: 16px;
+    }
+
+    .publication-visual-generated {
+      min-height: 4.35rem;
+      padding: 0.55rem;
+    }
+
+    .publication-visual-symbol svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
+</style>
