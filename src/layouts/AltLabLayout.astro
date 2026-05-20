@@ -32,6 +32,15 @@ const navIcons = {
   "/music-label": Disc3,
   "/contact": Mail,
 };
+
+const navThemes = {
+  "/about": "cyan",
+  "/work-areas": "emerald",
+  "/audio-demonstrator": "amber",
+  "/publications": "violet",
+  "/editorial-roles": "slate",
+  "/music-label": "cyan",
+};
 ---
 
 <BaseLayout title={title} description={description} bodyClass="alt-lab">
@@ -39,7 +48,7 @@ const navIcons = {
     <div class="alt-shell alt-nav-inner">
       <a href={withBase("/")} class="alt-wordmark">
         <AudioWaveform size={16} stroke-width={1.75} aria-hidden="true" />
-        <span>{site.name} / research and sound</span>
+        <span>{site.name}</span>
       </a>
 
       <nav class="alt-nav-links" aria-label="Site navigation">
@@ -47,7 +56,14 @@ const navIcons = {
           const Icon = navIcons[item.href as keyof typeof navIcons];
 
           return (
-            <a href={withBase(item.href)} class:list={["alt-nav-link", isActive(item.href) && "is-active"]}>
+            <a
+              href={withBase(item.href)}
+              class:list={[
+                "alt-nav-link",
+                `alt-nav-link-${navThemes[item.href as keyof typeof navThemes] ?? "slate"}`,
+                isActive(item.href) && "is-active",
+              ]}
+            >
               <Icon size={14} stroke-width={1.75} aria-hidden="true" />
               <span>{item.label}</span>
             </a>
@@ -129,6 +145,7 @@ const navIcons = {
     letter-spacing: 0.18em;
     text-transform: uppercase;
     text-decoration: none;
+    white-space: nowrap;
   }
 
   .alt-nav-links,
@@ -139,14 +156,87 @@ const navIcons = {
   }
 
   .alt-nav-link {
-    color: #a1a1aa;
-    font-size: 0.86rem;
+    color: #d4d4d8;
+    font-size: 0.96rem;
+    font-weight: 700;
+    padding: 0.72rem 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(10px);
     text-decoration: none;
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      background 180ms ease,
+      color 180ms ease,
+      box-shadow 180ms ease;
   }
 
   .alt-nav-link:hover,
   .alt-nav-link.is-active {
     color: #fff;
+    transform: translateY(-1px);
+  }
+
+  .alt-nav-link-cyan {
+    background: rgba(86, 216, 255, 0.08);
+    border-color: rgba(86, 216, 255, 0.16);
+  }
+
+  .alt-nav-link-emerald {
+    background: rgba(52, 211, 153, 0.08);
+    border-color: rgba(52, 211, 153, 0.16);
+  }
+
+  .alt-nav-link-amber {
+    background: rgba(255, 179, 71, 0.08);
+    border-color: rgba(255, 179, 71, 0.16);
+  }
+
+  .alt-nav-link-violet {
+    background: rgba(138, 125, 255, 0.08);
+    border-color: rgba(138, 125, 255, 0.18);
+  }
+
+  .alt-nav-link-slate {
+    background: rgba(161, 161, 170, 0.08);
+    border-color: rgba(161, 161, 170, 0.14);
+  }
+
+  .alt-nav-link-cyan:hover,
+  .alt-nav-link-cyan.is-active {
+    border-color: rgba(86, 216, 255, 0.36);
+    background: rgba(86, 216, 255, 0.16);
+    box-shadow: 0 10px 28px rgba(86, 216, 255, 0.12);
+  }
+
+  .alt-nav-link-emerald:hover,
+  .alt-nav-link-emerald.is-active {
+    border-color: rgba(52, 211, 153, 0.36);
+    background: rgba(52, 211, 153, 0.16);
+    box-shadow: 0 10px 28px rgba(52, 211, 153, 0.12);
+  }
+
+  .alt-nav-link-amber:hover,
+  .alt-nav-link-amber.is-active {
+    border-color: rgba(255, 179, 71, 0.36);
+    background: rgba(255, 179, 71, 0.16);
+    box-shadow: 0 10px 28px rgba(255, 179, 71, 0.12);
+  }
+
+  .alt-nav-link-violet:hover,
+  .alt-nav-link-violet.is-active {
+    border-color: rgba(138, 125, 255, 0.36);
+    background: rgba(138, 125, 255, 0.16);
+    box-shadow: 0 10px 28px rgba(138, 125, 255, 0.12);
+  }
+
+  .alt-nav-link-slate:hover,
+  .alt-nav-link-slate.is-active {
+    border-color: rgba(161, 161, 170, 0.28);
+    background: rgba(161, 161, 170, 0.14);
+    box-shadow: 0 10px 28px rgba(161, 161, 170, 0.08);
   }
 
   .alt-nav-link svg,
