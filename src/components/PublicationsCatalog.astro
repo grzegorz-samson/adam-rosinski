@@ -7,8 +7,10 @@ import Files from "@lucide/astro/icons/files";
 import Tags from "@lucide/astro/icons/tags";
 import PublicationVisual from "./PublicationVisual.astro";
 import { getDisplayTitle, getSecondaryTitle } from "../data/publicationPresentation";
+import { getPublicationStrip } from "../data/publicationStrips";
 import { getPublicationMetaLabel } from "../data/publicationTaxonomy";
 import type { PublicationRecord } from "../data/publications";
+import { withBase } from "../utils/withBase";
 
 interface Props {
   monographs: PublicationRecord[];
@@ -131,9 +133,22 @@ function getVenueLine(publication: PublicationRecord): string | null {
             const displayTitle = getDisplayTitle(publication);
             const secondaryTitle = getSecondaryTitle(publication);
             const venueLine = getVenueLine(publication);
+            const strip = getPublicationStrip(publication);
+            const stripStyle = [
+              `--publication-strip-svg: url("${withBase(strip.asset)}")`,
+              `--publication-strip-accent: ${strip.accent}`,
+              `--publication-strip-accent-2: ${strip.accent2}`,
+            ].join("; ");
 
             return (
-              <details class:list={["catalog-item", section.id === "monographs" && "catalog-item-book"]}>
+              <details
+                class:list={[
+                  "catalog-item",
+                  "publication-row",
+                  section.id === "monographs" && "catalog-item-book",
+                ]}
+                style={stripStyle}
+              >
                 <summary class="catalog-summary-row">
                   <div class="catalog-summary-main">
                     <PublicationVisual publication={publication} sectionId={section.id} title={displayTitle} />
@@ -224,6 +239,93 @@ function getVenueLine(publication: PublicationRecord): string | null {
     ))}
   </div>
 </section>
+
+<script>
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const publicationRows = Array.from(document.querySelectorAll(".catalog-item"));
+
+  for (const row of publicationRows) {
+    const summary = row.querySelector(".catalog-summary-row");
+    const content = row.querySelector(".catalog-expanded");
+
+    if (!(row instanceof HTMLDetailsElement) || !(summary instanceof HTMLElement) || !(content instanceof HTMLElement)) {
+      continue;
+    }
+
+    let animating = false;
+
+    if (!row.open) {
+      content.style.height = "0px";
+      content.style.opacity = "0";
+    } else {
+      content.style.height = "auto";
+      content.style.opacity = "1";
+    }
+
+    summary.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      if (animating) {
+        return;
+      }
+
+      if (prefersReducedMotion.matches) {
+        row.open = !row.open;
+        content.style.height = row.open ? "auto" : "0px";
+        content.style.opacity = row.open ? "1" : "0";
+        return;
+      }
+
+      if (row.open) {
+        animating = true;
+        content.style.height = `${content.scrollHeight}px`;
+        content.style.opacity = "1";
+
+        requestAnimationFrame(() => {
+          content.style.height = "0px";
+          content.style.opacity = "0";
+        });
+
+        const handleClose = (transitionEvent: TransitionEvent) => {
+          if (transitionEvent.propertyName !== "height") {
+            return;
+          }
+
+          row.open = false;
+          content.style.height = "0px";
+          content.style.opacity = "0";
+          animating = false;
+          content.removeEventListener("transitionend", handleClose);
+        };
+
+        content.addEventListener("transitionend", handleClose);
+        return;
+      }
+
+      row.open = true;
+      animating = true;
+      content.style.height = "0px";
+      content.style.opacity = "0";
+
+      requestAnimationFrame(() => {
+        content.style.height = `${content.scrollHeight}px`;
+        content.style.opacity = "1";
+      });
+
+      const handleOpen = (transitionEvent: TransitionEvent) => {
+        if (transitionEvent.propertyName !== "height") {
+          return;
+        }
+
+        content.style.height = "auto";
+        animating = false;
+        content.removeEventListener("transitionend", handleOpen);
+      };
+
+      content.addEventListener("transitionend", handleOpen);
+    });
+  }
+</script>
 
 <style>
   .catalog-section {
@@ -334,15 +436,57 @@ function getVenueLine(publication: PublicationRecord): string | null {
   }
 
   .catalog-item {
+    position: relative;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 24px;
     background: rgba(9, 12, 18, 0.55);
     overflow: hidden;
+    isolation: isolate;
   }
 
   .catalog-item[open] {
     border-color: rgba(86, 216, 255, 0.22);
     background: rgba(9, 12, 18, 0.72);
+  }
+
+  .publication-row::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background:
+      radial-gradient(circle at 83% 3.9rem, var(--publication-strip-accent) 0%, transparent 42%),
+      linear-gradient(
+        90deg,
+        rgba(4, 6, 11, 0.995) 0%,
+        rgba(4, 6, 11, 0.985) 42%,
+        rgba(4, 6, 11, 0.92) 70%,
+        rgba(4, 6, 11, 0.82) 100%
+      );
+  }
+
+  .publication-row::after {
+    content: "";
+    position: absolute;
+    inset: 0.55rem -0.45rem 0.55rem auto;
+    width: min(60%, 800px);
+    z-index: -1;
+    opacity: 0.9;
+    background-image: var(--publication-strip-svg);
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-size: contain;
+    mask-image: radial-gradient(circle at right top, #000 0%, #000 64%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle at right top, #000 0%, #000 64%, transparent 100%);
+    pointer-events: none;
+    transform-origin: right center;
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  .publication-row:hover::after,
+  .publication-row[open]::after {
+    opacity: 1;
+    transform: translateX(-0.45rem);
   }
 
   .catalog-summary-row {
@@ -373,7 +517,7 @@ function getVenueLine(publication: PublicationRecord): string | null {
     display: flex;
     flex-wrap: wrap;
     gap: 0.8rem 1rem;
-    color: #71717a;
+    color: #9195a5;
     font-size: 0.74rem;
     text-transform: uppercase;
     letter-spacing: 0.14em;
@@ -399,7 +543,7 @@ function getVenueLine(publication: PublicationRecord): string | null {
 
   .catalog-venue-line {
     margin-top: 0.42rem;
-    color: #8d92a6;
+    color: #b5b8c7;
     font-size: 0.88rem;
     line-height: 1.55;
   }
@@ -416,12 +560,12 @@ function getVenueLine(publication: PublicationRecord): string | null {
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    color: #a1a1aa;
+    color: #c6cad8;
     font-size: 0.82rem;
   }
 
   .catalog-chevron {
-    color: #8d92a6;
+    color: #c6cad8;
     transition: transform 180ms ease;
   }
 
@@ -432,7 +576,13 @@ function getVenueLine(publication: PublicationRecord): string | null {
   .catalog-expanded {
     display: grid;
     gap: 0;
-    padding: 0 1.2rem 1.2rem;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0 1.2rem;
+    transition:
+      height 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 180ms ease;
   }
 
   .catalog-expanded-columns {
@@ -444,6 +594,21 @@ function getVenueLine(publication: PublicationRecord): string | null {
   .catalog-column-side {
     display: grid;
     gap: 0;
+  }
+
+  .catalog-column-side .catalog-block {
+    padding-inline: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 18px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(233, 240, 248, 0.08)),
+      rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .catalog-column-side .catalog-block-label,
+  .catalog-column-side .catalog-detail-list p {
+    color: #0b1020;
   }
 
   .catalog-block {
@@ -498,7 +663,7 @@ function getVenueLine(publication: PublicationRecord): string | null {
     justify-content: space-between;
     align-items: center;
     gap: 0.8rem;
-    padding-top: 0.95rem;
+    padding: 0.95rem 0 1.2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
 
@@ -512,6 +677,26 @@ function getVenueLine(publication: PublicationRecord): string | null {
   }
 
   @media (max-width: 720px) {
+    .publication-row::after {
+      inset: 0.4rem -0.3rem 0.4rem auto;
+      width: 108%;
+      opacity: 0.3;
+      background-size: cover;
+      background-position: right top;
+    }
+
+    .publication-row:hover::after,
+    .publication-row[open]::after {
+      opacity: 0.34;
+      transform: translateX(-0.2rem);
+    }
+
+    .publication-row::before {
+      background:
+        radial-gradient(circle at 84% 3.2rem, var(--publication-strip-accent-2) 0%, transparent 38%),
+        linear-gradient(0deg, rgba(4, 6, 11, 0.982), rgba(4, 6, 11, 0.982));
+    }
+
     .catalog-summary-row {
       flex-direction: column;
     }
@@ -535,6 +720,38 @@ function getVenueLine(publication: PublicationRecord): string | null {
 
     .catalog-links {
       margin-top: 0.2rem;
+    }
+  }
+
+  @media (min-width: 721px) and (max-width: 959px) {
+    .publication-row::after {
+      inset: 0.55rem -0.2rem 0.55rem auto;
+      width: 74%;
+      opacity: 0.72;
+    }
+
+    .publication-row:hover::after,
+    .publication-row[open]::after {
+      opacity: 0.8;
+      transform: translateX(-0.3rem);
+    }
+
+    .publication-row::before {
+      background:
+        radial-gradient(circle at 84% 3.4rem, var(--publication-strip-accent) 0%, transparent 40%),
+        linear-gradient(
+          90deg,
+          rgba(4, 6, 11, 0.994) 0%,
+          rgba(4, 6, 11, 0.975) 58%,
+          rgba(4, 6, 11, 0.86) 100%
+        );
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .publication-row::after {
+      transition: none;
+      transform: none;
     }
   }
 </style>

@@ -1,0 +1,55 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title desc">
+  <title id="title">Publication strip orbit analysis background</title>
+  <desc id="desc">Abstract orbit map with points, rings and analytical lines for publication cards.</desc>
+  <defs>
+    <linearGradient id="fade" x1="0" x2="1">
+      <stop offset="0%" stop-color="#12D6D6" stop-opacity="0"/>
+      <stop offset="38%" stop-color="#12D6D6" stop-opacity=".08"/>
+      <stop offset="100%" stop-color="#56D8FF" stop-opacity=".25"/>
+    </linearGradient>
+    <radialGradient id="orb" cx="67%" cy="50%" r="58%">
+      <stop offset="0%" stop-color="#56D8FF" stop-opacity=".32"/>
+      <stop offset="56%" stop-color="#12D6D6" stop-opacity=".07"/>
+      <stop offset="100%" stop-color="#12D6D6" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2.2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="smallGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#56D8FF" stroke-opacity=".11"/>
+    </pattern>
+  </defs>
+  <rect x="360" y="0" width="540" height="180" fill="url(#orb)"/>
+  <rect x="470" y="16" width="390" height="148" fill="url(#smallGrid)" opacity=".48"/>
+
+  <g transform="translate(636 90)" fill="none" stroke="#56D8FF" stroke-width="1.2">
+    <ellipse rx="165" ry="36" opacity=".35" transform="rotate(-10)"/>
+    <ellipse rx="128" ry="58" opacity=".45" transform="rotate(22)"/>
+    <ellipse rx="88" ry="88" opacity=".32"/>
+    <ellipse rx="56" ry="24" opacity=".70"/>
+    <ellipse rx="24" ry="10" opacity=".82"/>
+  </g>
+
+  <g filter="url(#glow)">
+    <circle cx="636" cy="90" r="5.5" fill="#56D8FF" opacity=".95"/>
+    <circle cx="518" cy="76" r="4" fill="#56D8FF" opacity=".82"/>
+    <circle cx="740" cy="50" r="3" fill="#56D8FF" opacity=".78"/>
+    <circle cx="795" cy="103" r="3.4" fill="#56D8FF" opacity=".82"/>
+    <circle cx="573" cy="128" r="2.8" fill="#56D8FF" opacity=".70"/>
+    <circle cx="696" cy="138" r="2.8" fill="#56D8FF" opacity=".70"/>
+  </g>
+
+  <g stroke="#56D8FF" stroke-width="1" opacity=".32" fill="none">
+    <path d="M518 76L636 90L740 50"/>
+    <path d="M573 128L636 90L795 103"/>
+    <path d="M636 90L696 138"/>
+  </g>
+
+  <g fill="#56D8FF" opacity=".19">
+    <circle cx="518" cy="76" r="14"/>
+    <circle cx="740" cy="50" r="12"/>
+    <circle cx="795" cy="103" r="13"/>
+  </g>
+</svg>
+

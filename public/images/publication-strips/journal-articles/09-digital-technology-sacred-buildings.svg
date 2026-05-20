@@ -1,0 +1,42 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title desc">
+  <title id="title">The Application of Digital Technology in the Physical Space of Sacred Buildings â€” visual strip</title>
+  <desc id="desc">sacred architecture arches, digital grid, acoustic rays</desc>
+
+  <defs>
+    <linearGradient id="fade" x1="0" x2="1">
+      <stop offset="0%" stop-color="#FFB347" stop-opacity="0"/>
+      <stop offset="34%" stop-color="#FFB347" stop-opacity=".07"/>
+      <stop offset="100%" stop-color="#34D399" stop-opacity=".22"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="72%" cy="50%" r="62%">
+      <stop offset="0%" stop-color="#34D399" stop-opacity=".30"/>
+      <stop offset="58%" stop-color="#FFB347" stop-opacity=".08"/>
+      <stop offset="100%" stop-color="#FFB347" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softGlow" x="-20%" y="-40%" width="140%" height="180%">
+      <feGaussianBlur stdDeviation="2.1" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse">
+      <circle cx="1.2" cy="1.2" r="1.2" fill="#34D399" opacity=".25"/>
+    </pattern>
+    <pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0H0V26" fill="none" stroke="#34D399" stroke-opacity=".11" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect x="350" y="0" width="550" height="180" fill="url(#glow)"/>
+  <g opacity=".18"><rect x="520" y="18" width="310" height="144" fill="url(#dots)"/></g>
+  <g fill="none" stroke="#34D399" stroke-width="1.2" opacity=".46">
+    <path d="M460 150V78C460 48 490 32 520 78V150"/>
+    <path d="M540 150V64C540 26 582 22 612 64V150"/>
+    <path d="M640 150V82C640 52 670 38 700 82V150"/>
+    <path d="M430 150H740M450 118H720"/>
+  </g>
+  <g stroke="#FFB347" opacity=".36" fill="none">
+    <path d="M500 60C594 92 660 94 820 58"/>
+    <path d="M480 96C590 122 690 118 862 82"/>
+  </g>
+  <rect x="755" y="26" width="96" height="116" fill="url(#grid)" opacity=".40"/>
+</svg>
+
+

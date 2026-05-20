@@ -1,0 +1,50 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title desc">
+  <title id="title">Publication strip hex field background</title>
+  <desc id="desc">Subtle hexagonal field and dotted circular diagram for theoretical publications.</desc>
+  <defs>
+    <linearGradient id="fade" x1="0" x2="1">
+      <stop offset="0%" stop-color="#8B7CFF" stop-opacity="0"/>
+      <stop offset="36%" stop-color="#8B7CFF" stop-opacity=".09"/>
+      <stop offset="100%" stop-color="#8B7CFF" stop-opacity=".24"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="75%" cy="52%" r="56%">
+      <stop offset="0%" stop-color="#8B7CFF" stop-opacity=".31"/>
+      <stop offset="60%" stop-color="#56D8FF" stop-opacity=".07"/>
+      <stop offset="100%" stop-color="#56D8FF" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#56D8FF" opacity=".23"/>
+    </pattern>
+  </defs>
+  <rect x="360" width="540" height="180" fill="url(#glow)"/>
+  <rect x="540" y="16" width="300" height="148" fill="url(#dots)" opacity=".35"/>
+
+  <g fill="none" stroke="#8B7CFF" stroke-width="1.1" opacity=".54">
+    <path d="M512 52l24-14 24 14v28l-24 14-24-14z"/>
+    <path d="M614 92l30-18 30 18v36l-30 18-30-18z"/>
+    <path d="M744 44l22-13 22 13v26l-22 13-22-13z"/>
+    <path d="M794 114l34-20 34 20v40l-34 20-34-20z"/>
+  </g>
+
+  <g transform="translate(706 91)" fill="none" stroke="#56D8FF" stroke-width="1" opacity=".45">
+    <circle r="74"/>
+    <circle r="52"/>
+    <circle r="30"/>
+    <path d="M-92 0H92"/>
+    <path d="M0-92V92"/>
+  </g>
+
+  <g fill="#56D8FF" opacity=".75">
+    <circle cx="706" cy="91" r="4"/>
+    <circle cx="654" cy="91" r="2.3"/>
+    <circle cx="758" cy="91" r="2.3"/>
+    <circle cx="706" cy="39" r="2.3"/>
+    <circle cx="706" cy="143" r="2.3"/>
+  </g>
+
+  <g stroke="#8B7CFF" stroke-linecap="round" fill="none" opacity=".34">
+    <path d="M350 132 C456 98 540 110 610 122 S753 144 900 102" stroke-width="1.3"/>
+    <path d="M350 115 C452 76 541 92 612 104 S754 124 900 84" stroke-width="1"/>
+  </g>
+</svg>
+
