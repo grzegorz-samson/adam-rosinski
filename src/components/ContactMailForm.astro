@@ -1,0 +1,188 @@
+---
+interface Props {
+  emailCodes: {
+    local: string;
+    domain: string;
+    tld: string;
+  };
+}
+
+const { emailCodes } = Astro.props as Props;
+---
+
+<section class="contact-form-panel">
+  <div class="contact-form-panel__intro">
+    <h3>Contact form</h3>
+    <p>
+      This form opens your mail application with a prefilled draft addressed to Adam Rosiński.
+    </p>
+  </div>
+
+  <form class="contact-form" data-contact-form data-local-codes={emailCodes.local} data-domain-codes={emailCodes.domain} data-tld-codes={emailCodes.tld}>
+    <div class="contact-form__grid">
+      <label>
+        <span>Name</span>
+        <input type="text" name="name" maxlength="120" required />
+      </label>
+
+      <label>
+        <span>Your email</span>
+        <input type="email" name="replyTo" maxlength="180" required />
+      </label>
+    </div>
+
+    <label>
+      <span>Subject</span>
+      <input type="text" name="subject" maxlength="180" required />
+    </label>
+
+    <label>
+      <span>Message</span>
+      <textarea name="message" rows="7" maxlength="4000" required></textarea>
+    </label>
+
+    <div class="contact-form__actions">
+      <button type="submit" class="contact-form__submit">Compose email</button>
+    </div>
+  </form>
+</section>
+
+<script type="module">
+  const decodeCodes = (encoded) =>
+    encoded
+      .split("-")
+      .map((value) => Number.parseInt(value, 10))
+      .filter((value) => Number.isFinite(value))
+      .map((value) => String.fromCharCode(value))
+      .join("");
+
+  const forms = document.querySelectorAll("[data-contact-form]");
+
+  for (const form of forms) {
+    if (!(form instanceof HTMLFormElement) || form.dataset.bound === "true") continue;
+    form.dataset.bound = "true";
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (!form.reportValidity()) return;
+
+      const local = decodeCodes(form.dataset.localCodes ?? "");
+      const domain = decodeCodes(form.dataset.domainCodes ?? "");
+      const tld = decodeCodes(form.dataset.tldCodes ?? "");
+      const to = `${local}@${domain}.${tld}`;
+
+      const formData = new FormData(form);
+      const name = String(formData.get("name") ?? "").trim();
+      const replyTo = String(formData.get("replyTo") ?? "").trim();
+      const subject = String(formData.get("subject") ?? "").trim();
+      const message = String(formData.get("message") ?? "").trim();
+
+      const body = [
+        `Name: ${name}`,
+        `Email: ${replyTo}`,
+        "",
+        message,
+      ].join("\n");
+
+      const mailtoUrl = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailtoUrl;
+    });
+  }
+</script>
+
+<style>
+  .contact-form-panel {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 1.5rem;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
+  }
+
+  .contact-form-panel__intro h3 {
+    color: #fff;
+    font-size: 1.32rem;
+    line-height: 1.25;
+  }
+
+  .contact-form-panel__intro p {
+    margin-top: 0.9rem;
+    color: #a1a1aa;
+    line-height: 1.75;
+  }
+
+  .contact-form {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.4rem;
+  }
+
+  .contact-form__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .contact-form label {
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .contact-form label span {
+    color: #dbe4ef;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    background: rgba(5, 7, 11, 0.5);
+    padding: 0.95rem 1rem;
+    color: #fff;
+    outline: none;
+    transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+  }
+
+  .contact-form input:focus-visible,
+  .contact-form textarea:focus-visible {
+    border-color: rgba(86, 216, 255, 0.52);
+    box-shadow: 0 0 0 3px rgba(86, 216, 255, 0.12);
+  }
+
+  .contact-form textarea {
+    resize: vertical;
+    min-height: 11rem;
+  }
+
+  .contact-form__actions {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .contact-form__submit {
+    appearance: none;
+    border: 0;
+    border-radius: 999px;
+    background: #fff;
+    color: #05070b;
+    padding: 0.9rem 1.25rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 180ms ease, opacity 180ms ease;
+  }
+
+  .contact-form__submit:hover {
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 720px) {
+    .contact-form__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
