@@ -277,34 +277,55 @@ function getBookTheme(slug: string) {
   window.addEventListener("resize", syncBookSummaryWidths);
 
   async function animateCardReveal(card, collapsedWidth, expandedWidth) {
-    const hiddenRight = Math.max(expandedWidth - collapsedWidth, 0);
-    const startClip = `inset(0 ${hiddenRight}px 0 0)`;
-    const endClip = "inset(0 0px 0 0)";
+    const startWidth = `${collapsedWidth}px`;
+    const endWidth = `${expandedWidth}px`;
+    const duration = 420;
+    const previousTransition = card.style.transition;
+    const previousWillChange = card.style.willChange;
 
-    card.style.clipPath = startClip;
+    card.style.width = startWidth;
+    card.style.transition = "none";
+    card.style.willChange = "width, transform";
     card.getBoundingClientRect();
 
     if (prefersReducedMotion.matches) {
-      card.style.clipPath = endClip;
+      card.style.width = endWidth;
+      card.style.transition = previousTransition;
+      card.style.willChange = previousWillChange;
       return;
     }
 
-    const animation = card.animate(
-      [
-        { clipPath: startClip },
-        { clipPath: endClip },
-      ],
-      {
-        duration: 360,
-        easing: "cubic-bezier(0.22, 1, 0.36, 1)",
-      },
-    );
+    await new Promise((resolve) => {
+      let finished = false;
+      let timeoutId;
 
-    card.style.clipPath = endClip;
+      const finish = () => {
+        if (finished) {
+          return;
+        }
 
-    try {
-      await animation.finished;
-    } catch {}
+        finished = true;
+        clearTimeout(timeoutId);
+        card.removeEventListener("transitionend", onTransitionEnd);
+        card.style.transition = previousTransition;
+        card.style.willChange = previousWillChange;
+        resolve();
+      };
+
+      const onTransitionEnd = (event) => {
+        if (event.target === card && event.propertyName === "width") {
+          finish();
+        }
+      };
+
+      card.addEventListener("transitionend", onTransitionEnd);
+      timeoutId = setTimeout(finish, duration + 160);
+
+      requestAnimationFrame(() => {
+        card.style.transition = `width ${duration}ms cubic-bezier(0.22, 1, 0.36, 1)`;
+        card.style.width = endWidth;
+      });
+    });
   }
 
   async function animateCardConceal(card, expandedWidth, collapsedWidth) {
@@ -316,7 +337,7 @@ function getBookTheme(slug: string) {
 
     card.style.width = startWidth;
     card.style.transition = "none";
-    card.style.willChange = "width, transform, clip-path";
+    card.style.willChange = "width, transform";
     card.getBoundingClientRect();
 
     if (prefersReducedMotion.matches) {
@@ -377,7 +398,6 @@ function getBookTheme(slug: string) {
     await animateBooksLayout(() => {
       card.open = false;
       card.classList.remove("is-closing-book");
-      card.style.removeProperty("clip-path");
       card.style.removeProperty("width");
     });
   }
@@ -481,7 +501,7 @@ function getBookTheme(slug: string) {
 
           card.open = true;
           card.classList.remove("is-expanding-open");
-          card.style.removeProperty("clip-path");
+          card.style.removeProperty("width");
           return;
         }
 
@@ -552,7 +572,7 @@ function getBookTheme(slug: string) {
     overflow: hidden;
     min-height: 100%;
     transform-origin: top left;
-    will-change: transform, clip-path;
+    will-change: transform, width;
   }
 
   .alt-publication-card::before {
