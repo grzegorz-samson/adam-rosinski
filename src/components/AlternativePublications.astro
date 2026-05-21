@@ -165,56 +165,146 @@ function getBookTheme(slug: string) {
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const booksGrid = document.querySelector("#selected-publications .alt-grid");
   const bookCards = booksGrid ? Array.from(booksGrid.querySelectorAll(".alt-publication-card")) : [];
+  const activeAnimations = new WeakSet();
+
+  function getColumnCount() {
+    if (window.innerWidth <= 720) return 1;
+    if (window.innerWidth <= 1080) return 2;
+    return 4;
+  }
+
+  function shouldStageJump(card) {
+    if (!(card instanceof HTMLDetailsElement) || card.open) {
+      return false;
+    }
+
+    const columns = getColumnCount();
+    if (columns <= 1) {
+      return false;
+    }
+
+    const index = bookCards.indexOf(card);
+    if (index === -1) {
+      return false;
+    }
+
+    return index % columns === columns - 1;
+  }
+
+  function getStageColumnStart() {
+    if (window.innerWidth <= 720) return "auto";
+    return "1";
+  }
+
+  function getExpandedWidth() {
+    if (!booksGrid) {
+      return null;
+    }
+
+    const columns = getColumnCount();
+    if (columns <= 1) {
+      return null;
+    }
+
+    const styles = getComputedStyle(booksGrid);
+    const gap = Number.parseFloat(styles.columnGap || styles.gap || "16") || 16;
+    const gridWidth = booksGrid.getBoundingClientRect().width;
+    const columnWidth = (gridWidth - gap * (columns - 1)) / columns;
+
+    return 2 * columnWidth + gap;
+  }
+
+  function wait(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async function animateCardReveal(card, collapsedWidth, expandedWidth) {
+    const hiddenRight = Math.max(expandedWidth - collapsedWidth, 0);
+    const startClip = `inset(0 ${hiddenRight}px 0 0)`;
+    const endClip = "inset(0 0px 0 0)";
+
+    card.style.clipPath = startClip;
+    card.getBoundingClientRect();
+
+    if (prefersReducedMotion.matches) {
+      card.style.clipPath = endClip;
+      return;
+    }
+
+    const animation = card.animate(
+      [
+        { clipPath: startClip },
+        { clipPath: endClip },
+      ],
+      {
+        duration: 360,
+        easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+      },
+    );
+
+    card.style.clipPath = endClip;
+
+    try {
+      await animation.finished;
+    } catch {}
+  }
 
   function toggleBooksLayout(changedCard) {
     changedCard.open = !changedCard.open;
   }
 
-  function animateBooksLayout(changedCard) {
+  function animateBooksLayout(mutateLayout) {
     if (prefersReducedMotion.matches || !booksGrid || bookCards.length === 0) {
-      toggleBooksLayout(changedCard);
-      return;
+      mutateLayout();
+      return Promise.resolve();
     }
 
     const first = new Map(bookCards.map((card) => [card, card.getBoundingClientRect()]));
-    toggleBooksLayout(changedCard);
+    mutateLayout();
 
-    requestAnimationFrame(() => {
-      const last = new Map(bookCards.map((card) => [card, card.getBoundingClientRect()]));
+    return new Promise((resolve) => {
+      requestAnimationFrame(() => {
+        const last = new Map(bookCards.map((card) => [card, card.getBoundingClientRect()]));
+        const animations = [];
 
-      for (const card of bookCards) {
-        const from = first.get(card);
-        const to = last.get(card);
+        for (const card of bookCards) {
+          const from = first.get(card);
+          const to = last.get(card);
 
-        if (!from || !to) {
-          continue;
+          if (!from || !to) {
+            continue;
+          }
+
+          const deltaX = from.left - to.left;
+          const deltaY = from.top - to.top;
+
+          if (
+            Math.abs(deltaX) < 0.5 &&
+            Math.abs(deltaY) < 0.5
+          ) {
+            continue;
+          }
+
+          animations.push(
+            card.animate(
+              [
+                {
+                  transform: `translate(${deltaX}px, ${deltaY}px)`,
+                },
+                {
+                  transform: "translate(0, 0)",
+                },
+              ],
+              {
+                duration: 360,
+                easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+              },
+            ).finished.catch(() => {})
+          );
         }
 
-        const deltaX = from.left - to.left;
-        const deltaY = from.top - to.top;
-
-        if (
-          Math.abs(deltaX) < 0.5 &&
-          Math.abs(deltaY) < 0.5
-        ) {
-          continue;
-        }
-
-        card.animate(
-          [
-            {
-              transform: `translate(${deltaX}px, ${deltaY}px)`,
-            },
-            {
-              transform: "translate(0, 0)",
-            },
-          ],
-          {
-            duration: 360,
-            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
-          },
-        );
-      }
+        Promise.all(animations).finally(resolve);
+      });
     });
   }
 
@@ -225,9 +315,48 @@ function getBookTheme(slug: string) {
       continue;
     }
 
-    summary.addEventListener("click", (event) => {
+    summary.addEventListener("click", async (event) => {
       event.preventDefault();
-      animateBooksLayout(card);
+
+      if (activeAnimations.has(card)) {
+        return;
+      }
+
+      activeAnimations.add(card);
+
+      try {
+        if (shouldStageJump(card)) {
+          const collapsedWidth = card.getBoundingClientRect().width;
+
+          await animateBooksLayout(() => {
+            card.style.setProperty("--stage-column-start", getStageColumnStart());
+            card.classList.add("is-staging-open");
+          });
+
+          const expandedWidth = getExpandedWidth();
+
+          card.classList.remove("is-staging-open");
+          card.classList.add("is-expanding-open");
+          card.style.removeProperty("--stage-column-start");
+
+          if (expandedWidth) {
+            await animateCardReveal(card, collapsedWidth, expandedWidth);
+          } else {
+            await wait(360);
+          }
+
+          card.open = true;
+          card.classList.remove("is-expanding-open");
+          card.style.removeProperty("clip-path");
+          return;
+        }
+
+        await animateBooksLayout(() => {
+          toggleBooksLayout(card);
+        });
+      } finally {
+        setTimeout(() => activeAnimations.delete(card), 760);
+      }
     });
   }
 </script>
@@ -264,6 +393,7 @@ function getBookTheme(slug: string) {
   .alt-publication-card {
     position: relative;
     display: grid;
+    width: 100%;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 28px;
     background:
@@ -272,11 +402,14 @@ function getBookTheme(slug: string) {
     padding: 1.25rem;
     backdrop-filter: blur(18px);
     box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
-    transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+    transition:
+      border-color 180ms ease,
+      background 180ms ease,
+      box-shadow 180ms ease;
     overflow: hidden;
     min-height: 100%;
     transform-origin: top left;
-    will-change: transform;
+    will-change: transform, clip-path;
   }
 
   .alt-publication-card::before {
@@ -288,7 +421,9 @@ function getBookTheme(slug: string) {
   }
 
   .alt-publication-card:hover,
-  .alt-publication-card[open] {
+  .alt-publication-card[open],
+  .alt-publication-card.is-staging-open,
+  .alt-publication-card.is-expanding-open {
     border-color: color-mix(in srgb, var(--book-accent) 34%, rgba(255, 255, 255, 0.16));
     box-shadow: 0 22px 70px rgba(0, 0, 0, 0.38);
   }
@@ -327,7 +462,9 @@ function getBookTheme(slug: string) {
   }
 
   .alt-publication-card:hover .alt-cover-image,
-  .alt-publication-card[open] .alt-cover-image {
+  .alt-publication-card[open] .alt-cover-image,
+  .alt-publication-card.is-staging-open .alt-cover-image,
+  .alt-publication-card.is-expanding-open .alt-cover-image {
     transform: scale(1.06);
   }
 
@@ -353,7 +490,9 @@ function getBookTheme(slug: string) {
     z-index: 2;
   }
 
-  .alt-publication-card[open] .alt-book-chevron {
+  .alt-publication-card[open] .alt-book-chevron,
+  .alt-publication-card.is-staging-open .alt-book-chevron,
+  .alt-publication-card.is-expanding-open .alt-book-chevron {
     transform: rotate(90deg);
   }
 
@@ -382,7 +521,7 @@ function getBookTheme(slug: string) {
     padding-top: 0;
   }
 
-  .alt-publication-card[open] .alt-publication-expanded {
+  .alt-publication-card[open]:not(.is-expanding-open) .alt-publication-expanded {
     align-content: start;
     max-height: 40rem;
     opacity: 1;
@@ -478,18 +617,41 @@ function getBookTheme(slug: string) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .alt-publication-card[open] {
+    .alt-publication-card[open],
+    .alt-publication-card.is-expanding-open {
       grid-column: span 2;
       grid-template-columns: 16rem minmax(0, 1fr);
       gap: 1.15rem;
       align-items: start;
     }
 
-    .alt-publication-card[open] .alt-publication-summary {
+    .alt-publication-card.is-staging-open {
+      grid-column: var(--stage-column-start, 1);
+      grid-template-columns: 1fr;
+      gap: 0;
+      align-items: start;
+    }
+
+  .alt-publication-card.is-expanding-open {
+      justify-self: start;
+    }
+
+    .alt-publication-card.is-expanding-open .alt-publication-expanded {
+      grid-column: 2;
+      grid-row: 1;
+      max-height: 0;
+      opacity: 0;
+      transform: translateX(-18px);
+      padding-top: 0;
+    }
+
+    .alt-publication-card[open] .alt-publication-summary,
+    .alt-publication-card.is-staging-open .alt-publication-summary,
+    .alt-publication-card.is-expanding-open .alt-publication-summary {
       align-self: stretch;
     }
 
-    .alt-publication-card[open] .alt-publication-expanded {
+    .alt-publication-card[open]:not(.is-expanding-open) .alt-publication-expanded {
       grid-column: 2;
       grid-row: 1;
     }
@@ -500,26 +662,49 @@ function getBookTheme(slug: string) {
       grid-template-columns: 1fr;
     }
 
-    .alt-publication-card[open] {
+    .alt-publication-card[open],
+    .alt-publication-card.is-staging-open,
+    .alt-publication-card.is-expanding-open {
       grid-column: auto;
       grid-template-columns: 1fr;
     }
 
-    .alt-publication-card[open] .alt-publication-expanded {
+    .alt-publication-card[open]:not(.is-expanding-open) .alt-publication-expanded {
       grid-column: 1;
       grid-row: auto;
     }
   }
 
   @media (min-width: 1081px) {
-    .alt-publication-card[open] {
+    .alt-publication-card[open],
+    .alt-publication-card.is-expanding-open {
       grid-column: span 2;
       grid-template-columns: 17.5rem minmax(0, 1fr);
       gap: 1.25rem;
       align-items: start;
     }
 
-    .alt-publication-card[open] .alt-publication-expanded {
+    .alt-publication-card.is-staging-open {
+      grid-column: var(--stage-column-start, 1);
+      grid-template-columns: 1fr;
+      gap: 0;
+      align-items: start;
+    }
+
+    .alt-publication-card.is-expanding-open {
+      justify-self: start;
+    }
+
+    .alt-publication-card.is-expanding-open .alt-publication-expanded {
+      grid-column: 2;
+      grid-row: 1;
+      max-height: 0;
+      opacity: 0;
+      transform: translateX(-18px);
+      padding-top: 0;
+    }
+
+    .alt-publication-card[open]:not(.is-expanding-open) .alt-publication-expanded {
       grid-column: 2;
       grid-row: 1;
     }
