@@ -178,17 +178,25 @@ function getBookTheme(slug: string) {
       return false;
     }
 
+    if (!booksGrid) {
+      return false;
+    }
+
     const columns = getColumnCount();
     if (columns <= 1) {
       return false;
     }
 
-    const index = bookCards.indexOf(card);
-    if (index === -1) {
-      return false;
-    }
+    const styles = getComputedStyle(booksGrid);
+    const gap = Number.parseFloat(styles.columnGap || styles.gap || "16") || 16;
+    const gridRect = booksGrid.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const columnWidth = (gridRect.width - gap * (columns - 1)) / columns;
+    const relativeLeft = cardRect.left - gridRect.left;
+    const currentColumn = Math.round(relativeLeft / (columnWidth + gap)) + 1;
+    const requiredSpan = 2;
 
-    return index % columns === columns - 1;
+    return currentColumn + requiredSpan - 1 > columns;
   }
 
   function getStageColumnStart() {
