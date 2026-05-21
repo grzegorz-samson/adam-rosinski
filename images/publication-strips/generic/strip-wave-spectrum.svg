@@ -1,0 +1,64 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title desc">
+  <title id="title">Publication strip wave spectrum background</title>
+  <desc id="desc">Abstract waveform, spectral bars and dotted research-grid graphics designed for the right side of a publication row.</desc>
+  <defs>
+    <linearGradient id="stripFade" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#2EA8FF" stop-opacity="0"/>
+      <stop offset="32%" stop-color="#2EA8FF" stop-opacity=".10"/>
+      <stop offset="100%" stop-color="#56D8FF" stop-opacity=".26"/>
+    </linearGradient>
+    <radialGradient id="coreGlow" cx="66%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#56D8FF" stop-opacity=".28"/>
+      <stop offset="55%" stop-color="#2EA8FF" stop-opacity=".08"/>
+      <stop offset="100%" stop-color="#2EA8FF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softGlow" x="-20%" y="-40%" width="140%" height="180%">
+      <feGaussianBlur stdDeviation="2.4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <pattern id="dotGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="1.2" cy="1.2" r="1.2" fill="#56D8FF" opacity=".28"/>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="180" fill="url(#stripFade)"/>
+  <rect x="380" y="0" width="520" height="180" fill="url(#coreGlow)"/>
+  <rect x="560" y="12" width="300" height="156" fill="url(#dotGrid)" opacity=".45"/>
+
+  <g opacity=".28" stroke="#56D8FF" stroke-width="1" fill="none">
+    <circle cx="548" cy="88" r="42"/>
+    <circle cx="548" cy="88" r="70"/>
+    <circle cx="548" cy="88" r="98"/>
+    <path d="M450 88h220"/>
+    <path d="M548 0v180"/>
+  </g>
+
+  <g filter="url(#softGlow)" fill="#56D8FF" opacity=".60">
+    <rect x="608" y="70" width="2" height="40" rx="1"/>
+    <rect x="617" y="58" width="2" height="64" rx="1"/>
+    <rect x="626" y="40" width="2" height="100" rx="1"/>
+    <rect x="635" y="64" width="2" height="52" rx="1"/>
+    <rect x="644" y="28" width="2" height="124" rx="1"/>
+    <rect x="653" y="50" width="2" height="80" rx="1"/>
+    <rect x="662" y="66" width="2" height="48" rx="1"/>
+    <rect x="671" y="46" width="2" height="88" rx="1"/>
+    <rect x="680" y="36" width="2" height="108" rx="1"/>
+    <rect x="689" y="72" width="2" height="36" rx="1"/>
+  </g>
+
+  <g fill="none" stroke="#56D8FF" stroke-linecap="round">
+    <path d="M312 103 C392 70 438 70 507 95 S626 121 703 88 813 54 892 84" stroke-width="2.5" opacity=".82"/>
+    <path d="M302 112 C390 88 443 86 510 103 S630 135 706 98 815 67 900 99" stroke-width="1.2" opacity=".45"/>
+    <path d="M315 93 C402 44 444 54 509 80 S622 101 705 71 818 43 900 73" stroke-width="1.1" opacity=".35"/>
+    <path d="M330 126 C420 109 472 113 530 124 S637 147 710 116 820 90 898 118" stroke-width=".9" opacity=".22"/>
+  </g>
+
+  <g fill="#56D8FF" opacity=".72">
+    <circle cx="508" cy="95" r="3"/>
+    <circle cx="705" cy="88" r="2.6"/>
+    <circle cx="820" cy="63" r="2.2"/>
+  </g>
+</svg>

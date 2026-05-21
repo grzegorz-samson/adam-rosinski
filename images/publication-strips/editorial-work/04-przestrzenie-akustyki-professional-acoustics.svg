@@ -1,0 +1,38 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title desc">
+  <title id="title">Przestrzenie akustyki. Professional Acoustics â€” visual strip</title>
+  <desc id="desc">edited volume spine, acoustic spaces, room diagrams</desc>
+
+  <defs>
+    <linearGradient id="fade" x1="0" x2="1">
+      <stop offset="0%" stop-color="#2EA8FF" stop-opacity="0"/>
+      <stop offset="34%" stop-color="#2EA8FF" stop-opacity=".08"/>
+      <stop offset="100%" stop-color="#FFB347" stop-opacity=".22"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="72%" cy="50%" r="62%">
+      <stop offset="0%" stop-color="#FFB347" stop-opacity=".30"/>
+      <stop offset="58%" stop-color="#2EA8FF" stop-opacity=".08"/>
+      <stop offset="100%" stop-color="#2EA8FF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softGlow" x="-20%" y="-40%" width="140%" height="180%">
+      <feGaussianBlur stdDeviation="2.2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse">
+      <circle cx="1.2" cy="1.2" r="1.2" fill="#FFB347" opacity=".23"/>
+    </pattern>
+    <pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0H0V26" fill="none" stroke="#FFB347" stroke-opacity=".11" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect x="530" y="18" width="310" height="144" fill="url(#dots)" opacity=".22"/>
+<g fill="none" stroke="#FFB347" opacity=".52">
+<rect x="470" y="50" width="32" height="96" rx="5"/><path d="M478 66H494M478 128H494"/>
+<rect x="512" y="36" width="38" height="110" rx="5"/><path d="M520 52H542M520 128H542"/>
+<rect x="558" y="58" width="30" height="88" rx="5"/><path d="M566 74H580M566 128H580"/>
+<rect x="598" y="42" width="44" height="104" rx="5"/><path d="M606 58H634M606 128H634"/>
+<rect x="650" y="52" width="34" height="94" rx="5"/><path d="M658 68H676M658 128H676"/>
+</g>
+<g stroke="#2EA8FF" opacity=".32" fill="none"><path d="M330.0 133.7 L363.5 139.2 L397.1 141.2 L430.6 139.6 L464.1 136.4 L497.6 133.5 L531.2 131.3 L564.7 128.7 L598.2 124.7 L631.8 119.4 L665.3 114.9 L698.8 113.5 L732.4 116.3 L765.9 122.1 L799.4 128.3 L832.9 132.6 L866.5 134.8 L900.0 136.0"/><path d="M330.0 79.4 L363.5 75.4 L397.1 67.8 L430.6 60.0 L464.1 54.7 L497.6 51.9 L531.2 49.8 L564.7 47.2 L598.2 44.6 L631.8 44.4 L665.3 48.7 L698.8 57.2 L732.4 66.8 L765.9 73.8 L799.4 76.2 L832.9 74.6 L866.5 71.6 L900.0 69.1"/></g>
+</svg>
+
+

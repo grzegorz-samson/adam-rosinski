@@ -1,0 +1,58 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title desc">
+  <title id="title">Electronic Keyboard Instruments as Tools Supporting the Teaching of Music â€” visual strip</title>
+  <desc id="desc">keyboard keys, education markers, electronic pulses</desc>
+
+  <defs>
+    <linearGradient id="fade" x1="0" x2="1">
+      <stop offset="0%" stop-color="#56D8FF" stop-opacity="0"/>
+      <stop offset="34%" stop-color="#56D8FF" stop-opacity=".07"/>
+      <stop offset="100%" stop-color="#34D399" stop-opacity=".22"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="72%" cy="50%" r="62%">
+      <stop offset="0%" stop-color="#34D399" stop-opacity=".30"/>
+      <stop offset="58%" stop-color="#56D8FF" stop-opacity=".08"/>
+      <stop offset="100%" stop-color="#56D8FF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softGlow" x="-20%" y="-40%" width="140%" height="180%">
+      <feGaussianBlur stdDeviation="2.1" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse">
+      <circle cx="1.2" cy="1.2" r="1.2" fill="#34D399" opacity=".25"/>
+    </pattern>
+    <pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0H0V26" fill="none" stroke="#34D399" stroke-opacity=".11" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <g opacity=".18"><rect x="520" y="18" width="310" height="144" fill="url(#dots)"/></g>
+<rect x="450" y="98" width="20" height="48" rx="3" fill="#34D399" opacity=".25"/>
+<rect x="462" y="98" width="10" height="28" rx="2" fill="#34D399" opacity=".40"/>
+<rect x="474" y="98" width="20" height="48" rx="3" fill="#56D8FF" opacity=".25"/>
+<rect x="498" y="98" width="20" height="48" rx="3" fill="#34D399" opacity=".25"/>
+<rect x="522" y="98" width="20" height="48" rx="3" fill="#56D8FF" opacity=".25"/>
+<rect x="534" y="98" width="10" height="28" rx="2" fill="#56D8FF" opacity=".40"/>
+<rect x="546" y="98" width="20" height="48" rx="3" fill="#34D399" opacity=".25"/>
+<rect x="570" y="98" width="20" height="48" rx="3" fill="#56D8FF" opacity=".25"/>
+<rect x="594" y="98" width="20" height="48" rx="3" fill="#34D399" opacity=".25"/>
+<rect x="606" y="98" width="10" height="28" rx="2" fill="#34D399" opacity=".40"/>
+<rect x="618" y="98" width="20" height="48" rx="3" fill="#56D8FF" opacity=".25"/>
+<rect x="642" y="98" width="20" height="48" rx="3" fill="#34D399" opacity=".25"/>
+<rect x="666" y="98" width="20" height="48" rx="3" fill="#56D8FF" opacity=".25"/>
+<rect x="678" y="98" width="10" height="28" rx="2" fill="#56D8FF" opacity=".40"/>
+<rect x="690" y="98" width="20" height="48" rx="3" fill="#34D399" opacity=".25"/>
+<rect x="714" y="98" width="20" height="48" rx="3" fill="#56D8FF" opacity=".25"/>
+<rect x="738" y="98" width="20" height="48" rx="3" fill="#34D399" opacity=".25"/>
+<rect x="750" y="98" width="10" height="28" rx="2" fill="#34D399" opacity=".40"/>
+<rect x="762" y="98" width="20" height="48" rx="3" fill="#56D8FF" opacity=".25"/>
+<rect x="786" y="98" width="20" height="48" rx="3" fill="#34D399" opacity=".25"/>
+<rect x="810" y="98" width="20" height="48" rx="3" fill="#56D8FF" opacity=".25"/>
+<rect x="822" y="98" width="10" height="28" rx="2" fill="#56D8FF" opacity=".40"/>
+  <g stroke="#34D399" fill="none" opacity=".36">
+    <path d="M440 72C520 50 600 60 680 76S800 98 890 58"/>
+    <path d="M440 52C520 28 610 34 700 54"/>
+  </g>
+  <g fill="#56D8FF" opacity=".60"><circle cx="610" cy="52" r="4"/><circle cx="700" cy="76" r="4"/></g>
+</svg>
+
+
+

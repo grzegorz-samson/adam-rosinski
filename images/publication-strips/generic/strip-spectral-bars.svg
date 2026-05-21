@@ -1,0 +1,49 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title desc">
+  <title id="title">Publication strip spectral bars background</title>
+  <desc id="desc">Warm spectral bars and flowing sound curves for recording-oriented publication rows.</desc>
+  <defs>
+    <linearGradient id="fade" x1="0" x2="1">
+      <stop offset="0%" stop-color="#FFB347" stop-opacity="0"/>
+      <stop offset="36%" stop-color="#FFB347" stop-opacity=".10"/>
+      <stop offset="100%" stop-color="#FF8A00" stop-opacity=".25"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="70%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#FFB347" stop-opacity=".30"/>
+      <stop offset="62%" stop-color="#FF8A00" stop-opacity=".07"/>
+      <stop offset="100%" stop-color="#FF8A00" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft">
+      <feGaussianBlur stdDeviation="2.1" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="365" width="535" height="180" fill="url(#glow)"/>
+
+  <g stroke="#FFB347" stroke-linecap="round" fill="none">
+    <path d="M332 114 C414 48 480 81 538 108 S651 129 720 88 819 72 900 96" stroke-width="2.2" opacity=".78"/>
+    <path d="M330 128 C410 99 485 91 544 118 S656 147 724 103 824 91 900 115" stroke-width="1.2" opacity=".45"/>
+    <path d="M340 96 C418 23 482 61 536 92 S647 104 722 66 820 47 900 78" stroke-width="1" opacity=".30"/>
+  </g>
+
+  <g filter="url(#soft)" fill="#FFB347">
+    <rect x="568" y="78" width="3" height="28" rx="1.5" opacity=".55"/>
+    <rect x="579" y="66" width="3" height="52" rx="1.5" opacity=".68"/>
+    <rect x="590" y="43" width="3" height="98" rx="1.5" opacity=".82"/>
+    <rect x="601" y="57" width="3" height="70" rx="1.5" opacity=".72"/>
+    <rect x="612" y="25" width="3" height="130" rx="1.5" opacity=".92"/>
+    <rect x="623" y="50" width="3" height="84" rx="1.5" opacity=".74"/>
+    <rect x="634" y="72" width="3" height="40" rx="1.5" opacity=".62"/>
+    <rect x="645" y="35" width="3" height="112" rx="1.5" opacity=".86"/>
+    <rect x="656" y="59" width="3" height="66" rx="1.5" opacity=".70"/>
+    <rect x="667" y="82" width="3" height="20" rx="1.5" opacity=".50"/>
+  </g>
+
+  <g opacity=".18" stroke="#FFB347" fill="none">
+    <path d="M470 148H850"/>
+    <path d="M470 120H850"/>
+    <path d="M470 92H850"/>
+    <path d="M470 64H850"/>
+    <path d="M470 36H850"/>
+  </g>
+</svg>
+
