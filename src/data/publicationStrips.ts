@@ -92,13 +92,13 @@ const journalArticleStripMap: Record<string, PublicationStrip> = {
     accent2: "#FFB347",
     motif: "Speaker coverage and reinforcement beams",
   },
-  "music-teachers-media-education": {
+  "training-of-music-teachers-in-media-education": {
     asset: "/images/publication-strips/journal-articles/15-music-teachers-media-education.svg",
     accent: "#34D399",
     accent2: "#8B7CFF",
     motif: "Media education constellation and pedagogy nodes",
   },
-  "virtual-instruments-production-sound-compositions": {
+  "virtual-instruments-production-sound-design-compositions": {
     asset: "/images/publication-strips/journal-articles/16-virtual-instruments-production-sound-compositions.svg",
     accent: "#12D6D6",
     accent2: "#FFB347",

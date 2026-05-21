@@ -4,7 +4,10 @@ import ChevronDown from "@lucide/astro/icons/chevron-down";
 import ExternalLink from "@lucide/astro/icons/external-link";
 import FileText from "@lucide/astro/icons/file-text";
 import Files from "@lucide/astro/icons/files";
+import LibraryBig from "@lucide/astro/icons/library-big";
+import Newspaper from "@lucide/astro/icons/newspaper";
 import Tags from "@lucide/astro/icons/tags";
+import WholeWord from "@lucide/astro/icons/whole-word";
 import PublicationVisual from "./PublicationVisual.astro";
 import { getDisplayTitle, getSecondaryTitle } from "../data/publicationPresentation";
 import { getPublicationStrip } from "../data/publicationStrips";
@@ -27,18 +30,27 @@ const sections = [
     title: "Journal articles",
     description: "Articles, proceedings papers, and prototype-oriented studies.",
     items: journalArticles,
+    icon: Newspaper,
+    accent: "#56D8FF",
+    accent2: "#8B7CFF",
   },
   {
     id: "editorial-work",
     title: "Editorial work",
     description: "Edited volumes, series work, and publication leadership.",
     items: editorialWork,
+    icon: LibraryBig,
+    accent: "#34D399",
+    accent2: "#12D6D6",
   },
   {
     id: "book-chapters",
     title: "Book chapters",
     description: "Chapters connected with perception, sound practice, and music education.",
     items: bookChapters,
+    icon: WholeWord,
+    accent: "#FFB347",
+    accent2: "#FF8A00",
   },
 ];
 
@@ -103,27 +115,45 @@ function getVenueLine(publication: PublicationRecord): string | null {
   </div>
 
   <nav class="catalog-nav" aria-label="Publication categories">
-    <a href="#selected-publications" class="catalog-chip">
-      <span>Monographs</span>
-      <span>{monographs.length}</span>
+    <a
+      href="#selected-publications"
+      class="catalog-chip"
+      style="--catalog-chip-accent: #ff6a5c; --catalog-chip-accent-2: #df4a3d;"
+    >
+      <span class="catalog-chip-label">
+        <BookOpen size={15} stroke-width={1.85} aria-hidden="true" />
+        <span>Monographs</span>
+      </span>
+      <span class="catalog-chip-count">{monographs.length}</span>
     </a>
-    {sections.map((section) => (
-      <a href={`#${section.id}`} class="catalog-chip">
-        <span>{section.title}</span>
-        <span>{section.items.length}</span>
-      </a>
-    ))}
+    {sections.map((section) => {
+      const SectionIcon = section.icon;
+      return (
+        <a
+          href={`#${section.id}`}
+          class="catalog-chip"
+          style={`--catalog-chip-accent: ${section.accent}; --catalog-chip-accent-2: ${section.accent2};`}
+        >
+          <span class="catalog-chip-label">
+            <SectionIcon size={15} stroke-width={1.85} aria-hidden="true" />
+            <span>{section.title}</span>
+          </span>
+          <span class="catalog-chip-count">{section.items.length}</span>
+        </a>
+      );
+    })}
   </nav>
 
   <div class="catalog-groups">
     {sections.map((section) => (
       <section id={section.id} class="catalog-group" aria-labelledby={`${section.id}-title`}>
         <div class="catalog-group-header">
-          <div>
+          <div class="catalog-group-copy">
             <p class="catalog-group-count">{section.items.length} items</p>
             <h3 id={`${section.id}-title`}>{section.title}</h3>
             <p>{section.description}</p>
           </div>
+          <p class="catalog-group-count-badge">{section.items.length}</p>
         </div>
 
         <div class="catalog-grid">
@@ -382,23 +412,72 @@ function getVenueLine(publication: PublicationRecord): string | null {
   .catalog-chip {
     display: inline-flex;
     align-items: center;
-    gap: 0.8rem;
-    padding: 0.8rem 1rem;
+    justify-content: space-between;
+    gap: 1rem;
+    min-width: 12rem;
+    padding: 0.9rem 1rem 0.9rem 1.05rem;
     border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.03);
-    color: #d4d4d8;
+    border: 1px solid color-mix(in srgb, var(--catalog-chip-accent) 28%, rgba(255, 255, 255, 0.1));
+    background:
+      radial-gradient(circle at 18% 50%, color-mix(in srgb, var(--catalog-chip-accent) 18%, transparent), transparent 42%),
+      linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--catalog-chip-accent-2) 22%, rgba(255, 255, 255, 0.04)) 0%,
+        color-mix(in srgb, var(--catalog-chip-accent) 12%, rgba(255, 255, 255, 0.02)) 100%
+      );
+    color: #eef3ff;
     text-decoration: none;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 14px 30px rgba(0, 0, 0, 0.2);
+    transition:
+      border-color 160ms ease,
+      transform 160ms ease,
+      box-shadow 160ms ease,
+      color 160ms ease;
+  }
+
+  .catalog-chip-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-width: 0;
+    font-weight: 600;
+  }
+
+  .catalog-chip-label svg {
+    flex-shrink: 0;
+    color: var(--catalog-chip-accent);
+    filter: drop-shadow(0 0 12px color-mix(in srgb, var(--catalog-chip-accent) 28%, transparent));
+  }
+
+  .catalog-chip-label span:last-child {
+    text-wrap: pretty;
   }
 
   .catalog-chip:hover {
-    border-color: rgba(86, 216, 255, 0.24);
+    border-color: color-mix(in srgb, var(--catalog-chip-accent) 46%, rgba(255, 255, 255, 0.12));
     color: #fff;
+    transform: translateY(-1px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 16px 34px rgba(0, 0, 0, 0.24),
+      0 0 0 1px color-mix(in srgb, var(--catalog-chip-accent) 12%, transparent);
   }
 
-  .catalog-chip span:last-child {
-    color: #56d8ff;
+  .catalog-chip-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.9rem;
+    height: 1.9rem;
+    padding: 0 0.5rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--catalog-chip-accent) 36%, transparent);
+    background: color-mix(in srgb, var(--catalog-chip-accent) 10%, rgba(255, 255, 255, 0.02));
+    color: var(--catalog-chip-accent);
     font-size: 0.82rem;
+    font-weight: 700;
   }
 
   .catalog-groups {
@@ -416,7 +495,15 @@ function getVenueLine(publication: PublicationRecord): string | null {
   }
 
   .catalog-group-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
     margin-bottom: 1.25rem;
+  }
+
+  .catalog-group-copy {
+    min-width: 0;
   }
 
   .catalog-group-count {
@@ -424,6 +511,24 @@ function getVenueLine(publication: PublicationRecord): string | null {
     font-size: 0.74rem;
     text-transform: uppercase;
     letter-spacing: 0.16em;
+  }
+
+  .catalog-group-count-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    min-width: 2.2rem;
+    height: 2.2rem;
+    padding: 0 0.7rem;
+    border-radius: 999px;
+    border: 1px solid rgba(86, 216, 255, 0.24);
+    background: rgba(86, 216, 255, 0.08);
+    color: #56d8ff;
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1;
   }
 
   .catalog-group h3 {
@@ -684,6 +789,11 @@ function getVenueLine(publication: PublicationRecord): string | null {
   }
 
   @media (max-width: 720px) {
+    .catalog-chip {
+      min-width: 0;
+      width: 100%;
+    }
+
     .publication-row::after {
       inset: 0 -0.35rem 0 0;
       opacity: 0.32;
@@ -718,6 +828,10 @@ function getVenueLine(publication: PublicationRecord): string | null {
 
     .catalog-title-stack {
       max-width: 100%;
+    }
+
+    .catalog-group-header {
+      flex-direction: column;
     }
 
   }
