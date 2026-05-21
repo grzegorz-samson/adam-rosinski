@@ -1,6 +1,5 @@
 ---
 import AltLabLayout from "../layouts/AltLabLayout.astro";
-import AltPageHero from "../components/AltPageHero.astro";
 import AlternativePublications from "../components/AlternativePublications.astro";
 import PublicationsCatalog from "../components/PublicationsCatalog.astro";
 import AlternativeProfiles from "../components/AlternativeProfiles.astro";
@@ -13,7 +12,6 @@ import { withBase } from "../utils/withBase";
   description="Books, articles, editorial work, and chapters on auditory perception, recording, and spatial audio."
   activePath="/publications"
 >
-  <AltPageHero title="Publications" />
   <AlternativePublications
     publications={selectedPublications}
     kicker="Books"
