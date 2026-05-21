@@ -331,7 +331,7 @@ function getBookTheme(slug: string) {
   async function animateCardConceal(card, expandedWidth, collapsedWidth) {
     const startWidth = `${expandedWidth}px`;
     const endWidth = `${collapsedWidth}px`;
-    const duration = 760;
+    const duration = 620;
     const previousTransition = card.style.transition;
     const previousWillChange = card.style.willChange;
 
@@ -386,7 +386,7 @@ function getBookTheme(slug: string) {
 
   async function closeBookCard(card) {
     card.classList.add("is-closing-book");
-    await wait(prefersReducedMotion.matches ? 0 : 420);
+    await wait(prefersReducedMotion.matches ? 0 : 320);
 
     const expandedWidth = card.getBoundingClientRect().width;
     const collapsedWidth = getCollapsedWidth();
