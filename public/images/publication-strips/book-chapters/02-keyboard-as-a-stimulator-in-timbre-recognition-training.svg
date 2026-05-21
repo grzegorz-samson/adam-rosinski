@@ -24,7 +24,6 @@
       <path d="M26 0H0V26" fill="none" stroke="#FFB347" stroke-opacity=".11" stroke-width="1"/>
     </pattern>
   </defs>
-  <rect x="350" y="0" width="550" height="180" fill="url(#glow)"/>
   <rect x="530" y="18" width="310" height="144" fill="url(#dots)" opacity=".22"/>
 <rect x="458" y="102" width="19" height="44" rx="3" fill="#FFB347" opacity="0.22"/>
 <rect x="482" y="102" width="19" height="44" rx="3" fill="#FFB347" opacity="0.26"/>
@@ -47,4 +46,5 @@
 <rect x="782" y="102" width="10" height="26" rx="2" fill="#34D399" opacity=".34"/>
 <g fill="#FFB347" filter="url(#softGlow)"><circle cx="520" cy="72" r="4"/><circle cx="614" cy="58" r="4"/><circle cx="728" cy="70" r="4"/></g><g stroke="#34D399" fill="none" opacity=".46"><path d="M470 72C560 40 650 40 780 76"/></g>
 </svg>
+
 

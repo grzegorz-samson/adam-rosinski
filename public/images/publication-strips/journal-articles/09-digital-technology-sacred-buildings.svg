@@ -24,7 +24,6 @@
       <path d="M26 0H0V26" fill="none" stroke="#34D399" stroke-opacity=".11" stroke-width="1"/>
     </pattern>
   </defs>
-  <rect x="350" y="0" width="550" height="180" fill="url(#glow)"/>
   <g opacity=".18"><rect x="520" y="18" width="310" height="144" fill="url(#dots)"/></g>
   <g fill="none" stroke="#34D399" stroke-width="1.2" opacity=".46">
     <path d="M460 150V78C460 48 490 32 520 78V150"/>
@@ -38,5 +37,6 @@
   </g>
   <rect x="755" y="26" width="96" height="116" fill="url(#grid)" opacity=".40"/>
 </svg>
+
 
 

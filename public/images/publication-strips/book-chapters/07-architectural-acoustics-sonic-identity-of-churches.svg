@@ -24,8 +24,8 @@
       <path d="M26 0H0V26" fill="none" stroke="#56D8FF" stroke-opacity=".11" stroke-width="1"/>
     </pattern>
   </defs>
-  <rect x="350" y="0" width="550" height="180" fill="url(#glow)"/>
   <rect x="530" y="18" width="310" height="144" fill="url(#dots)" opacity=".22"/>
 <g fill="none" stroke="#56D8FF" opacity=".45"><path d="M470 150V78C470 42 514 30 548 78V150"/><path d="M555 150V60C555 18 616 18 650 60V150"/><path d="M660 150V84C660 46 708 34 742 84V150"/><path d="M450 150H772M470 118H750"/></g><g stroke="#FFB347" fill="none" opacity=".34"><path d="M500 72C604 104 720 98 850 62"/><path d="M488 106C610 142 725 134 870 96"/></g>
 </svg>
+
 

@@ -24,7 +24,6 @@
       <path d="M26 0H0V26" fill="none" stroke="#34D399" stroke-opacity=".11" stroke-width="1"/>
     </pattern>
   </defs>
-  <rect x="350" y="0" width="550" height="180" fill="url(#glow)"/>
   <rect x="530" y="18" width="310" height="144" fill="url(#dots)" opacity=".22"/>
 <g fill="none" stroke="#34D399" opacity=".52">
 <rect x="470" y="50" width="32" height="96" rx="5"/><path d="M478 66H494M478 128H494"/>
@@ -36,4 +35,5 @@
 <g font-family="monospace" font-size="44" fill="#12D6D6" opacity=".44"><text x="720" y="116">II</text></g>
 <g stroke="#12D6D6" opacity=".32" fill="none"><path d="M330.0 133.7 L363.5 139.2 L397.1 141.2 L430.6 139.6 L464.1 136.4 L497.6 133.5 L531.2 131.3 L564.7 128.7 L598.2 124.7 L631.8 119.4 L665.3 114.9 L698.8 113.5 L732.4 116.3 L765.9 122.1 L799.4 128.3 L832.9 132.6 L866.5 134.8 L900.0 136.0"/><path d="M330.0 79.4 L363.5 75.4 L397.1 67.8 L430.6 60.0 L464.1 54.7 L497.6 51.9 L531.2 49.8 L564.7 47.2 L598.2 44.6 L631.8 44.4 L665.3 48.7 L698.8 57.2 L732.4 66.8 L765.9 73.8 L799.4 76.2 L832.9 74.6 L866.5 71.6 L900.0 69.1"/></g>
 </svg>
+
 

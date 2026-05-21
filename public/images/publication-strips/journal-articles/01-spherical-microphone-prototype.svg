@@ -24,7 +24,6 @@
       <path d="M26 0H0V26" fill="none" stroke="#56D8FF" stroke-opacity=".11" stroke-width="1"/>
     </pattern>
   </defs>
-  <rect x="350" y="0" width="550" height="180" fill="url(#glow)"/>
   <g opacity=".18"><rect x="520" y="18" width="310" height="144" fill="url(#dots)"/></g>
   <g transform="translate(620 90)" fill="none" stroke="#56D8FF" stroke-width="1.2" opacity=".65">
     <circle r="54"/><circle r="28"/><path d="M-70 0H70M0-70V70"/><ellipse rx="92" ry="30" transform="rotate(-14)"/><ellipse rx="92" ry="30" transform="rotate(22)"/>
@@ -35,5 +34,6 @@
   </g>
   <g fill="#56D8FF" opacity=".8"><circle cx="620" cy="90" r="5"/><circle cx="680" cy="70" r="3"/><circle cx="558" cy="116" r="2.6"/></g>
 </svg>
+
 
 

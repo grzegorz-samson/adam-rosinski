@@ -149,7 +149,13 @@ function getVenueLine(publication: PublicationRecord): string | null {
               >
                 <summary class="catalog-summary-row">
                   <div class="catalog-summary-main">
-                    <PublicationVisual publication={publication} sectionId={section.id} title={displayTitle} />
+                    <PublicationVisual
+                      publication={publication}
+                      sectionId={section.id}
+                      title={displayTitle}
+                      accent={strip.accent}
+                      accent2={strip.accent2}
+                    />
 
                     <div class="catalog-title-stack">
                       <div class="catalog-item-meta">
@@ -453,37 +459,38 @@ function getVenueLine(publication: PublicationRecord): string | null {
     inset: 0;
     z-index: -2;
     background:
-      radial-gradient(circle at 83% 3.9rem, var(--publication-strip-accent) 0%, transparent 42%),
+      radial-gradient(circle at 84% 3.9rem, var(--publication-strip-accent) 0%, transparent 46%),
       linear-gradient(
         90deg,
-        rgba(4, 6, 11, 0.995) 0%,
-        rgba(4, 6, 11, 0.985) 42%,
-        rgba(4, 6, 11, 0.92) 70%,
-        rgba(4, 6, 11, 0.82) 100%
+        rgba(1, 2, 5, 0.998) 0%,
+        rgba(1, 2, 5, 0.997) 52%,
+        rgba(1, 2, 5, 0.992) 74%,
+        rgba(0, 0, 0, 0.9) 88%,
+        rgba(0, 0, 0, 0.9) 100%
       );
   }
 
   .publication-row::after {
     content: "";
     position: absolute;
-    inset: 0.55rem -0.45rem 0.55rem auto;
-    width: min(60%, 800px);
+    inset: 0 -0.6rem 0 0;
     z-index: -1;
-    opacity: 0.9;
-    background-image: var(--publication-strip-svg);
-    background-repeat: no-repeat;
-    background-position: right top;
-    background-size: contain;
-    mask-image: radial-gradient(circle at right top, #000 0%, #000 64%, transparent 100%);
-    -webkit-mask-image: radial-gradient(circle at right top, #000 0%, #000 64%, transparent 100%);
+    opacity: 0.78;
+    background-image:
+      var(--publication-strip-svg),
+      linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+    background-repeat: no-repeat, no-repeat;
+    background-position: right top, right top;
+    background-size: min(60%, 800px) auto, 100% 100%;
     pointer-events: none;
     transform-origin: right center;
     transition: opacity 180ms ease, transform 180ms ease;
+    filter: brightness(0.98) contrast(1.18) saturate(0.82);
   }
 
   .publication-row:hover::after,
   .publication-row[open]::after {
-    opacity: 1;
+    opacity: 0.86;
     transform: translateX(-0.45rem);
   }
 
@@ -505,10 +512,12 @@ function getVenueLine(publication: PublicationRecord): string | null {
     align-items: center;
     gap: 1rem;
     min-width: 0;
+    padding-right: clamp(0.75rem, 6vw, 5.5rem);
   }
 
   .catalog-title-stack {
     min-width: 0;
+    max-width: 44rem;
   }
 
   .catalog-item-meta {
@@ -532,6 +541,8 @@ function getVenueLine(publication: PublicationRecord): string | null {
     color: #fff;
     font-size: 1.12rem;
     line-height: 1.4;
+    max-width: 100%;
+    text-wrap: pretty;
   }
 
   .catalog-secondary-title {
@@ -674,23 +685,22 @@ function getVenueLine(publication: PublicationRecord): string | null {
 
   @media (max-width: 720px) {
     .publication-row::after {
-      inset: 0.4rem -0.3rem 0.4rem auto;
-      width: 108%;
-      opacity: 0.3;
-      background-size: cover;
-      background-position: right top;
+      inset: 0 -0.35rem 0 0;
+      opacity: 0.32;
+      background-position: right top, right top;
+      background-size: 108% auto, 100% 100%;
     }
 
     .publication-row:hover::after,
     .publication-row[open]::after {
-      opacity: 0.34;
+      opacity: 0.4;
       transform: translateX(-0.2rem);
     }
 
     .publication-row::before {
       background:
-        radial-gradient(circle at 84% 3.2rem, var(--publication-strip-accent-2) 0%, transparent 38%),
-        linear-gradient(0deg, rgba(4, 6, 11, 0.982), rgba(4, 6, 11, 0.982));
+        radial-gradient(circle at 84% 3.2rem, var(--publication-strip-accent-2) 0%, transparent 44%),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9));
     }
 
     .catalog-summary-row {
@@ -703,6 +713,11 @@ function getVenueLine(publication: PublicationRecord): string | null {
 
     .catalog-summary-main {
       align-items: flex-start;
+      padding-right: 0;
+    }
+
+    .catalog-title-stack {
+      max-width: 100%;
     }
 
   }
@@ -721,26 +736,35 @@ function getVenueLine(publication: PublicationRecord): string | null {
 
   @media (min-width: 721px) and (max-width: 959px) {
     .publication-row::after {
-      inset: 0.55rem -0.2rem 0.55rem auto;
-      width: 74%;
-      opacity: 0.72;
+      inset: 0 -0.3rem 0 0;
+      opacity: 0.62;
+      background-position: right top, right top;
+      background-size: 74% auto, 100% 100%;
     }
 
     .publication-row:hover::after,
     .publication-row[open]::after {
-      opacity: 0.8;
+      opacity: 0.74;
       transform: translateX(-0.3rem);
     }
 
     .publication-row::before {
       background:
-        radial-gradient(circle at 84% 3.4rem, var(--publication-strip-accent) 0%, transparent 40%),
+        radial-gradient(circle at 84% 3.4rem, var(--publication-strip-accent) 0%, transparent 46%),
         linear-gradient(
           90deg,
-          rgba(4, 6, 11, 0.994) 0%,
-          rgba(4, 6, 11, 0.975) 58%,
-          rgba(4, 6, 11, 0.86) 100%
+          rgba(1, 2, 5, 0.997) 0%,
+          rgba(1, 2, 5, 0.994) 64%,
+          rgba(0, 0, 0, 0.9) 100%
         );
+    }
+
+    .catalog-summary-main {
+      padding-right: 2.4rem;
+    }
+
+    .catalog-title-stack {
+      max-width: 38rem;
     }
   }
 

@@ -25,9 +25,12 @@ interface Props {
   publication: PublicationRecord;
   sectionId: string;
   title: string;
+  accent?: string;
+  accent2?: string;
 }
 
 const { publication, sectionId, title } = Astro.props as Props;
+const { accent = "#56D8FF", accent2 = "#8B7CFF" } = Astro.props as Props;
 
 const iconMap = {
   monographs: BookOpen,
@@ -44,10 +47,6 @@ const hasSpecificCover =
 
 const shouldUseRealCover = sectionId === "monographs" && hasSpecificCover;
 const coverSrc = shouldUseRealCover && publication.cover ? withBase(publication.cover) : null;
-
-function getVenue(publication: PublicationRecord): string {
-  return publication.journal ?? publication.book ?? publication.publisher ?? publication.type ?? "Publication";
-}
 
 function getSemanticIcon(publication: PublicationRecord) {
   const haystack = [
@@ -79,15 +78,6 @@ function getSemanticIcon(publication: PublicationRecord) {
   return Icon;
 }
 
-function getAccent(publication: PublicationRecord): string {
-  if (publication.relatedAreas.includes("recording") || publication.relatedAreas.includes("practice")) return "amber";
-  if (publication.relatedAreas.includes("spatial-audio")) return "emerald";
-  if (publication.relatedAreas.includes("education")) return "neutral";
-  return "cyan";
-}
-
-const venue = getVenue(publication);
-const accent = getAccent(publication);
 const SemanticIcon = getSemanticIcon(publication);
 ---
 
@@ -95,9 +85,9 @@ const SemanticIcon = getSemanticIcon(publication);
   class:list={[
     "publication-visual",
     `publication-visual-${sectionId}`,
-    `publication-visual-${accent}`,
     coverSrc && "has-cover",
   ]}
+  style={`--publication-visual-accent: ${accent}; --publication-visual-accent-2: ${accent2};`}
 >
   {coverSrc ? (
     <img src={coverSrc} alt={`Cover for ${title}`} loading="lazy" />
@@ -124,13 +114,14 @@ const SemanticIcon = getSemanticIcon(publication);
     min-height: 5rem;
     border-radius: 18px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.11);
+    border: 1px solid color-mix(in srgb, var(--publication-visual-accent) 30%, transparent);
     background:
-      radial-gradient(circle at 30% 20%, rgba(86, 216, 255, 0.16), transparent 0 45%),
-      rgba(255, 255, 255, 0.045);
+      radial-gradient(circle at 30% 20%, color-mix(in srgb, var(--publication-visual-accent) 22%, transparent), transparent 0 45%),
+      color-mix(in srgb, var(--publication-visual-accent-2) 6%, rgba(255, 255, 255, 0.04));
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.06),
       0 12px 28px rgba(0, 0, 0, 0.26);
+    color: var(--publication-visual-accent);
   }
 
   .publication-visual-monographs {
@@ -211,34 +202,6 @@ const SemanticIcon = getSemanticIcon(publication);
     border: 1px solid currentColor;
     border-radius: 12px;
     opacity: 0.12;
-  }
-
-  .publication-visual-cyan {
-    color: #56d8ff;
-    border-color: rgba(86, 216, 255, 0.2);
-    background:
-      radial-gradient(circle at 30% 20%, rgba(86, 216, 255, 0.18), transparent 0 45%),
-      rgba(86, 216, 255, 0.055);
-  }
-
-  .publication-visual-amber {
-    color: #ffb347;
-    border-color: rgba(255, 179, 71, 0.2);
-    background:
-      radial-gradient(circle at 30% 20%, rgba(255, 179, 71, 0.16), transparent 0 45%),
-      rgba(255, 179, 71, 0.055);
-  }
-
-  .publication-visual-emerald {
-    color: #34d399;
-    border-color: rgba(52, 211, 153, 0.2);
-    background:
-      radial-gradient(circle at 30% 20%, rgba(52, 211, 153, 0.15), transparent 0 45%),
-      rgba(52, 211, 153, 0.055);
-  }
-
-  .publication-visual-neutral {
-    color: rgba(255, 255, 255, 0.78);
   }
 
   @media (max-width: 720px) {

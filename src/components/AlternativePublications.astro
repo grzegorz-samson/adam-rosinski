@@ -1,10 +1,14 @@
 ---
 import BookOpen from "@lucide/astro/icons/book-open";
+import ChevronDown from "@lucide/astro/icons/chevron-down";
 import ExternalLink from "@lucide/astro/icons/external-link";
+import FileText from "@lucide/astro/icons/file-text";
+import Tags from "@lucide/astro/icons/tags";
 import { getPublicationMetaLabel, type PublicationCategory } from "../data/publicationTaxonomy";
 import { withBase } from "../utils/withBase";
 
 interface Entry {
+  slug: string;
   title: string;
   year: number;
   category: PublicationCategory;
@@ -38,6 +42,39 @@ const {
   title = "Selected publications",
   description = "A compact shelf of publications connecting auditory perception, recording, spatial listening, and audio-tool design.",
 } = Astro.props;
+
+const bookThemes: Record<string, { accent: string; accent2: string; glow: string }> = {
+  "melody-and-rhythm-auditory-percepts": {
+    accent: "#9b7cff",
+    accent2: "#33104a",
+    glow: "76% 16%",
+  },
+  "microphone-techniques-in-stereo-and-surround-recording": {
+    accent: "#f39b3b",
+    accent2: "#b31e22",
+    glow: "80% 18%",
+  },
+  "psychoacoustic-contexts-of-auditory-stream-formation-in-music": {
+    accent: "#d9c7a0",
+    accent2: "#f3ebd3",
+    glow: "74% 16%",
+  },
+  "computer-technology-in-music-recording-and-production": {
+    accent: "#ff8d1f",
+    accent2: "#231f1e",
+    glow: "80% 20%",
+  },
+};
+
+function getBookTheme(slug: string) {
+  return (
+    bookThemes[slug] ?? {
+      accent: "#56d8ff",
+      accent2: "#8b7cff",
+      glow: "78% 18%",
+    }
+  );
+}
 ---
 
 <section id="selected-publications" class="alt-section">
@@ -57,45 +94,143 @@ const {
         label: getPublicationMetaLabel(publication.category, publication.type),
       };
       const sourceLine = publication.publisher ?? publication.journal ?? publication.doi ?? publication.isbn;
+      const theme = getBookTheme(publication.slug);
+      const themeStyle = [
+        `--book-accent: ${theme.accent}`,
+        `--book-accent-2: ${theme.accent2}`,
+        `--book-glow-position: ${theme.glow}`,
+      ].join("; ");
 
       return (
-        <article class="alt-publication-card">
-          <a href={publication.href} target="_blank" rel="noreferrer" class="alt-cover-link">
-            <div class="alt-cover-frame">
-              <img src={cover.src} alt={cover.alt} class="alt-cover-image" loading="lazy" />
+        <details class="alt-publication-card" style={themeStyle}>
+          <summary class="alt-publication-summary">
+            <div class="alt-cover-link">
+              <div class="alt-cover-frame">
+                <img src={cover.src} alt={cover.alt} class="alt-cover-image" loading="lazy" />
+              </div>
             </div>
-          </a>
 
-          <div class="alt-publication-copy">
-            <div class="alt-meta">
-              <span>
-                <BookOpen size={13} stroke-width={1.75} aria-hidden="true" />
-                {publication.year}
-              </span>
-              <span>{cover.label}</span>
+            <div class="alt-publication-copy">
+              <div class="alt-meta">
+                <span>
+                  <BookOpen size={13} stroke-width={1.75} aria-hidden="true" />
+                  {publication.year}
+                </span>
+                <span>{cover.label}</span>
+              </div>
+              <h3>{publication.title}</h3>
             </div>
-            <h3>{publication.title}</h3>
+
+            <ChevronDown size={18} stroke-width={1.9} aria-hidden="true" class="alt-book-chevron" />
+          </summary>
+
+          <div class="alt-publication-expanded">
             <p>{publication.summary}</p>
             <div class="alt-publication-notes">
               <span>{publication.language}</span>
               {publication.pages && <span>{publication.pages} pp.</span>}
             </div>
-            {sourceLine && <p class="alt-source-line">{sourceLine}</p>}
-            <div class="alt-tag-row">
-              {publication.tags.map((tag) => (
-                <span>{tag}</span>
-              ))}
+            {sourceLine && (
+              <div class="alt-detail-block">
+                <p class="alt-detail-label">
+                  <FileText size={13} stroke-width={1.8} aria-hidden="true" />
+                  Bibliographic details
+                </p>
+                <p class="alt-source-line">{sourceLine}</p>
+              </div>
+            )}
+            <div class="alt-detail-block">
+              <p class="alt-detail-label">
+                <Tags size={13} stroke-width={1.8} aria-hidden="true" />
+                Keywords
+              </p>
+              <div class="alt-tag-row">
+                {publication.tags.map((tag) => (
+                  <span>{tag}</span>
+                ))}
+              </div>
             </div>
             <a href={publication.href} target="_blank" rel="noreferrer" class="alt-publication-link alt-link-with-icon">
-              <span>{publication.sourceVerified === false ? "View source page" : "View publication"}</span>
+              <span>{publication.sourceVerified === false ? "Open source page" : "Open publication"}</span>
               <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
             </a>
           </div>
-        </article>
+        </details>
       );
     })}
   </div>
 </section>
+
+<script>
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const booksGrid = document.querySelector("#selected-publications .alt-grid");
+  const bookCards = booksGrid ? Array.from(booksGrid.querySelectorAll(".alt-publication-card")) : [];
+
+  function toggleBooksLayout(changedCard) {
+    changedCard.open = !changedCard.open;
+  }
+
+  function animateBooksLayout(changedCard) {
+    if (prefersReducedMotion.matches || !booksGrid || bookCards.length === 0) {
+      toggleBooksLayout(changedCard);
+      return;
+    }
+
+    const first = new Map(bookCards.map((card) => [card, card.getBoundingClientRect()]));
+    toggleBooksLayout(changedCard);
+
+    requestAnimationFrame(() => {
+      const last = new Map(bookCards.map((card) => [card, card.getBoundingClientRect()]));
+
+      for (const card of bookCards) {
+        const from = first.get(card);
+        const to = last.get(card);
+
+        if (!from || !to) {
+          continue;
+        }
+
+        const deltaX = from.left - to.left;
+        const deltaY = from.top - to.top;
+
+        if (
+          Math.abs(deltaX) < 0.5 &&
+          Math.abs(deltaY) < 0.5
+        ) {
+          continue;
+        }
+
+        card.animate(
+          [
+            {
+              transform: `translate(${deltaX}px, ${deltaY}px)`,
+            },
+            {
+              transform: "translate(0, 0)",
+            },
+          ],
+          {
+            duration: 360,
+            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+          },
+        );
+      }
+    });
+  }
+
+  for (const card of bookCards) {
+    const summary = card.querySelector(".alt-publication-summary");
+
+    if (!(card instanceof HTMLDetailsElement) || !(summary instanceof HTMLElement)) {
+      continue;
+    }
+
+    summary.addEventListener("click", (event) => {
+      event.preventDefault();
+      animateBooksLayout(card);
+    });
+  }
+</script>
 
 <style>
   .alt-section {
@@ -127,24 +262,51 @@ const {
   }
 
   .alt-publication-card {
+    position: relative;
+    display: grid;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 28px;
-    background: rgba(255, 255, 255, 0.04);
+    background:
+      radial-gradient(circle at var(--book-glow-position), color-mix(in srgb, var(--book-accent) 30%, transparent), transparent 24%),
+      linear-gradient(180deg, color-mix(in srgb, var(--book-accent-2) 12%, rgba(255, 255, 255, 0.04)), rgba(255, 255, 255, 0.03));
     padding: 1.25rem;
     backdrop-filter: blur(18px);
     box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
-    transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+    overflow: hidden;
+    min-height: 100%;
+    transform-origin: top left;
+    will-change: transform;
   }
 
-  .alt-publication-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(86, 216, 255, 0.22);
-    background: rgba(255, 255, 255, 0.055);
+  .alt-publication-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(7, 10, 17, 0.14), rgba(7, 10, 17, 0.32));
+    pointer-events: none;
+  }
+
+  .alt-publication-card:hover,
+  .alt-publication-card[open] {
+    border-color: color-mix(in srgb, var(--book-accent) 34%, rgba(255, 255, 255, 0.16));
+    box-shadow: 0 22px 70px rgba(0, 0, 0, 0.38);
+  }
+
+  .alt-publication-summary {
+    z-index: 1;
+    display: grid;
+    gap: 1rem;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .alt-publication-summary::-webkit-details-marker {
+    display: none;
   }
 
   .alt-cover-link {
     display: block;
-    text-decoration: none;
   }
 
   .alt-cover-frame {
@@ -165,12 +327,12 @@ const {
   }
 
   .alt-publication-card:hover .alt-cover-image,
-  .alt-cover-link:hover .alt-cover-image {
+  .alt-publication-card[open] .alt-cover-image {
     transform: scale(1.06);
   }
 
   .alt-publication-copy {
-    margin-top: 1rem;
+    min-width: 0;
   }
 
   .alt-publication-card h3 {
@@ -178,6 +340,54 @@ const {
     color: #fff;
     font-size: 1.32rem;
     line-height: 1.25;
+    text-wrap: pretty;
+  }
+
+  .alt-book-chevron {
+    position: absolute;
+    right: 0.7rem;
+    bottom: 0.65rem;
+    color: #d4d4d8;
+    transform: rotate(-90deg);
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 2;
+  }
+
+  .alt-publication-card[open] .alt-book-chevron {
+    transform: rotate(90deg);
+  }
+
+  .alt-publication-copy,
+  .alt-publication-expanded {
+    position: relative;
+    z-index: 1;
+  }
+
+  .alt-publication-copy {
+    margin-top: 1rem;
+  }
+
+  .alt-publication-expanded {
+    display: grid;
+    gap: 0.95rem;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateX(-18px);
+    transition:
+      max-height 360ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 240ms ease,
+      transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+      padding-top 360ms cubic-bezier(0.22, 1, 0.36, 1);
+    padding-top: 0;
+  }
+
+  .alt-publication-card[open] .alt-publication-expanded {
+    align-content: start;
+    max-height: 40rem;
+    opacity: 1;
+    transform: translateX(0);
+    padding-top: 0.25rem;
   }
 
   .alt-publication-notes {
@@ -190,7 +400,7 @@ const {
   }
 
   .alt-source-line {
-    margin-top: 0.65rem;
+    margin-top: 0;
     color: #d4d4d8;
     font-size: 0.92rem;
     line-height: 1.5;
@@ -211,6 +421,7 @@ const {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1rem;
+    align-items: start;
   }
 
   .alt-meta {
@@ -245,15 +456,81 @@ const {
     line-height: 1;
   }
 
+  .alt-detail-block {
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .alt-detail-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.42rem;
+    margin: 0;
+    color: color-mix(in srgb, var(--book-accent) 82%, white);
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+  }
+
   @media (max-width: 1080px) {
     .alt-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .alt-publication-card[open] {
+      grid-column: span 2;
+      grid-template-columns: 16rem minmax(0, 1fr);
+      gap: 1.15rem;
+      align-items: start;
+    }
+
+    .alt-publication-card[open] .alt-publication-summary {
+      align-self: stretch;
+    }
+
+    .alt-publication-card[open] .alt-publication-expanded {
+      grid-column: 2;
+      grid-row: 1;
     }
   }
 
   @media (max-width: 720px) {
     .alt-grid {
       grid-template-columns: 1fr;
+    }
+
+    .alt-publication-card[open] {
+      grid-column: auto;
+      grid-template-columns: 1fr;
+    }
+
+    .alt-publication-card[open] .alt-publication-expanded {
+      grid-column: 1;
+      grid-row: auto;
+    }
+  }
+
+  @media (min-width: 1081px) {
+    .alt-publication-card[open] {
+      grid-column: span 2;
+      grid-template-columns: 17.5rem minmax(0, 1fr);
+      gap: 1.25rem;
+      align-items: start;
+    }
+
+    .alt-publication-card[open] .alt-publication-expanded {
+      grid-column: 2;
+      grid-row: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .alt-publication-card,
+    .alt-publication-expanded,
+    .alt-book-chevron,
+    .alt-cover-image {
+      transition: none;
     }
   }
 </style>
