@@ -222,6 +222,41 @@ function getBookTheme(slug: string) {
     return 2 * columnWidth + gap;
   }
 
+  function getCollapsedWidth() {
+    if (!booksGrid) {
+      return null;
+    }
+
+    const columns = getColumnCount();
+    if (columns <= 1) {
+      return null;
+    }
+
+    const styles = getComputedStyle(booksGrid);
+    const gap = Number.parseFloat(styles.columnGap || styles.gap || "16") || 16;
+    const gridWidth = booksGrid.getBoundingClientRect().width;
+
+    return (gridWidth - gap * (columns - 1)) / columns;
+  }
+
+  function getCollapsedContentWidth(card) {
+    const collapsedWidth = getCollapsedWidth();
+
+    if (!collapsedWidth || !(card instanceof HTMLElement)) {
+      return null;
+    }
+
+    const styles = getComputedStyle(card);
+    const horizontalPadding =
+      Number.parseFloat(styles.paddingLeft || "0") +
+      Number.parseFloat(styles.paddingRight || "0");
+    const horizontalBorder =
+      Number.parseFloat(styles.borderLeftWidth || "0") +
+      Number.parseFloat(styles.borderRightWidth || "0");
+
+    return Math.max(collapsedWidth - horizontalPadding - horizontalBorder, 0);
+  }
+
   function wait(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
@@ -257,8 +292,65 @@ function getBookTheme(slug: string) {
     } catch {}
   }
 
+  async function animateCardConceal(card, expandedWidth, collapsedWidth) {
+    const startWidth = `${expandedWidth}px`;
+    const endWidth = `${collapsedWidth}px`;
+    const collapsedContentWidth = getCollapsedContentWidth(card);
+
+    if (collapsedContentWidth) {
+      card.style.setProperty("--closing-cover-column", `${collapsedContentWidth}px`);
+      card.classList.add("is-width-closing");
+    }
+
+    card.style.width = startWidth;
+    card.getBoundingClientRect();
+
+    if (prefersReducedMotion.matches) {
+      card.style.width = endWidth;
+      return;
+    }
+
+    const animation = card.animate(
+      [
+        { width: startWidth },
+        { width: endWidth },
+      ],
+      {
+        duration: 560,
+        easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+      },
+    );
+
+    card.style.width = endWidth;
+
+    try {
+      await animation.finished;
+    } catch {}
+  }
+
   function toggleBooksLayout(changedCard) {
     changedCard.open = !changedCard.open;
+  }
+
+  async function closeBookCard(card) {
+    card.classList.add("is-closing-book");
+    await wait(prefersReducedMotion.matches ? 0 : 340);
+
+    const expandedWidth = card.getBoundingClientRect().width;
+    const collapsedWidth = getCollapsedWidth();
+
+    if (collapsedWidth && expandedWidth > collapsedWidth) {
+      await animateCardConceal(card, expandedWidth, collapsedWidth);
+    }
+
+    await animateBooksLayout(() => {
+      card.open = false;
+      card.classList.remove("is-closing-book");
+      card.classList.remove("is-width-closing");
+      card.style.removeProperty("clip-path");
+      card.style.removeProperty("width");
+      card.style.removeProperty("--closing-cover-column");
+    });
   }
 
   function animateBooksLayout(mutateLayout) {
@@ -304,8 +396,8 @@ function getBookTheme(slug: string) {
                 },
               ],
               {
-                duration: 360,
-                easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+                duration: 520,
+                easing: "cubic-bezier(0.16, 1, 0.3, 1)",
               },
             ).finished.catch(() => {})
           );
@@ -333,6 +425,11 @@ function getBookTheme(slug: string) {
       activeAnimations.add(card);
 
       try {
+        if (card.open) {
+          await closeBookCard(card);
+          return;
+        }
+
         if (shouldStageJump(card)) {
           const collapsedWidth = card.getBoundingClientRect().width;
 
@@ -363,7 +460,7 @@ function getBookTheme(slug: string) {
           toggleBooksLayout(card);
         });
       } finally {
-        setTimeout(() => activeAnimations.delete(card), 760);
+        setTimeout(() => activeAnimations.delete(card), 1180);
       }
     });
   }
@@ -402,14 +499,22 @@ function getBookTheme(slug: string) {
     position: relative;
     display: grid;
     width: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid color-mix(in srgb, var(--book-accent) 22%, rgba(255, 255, 255, 0.1));
     border-radius: 28px;
     background:
-      radial-gradient(circle at var(--book-glow-position), color-mix(in srgb, var(--book-accent) 30%, transparent), transparent 24%),
-      linear-gradient(180deg, color-mix(in srgb, var(--book-accent-2) 12%, rgba(255, 255, 255, 0.04)), rgba(255, 255, 255, 0.03));
+      radial-gradient(circle at var(--book-glow-position), color-mix(in srgb, var(--book-accent) 44%, transparent), transparent 34%),
+      linear-gradient(
+        145deg,
+        color-mix(in srgb, var(--book-accent-2) 26%, rgba(255, 255, 255, 0.045)) 0%,
+        rgba(7, 10, 17, 0.86) 52%,
+        color-mix(in srgb, var(--book-accent) 14%, rgba(255, 255, 255, 0.035)) 100%
+      );
     padding: 1.25rem;
     backdrop-filter: blur(18px);
-    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      inset 0 0 0 1px color-mix(in srgb, var(--book-accent) 5%, transparent),
+      0 18px 60px rgba(0, 0, 0, 0.34);
     transition:
       border-color 180ms ease,
       background 180ms ease,
@@ -417,14 +522,16 @@ function getBookTheme(slug: string) {
     overflow: hidden;
     min-height: 100%;
     transform-origin: top left;
-    will-change: transform, clip-path;
+    will-change: transform, width, clip-path;
   }
 
   .alt-publication-card::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(7, 10, 17, 0.14), rgba(7, 10, 17, 0.32));
+    background:
+      linear-gradient(90deg, rgba(4, 6, 11, 0.18), rgba(4, 6, 11, 0.48)),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(7, 10, 17, 0.34));
     pointer-events: none;
   }
 
@@ -433,7 +540,11 @@ function getBookTheme(slug: string) {
   .alt-publication-card.is-staging-open,
   .alt-publication-card.is-expanding-open {
     border-color: color-mix(in srgb, var(--book-accent) 34%, rgba(255, 255, 255, 0.16));
-    box-shadow: 0 22px 70px rgba(0, 0, 0, 0.38);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 0 0 1px color-mix(in srgb, var(--book-accent) 9%, transparent),
+      0 22px 70px rgba(0, 0, 0, 0.38),
+      0 0 38px color-mix(in srgb, var(--book-accent) 10%, transparent);
   }
 
   .alt-publication-summary {
@@ -458,7 +569,18 @@ function getBookTheme(slug: string) {
     border-radius: 22px;
     aspect-ratio: 4 / 5;
     background: #0a0d14;
-    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+    border: 1px solid color-mix(in srgb, var(--book-accent) 22%, rgba(255, 255, 255, 0.08));
+    box-shadow:
+      0 18px 50px rgba(0, 0, 0, 0.35),
+      0 0 34px color-mix(in srgb, var(--book-accent) 12%, transparent);
+  }
+
+  .alt-cover-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 30%, rgba(0, 0, 0, 0.18));
+    pointer-events: none;
   }
 
   .alt-cover-image {
@@ -469,10 +591,7 @@ function getBookTheme(slug: string) {
     transition: transform 220ms ease;
   }
 
-  .alt-publication-card:hover .alt-cover-image,
-  .alt-publication-card[open] .alt-cover-image,
-  .alt-publication-card.is-staging-open .alt-cover-image,
-  .alt-publication-card.is-expanding-open .alt-cover-image {
+  .alt-publication-card:hover .alt-cover-image {
     transform: scale(1.06);
   }
 
@@ -498,7 +617,7 @@ function getBookTheme(slug: string) {
     z-index: 2;
   }
 
-  .alt-publication-card[open] .alt-book-chevron,
+  .alt-publication-card[open]:not(.is-closing-book) .alt-book-chevron,
   .alt-publication-card.is-staging-open .alt-book-chevron,
   .alt-publication-card.is-expanding-open .alt-book-chevron {
     transform: rotate(90deg);
@@ -522,14 +641,14 @@ function getBookTheme(slug: string) {
     overflow: hidden;
     transform: translateX(-18px);
     transition:
-      max-height 360ms cubic-bezier(0.22, 1, 0.36, 1),
-      opacity 240ms ease,
-      transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
-      padding-top 360ms cubic-bezier(0.22, 1, 0.36, 1);
+      max-height 420ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 300ms ease,
+      transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+      padding-top 420ms cubic-bezier(0.16, 1, 0.3, 1);
     padding-top: 0;
   }
 
-  .alt-publication-card[open]:not(.is-expanding-open) .alt-publication-expanded {
+  .alt-publication-card[open]:not(.is-expanding-open):not(.is-closing-book) .alt-publication-expanded {
     align-content: start;
     max-height: 40rem;
     opacity: 1;
@@ -578,7 +697,7 @@ function getBookTheme(slug: string) {
     font-size: 0.74rem;
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    color: #71717a;
+    color: color-mix(in srgb, var(--book-accent) 54%, #8b90a3);
   }
 
   .alt-meta span {
@@ -628,9 +747,13 @@ function getBookTheme(slug: string) {
     .alt-publication-card[open],
     .alt-publication-card.is-expanding-open {
       grid-column: span 2;
-      grid-template-columns: 16rem minmax(0, 1fr);
+      grid-template-columns: minmax(0, calc((100% - 3.5rem) / 2)) minmax(0, 1fr);
       gap: 1.15rem;
       align-items: start;
+    }
+
+    .alt-publication-card.is-width-closing {
+      grid-template-columns: minmax(0, var(--closing-cover-column)) minmax(0, 1fr);
     }
 
     .alt-publication-card.is-staging-open {
@@ -687,9 +810,13 @@ function getBookTheme(slug: string) {
     .alt-publication-card[open],
     .alt-publication-card.is-expanding-open {
       grid-column: span 2;
-      grid-template-columns: 17.5rem minmax(0, 1fr);
+      grid-template-columns: minmax(0, calc((100% - 3.5rem) / 2)) minmax(0, 1fr);
       gap: 1.25rem;
       align-items: start;
+    }
+
+    .alt-publication-card.is-width-closing {
+      grid-template-columns: minmax(0, var(--closing-cover-column)) minmax(0, 1fr);
     }
 
     .alt-publication-card.is-staging-open {
