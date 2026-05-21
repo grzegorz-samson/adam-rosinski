@@ -261,6 +261,21 @@ function getBookTheme(slug: string) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
+  function syncBookSummaryWidths() {
+    for (const card of bookCards) {
+      const summaryWidth = getCollapsedContentWidth(card);
+
+      if (summaryWidth) {
+        card.style.setProperty("--book-summary-width", `${summaryWidth}px`);
+      } else {
+        card.style.removeProperty("--book-summary-width");
+      }
+    }
+  }
+
+  syncBookSummaryWidths();
+  window.addEventListener("resize", syncBookSummaryWidths);
+
   async function animateCardReveal(card, collapsedWidth, expandedWidth) {
     const hiddenRight = Math.max(expandedWidth - collapsedWidth, 0);
     const startClip = `inset(0 ${hiddenRight}px 0 0)`;
@@ -295,37 +310,53 @@ function getBookTheme(slug: string) {
   async function animateCardConceal(card, expandedWidth, collapsedWidth) {
     const startWidth = `${expandedWidth}px`;
     const endWidth = `${collapsedWidth}px`;
-    const collapsedContentWidth = getCollapsedContentWidth(card);
-
-    if (collapsedContentWidth) {
-      card.style.setProperty("--closing-cover-column", `${collapsedContentWidth}px`);
-      card.classList.add("is-width-closing");
-    }
+    const duration = 760;
+    const previousTransition = card.style.transition;
+    const previousWillChange = card.style.willChange;
 
     card.style.width = startWidth;
+    card.style.transition = "none";
+    card.style.willChange = "width, transform, clip-path";
     card.getBoundingClientRect();
 
     if (prefersReducedMotion.matches) {
       card.style.width = endWidth;
+      card.style.transition = previousTransition;
+      card.style.willChange = previousWillChange;
       return;
     }
 
-    const animation = card.animate(
-      [
-        { width: startWidth },
-        { width: endWidth },
-      ],
-      {
-        duration: 560,
-        easing: "cubic-bezier(0.16, 1, 0.3, 1)",
-      },
-    );
+    await new Promise((resolve) => {
+      let finished = false;
+      let timeoutId;
 
-    card.style.width = endWidth;
+      const finish = () => {
+        if (finished) {
+          return;
+        }
 
-    try {
-      await animation.finished;
-    } catch {}
+        finished = true;
+        clearTimeout(timeoutId);
+        card.removeEventListener("transitionend", onTransitionEnd);
+        card.style.transition = previousTransition;
+        card.style.willChange = previousWillChange;
+        resolve();
+      };
+
+      const onTransitionEnd = (event) => {
+        if (event.target === card && event.propertyName === "width") {
+          finish();
+        }
+      };
+
+      card.addEventListener("transitionend", onTransitionEnd);
+      timeoutId = setTimeout(finish, duration + 160);
+
+      requestAnimationFrame(() => {
+        card.style.transition = `width ${duration}ms cubic-bezier(0.16, 1, 0.3, 1)`;
+        card.style.width = endWidth;
+      });
+    });
   }
 
   function toggleBooksLayout(changedCard) {
@@ -334,7 +365,7 @@ function getBookTheme(slug: string) {
 
   async function closeBookCard(card) {
     card.classList.add("is-closing-book");
-    await wait(prefersReducedMotion.matches ? 0 : 340);
+    await wait(prefersReducedMotion.matches ? 0 : 420);
 
     const expandedWidth = card.getBoundingClientRect().width;
     const collapsedWidth = getCollapsedWidth();
@@ -346,14 +377,12 @@ function getBookTheme(slug: string) {
     await animateBooksLayout(() => {
       card.open = false;
       card.classList.remove("is-closing-book");
-      card.classList.remove("is-width-closing");
       card.style.removeProperty("clip-path");
       card.style.removeProperty("width");
-      card.style.removeProperty("--closing-cover-column");
     });
   }
 
-  function animateBooksLayout(mutateLayout) {
+  function animateBooksLayout(mutateLayout, duration = 520) {
     if (prefersReducedMotion.matches || !booksGrid || bookCards.length === 0) {
       mutateLayout();
       return Promise.resolve();
@@ -396,7 +425,7 @@ function getBookTheme(slug: string) {
                 },
               ],
               {
-                duration: 520,
+                duration,
                 easing: "cubic-bezier(0.16, 1, 0.3, 1)",
               },
             ).finished.catch(() => {})
@@ -460,7 +489,7 @@ function getBookTheme(slug: string) {
           toggleBooksLayout(card);
         });
       } finally {
-        setTimeout(() => activeAnimations.delete(card), 1180);
+        activeAnimations.delete(card);
       }
     });
   }
@@ -498,6 +527,7 @@ function getBookTheme(slug: string) {
   .alt-publication-card {
     position: relative;
     display: grid;
+    box-sizing: border-box;
     width: 100%;
     border: 1px solid color-mix(in srgb, var(--book-accent) 22%, rgba(255, 255, 255, 0.1));
     border-radius: 28px;
@@ -522,7 +552,7 @@ function getBookTheme(slug: string) {
     overflow: hidden;
     min-height: 100%;
     transform-origin: top left;
-    will-change: transform, width, clip-path;
+    will-change: transform, clip-path;
   }
 
   .alt-publication-card::before {
@@ -545,6 +575,10 @@ function getBookTheme(slug: string) {
       inset 0 0 0 1px color-mix(in srgb, var(--book-accent) 9%, transparent),
       0 22px 70px rgba(0, 0, 0, 0.38),
       0 0 38px color-mix(in srgb, var(--book-accent) 10%, transparent);
+  }
+
+  .alt-publication-card.is-closing-book {
+    justify-self: start;
   }
 
   .alt-publication-summary {
@@ -747,13 +781,9 @@ function getBookTheme(slug: string) {
     .alt-publication-card[open],
     .alt-publication-card.is-expanding-open {
       grid-column: span 2;
-      grid-template-columns: minmax(0, calc((100% - 3.5rem) / 2)) minmax(0, 1fr);
+      grid-template-columns: var(--book-summary-width, 16rem) minmax(0, 1fr);
       gap: 1.15rem;
       align-items: start;
-    }
-
-    .alt-publication-card.is-width-closing {
-      grid-template-columns: minmax(0, var(--closing-cover-column)) minmax(0, 1fr);
     }
 
     .alt-publication-card.is-staging-open {
@@ -810,13 +840,9 @@ function getBookTheme(slug: string) {
     .alt-publication-card[open],
     .alt-publication-card.is-expanding-open {
       grid-column: span 2;
-      grid-template-columns: minmax(0, calc((100% - 3.5rem) / 2)) minmax(0, 1fr);
+      grid-template-columns: var(--book-summary-width, 17.5rem) minmax(0, 1fr);
       gap: 1.25rem;
       align-items: start;
-    }
-
-    .alt-publication-card.is-width-closing {
-      grid-template-columns: minmax(0, var(--closing-cover-column)) minmax(0, 1fr);
     }
 
     .alt-publication-card.is-staging-open {
