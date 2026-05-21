@@ -314,15 +314,13 @@ function getVenueLine(publication: PublicationRecord): string | null {
         row.classList.add("is-closing");
         content.style.height = `${content.scrollHeight}px`;
         content.style.opacity = "1";
+        content.getBoundingClientRect();
 
-        requestAnimationFrame(() => {
-          content.style.height = "0px";
-          content.style.opacity = "0";
-        });
+        let closeFallback: number | undefined;
 
-        const handleClose = (transitionEvent: TransitionEvent) => {
-          if (transitionEvent.propertyName !== "height") {
-            return;
+        const cleanupClose = () => {
+          if (closeFallback) {
+            window.clearTimeout(closeFallback);
           }
 
           row.open = false;
@@ -331,9 +329,25 @@ function getVenueLine(publication: PublicationRecord): string | null {
           content.style.opacity = "0";
           animating = false;
           content.removeEventListener("transitionend", handleClose);
+          content.removeEventListener("transitioncancel", handleClose);
+        };
+
+        requestAnimationFrame(() => {
+          content.style.height = "0px";
+          content.style.opacity = "0";
+        });
+
+        const handleClose = (transitionEvent: TransitionEvent) => {
+          if (transitionEvent.type === "transitionend" && transitionEvent.propertyName !== "height") {
+            return;
+          }
+
+          cleanupClose();
         };
 
         content.addEventListener("transitionend", handleClose);
+        content.addEventListener("transitioncancel", handleClose);
+        closeFallback = window.setTimeout(cleanupClose, 420);
         return;
       }
 
@@ -342,23 +356,37 @@ function getVenueLine(publication: PublicationRecord): string | null {
       animating = true;
       content.style.height = "0px";
       content.style.opacity = "0";
+      content.getBoundingClientRect();
+
+      let openFallback: number | undefined;
 
       requestAnimationFrame(() => {
         content.style.height = `${content.scrollHeight}px`;
         content.style.opacity = "1";
       });
 
-      const handleOpen = (transitionEvent: TransitionEvent) => {
-        if (transitionEvent.propertyName !== "height") {
-          return;
+      const cleanupOpen = () => {
+        if (openFallback) {
+          window.clearTimeout(openFallback);
         }
 
         content.style.height = "auto";
         animating = false;
         content.removeEventListener("transitionend", handleOpen);
+        content.removeEventListener("transitioncancel", handleOpen);
+      };
+
+      const handleOpen = (transitionEvent: TransitionEvent) => {
+        if (transitionEvent.type === "transitionend" && transitionEvent.propertyName !== "height") {
+          return;
+        }
+
+        cleanupOpen();
       };
 
       content.addEventListener("transitionend", handleOpen);
+      content.addEventListener("transitioncancel", handleOpen);
+      openFallback = window.setTimeout(cleanupOpen, 420);
     });
   }
 </script>
