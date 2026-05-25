@@ -1,0 +1,964 @@
+---
+import Ear from "@lucide/astro/icons/ear";
+import Mic from "@lucide/astro/icons/mic";
+import Orbit from "@lucide/astro/icons/orbit";
+import GraduationCap from "@lucide/astro/icons/graduation-cap";
+import Wrench from "@lucide/astro/icons/wrench";
+import Sparkles from "@lucide/astro/icons/sparkles";
+import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
+import { publicInventions, researchToPrototypeFlow } from "../data/inventions";
+import { withBase } from "../utils/withBase";
+
+const workAreas = [
+  {
+    key: "perception",
+    title: "Perception",
+    eyebrow: "Psychoacoustics",
+    icon: Ear,
+    intro:
+      "Auditory scene analysis, stream segregation, and the way musical sound becomes organised into perceptual events.",
+    href: "#research-to-prototype",
+    cta: "Trace the flow",
+    accent: "cyan",
+  },
+  {
+    key: "recording",
+    title: "Recording",
+    eyebrow: "Microphone practice",
+    icon: Mic,
+    intro:
+      "Stereo, surround, and multichannel recording treated as a way of designing listening perspective and spatial focus.",
+    href: "#authorial-prototypes",
+    cta: "See prototypes",
+    accent: "amber",
+  },
+  {
+    key: "space",
+    title: "Space",
+    eyebrow: "Spatial audio",
+    icon: Orbit,
+    intro:
+      "Acoustic space, direction, envelopment, and spatial composition as both research material and artistic medium.",
+    href: "#applications-matrix",
+    cta: "View uses",
+    accent: "emerald",
+  },
+  {
+    key: "education",
+    title: "Education",
+    eyebrow: "Listening literacy",
+    icon: GraduationCap,
+    intro:
+      "Digital tools and studio environments used to teach listening, audio analysis, sound production, and musical technology.",
+    href: "#applications-matrix",
+    cta: "View uses",
+    accent: "neutral",
+  },
+  {
+    key: "prototypes",
+    title: "Authorial Prototypes",
+    eyebrow: "Audio inventions",
+    icon: Wrench,
+    intro:
+      "Custom-designed systems that transform research on listening and spatial recording into physical audio devices.",
+    href: "#authorial-prototypes",
+    cta: "Open showcase",
+    accent: "violet",
+  },
+  {
+    key: "artistic-research",
+    title: "Artistic Research",
+    eyebrow: "Sound art and practice",
+    icon: Sparkles,
+    intro:
+      "Experimental systems used as compositional tools, installation interfaces, and research environments for new listening situations.",
+    href: "#authorial-prototypes",
+    cta: "See systems",
+    accent: "rose",
+  },
+];
+
+const motifFor = {
+  array: "/images/work-area-motifs/motif-circular-array.svg",
+  ellipsoid: "/images/work-area-motifs/motif-spherical-capsule.svg",
+  pipeline: "/images/work-area-motifs/motif-research-pipeline.svg",
+  polar: "/images/work-area-motifs/motif-polar-pattern.svg",
+};
+
+const applicationBuckets = [
+  {
+    title: "Studio and field recording",
+    text: "Capturing spatial relations, ambience, and source movement with authorial microphone strategies.",
+  },
+  {
+    title: "Installation and performance",
+    text: "Treating spatial audio systems as live, physical interfaces for sound art and electroacoustic practice.",
+  },
+  {
+    title: "Research and testing",
+    text: "Designing listening scenarios for auditory scene analysis, spatial perception, and multichannel evaluation.",
+  },
+  {
+    title: "Education and workshops",
+    text: "Using prototypes to explain microphone directionality, envelopment, and spatial listening through tangible examples.",
+  },
+];
+---
+
+<section class="inventive-hero" aria-labelledby="work-areas-title">
+  <div class="hero-copy">
+    <p class="kicker">Work areas / authorial systems</p>
+    <h1 id="work-areas-title">Listening, spatial recording and authorial audio prototypes.</h1>
+    <p>
+      Adam Rosinski's work connects auditory perception, microphone technologies, acoustic space,
+      education, and experimental devices. The page is organised as a research map: from listening
+      theory to physical systems and artistic applications.
+    </p>
+    <div class="hero-actions">
+      <a href="#authorial-prototypes" class="primary-link">
+        <span>Explore inventions</span>
+        <ArrowUpRight size={16} stroke-width={1.8} aria-hidden="true" />
+      </a>
+      <a href="#research-to-prototype" class="secondary-link">Research to prototype flow</a>
+    </div>
+  </div>
+
+  <div class="hero-visual" aria-hidden="true">
+    <img src={withBase("/images/work-area-motifs/motif-technical-grid.svg")} alt="" loading="eager" />
+    <div class="hero-orbit hero-orbit-one"></div>
+    <div class="hero-orbit hero-orbit-two"></div>
+    <div class="hero-chip hero-chip-a">perception</div>
+    <div class="hero-chip hero-chip-b">prototype</div>
+    <div class="hero-chip hero-chip-c">spatial capture</div>
+  </div>
+</section>
+
+<section id="authorial-prototypes" class="prototype-section" aria-labelledby="prototype-title">
+  <div class="section-head">
+    <p class="kicker">Authorial inventions and prototypes</p>
+    <h2 id="prototype-title">Research made physical.</h2>
+    <p>
+      The two public systems below turn spatial-audio research into tangible forms: a circular
+      listening environment and a reconfigurable spherical microphone prototype. A third prototype
+      remains intentionally excluded from the public UI until its article is ready after review.
+    </p>
+  </div>
+
+  <div class="prototype-grid">
+    {publicInventions.map((item) => (
+      <article
+        class="prototype-card"
+        style={`--accent: ${item.accent}; --accent-2: ${item.accent2}; background-image: radial-gradient(circle at top right, color-mix(in srgb, ${item.accent} 24%, transparent), transparent 36%);`}
+      >
+        <div class:list={["prototype-media", item.id === "spherical-microphone-prototype" && "is-contain-media"]}>
+          <img src={withBase(item.image)} alt={item.imageAlt} loading="lazy" />
+          <img class="prototype-motif" src={withBase(motifFor[item.visualMotif])} alt="" loading="lazy" />
+        </div>
+        <div class="prototype-copy">
+          <div class="prototype-labels">
+            <span>{item.publicLabel}</span>
+            <span>{item.eyebrow}</span>
+          </div>
+          <h3>{item.title}</h3>
+          <p>{item.subtitle}</p>
+
+          <div class="prototype-lists">
+            <div>
+              <h4>Design emphasis</h4>
+              <ul>
+                {item.innovationPoints.map((point) => <li>{point}</li>)}
+              </ul>
+            </div>
+            <div>
+              <h4>Applications</h4>
+              <ul>
+                {item.applications.map((app) => <li>{app}</li>)}
+              </ul>
+            </div>
+          </div>
+
+          <div class="tag-row" aria-label="Related areas">
+            {item.tags.map((tag) => <span>{tag}</span>)}
+          </div>
+
+          {item.articleHref ? (
+            <a href={item.articleHref} class="article-link" target="_blank" rel="noreferrer">
+              <span>Read related article</span>
+              <ArrowUpRight size={15} stroke-width={1.8} aria-hidden="true" />
+            </a>
+          ) : (
+            <p class="source-note">{item.sourceNote}</p>
+          )}
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<section id="work-areas-map" class="work-map" aria-labelledby="work-map-title">
+  <div class="map-panel">
+    <div class="map-grid">
+      <div>
+        <p class="kicker">Interactive map</p>
+        <h2 id="work-map-title">Six connected areas, one design field.</h2>
+        <p class="lead">
+          The original work-area structure is extended with authorial prototypes and artistic
+          research, so the page shows not only topics, but also how research becomes a device,
+          recording scenario, or listening environment.
+        </p>
+
+        <div class="mode-list" data-work-mode-buttons>
+          {workAreas.map((area, index) => {
+            const Icon = area.icon;
+            return (
+              <article class={`mode-card ${index === 0 ? "is-active" : ""}`} data-work-mode-card={area.key}>
+                <button
+                  type="button"
+                  class="mode-trigger"
+                  data-work-mode={area.key}
+                  aria-pressed={index === 0 ? "true" : "false"}
+                >
+                  <span class={`mode-icon mode-icon-${area.accent}`}>
+                    <Icon size={18} stroke-width={1.8} aria-hidden="true" />
+                  </span>
+                  <span class="mode-copy">
+                    <small>{area.eyebrow}</small>
+                    <strong>{area.title}</strong>
+                    <span>{area.intro}</span>
+                  </span>
+                </button>
+                <a href={area.href} class="mode-link">
+                  {area.cta}
+                  <ArrowUpRight size={14} stroke-width={1.8} aria-hidden="true" />
+                </a>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+
+      <div class="map-visual">
+        <svg viewBox="0 0 720 560" class="map-svg" aria-hidden="true">
+          <g opacity="0.14" stroke="white" fill="none">
+            <circle cx="360" cy="280" r="76" />
+            <circle cx="360" cy="280" r="152" />
+            <circle cx="360" cy="280" r="228" />
+            <path d="M360 36v488M116 280h488M187 107l346 346M533 107 187 453" />
+          </g>
+
+          <g data-work-group="perception">
+            <path d="M90 178 C 170 240, 245 196, 360 280 S 545 356, 630 210" fill="none" stroke="#67e8f9" stroke-width="4" />
+            <path d="M102 390 C 210 322, 284 344, 360 280 S 492 204, 615 358" fill="none" stroke="rgba(255,255,255,.42)" stroke-width="2" />
+            <circle cx="360" cy="280" r="13" fill="#fbbf24" />
+          </g>
+
+          <g data-work-group="recording" opacity="0.18">
+            <path d="M360 84v392M164 280h392M222 142l276 276M498 142 222 418" fill="none" stroke="#fbbf24" stroke-width="3" />
+            <circle cx="360" cy="280" r="20" fill="#fbbf24" />
+            <circle cx="360" cy="148" r="8" fill="white" />
+            <circle cx="492" cy="280" r="8" fill="white" />
+            <circle cx="360" cy="412" r="8" fill="white" />
+            <circle cx="228" cy="280" r="8" fill="white" />
+          </g>
+
+          <g data-work-group="space" opacity="0.18">
+            <path d="M360 72 Q 512 128, 596 280 Q 512 432, 360 488 Q 208 432, 124 280 Q 208 128, 360 72Z" fill="rgba(52,211,153,.08)" stroke="#34d399" stroke-width="4" />
+            <circle cx="360" cy="280" r="20" fill="#34d399" />
+          </g>
+
+          <g data-work-group="education" opacity="0.18">
+            <rect x="180" y="150" width="112" height="82" rx="18" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.24)" />
+            <rect x="304" y="150" width="112" height="82" rx="18" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.24)" />
+            <rect x="428" y="150" width="112" height="82" rx="18" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.24)" />
+            <rect x="242" y="328" width="112" height="82" rx="18" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.24)" />
+            <rect x="366" y="328" width="112" height="82" rx="18" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.24)" />
+          </g>
+
+          <g data-work-group="prototypes" opacity="0.18">
+            <ellipse cx="360" cy="280" rx="220" ry="108" fill="rgba(167,139,250,.10)" stroke="#a78bfa" stroke-width="4" />
+            <g fill="#a78bfa">
+              <circle cx="140" cy="280" r="8" />
+              <circle cx="188" cy="226" r="8" />
+              <circle cx="282" cy="184" r="8" />
+              <circle cx="402" cy="178" r="8" />
+              <circle cx="510" cy="222" r="8" />
+              <circle cx="580" cy="280" r="8" />
+              <circle cx="510" cy="338" r="8" />
+              <circle cx="402" cy="382" r="8" />
+              <circle cx="282" cy="376" r="8" />
+              <circle cx="188" cy="334" r="8" />
+            </g>
+          </g>
+
+          <g data-work-group="artistic-research" opacity="0.18">
+            <path d="M168 360 C 260 94, 464 466, 558 190" fill="none" stroke="#fb7185" stroke-width="4" />
+            <path d="M130 260 C 252 160, 458 400, 606 282" fill="none" stroke="rgba(255,255,255,.42)" stroke-width="2" />
+            <g fill="#fb7185">
+              <circle cx="168" cy="360" r="9" />
+              <circle cx="360" cy="280" r="12" />
+              <circle cx="558" cy="190" r="9" />
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="research-to-prototype" class="flow-section" aria-labelledby="flow-title">
+  <div class="section-head compact">
+    <p class="kicker">From research to prototype</p>
+    <h2 id="flow-title">A practical chain from listening theory to custom systems.</h2>
+  </div>
+
+  <div class="flow-card">
+    <img src={withBase("/images/work-area-motifs/motif-research-pipeline.svg")} alt="" loading="lazy" />
+    <ol>
+      {researchToPrototypeFlow.map((step) => (
+        <li>
+          <strong>{step.title}</strong>
+          <span>{step.text}</span>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<section id="applications-matrix" class="applications-section" aria-labelledby="applications-title">
+  <div class="section-head compact">
+    <p class="kicker">Applications matrix</p>
+    <h2 id="applications-title">Where the work areas meet.</h2>
+  </div>
+
+  <div class="applications-grid">
+    {applicationBuckets.map((item, index) => (
+      <article class="application-card">
+        <span class="application-index">0{index + 1}</span>
+        <h3>{item.title}</h3>
+        <p>{item.text}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<script is:inline>
+  const initInventiveWorkAreas = () => {
+    const section = document.querySelector("#work-areas-map");
+    if (!section || section.dataset.bound === "true") return;
+    section.dataset.bound = "true";
+
+    const buttons = Array.from(section.querySelectorAll("[data-work-mode]"));
+    const cards = Array.from(section.querySelectorAll("[data-work-mode-card]"));
+    const groups = Array.from(section.querySelectorAll("[data-work-group]"));
+
+    if (!buttons.length || !groups.length || !cards.length) return;
+
+    const setMode = (key) => {
+      buttons.forEach((button) => {
+        const active = button.getAttribute("data-work-mode") === key;
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+
+      cards.forEach((card) => {
+        card.classList.toggle("is-active", card.getAttribute("data-work-mode-card") === key);
+      });
+
+      groups.forEach((group) => {
+        group.setAttribute("opacity", group.getAttribute("data-work-group") === key ? "1" : "0.16");
+      });
+    };
+
+    buttons.forEach((button) => {
+      if (button.dataset.bound === "true") return;
+      button.dataset.bound = "true";
+      button.addEventListener("click", () => setMode(button.getAttribute("data-work-mode")));
+      button.addEventListener("focus", () => setMode(button.getAttribute("data-work-mode")));
+    });
+
+    cards.forEach((card) => {
+      const key = card.getAttribute("data-work-mode-card");
+      if (!key) return;
+
+      card.addEventListener("mouseenter", () => setMode(key));
+      card.addEventListener("focusin", () => setMode(key));
+    });
+
+    setMode("perception");
+  };
+
+  initInventiveWorkAreas();
+</script>
+
+<style>
+  .kicker {
+    color: #67e8f9;
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.76rem;
+    letter-spacing: 0.22em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .inventive-hero,
+  .work-map,
+  .prototype-section,
+  .flow-section,
+  .applications-section {
+    padding: 4.5rem 0;
+  }
+
+  .inventive-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(330px, 0.68fr);
+    gap: 2rem;
+    align-items: stretch;
+    padding-top: 5.5rem;
+  }
+
+  .hero-copy,
+  .hero-visual,
+  .map-panel,
+  .prototype-card,
+  .flow-card,
+  .application-card {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.045);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+    backdrop-filter: blur(18px);
+  }
+
+  .hero-copy {
+    border-radius: 34px;
+    padding: clamp(1.6rem, 5vw, 3.3rem);
+    background:
+      radial-gradient(circle at 20% 0%, rgba(103, 232, 249, 0.16), transparent 35%),
+      rgba(255, 255, 255, 0.045);
+  }
+
+  .hero-copy h1,
+  .section-head h2,
+  .map-panel h2 {
+    color: #fff;
+    letter-spacing: -0.045em;
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+
+  .hero-copy h1 {
+    margin: 0.9rem 0 0;
+    font-size: clamp(2.8rem, 7vw, 6.4rem);
+  }
+
+  .hero-copy p:not(.kicker),
+  .lead,
+  .section-head p:not(.kicker) {
+    color: #b7bdca;
+    line-height: 1.85;
+  }
+
+  .hero-copy p:not(.kicker) {
+    max-width: 62rem;
+    margin-top: 1.2rem;
+    font-size: 1.04rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 1.6rem;
+  }
+
+  .primary-link,
+  .secondary-link,
+  .article-link,
+  .mode-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    text-decoration: none;
+  }
+
+  .primary-link,
+  .secondary-link {
+    border-radius: 999px;
+    font-weight: 800;
+    padding: 0.78rem 1rem;
+  }
+
+  .primary-link {
+    background: linear-gradient(135deg, #67e8f9, #a78bfa 52%, #fbbf24);
+    color: #020617;
+  }
+
+  .secondary-link {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #e5e7eb;
+    background: rgba(255, 255, 255, 0.045);
+  }
+
+  .hero-visual {
+    position: relative;
+    overflow: hidden;
+    min-height: 29rem;
+    border-radius: 34px;
+    background:
+      radial-gradient(circle at 70% 18%, rgba(251, 191, 36, 0.18), transparent 30%),
+      radial-gradient(circle at 22% 70%, rgba(103, 232, 249, 0.15), transparent 36%),
+      #070b12;
+  }
+
+  .hero-visual img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.56;
+  }
+
+  .hero-orbit {
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 50%;
+    transform: rotate(-18deg);
+  }
+
+  .hero-orbit-one {
+    width: 27rem;
+    height: 13rem;
+    left: 8%;
+    top: 26%;
+  }
+
+  .hero-orbit-two {
+    width: 19rem;
+    height: 8.5rem;
+    left: 24%;
+    top: 36%;
+    border-color: rgba(103, 232, 249, 0.34);
+  }
+
+  .hero-chip {
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    background: rgba(2, 6, 23, 0.72);
+    color: #fff;
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    padding: 0.55rem 0.72rem;
+    text-transform: uppercase;
+  }
+
+  .hero-chip-a { left: 10%; bottom: 16%; }
+  .hero-chip-b { right: 12%; top: 14%; }
+  .hero-chip-c { right: 9%; bottom: 22%; }
+
+  .map-panel {
+    border-radius: 32px;
+    padding: clamp(1.2rem, 3vw, 2rem);
+  }
+
+  .map-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(340px, 0.88fr);
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .map-panel h2,
+  .section-head h2 {
+    margin: 0.85rem 0 0;
+    font-size: clamp(2rem, 4.5vw, 3.7rem);
+  }
+
+  .lead {
+    margin-top: 1rem;
+    max-width: 58rem;
+  }
+
+  .mode-list {
+    display: grid;
+    gap: 0.88rem;
+    margin-top: 1.5rem;
+  }
+
+  .mode-card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.8rem;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.045);
+    padding: 0.9rem;
+    transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+  }
+
+  .mode-card:hover,
+  .mode-card.is-active {
+    transform: translateY(-2px);
+    border-color: rgba(103, 232, 249, 0.36);
+    background: rgba(103, 232, 249, 0.075);
+  }
+
+  .mode-trigger {
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
+    text-align: left;
+  }
+
+  .mode-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 2.3rem;
+    height: 2.3rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.045);
+  }
+
+  .mode-icon-cyan { color: #67e8f9; border-color: rgba(103, 232, 249, 0.24); }
+  .mode-icon-amber { color: #fbbf24; border-color: rgba(251, 191, 36, 0.24); }
+  .mode-icon-emerald { color: #34d399; border-color: rgba(52, 211, 153, 0.24); }
+  .mode-icon-violet { color: #a78bfa; border-color: rgba(167, 139, 250, 0.24); }
+  .mode-icon-rose { color: #fb7185; border-color: rgba(251, 113, 133, 0.24); }
+  .mode-icon-neutral { color: #e5e7eb; }
+
+  .mode-copy small,
+  .prototype-labels span,
+  .tag-row span,
+  .application-index {
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    text-transform: uppercase;
+  }
+
+  .mode-copy small {
+    display: block;
+    color: #8f98a8;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+  }
+
+  .mode-copy strong {
+    display: block;
+    margin-top: 0.18rem;
+    color: #fff;
+    font-size: 1rem;
+  }
+
+  .mode-copy span {
+    display: block;
+    margin-top: 0.24rem;
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .mode-link {
+    color: #67e8f9;
+    font-size: 0.84rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .map-visual {
+    min-height: 36rem;
+    display: grid;
+    place-items: center;
+  }
+
+  .map-svg {
+    display: block;
+    width: min(100%, 38rem);
+    height: auto;
+  }
+
+  .section-head {
+    max-width: 70rem;
+    margin-bottom: 2rem;
+  }
+
+  .section-head.compact {
+    max-width: 58rem;
+  }
+
+  .prototype-grid {
+    display: grid;
+    gap: 1.2rem;
+  }
+
+  .prototype-card {
+    display: grid;
+    grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+    overflow: hidden;
+    border-radius: 34px;
+  }
+
+  .prototype-media {
+    position: relative;
+    min-height: 32rem;
+    overflow: hidden;
+    background: #f8fafc;
+  }
+
+  .prototype-media > img:first-child {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    filter: saturate(0.92) contrast(1.04);
+  }
+
+  .prototype-media.is-contain-media {
+    background: #ffffff;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+  }
+
+  .prototype-media.is-contain-media > img:first-child {
+    object-fit: contain;
+    object-position: center;
+    padding: clamp(1rem, 2.8vw, 2rem);
+    filter: saturate(0.94) contrast(1.03) drop-shadow(0 20px 32px rgba(15, 23, 42, 0.14));
+  }
+
+  .prototype-motif {
+    position: absolute;
+    right: -3rem;
+    bottom: -2rem;
+    width: min(72%, 30rem);
+    opacity: 0.64;
+    mix-blend-mode: screen;
+  }
+
+  .prototype-copy {
+    padding: clamp(1.35rem, 3.4vw, 2.5rem);
+    background:
+      radial-gradient(circle at 88% 8%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 34%),
+      rgba(2, 6, 23, 0.66);
+  }
+
+  .prototype-labels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+  }
+
+  .prototype-labels span,
+  .tag-row span {
+    border: 1px solid color-mix(in srgb, var(--accent) 48%, rgba(255,255,255,.12));
+    border-radius: 999px;
+    color: #fff;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    padding: 0.42rem 0.6rem;
+  }
+
+  .prototype-card h3 {
+    margin: 1.05rem 0 0;
+    color: #fff;
+    font-size: clamp(1.75rem, 3.8vw, 3rem);
+    letter-spacing: -0.035em;
+    line-height: 1.04;
+  }
+
+  .prototype-card p {
+    margin-top: 1rem;
+    color: #cbd5e1;
+    line-height: 1.82;
+  }
+
+  .prototype-lists {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1.3rem;
+  }
+
+  .prototype-lists h4 {
+    color: #fff;
+    font-size: 0.92rem;
+    margin: 0 0 0.45rem;
+  }
+
+  .prototype-lists ul {
+    display: grid;
+    gap: 0.45rem;
+    margin: 0;
+    padding-left: 1rem;
+    color: #b7bdca;
+    line-height: 1.55;
+  }
+
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin-top: 1.35rem;
+  }
+
+  .article-link {
+    width: fit-content;
+    margin-top: 1.35rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #020617;
+    font-weight: 900;
+    padding: 0.72rem 0.92rem;
+  }
+
+  .source-note {
+    border-left: 2px solid var(--accent);
+    padding-left: 0.9rem;
+    color: #aab4c4 !important;
+    font-size: 0.9rem;
+  }
+
+  .flow-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 30px;
+    padding: clamp(1.1rem, 3vw, 1.7rem);
+  }
+
+  .flow-card > img {
+    display: block;
+    width: min(100%, 54rem);
+    margin: 0 auto 0.5rem;
+    opacity: 0.92;
+  }
+
+  .flow-card ol {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.8rem;
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+  }
+
+  .flow-card li {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.045);
+    padding: 1rem;
+  }
+
+  .flow-card strong {
+    color: #fff;
+    display: block;
+  }
+
+  .flow-card span,
+  .application-card p {
+    display: block;
+    margin-top: 0.55rem;
+    color: #aab4c4;
+    line-height: 1.65;
+  }
+
+  .applications-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .application-card {
+    position: relative;
+    overflow: hidden;
+    min-height: 15rem;
+    border-radius: 26px;
+    padding: 1.2rem;
+  }
+
+  .application-card::after {
+    content: "";
+    position: absolute;
+    inset: auto -30% -45% 20%;
+    height: 10rem;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(103, 232, 249, 0.18), transparent 65%);
+  }
+
+  .application-index {
+    color: #67e8f9;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+  }
+
+  .application-card h3 {
+    margin: 1rem 0 0;
+    color: #fff;
+    font-size: 1.24rem;
+    line-height: 1.2;
+  }
+
+  @media (max-width: 1120px) {
+    .inventive-hero,
+    .map-grid,
+    .prototype-card {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-visual,
+    .map-visual {
+      min-height: 28rem;
+    }
+
+    .prototype-media {
+      min-height: 24rem;
+    }
+
+    .flow-card ol,
+    .applications-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 720px) {
+    .inventive-hero,
+    .work-map,
+    .prototype-section,
+    .flow-section,
+    .applications-section {
+      padding: 3rem 0;
+    }
+
+    .mode-card,
+    .prototype-lists,
+    .flow-card ol,
+    .applications-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .mode-link {
+      margin-left: 3.1rem;
+      justify-self: start;
+    }
+
+    .prototype-media {
+      min-height: 19rem;
+    }
+
+    .hero-copy,
+    .map-panel,
+    .prototype-copy,
+    .flow-card,
+    .application-card {
+      padding: 1.15rem;
+    }
+  }
+</style>

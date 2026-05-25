@@ -1,85 +1,168 @@
 ---
+import AudioWaveform from "@lucide/astro/icons/audio-waveform";
 import BadgeCheck from "@lucide/astro/icons/badge-check";
+import BookOpenCheck from "@lucide/astro/icons/book-open-check";
+import Building2 from "@lucide/astro/icons/building-2";
 import ExternalLink from "@lucide/astro/icons/external-link";
+import FileSearch from "@lucide/astro/icons/file-search";
+import Network from "@lucide/astro/icons/network";
+import Radio from "@lucide/astro/icons/radio";
 import SearchCheck from "@lucide/astro/icons/search-check";
-import UsersRound from "@lucide/astro/icons/users-round";
+import Sparkles from "@lucide/astro/icons/sparkles";
+import WavesHorizontal from "@lucide/astro/icons/waves-horizontal";
 import EditorialWorkCatalog from "./EditorialWorkCatalog.astro";
-import { editorialIntro, editorialRoles } from "../data/editorialRoles";
+import { editorialIntro, editorialReviewAreas, editorialRoles } from "../data/editorialRoles";
 import { publicationsByCategory } from "../data/publications";
+import { withBase } from "../utils/withBase";
 
-const kindIcons = {
-  "Professional Organisation": UsersRound,
-  "Peer Review": SearchCheck,
-  "Publishing Profile": BadgeCheck,
+const organizationRoles = editorialRoles.filter((role) => role.kind === "Professional Organisation");
+
+const motifIcons = {
+  waves: WavesHorizontal,
+  rings: Radio,
+  signal: AudioWaveform,
+  constellation: Network,
 };
 
-const serviceRoles = editorialRoles.filter(
-  (role) => role.kind === "Professional Organisation" || role.kind === "Peer Review" || role.kind === "Publishing Profile"
-);
+const reviewIcons = {
+  journal: FileSearch,
+  book: BookOpenCheck,
+  field: Sparkles,
+};
 ---
 
 <section class="editorial-section">
   <div class="editorial-hero">
-    <p class="alt-kicker">Editorial work / professional service</p>
-    <h1>{editorialIntro.title}</h1>
-    <p>{editorialIntro.description}</p>
+    <div class="editorial-hero-copy">
+      <p class="alt-kicker">Editorial work / professional service</p>
+      <h1>{editorialIntro.title}</h1>
+      <p>{editorialIntro.description}</p>
+
+      <div class="editorial-hero-pills" aria-label="Editorial page highlights">
+        <span>Publishing initiatives</span>
+        <span>Institutional service</span>
+        <span>Review activity</span>
+      </div>
+    </div>
+
+    <aside class="editorial-hero-panel" aria-label="Editorial overview">
+      <div class="editorial-hero-panel-header">
+        <Building2 size={18} stroke-width={1.75} aria-hidden="true" />
+        <span>Editorial map</span>
+      </div>
+      <div class="editorial-hero-metric">
+        <strong>{publicationsByCategory.editorialWork.length}</strong>
+        <span>special issues and edited volumes</span>
+      </div>
+      <div class="editorial-hero-metric">
+        <strong>{organizationRoles.length}</strong>
+        <span>professional organisations</span>
+      </div>
+      <div class="editorial-hero-metric">
+        <strong>{editorialReviewAreas.length}</strong>
+        <span>review-related activity areas</span>
+      </div>
+    </aside>
+  </div>
+
+  <div class="editorial-service-heading">
+    <p class="alt-kicker">Professional service</p>
+    <h2>Institutions and professional environments</h2>
+    <p>
+      The service layer is presented as a set of institution cards: each one has its own visual accent,
+      a neutral public label, and a motif connected with acoustics, signal flow, or professional audio networks.
+    </p>
+  </div>
+
+  <div class="organization-grid">
+    {organizationRoles.map((role) => {
+      const Icon = motifIcons[role.visualMotif] ?? BadgeCheck;
+      const roleStyle = [
+        `--role-accent: ${role.accent}`,
+        `--role-accent-2: ${role.accent2 ?? role.accent}`,
+      ].join("; ");
+
+      return (
+        <article class:list={["organization-card", `is-${role.visualMotif}`]} style={roleStyle}>
+          <div class="organization-card-orbit" aria-hidden="true"></div>
+
+          <div class="organization-card-topline">
+            <span class="organization-card-label">{role.publicLabel}</span>
+            {role.href && (
+              <a href={role.href} target="_blank" rel="noreferrer" aria-label={`Open source for ${role.title}`}>
+                <ExternalLink size={16} stroke-width={1.8} aria-hidden="true" />
+              </a>
+            )}
+          </div>
+
+          <div class="organization-card-main">
+            {role.logo && (
+              <div class="organization-logo-frame">
+                <img src={withBase(role.logo)} alt="" loading="lazy" />
+              </div>
+            )}
+
+            <div>
+              <div class="organization-card-meta">
+                <Icon size={15} stroke-width={1.8} aria-hidden="true" />
+                <span>{role.yearOrPeriod}</span>
+              </div>
+              <h3>{role.title}</h3>
+              <p class="organization-native-name">{role.institution}</p>
+            </div>
+          </div>
+
+          <p class="organization-description">{role.description}</p>
+
+          <div class="organization-tags">
+            {role.tags.map((tag) => <span>{tag}</span>)}
+          </div>
+        </article>
+      );
+      })}
   </div>
 
   <EditorialWorkCatalog
     items={publicationsByCategory.editorialWork}
-    kicker="Editorial work"
+    kicker="Editorial publications"
     title="Special issues and edited volumes"
-    description="These publication records now serve as the primary editorial overview, so the subpage stays aligned with the publications section instead of repeating the same material in a separate card system."
+    description="Publication-backed editorial work stays connected with the visual language of the publications page, while this subpage adds a more institutional layer around editing, service, and professional networks."
   />
 
-  <div class="editorial-heading">
-    <h2>Professional service</h2>
-    <p>
-      What remains here is the service layer around the publications: organisations, affiliations,
-      and reviewer-related activity that does not belong in the publication catalog itself.
-    </p>
-  </div>
+  <section class="review-section" aria-labelledby="review-section-title">
+    <div class="review-section-heading">
+      <p class="alt-kicker">Peer review activity</p>
+      <h2 id="review-section-title">Review and publishing support areas</h2>
+      <p>
+        This section intentionally describes areas of activity rather than naming specific journals or publishers.
+        Named venues can be added later only after they are confirmed from public or internal documentation.
+      </p>
+    </div>
 
-  <div class="editorial-role-list">
-    {serviceRoles.map((role) => {
-      const Icon = kindIcons[role.kind] ?? BadgeCheck;
+    <div class="review-area-grid">
+      {editorialReviewAreas.map((area) => {
+        const Icon = reviewIcons[area.icon] ?? SearchCheck;
+        const areaStyle = [
+          `--review-accent: ${area.accent}`,
+          `--review-accent-2: ${area.accent2 ?? area.accent}`,
+        ].join("; ");
 
-      return (
-        <article class="editorial-role-card">
-          <div class="editorial-role-icon">
-            <Icon size={18} stroke-width={1.75} aria-hidden="true" />
-          </div>
-
-          <div class="editorial-role-copy">
-            <div class="editorial-role-meta">
-              <span>{role.kind}</span>
-              <span>{role.yearOrPeriod}</span>
+        return (
+          <article class:list={["review-area-card", `is-${area.visualMotif}`]} style={areaStyle}>
+            <div class="review-area-icon">
+              <Icon size={18} stroke-width={1.8} aria-hidden="true" />
             </div>
-
-            <h3>{role.title}</h3>
-            <p class="editorial-institution">{role.institution}</p>
-            <p>{role.description}</p>
-
-            <div class="editorial-tags">
-              {role.tags.map((tag) => <span>{tag}</span>)}
+            <p class="review-area-label">{area.publicLabel}</p>
+            <h3>{area.title}</h3>
+            <p>{area.description}</p>
+            <div class="review-area-tags">
+              {area.tags.map((tag) => <span>{tag}</span>)}
             </div>
-          </div>
-
-          <div class="editorial-role-side">
-            <span class:list={["editorial-status", role.status === "To be confirmed" && "is-unconfirmed"]}>
-              {role.status}
-            </span>
-
-            {role.href && (
-              <a href={role.href} target="_blank" rel="noreferrer" aria-label={`Open source for ${role.title}`}>
-                <ExternalLink size={17} stroke-width={1.8} aria-hidden="true" />
-              </a>
-            )}
-          </div>
-        </article>
-      );
-    })}
-  </div>
+          </article>
+        );
+      })}
+    </div>
+  </section>
 </section>
 
 <style>
@@ -88,162 +171,483 @@ const serviceRoles = editorialRoles.filter(
   }
 
   .editorial-hero {
-    max-width: 68rem;
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.55fr);
+    gap: clamp(1.1rem, 3vw, 2rem);
+    align-items: stretch;
+    overflow: hidden;
+    margin-bottom: 3.6rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 32px;
+    border-radius: 36px;
     background:
-      radial-gradient(circle at 18% 22%, rgba(86, 216, 255, 0.13), transparent 36%),
-      rgba(255, 255, 255, 0.04);
-    padding: clamp(1.5rem, 4vw, 3rem);
+      radial-gradient(circle at 15% 18%, rgba(86, 216, 255, 0.18), transparent 34%),
+      radial-gradient(circle at 85% 12%, rgba(167, 139, 250, 0.14), transparent 30%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025));
+    padding: clamp(1.35rem, 4vw, 3.1rem);
     backdrop-filter: blur(18px);
-    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+  }
+
+  .editorial-hero::before,
+  .editorial-hero::after {
+    position: absolute;
+    content: "";
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .editorial-hero::before {
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+      radial-gradient(circle at 72% 56%, rgba(86, 216, 255, 0.14), transparent 34%);
+    background-size: 36px 36px, 36px 36px, auto;
+    mask-image: radial-gradient(circle at 60% 30%, black, transparent 78%);
+    opacity: 0.9;
+  }
+
+  .editorial-hero::after {
+    right: -4rem;
+    bottom: -9rem;
+    width: 30rem;
+    height: 30rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    background: repeating-radial-gradient(circle, rgba(86, 216, 255, 0.17) 0 1px, transparent 1px 26px);
+    opacity: 0.55;
+  }
+
+  .editorial-hero-copy {
+    position: relative;
+    z-index: 1;
+    max-width: 67rem;
   }
 
   .editorial-hero h1 {
     color: #fff;
-    font-size: clamp(2.6rem, 7vw, 5.8rem);
-    line-height: 0.96;
-    letter-spacing: -0.055em;
+    font-size: clamp(2.7rem, 7vw, 6.3rem);
+    line-height: 0.94;
+    letter-spacing: -0.06em;
     text-wrap: balance;
   }
 
-  .editorial-hero p:last-child {
-    margin-top: 1.2rem;
-    color: #a1a1aa;
+  .editorial-hero-copy > p:last-of-type {
+    max-width: 48rem;
+    margin-top: 1.25rem;
+    color: #b6bdca;
     line-height: 1.85;
+    font-size: clamp(1rem, 1.4vw, 1.1rem);
   }
 
-  .editorial-role-card {
+  .editorial-hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+  }
+
+  .editorial-hero-pills span,
+  .organization-card-label,
+  .review-area-label {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.055);
+    color: #e7eefb;
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    padding: 0.48rem 0.66rem;
+    text-transform: uppercase;
+  }
+
+  .editorial-hero-panel {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    align-content: end;
+    gap: 0.75rem;
+    min-height: 100%;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 28px;
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(18px);
-    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
+    background:
+      radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.1), transparent 34%),
+      rgba(2, 6, 12, 0.38);
+    padding: 1rem;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
   }
 
-  .editorial-role-meta,
-  .editorial-role-side {
-    display: flex;
+  .editorial-hero-panel-header,
+  .editorial-hero-metric {
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.045);
+  }
+
+  .editorial-hero-panel-header {
+    display: inline-flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-
-  .editorial-role-meta {
-    color: #71717a;
+    gap: 0.55rem;
+    width: fit-content;
+    color: #56d8ff;
+    padding: 0.62rem 0.78rem;
     font-family: "JetBrains Mono", "Consolas", monospace;
     font-size: 0.72rem;
+    font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
 
-  .editorial-role-card h3 {
+  .editorial-hero-metric {
+    display: grid;
+    gap: 0.15rem;
+    padding: 0.8rem 0.9rem;
+  }
+
+  .editorial-hero-metric strong {
     color: #fff;
-    line-height: 1.2;
+    font-size: 2rem;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .editorial-hero-metric span {
+    color: #aeb7c6;
+    font-size: 0.88rem;
+    line-height: 1.4;
+  }
+
+  .editorial-service-heading,
+  .review-section-heading {
+    max-width: 60rem;
+    margin: 4.5rem 0 1.5rem;
+  }
+
+  .editorial-service-heading h2,
+  .review-section-heading h2 {
+    color: #fff;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
     text-wrap: balance;
   }
 
-  .editorial-role-card p {
-    margin-top: 0.8rem;
-    color: #a1a1aa;
-    line-height: 1.75;
-  }
-
-  .editorial-heading {
-    margin: 4rem 0 1.5rem;
-    max-width: 58rem;
-  }
-
-  .editorial-heading h2 {
-    color: #fff;
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    line-height: 1.02;
-    letter-spacing: -0.03em;
-  }
-
-  .editorial-heading p {
+  .editorial-service-heading p:last-child,
+  .review-section-heading p:last-child {
     margin-top: 1rem;
-    color: #a1a1aa;
+    color: #aeb7c6;
     line-height: 1.85;
   }
 
-  .editorial-role-list {
+  .organization-grid {
     display: grid;
-    gap: 0.85rem;
-  }
-
-  .editorial-role-card {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1rem;
-    align-items: start;
-    padding: 1rem;
   }
 
-  .editorial-role-icon {
+  .organization-card,
+  .review-area-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-radius: 30px;
+    background:
+      radial-gradient(circle at 16% 0%, color-mix(in srgb, var(--role-accent, #56d8ff) 20%, transparent), transparent 34%),
+      linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+    padding: 1rem;
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.32);
+    backdrop-filter: blur(18px);
+  }
+
+  .organization-card {
+    display: flex;
+    min-height: 26rem;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .organization-card::before,
+  .organization-card::after,
+  .review-area-card::before {
+    position: absolute;
+    content: "";
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .organization-card::before {
+    inset: 0;
+    background:
+      linear-gradient(120deg, transparent, color-mix(in srgb, var(--role-accent, #56d8ff) 12%, transparent), transparent),
+      radial-gradient(circle at 82% 20%, color-mix(in srgb, var(--role-accent-2, #fff) 16%, transparent), transparent 25%);
+    opacity: 0.8;
+  }
+
+  .organization-card.is-rings::after {
+    right: -5.5rem;
+    top: 4.5rem;
+    width: 18rem;
+    height: 18rem;
+    border-radius: 999px;
+    background: repeating-radial-gradient(circle, color-mix(in srgb, var(--role-accent) 35%, transparent) 0 1px, transparent 1px 20px);
+    opacity: 0.75;
+  }
+
+  .organization-card.is-signal::after {
+    right: -3rem;
+    top: 5rem;
+    width: 19rem;
+    height: 12rem;
+    background:
+      linear-gradient(90deg, transparent 0 10%, color-mix(in srgb, var(--role-accent) 45%, transparent) 10% 11%, transparent 11% 20%),
+      repeating-linear-gradient(90deg, transparent 0 16px, color-mix(in srgb, var(--role-accent) 28%, transparent) 16px 18px, transparent 18px 32px);
+    transform: rotate(-8deg);
+    opacity: 0.45;
+    mask-image: linear-gradient(90deg, transparent, black 22%, black 80%, transparent);
+  }
+
+  .organization-card.is-constellation::after {
+    inset: 5rem -4rem auto auto;
+    width: 20rem;
+    height: 13rem;
+    background:
+      radial-gradient(circle at 12% 28%, var(--role-accent) 0 3px, transparent 4px),
+      radial-gradient(circle at 36% 16%, var(--role-accent-2) 0 2px, transparent 3px),
+      radial-gradient(circle at 58% 42%, var(--role-accent) 0 3px, transparent 4px),
+      radial-gradient(circle at 76% 22%, var(--role-accent-2) 0 2px, transparent 3px),
+      linear-gradient(23deg, transparent 8%, color-mix(in srgb, var(--role-accent) 35%, transparent) 8.5%, transparent 9%),
+      linear-gradient(-18deg, transparent 29%, color-mix(in srgb, var(--role-accent) 28%, transparent) 29.5%, transparent 30%);
+    opacity: 0.56;
+  }
+
+  .organization-card-orbit {
+    position: absolute;
+    inset: auto -6rem -7rem auto;
+    width: 18rem;
+    height: 18rem;
+    border: 1px solid color-mix(in srgb, var(--role-accent) 36%, transparent);
+    border-radius: 999px;
+    opacity: 0.52;
+    pointer-events: none;
+  }
+
+  .organization-card-topline,
+  .organization-card-main,
+  .organization-card-meta,
+  .organization-tags,
+  .review-area-tags {
+    display: flex;
+    align-items: center;
+  }
+
+  .organization-card-topline {
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .organization-card-topline a {
     display: grid;
     place-items: center;
-    width: 2.6rem;
-    height: 2.6rem;
-    border: 1px solid rgba(86, 216, 255, 0.22);
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid color-mix(in srgb, var(--role-accent) 34%, rgba(255, 255, 255, 0.1));
     border-radius: 999px;
-    color: #56d8ff;
-    background: rgba(86, 216, 255, 0.07);
+    color: var(--role-accent);
+    background: rgba(255, 255, 255, 0.045);
+    text-decoration: none;
+    transition:
+      transform 180ms ease,
+      background 180ms ease,
+      border-color 180ms ease;
   }
 
-  .editorial-institution {
-    color: #d4d4d8 !important;
-    font-weight: 600;
+  .organization-card-topline a:hover {
+    transform: translateY(-1px);
+    border-color: color-mix(in srgb, var(--role-accent) 64%, white 20%);
+    background: color-mix(in srgb, var(--role-accent) 10%, rgba(255, 255, 255, 0.05));
   }
 
-  .editorial-role-side {
-    flex-direction: column;
-    align-items: flex-end;
+  .organization-card-label {
+    border-color: color-mix(in srgb, var(--role-accent) 30%, rgba(255, 255, 255, 0.12));
+    color: color-mix(in srgb, var(--role-accent-2) 84%, white 16%);
+    background: color-mix(in srgb, var(--role-accent) 10%, rgba(255, 255, 255, 0.045));
   }
 
-  .editorial-status {
-    display: inline-flex;
-    border: 1px solid rgba(86, 216, 255, 0.24);
-    border-radius: 999px;
-    padding: 0.25rem 0.55rem;
-    color: #56d8ff;
-    background: rgba(86, 216, 255, 0.07);
+  .organization-card-main {
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .organization-logo-frame {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: clamp(5rem, 7vw, 6.7rem);
+    height: clamp(5rem, 7vw, 6.7rem);
+    overflow: visible;
+    padding: 0.45rem;
+    border: 1px solid transparent;
+    border-radius: 24px;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .organization-logo-frame img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .organization-card-meta {
+    gap: 0.45rem;
+    color: color-mix(in srgb, var(--role-accent) 74%, white 26%);
     font-family: "JetBrains Mono", "Consolas", monospace;
-    font-size: 0.68rem;
+    font-size: 0.72rem;
+    font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    white-space: nowrap;
   }
 
-  .editorial-status.is-unconfirmed {
-    color: #ffb347;
-    border-color: rgba(255, 179, 71, 0.24);
-    background: rgba(255, 179, 71, 0.07);
+  .organization-card h3,
+  .review-area-card h3 {
+    margin-top: 0.55rem;
+    color: #fff;
+    font-size: clamp(1.45rem, 2.3vw, 2rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
   }
 
-  .editorial-tags {
-    display: flex;
+  .organization-native-name {
+    margin-top: 0.55rem;
+    color: #e2e8f0;
+    font-weight: 700;
+    line-height: 1.45;
+  }
+
+  .organization-description,
+  .review-area-card p:not(.review-area-label) {
+    margin-top: 1.2rem;
+    color: #b6bdca;
+    line-height: 1.72;
+  }
+
+  .organization-tags,
+  .review-area-tags {
     flex-wrap: wrap;
     gap: 0.45rem;
-    margin-top: 1rem;
+    margin-top: 1.2rem;
   }
 
-  .editorial-tags span {
+  .organization-tags span,
+  .review-area-tags span {
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 999px;
-    padding: 0.3rem 0.58rem;
-    color: #cbd5e1;
+    padding: 0.34rem 0.6rem;
+    color: #dbe4ef;
     font-size: 0.76rem;
-    background: rgba(255, 255, 255, 0.04);
+    line-height: 1.15;
+    background: rgba(255, 255, 255, 0.045);
+  }
+
+  .review-section {
+    margin-top: 4.5rem;
+  }
+
+  .review-section-heading {
+    margin-top: 0;
+  }
+
+  .review-area-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .review-area-card {
+    --role-accent: var(--review-accent);
+    --role-accent-2: var(--review-accent-2);
+    min-height: 19rem;
+    background:
+      radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--review-accent) 16%, transparent), transparent 36%),
+      rgba(255, 255, 255, 0.04);
+  }
+
+  .review-area-card::before {
+    inset: auto -4rem -6rem auto;
+    width: 15rem;
+    height: 15rem;
+    border-radius: 999px;
+    background: repeating-radial-gradient(circle, color-mix(in srgb, var(--review-accent) 24%, transparent) 0 1px, transparent 1px 18px);
+    opacity: 0.58;
+  }
+
+  .review-area-icon {
+    display: grid;
+    place-items: center;
+    width: 2.8rem;
+    height: 2.8rem;
+    margin-bottom: 1.1rem;
+    border: 1px solid color-mix(in srgb, var(--review-accent) 34%, rgba(255, 255, 255, 0.1));
+    border-radius: 18px;
+    color: var(--review-accent);
+    background: color-mix(in srgb, var(--review-accent) 9%, rgba(255, 255, 255, 0.045));
+  }
+
+  .review-area-label {
+    border-color: color-mix(in srgb, var(--review-accent) 26%, rgba(255, 255, 255, 0.12));
+    color: color-mix(in srgb, var(--review-accent-2) 84%, white 16%);
+    background: color-mix(in srgb, var(--review-accent) 8%, rgba(255, 255, 255, 0.045));
   }
 
   @media (max-width: 1080px) {
-    .editorial-role-card {
+    .editorial-hero,
+    .organization-grid,
+    .review-area-grid {
       grid-template-columns: 1fr;
     }
 
-    .editorial-role-side {
+    .organization-card {
+      min-height: auto;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .editorial-section {
+      padding-top: 1rem;
+    }
+
+    .editorial-hero,
+    .organization-card,
+    .review-area-card {
+      border-radius: 24px;
+    }
+
+    .editorial-hero {
+      padding: 1.1rem;
+    }
+
+    .organization-card-main {
       align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .organization-logo-frame {
+      width: 5.2rem;
+      height: 5.2rem;
+      border-radius: 20px;
     }
   }
 </style>

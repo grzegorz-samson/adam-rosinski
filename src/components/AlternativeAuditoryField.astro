@@ -151,10 +151,14 @@ const modes = [
 
 <script is:inline define:vars={{ modes }}>
   const initAltAuditoryField = () => {
-    const buttons = Array.from(document.querySelectorAll("[data-alt-mode]"));
-    const groups = Array.from(document.querySelectorAll("[data-alt-group]"));
-    const cards = Array.from(document.querySelectorAll("[data-alt-mode-card]"));
-    if (!buttons.length || !groups.length) return;
+    const section = document.querySelector("#work-areas-alt");
+    if (!section || section.dataset.bound === "true") return;
+    section.dataset.bound = "true";
+
+    const buttons = Array.from(section.querySelectorAll("[data-alt-mode]"));
+    const groups = Array.from(section.querySelectorAll("[data-alt-group]"));
+    const cards = Array.from(section.querySelectorAll("[data-alt-mode-card]"));
+    if (!buttons.length || !groups.length || !cards.length) return;
 
     const setMode = (key) => {
       buttons.forEach((button) => {
@@ -178,6 +182,15 @@ const modes = [
       if (button.dataset.bound === "true") return;
       button.dataset.bound = "true";
       button.addEventListener("click", () => setMode(button.getAttribute("data-alt-mode")));
+      button.addEventListener("focus", () => setMode(button.getAttribute("data-alt-mode")));
+    });
+
+    cards.forEach((card) => {
+      const key = card.getAttribute("data-alt-mode-card");
+      if (!key) return;
+
+      card.addEventListener("mouseenter", () => setMode(key));
+      card.addEventListener("focusin", () => setMode(key));
     });
 
     setMode("perception");

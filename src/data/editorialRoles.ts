@@ -1,9 +1,6 @@
-export type EditorialRoleKind =
-  | "Guest Editor"
-  | "Edited Volume"
-  | "Professional Organisation"
-  | "Peer Review"
-  | "Publishing Profile";
+export type EditorialRoleKind = "Professional Organisation";
+
+export type EditorialVisualMotif = "waves" | "rings" | "signal" | "constellation";
 
 export interface EditorialRole {
   slug: string;
@@ -11,115 +8,129 @@ export interface EditorialRole {
   kind: EditorialRoleKind;
   institution: string;
   yearOrPeriod: string;
-  status: "Publicly verified" | "To be confirmed" | "Profile information";
+  publicLabel: string;
   description: string;
   tags: string[];
   href?: string;
-  featured?: boolean;
+  logo?: string;
+  accent: string;
+  accent2?: string;
+  visualMotif: EditorialVisualMotif;
+  sourceNote?: string;
+}
+
+export interface EditorialReviewArea {
+  slug: string;
+  title: string;
+  publicLabel: string;
+  description: string;
+  tags: string[];
+  accent: string;
+  accent2?: string;
+  visualMotif: EditorialVisualMotif;
+  icon: "journal" | "book" | "field";
 }
 
 export const editorialIntro = {
   title: "Editorial Roles & Professional Service",
   subtitle:
-    "Guest editing, publishing initiatives, professional organisations, and peer-review activity.",
+    "Publishing initiatives, institutional affiliations, and review-related service in acoustics, sound, and audio research.",
   description:
-    "This page gathers Adam Rosiński's editorial and publishing-related activity: special issues, edited volumes, professional affiliations, and reviewer roles. Publicly verified items are separated from entries that should be confirmed from CV or private documentation before publication.",
+    "A curated editorial and institutional overview: special issues, edited volumes, professional organisations, and broader review activity connected with sound, listening, acoustics, and audio engineering.",
 };
 
 export const editorialRoles: EditorialRole[] = [
-  {
-    slug: "sound-space-creativity-performing-arts",
-    title: "Sound, Space, and Creativity in Performing Arts",
-    kind: "Guest Editor",
-    institution: "Arts / MDPI",
-    yearOrPeriod: "2025",
-    status: "Publicly verified",
-    description:
-      "Special Issue in Arts devoted to sound, sonic space, and creative practices in contemporary performing arts.",
-    tags: ["special issue", "sound", "space", "performing arts"],
-    href: "https://www.mdpi.com/journal/arts/special_issues/WQA3DYR5IQ",
-    featured: true,
-  },
-  {
-    slug: "perspectives-of-acoustics",
-    title: "Perspectives of Acoustics",
-    kind: "Guest Editor",
-    institution: "Arts / MDPI",
-    yearOrPeriod: "2027",
-    status: "Publicly verified",
-    description:
-      "Special Issue in Arts focused on acoustics, sound, technology, listening, and artistic research.",
-    tags: ["special issue", "acoustics", "arts", "sound"],
-    href: "https://www.mdpi.com/journal/arts/special_issues/3U4U17WCQE",
-    featured: true,
-  },
-  {
-    slug: "professional-acoustics-2",
-    title: "Przestrzenie akustyki. Professional Acoustics 2",
-    kind: "Edited Volume",
-    institution: "University of Warmia and Mazury Press",
-    yearOrPeriod: "2023",
-    status: "Publicly verified",
-    description:
-      "Edited volume in the Professional Acoustics series, published by the University of Warmia and Mazury Press.",
-    tags: ["edited volume", "acoustics", "publishing"],
-    href: "https://open.icm.edu.pl/items/61c00c56-539f-4176-9b70-02f244a0b0e3f7a64c6f96da8",
-    featured: true,
-  },
-  {
-    slug: "professional-acoustics",
-    title: "Przestrzenie akustyki. Professional Acoustics",
-    kind: "Edited Volume",
-    institution: "University of Warmia and Mazury Press",
-    yearOrPeriod: "2021",
-    status: "Publicly verified",
-    description:
-      "Earlier edited volume in the Professional Acoustics series.",
-    tags: ["edited volume", "acoustics", "research"],
-    href: "https://open.icm.edu.pl/server/api/core/bitstreams/a660cb48-c089-4863-98a2-b9b0e51f5aaa/content",
-  },
   {
     slug: "polish-acoustical-society",
     title: "Polish Acoustical Society",
     kind: "Professional Organisation",
     institution: "Polskie Towarzystwo Akustyczne",
-    yearOrPeriod: "profile information",
-    status: "Profile information",
+    yearOrPeriod: "Professional community",
+    publicLabel: "Professional affiliation",
     description:
-      "Professional affiliation listed in public biographical profiles.",
-    tags: ["organisation", "acoustics"],
+      "A national acoustics community connecting research, education, and professional exchange around sound, acoustic space, and listening environments.",
+    tags: ["acoustics", "research community", "professional service"],
+    href: "https://acoustics.org.pl/",
+    logo: "/images/organizations/pta-logo.gif",
+    accent: "#56d8ff",
+    accent2: "#b8f3ff",
+    visualMotif: "rings",
+    sourceNote:
+      "Official logo downloaded from the public PTA site header asset. A higher-resolution variant from OWPTA remains stored as an alternate local asset.",
   },
   {
     slug: "polish-sound-engineers-association",
     title: "Polish Association of Sound Engineers",
     kind: "Professional Organisation",
-    institution: "Polskie Stowarzyszenie Realizatorów Dźwięku",
-    yearOrPeriod: "profile information",
-    status: "Profile information",
+    institution: "Polskie Stowarzyszenie Realizatorow Dzwieku",
+    yearOrPeriod: "Professional community",
+    publicLabel: "Honorary membership",
     description:
-      "Honorary membership listed in public biographical profiles.",
-    tags: ["organisation", "sound engineering"],
+      "A professional sound-engineering environment focused on practice, standards, education, and the recognition of sound production work.",
+    tags: ["sound engineering", "recording", "professional practice"],
+    href: "https://ard.edu.pl/o-akademii/polskie-stowarzyszenie-realizatorow-dzwieku/",
+    logo: "/images/organizations/psrd-placeholder.svg",
+    accent: "#ffb347",
+    accent2: "#ffe0a3",
+    visualMotif: "signal",
+    sourceNote:
+      "Placeholder mark restored for the PSRD card.",
   },
   {
     slug: "audio-engineering-society",
     title: "Audio Engineering Society",
     kind: "Professional Organisation",
     institution: "AES",
-    yearOrPeriod: "profile information",
-    status: "Profile information",
+    yearOrPeriod: "International network",
+    publicLabel: "Audio engineering network",
     description:
-      "Professional affiliation listed in public biographical profiles.",
-    tags: ["organisation", "audio engineering"],
+      "An international professional network for audio engineering, standards, technology, conferences, and knowledge exchange.",
+    tags: ["audio engineering", "standards", "international network"],
+    href: "https://aes.org/",
+    logo: "/images/organizations/aes-shield-white.png",
+    accent: "#8fb7ff",
+    accent2: "#d9e7ff",
+    visualMotif: "constellation",
+    sourceNote:
+      "Official AES Shield Only White logo downloaded from the public AES brand asset pack and kept unchanged.",
+  },
+];
+
+export const editorialReviewAreas: EditorialReviewArea[] = [
+  {
+    slug: "journal-manuscript-reviews",
+    title: "Journal manuscript reviews",
+    publicLabel: "Editorial and review service",
+    description:
+      "General review activity related to manuscripts in sound studies, acoustics, music technology, and listening research.",
+    tags: ["manuscripts", "peer review", "journals"],
+    accent: "#56d8ff",
+    accent2: "#c7f7ff",
+    visualMotif: "waves",
+    icon: "journal",
   },
   {
-    slug: "peer-review-activity",
-    title: "Peer Review Activity",
-    kind: "Peer Review",
-    institution: "Journals and publishers",
-    yearOrPeriod: "to be confirmed",
-    status: "To be confirmed",
+    slug: "book-and-chapter-review-support",
+    title: "Book and chapter review support",
+    publicLabel: "Scholarly publishing support",
     description:
-      "Use this entry as a placeholder for confirmed reviewer activity. Do not list specific journals until Adam Rosiński confirms them or a public source is available.",
-    tags: ["peer review", "journals", "verification needed"],
+      "Broader support for edited volumes, book chapters, and publication workflows in areas adjacent to sound and music research.",
+    tags: ["edited volumes", "chapters", "publishing"],
+    accent: "#ffb347",
+    accent2: "#ffe0a3",
+    visualMotif: "rings",
+    icon: "book",
+  },
+  {
+    slug: "acoustics-sound-studies-audio-research",
+    title: "Acoustics, sound studies, and audio research",
+    publicLabel: "Research field expertise",
+    description:
+      "A thematic area rather than a list of named journals: acoustics, auditory perception, recording, spatial audio, and audio engineering.",
+    tags: ["acoustics", "sound studies", "audio research"],
+    accent: "#a78bfa",
+    accent2: "#ddd6fe",
+    visualMotif: "constellation",
+    icon: "field",
   },
 ];
