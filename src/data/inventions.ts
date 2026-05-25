@@ -32,7 +32,7 @@ export const inventions: Invention[] = [
       "A large-scale circular audio environment for experiments in multichannel listening, spatial perception, and situated sound practice.",
     status: "article-related",
     publicLabel: "Authorial prototype",
-    image: "/images/inventions/circular-audio-array.jpg",
+    image: "/images/inventions/circular-audio-array.webp",
     imageAlt:
       "Large black circular multichannel audio array suspended above a seated listener.",
     sourceNote:

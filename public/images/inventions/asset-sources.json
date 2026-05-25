@@ -1,13 +1,13 @@
 {
   "assets": [
     {
-      "file": "/images/inventions/circular-audio-array.jpg",
-      "source": "User-provided render: 1 wynalazek.jpg",
+      "file": "/images/inventions/circular-audio-array.webp",
+      "source": "User-provided render: 1 wynalazek_no_background.jpg",
       "publicUseNote": "Use as an author-provided visual. The related Open ICM article URL was supplied in Adam_Rosinski_Wynalazki.txt; replace temporary/private links with a stable public record before publication."
     },
     {
-      "file": "/images/inventions/spherical-microphone-prototype.jpg",
-      "source": "User-provided render: 2 wynalazek.jpg",
+      "file": "/images/inventions/spherical-microphone-prototype.webp",
+      "source": "User-provided render: 2 wynalazek_no_background.png",
       "publicUseNote": "Render connected with the Cambridge Core / Organised Sound article on the spherical microphone prototype."
     },
     {
