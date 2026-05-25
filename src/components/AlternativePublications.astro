@@ -18,6 +18,7 @@ interface Entry {
   tags: string[];
   relatedAreas: string[];
   href: string;
+  pdfHref?: string | null;
   publisher?: string;
   journal?: string;
   volume?: string;
@@ -75,6 +76,10 @@ function getBookTheme(slug: string) {
     }
   );
 }
+
+function hasExternalSourceLink(href: string): boolean {
+  return href !== "https://adamrosinski.com/publications/";
+}
 ---
 
 <section id="selected-publications" class="alt-section">
@@ -94,6 +99,7 @@ function getBookTheme(slug: string) {
         label: getPublicationMetaLabel(publication.category, publication.type),
       };
       const sourceLine = publication.publisher ?? publication.journal ?? publication.doi ?? publication.isbn;
+      const hasExternalSource = hasExternalSourceLink(publication.href);
       const theme = getBookTheme(publication.slug);
       const themeStyle = [
         `--book-accent: ${theme.accent}`,
@@ -150,10 +156,20 @@ function getBookTheme(slug: string) {
                 ))}
               </div>
             </div>
-            <a href={publication.href} target="_blank" rel="noreferrer" class="alt-publication-link alt-link-with-icon">
-              <span>{publication.sourceVerified === false ? "Open source page" : "Open publication"}</span>
-              <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
-            </a>
+            <div class="alt-publication-links">
+              {publication.pdfHref && (
+                <a href={withBase(publication.pdfHref)} target="_blank" rel="noreferrer" class="alt-publication-link alt-link-with-icon">
+                  <span>PDF</span>
+                  <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
+                </a>
+              )}
+              {hasExternalSource && (
+                <a href={publication.href} target="_blank" rel="noreferrer" class="alt-publication-link alt-link-with-icon">
+                  <span>Source</span>
+                  <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
+                </a>
+              )}
+            </div>
           </div>
         </details>
       );
@@ -727,14 +743,19 @@ function getBookTheme(slug: string) {
   }
 
   .alt-publication-link {
-    display: inline-block;
-    margin-top: 1rem;
     color: #56d8ff;
     text-decoration: none;
   }
 
   .alt-publication-link:hover {
     color: #fff;
+  }
+
+  .alt-publication-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
   }
 
   .alt-grid {

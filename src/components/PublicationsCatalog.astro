@@ -102,6 +102,10 @@ function getVenueLine(publication: PublicationRecord): string | null {
 
   return null;
 }
+
+function hasExternalSourceLink(href: string): boolean {
+  return href !== "https://adamrosinski.com/publications/";
+}
 ---
 
 <section class="catalog-section" aria-labelledby="catalog-title">
@@ -161,6 +165,7 @@ function getVenueLine(publication: PublicationRecord): string | null {
             const secondaryTitle = getSecondaryTitle(publication);
             const venueLine = getVenueLine(publication);
             const strip = getPublicationStrip(publication);
+            const hasExternalSource = hasExternalSourceLink(publication.href);
             const stripStyle = [
               `--publication-strip-svg: url("${withBase(strip.asset)}")`,
               `--publication-strip-accent: ${strip.accent}`,
@@ -202,10 +207,16 @@ function getVenueLine(publication: PublicationRecord): string | null {
                   </div>
 
                   <div class="catalog-summary-side">
-                    {publication.sourceVerified === false && (
+                    {publication.pdfHref && (
                       <span class="catalog-pdf-badge">
                         <FileText size={13} stroke-width={1.8} aria-hidden="true" />
                         PDF
+                      </span>
+                    )}
+                    {hasExternalSource && (
+                      <span class="catalog-pdf-badge">
+                        <ExternalLink size={13} stroke-width={1.8} aria-hidden="true" />
+                        Source
                       </span>
                     )}
                     <ChevronDown size={18} stroke-width={1.9} aria-hidden="true" class="catalog-chevron" />
@@ -252,16 +263,18 @@ function getVenueLine(publication: PublicationRecord): string | null {
                   </div>
 
                   <div class="catalog-links">
-                    {publication.sourceVerified === false && (
-                      <span class="catalog-pdf-note">
-                        <FileText size={13} stroke-width={1.8} aria-hidden="true" />
-                        PDF
-                      </span>
+                    {publication.pdfHref && (
+                      <a href={withBase(publication.pdfHref)} target="_blank" rel="noreferrer" class="catalog-link alt-link-with-icon">
+                        <span>PDF</span>
+                        <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
+                      </a>
                     )}
-                    <a href={publication.href} target="_blank" rel="noreferrer" class="catalog-link alt-link-with-icon">
-                      <span>{publication.sourceVerified === false ? "Open source page" : "Open publication"}</span>
-                      <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
-                    </a>
+                    {hasExternalSource && (
+                      <a href={publication.href} target="_blank" rel="noreferrer" class="catalog-link alt-link-with-icon">
+                        <span>Source</span>
+                        <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
+                      </a>
+                    )}
                   </div>
                 </div>
               </details>
@@ -717,7 +730,8 @@ function getVenueLine(publication: PublicationRecord): string | null {
 
   .catalog-summary-side {
     display: flex;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: flex-end;
     gap: 0.8rem;
     flex-shrink: 0;
   }
@@ -885,6 +899,8 @@ function getVenueLine(publication: PublicationRecord): string | null {
     }
 
     .catalog-summary-side {
+      flex-direction: row;
+      align-items: center;
       justify-content: space-between;
     }
 

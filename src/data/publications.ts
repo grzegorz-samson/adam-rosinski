@@ -9,6 +9,7 @@ export interface PublicationRecord {
   tags: string[];
   relatedAreas: string[];
   href: string;
+  pdfHref: string | null;
   sourceNote?: string;
   publisher?: string;
   place?: string;
@@ -57,7 +58,8 @@ export const publications: PublicationRecord[] = [
     "featured": true,
     "cover": "/images/covers/melody-and-rhythm.jpg",
     "citation": "Rosiński, Adam. 2024. \"Melody and Rhythm in Shaping Multiple Auditory Percepts: Auditory Stream Organisation in Selected Musical Works.\" University of Warsaw Press. https://doi.org/10.31338/uw.9788323562757.",
-    "sourceVerified": true
+    "sourceVerified": true,
+    "pdfHref": "/pdfs/publications/melody-and-rhythm-auditory-percepts.pdf"
   },
   {
     "slug": "microphone-techniques-in-stereo-and-surround-recording",
@@ -86,7 +88,8 @@ export const publications: PublicationRecord[] = [
     "featured": true,
     "cover": "/images/covers/microphone-techniques.jpg",
     "citation": "Rosiński, Adam. 2022. \"Microphone Techniques in Stereo and Surround Recording.\" Jagiellonian University Press. https://doi.org/10.4467/K7385.29/e/22.22.16204.",
-    "sourceVerified": true
+    "sourceVerified": true,
+    "pdfHref": "/pdfs/publications/microphone-techniques-in-stereo-and-surround-recording.pdf"
   },
   {
     "slug": "psychoacoustic-contexts-of-auditory-stream-formation-in-music",
@@ -100,7 +103,7 @@ export const publications: PublicationRecord[] = [
     "place": "Olsztyn",
     "pages": "140",
     "isbn": "978-83-8100-119-9",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://open.icm.edu.pl/items/a8c5af04-2b7e-4133-8494-cf9272cbfe8e",
     "summary": "A Polish-language monograph on psychoacoustic contexts of auditory stream formation in music.",
     "tags": [
       "psychoacoustics",
@@ -113,7 +116,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/covers/psychoacoustic-contexts.jpg",
     "citation": "Rosiński, Adam. 2018. \"Psychoacoustic Contexts of Auditory Stream Formation in Music.\" University of Warmia and Mazury Press.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/psychoacoustic-contexts-of-auditory-stream-formation-in-music.pdf"
   },
   {
     "slug": "computer-technology-in-music-recording-and-production",
@@ -127,7 +131,7 @@ export const publications: PublicationRecord[] = [
     "place": "Bydgoszcz",
     "pages": "221",
     "isbn": "978-83-7096-933-2",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://open.icm.edu.pl/items/c8d0fdbf-8b05-4bbf-b9e3-b0d4fa7f4d67",
     "summary": "A Polish-language monograph on computer technologies in music recording, production and music-teacher practice.",
     "tags": [
       "music technology",
@@ -141,7 +145,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/covers/computer-technology.jpg",
     "citation": "Rosiński, Adam. 2013. \"The Use of Computer Technology in Music Recording and Production.\" Kazimierz Wielki University Press.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/computer-technology-in-music-recording-and-production.pdf"
   },
   {
     "slug": "spherical-microphone-prototype",
@@ -169,7 +174,8 @@ export const publications: PublicationRecord[] = [
     "featured": true,
     "cover": "/images/covers/spherical-microphone.jpg",
     "citation": "Rosiński, Adam. 2026. \"A spherical microphone prototype for multichannel recording: Technological design, artistic applications and compositional implications.\" Organised Sound. https://doi.org/10.1017/S1355771825101039.",
-    "sourceVerified": true
+    "sourceVerified": true,
+    "pdfHref": "/pdfs/publications/spherical-microphone-prototype.pdf"
   },
   {
     "slug": "variable-properties-of-auditory-image-analysis",
@@ -195,7 +201,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/covers/variable-properties.jpg",
     "citation": "Rosiński, Adam. 2025. \"Variable Properties of Auditory Image Analysis: A Case Study of Selected Musical Works.\" Proceedings of the Annual Meeting of the Cognitive Science Society.",
-    "sourceVerified": true
+    "sourceVerified": true,
+    "pdfHref": "/pdfs/publications/variable-properties-of-auditory-image-analysis.pdf"
   },
   {
     "slug": "telemann-audio-information-streaming",
@@ -224,7 +231,8 @@ export const publications: PublicationRecord[] = [
     "featured": true,
     "cover": "/images/covers/variable-properties.jpg",
     "citation": "Rosiński, Adam. 2025. \"An Analysis of Audio Information Streaming in Georg Philipp Telemann’s Sonata in C Major for Recorder and Basso Continuo, Allegro (TWV 41:C2).\" Arts. https://doi.org/10.3390/arts14040076.",
-    "sourceVerified": true
+    "sourceVerified": true,
+    "pdfHref": "/pdfs/publications/telemann-audio-information-streaming.pdf"
   },
   {
     "slug": "variable-properties-of-auditory-scene-analysis-in-music",
@@ -253,7 +261,8 @@ export const publications: PublicationRecord[] = [
     "featured": true,
     "cover": "/images/covers/variable-properties.jpg",
     "citation": "Rosiński, Adam. 2025. \"Variable Properties of Auditory Scene Analysis in Music.\" Arts. https://doi.org/10.3390/arts14010019.",
-    "sourceVerified": true
+    "sourceVerified": true,
+    "pdfHref": "/pdfs/publications/variable-properties-of-auditory-scene-analysis-in-music.pdf"
   },
   {
     "slug": "multivariantism-of-auditory-perceptions",
@@ -283,7 +292,8 @@ export const publications: PublicationRecord[] = [
     "featured": true,
     "cover": "/images/covers/multivariantism.jpg",
     "citation": "Rosiński, Adam. 2024. \"Multivariantism of Auditory Perceptions as a Significant Element of the Auditory Scene Analysis Concept.\" Arts. https://doi.org/10.3390/arts13060180.",
-    "sourceVerified": true
+    "sourceVerified": true,
+    "pdfHref": "/pdfs/publications/multivariantism-of-auditory-perceptions.pdf"
   },
   {
     "slug": "influence-of-music-education-and-interval-size",
@@ -310,7 +320,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/covers/variable-properties.jpg",
     "citation": "Rosiński, Adam. 2024. \"Influence of Music Education and Interval Size on Grouping of the AB-AB Sequence Sounds.\" Proceedings of the Annual Meeting of the Cognitive Science Society.",
-    "sourceVerified": true
+    "sourceVerified": true,
+    "pdfHref": "/pdfs/publications/influence-of-music-education-and-interval-size.pdf"
   },
   {
     "slug": "virtual-musical-instruments-timbre-recognition-training",
@@ -340,7 +351,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2023. \"The Use of Virtual Musical Instruments in Timbre Recognition Training.\" International Journal of Learning and Teaching. https://doi.org/10.18178/ijlt.9.3.256-260.",
-    "sourceVerified": true
+    "sourceVerified": true,
+    "pdfHref": "/pdfs/publications/virtual-musical-instruments-timbre-recognition-training.pdf"
   },
   {
     "slug": "digital-technologies-in-teaching-conducting",
@@ -368,7 +380,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2023. \"Digital technologies in teaching conducting.\" PUPIL: International Journal of Teaching, Education and Learning. https://doi.org/10.20319/pijtel.2023.63.5767.",
-    "sourceVerified": true
+    "sourceVerified": true,
+    "pdfHref": "/pdfs/publications/digital-technologies-in-teaching-conducting.pdf"
   },
   {
     "slug": "digital-technology-in-sacred-buildings",
@@ -398,7 +411,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2018. \"The Application of Digital Technology in the Physical Space of Sacred Buildings.\" Liturgia Sacra. https://doi.org/10.25167/LitS/24(2018)1/255-266.",
-    "sourceVerified": true
+    "sourceVerified": true,
+    "pdfHref": "/pdfs/publications/digital-technology-in-sacred-buildings.pdf"
   },
   {
     "slug": "sound-localisation-visual-impairment",
@@ -428,7 +442,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2017. \"Sound Localisation in Individuals with Visual Impairment.\" Niepełnosprawność. Dyskursy pedagogiki specjalnej. https://doi.org/10.4467/25439561.NP.17.028.8104.",
-    "sourceVerified": true
+    "sourceVerified": true,
+    "pdfHref": "/pdfs/publications/sound-localisation-visual-impairment.pdf"
   },
   {
     "slug": "cyberculture-and-digital-creative-practices",
@@ -441,7 +456,7 @@ export const publications: PublicationRecord[] = [
     "journal": "Muzyka. Historia. Teoria. Edukacja",
     "issue": "6",
     "pages": "74–90",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://czasopisma.ukw.edu.pl/index.php/mhte/article/view/732",
     "summary": "A Polish-language publication related to digital culture, multimedia.",
     "tags": [
       "digital culture",
@@ -454,7 +469,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2016. \"Cyberculture and Digital Creative Practices as Trends in a Multimedia Society.\" Muzyka. Historia. Teoria. Edukacja.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/cyberculture-and-digital-creative-practices.pdf"
   },
   {
     "slug": "computer-as-multimedia-tool-in-music-teacher-practice",
@@ -467,7 +483,7 @@ export const publications: PublicationRecord[] = [
     "journal": "Muzyka. Historia. Teoria. Edukacja",
     "issue": "5",
     "pages": "84–113",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://repozytorium.ukw.edu.pl/handle/item/1451",
     "summary": "A Polish-language publication related to computer music, music teaching.",
     "tags": [
       "computer music",
@@ -480,7 +496,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2015. \"The Computer as a Multimedia Tool in the Teaching Practice of Music Teachers in General and Primary-Level Music Education.\" Muzyka. Historia. Teoria. Edukacja.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/computer-as-multimedia-tool-in-music-teacher-practice.pdf"
   },
   {
     "slug": "room-acoustics-in-sacred-spaces",
@@ -493,7 +510,7 @@ export const publications: PublicationRecord[] = [
     "journal": "Przegląd Religioznawczy",
     "issue": "4(250)",
     "pages": "99–108",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://bazawiedzy.uwm.edu.pl/info/article/UWM993e34fdd2fd4b34a34ab7193639a5c2",
     "summary": "A Polish-language publication related to room acoustics, sacred spaces.",
     "tags": [
       "room acoustics",
@@ -506,7 +523,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2013. \"Room Acoustics in Sacred Spaces and the Perception of Spaciousness.\" Przegląd Religioznawczy.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/room-acoustics-in-sacred-spaces.pdf"
   },
   {
     "slug": "sound-reinforcement-systems-for-sacred-spaces",
@@ -519,7 +537,7 @@ export const publications: PublicationRecord[] = [
     "journal": "Colloquia Theologica Ottoniana",
     "issue": "2",
     "pages": "165–183",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://doaj.org/article/cbb52e7f4d764548bebb49414bb1f217",
     "summary": "A Polish-language publication related to sound reinforcement, sacred spaces.",
     "tags": [
       "sound reinforcement",
@@ -533,7 +551,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2013. \"The Selection of Sound Reinforcement Systems for Sacred Spaces.\" Colloquia Theologica Ottoniana.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/sound-reinforcement-systems-for-sacred-spaces.pdf"
   },
   {
     "slug": "training-of-music-teachers-in-media-education",
@@ -546,7 +565,7 @@ export const publications: PublicationRecord[] = [
     "journal": "Neodidagmata",
     "issue": "35",
     "pages": "83–101",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://repozytorium.amu.edu.pl/items/b001f74b-0b93-4909-93ec-3d615340659e",
     "summary": "A Polish-language publication related to media education, music teachers.",
     "tags": [
       "media education",
@@ -559,7 +578,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2013. \"The Training of Music Teachers in Media Education.\" Neodidagmata.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/training-of-music-teachers-in-media-education.pdf"
   },
   {
     "slug": "virtual-instruments-production-sound-design-compositions",
@@ -572,7 +592,7 @@ export const publications: PublicationRecord[] = [
     "journal": "Muzyka. Historia. Teoria. Edukacja",
     "issue": "2",
     "pages": "100–113",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://open.icm.edu.pl/handle/123456789/8861",
     "summary": "A Polish-language publication related to virtual instruments, sound design.",
     "tags": [
       "virtual instruments",
@@ -586,7 +606,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2012. \"The Use of Virtual Musical Instruments in the Production of Sound for Musical Compositions and Arrangements.\" Muzyka. Historia. Teoria. Edukacja.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/virtual-instruments-production-sound-design-compositions.pdf"
   },
   {
     "slug": "electronic-keyboard-instruments-teaching-music",
@@ -599,7 +620,7 @@ export const publications: PublicationRecord[] = [
     "journal": "Kultura i Wychowanie. Międzynarodowe elektroniczne czasopismo naukowe",
     "issue": "4(2)",
     "pages": "160–175",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://open.icm.edu.pl/handle/123456789/8856",
     "summary": "A Polish-language publication related to keyboard instruments, music teaching.",
     "tags": [
       "keyboard instruments",
@@ -612,7 +633,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2012. \"Electronic Keyboard Instruments as Tools Supporting the Teaching of Music.\" Kultura i Wychowanie. Międzynarodowe elektroniczne czasopismo naukowe.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/electronic-keyboard-instruments-teaching-music.pdf"
   },
   {
     "slug": "perspectives-of-acoustics-arts-2027",
@@ -637,7 +659,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2027. \"Perspectives of Acoustics. Arts.\" Book series editor.",
-    "sourceVerified": true
+    "sourceVerified": true,
+    "pdfHref": null
   },
   {
     "slug": "sound-space-creativity-performing-arts-2025",
@@ -647,7 +670,7 @@ export const publications: PublicationRecord[] = [
     "type": "Edited special issue / series",
     "language": "English",
     "issn": "2076-0752",
-    "href": "https://www.mdpi.com/journal/arts/special_issues",
+    "href": "https://www.mdpi.com/journal/arts/special_issues/WQA3DYR5IQ",
     "summary": "An edited publication context connecting sound, space, creativity and performing arts.",
     "tags": [
       "sound",
@@ -661,7 +684,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2025. \"Sound, Space, and Creativity in Performing Arts. Arts.\" Book series editor.",
-    "sourceVerified": true
+    "sourceVerified": true,
+    "pdfHref": null
   },
   {
     "slug": "przestrzenie-akustyki-professional-acoustics-2",
@@ -674,7 +698,7 @@ export const publications: PublicationRecord[] = [
     "place": "Olsztyn",
     "pages": "191",
     "isbn": "978-83-8100-364-3",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://wydawnictwo.uwm.edu.pl/sklep/produkt-info/shop/69/1978/przestrzenie-akustyki-professional-acoustics-2.html",
     "summary": "An edited volume in the Professional Acoustics series.",
     "tags": [
       "acoustics",
@@ -688,7 +712,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2023. \"Przestrzenie akustyki. Professional Acoustics. 2.\" University of Warmia and Mazury Press.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/przestrzenie-akustyki-professional-acoustics-2.pdf"
   },
   {
     "slug": "przestrzenie-akustyki-professional-acoustics",
@@ -701,7 +726,7 @@ export const publications: PublicationRecord[] = [
     "place": "Olsztyn",
     "pages": "171",
     "isbn": "978-83-8100-258-5",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://wydawnictwo.uwm.edu.pl/sklep/produkt-info/shop/69/1869/przestrzenie-akustyki-professional-acoustics.html",
     "summary": "The first edited volume in the Professional Acoustics series.",
     "tags": [
       "acoustics",
@@ -715,7 +740,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2021. \"Przestrzenie akustyki. Professional Acoustics.\" University of Warmia and Mazury Press.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/przestrzenie-akustyki-professional-acoustics.pdf"
   },
   {
     "slug": "pitch-based-stream-segregation",
@@ -728,7 +754,7 @@ export const publications: PublicationRecord[] = [
     "book": "Sonic Art, Sound Perception, and Audio Engineering",
     "pages": "59–74",
     "isbn": "978-83-65990-63-1",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://katalogi.bn.org.pl/discovery/fulldisplay?context=L&docid=alma991053137884505066&vid=48OMNIS_NLOP%3A48OMNIS_NLOP",
     "summary": "A book chapter focused on auditory stream, musicians.",
     "tags": [
       "auditory stream",
@@ -741,7 +767,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2024. \"Pitch-based stream segregation of tone sequences: A comparative study of musicians and non-musicians.\" Sonic Art, Sound Perception, and Audio Engineering.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": null
   },
   {
     "slug": "keyboard-as-a-stimulator-in-timbre-recognition-training",
@@ -754,7 +781,7 @@ export const publications: PublicationRecord[] = [
     "book": "20th International Conference on Cognition and Exploratory Learning in the Digital Age (CELDA 2023) Proceedings",
     "pages": "321–328",
     "isbn": "978-989-8704-52-8",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://eric.ed.gov/?id=ED636612",
     "summary": "A book chapter focused on keyboard, timbre.",
     "tags": [
       "keyboard",
@@ -768,7 +795,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2023. \"Keyboard as a Stimulator in Timbre Recognition Training.\" 20th International Conference on Cognition and Exploratory Learning in the Digital Age (CELDA 2023) Proceedings.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/keyboard-as-a-stimulator-in-timbre-recognition-training.pdf"
   },
   {
     "slug": "influence-of-music-education-and-pitch-scales",
@@ -781,7 +809,7 @@ export const publications: PublicationRecord[] = [
     "book": "Przestrzenie akustyki 2. Professional Acoustics. 2",
     "pages": "113–134",
     "isbn": "978-83-8100-364-3",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://open.icm.edu.pl/handle/123456789/24589",
     "summary": "A book chapter focused on music education, pitch scales.",
     "tags": [
       "music education",
@@ -795,7 +823,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2023. \"Influence of Music Education and Pitch Scales on the Grouping of the AB-AB Sequence Sounds.\" Przestrzenie akustyki 2. Professional Acoustics. 2.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/influence-of-music-education-and-pitch-scales.pdf"
   },
   {
     "slug": "computer-applications-popular-music-composers",
@@ -808,7 +837,7 @@ export const publications: PublicationRecord[] = [
     "book": "Przestrzenie akustyki 2. Professional Acoustics. 2",
     "pages": "53–73",
     "isbn": "978-83-8100-364-3",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://bazawiedzy.uwm.edu.pl/info/article/UWM2a4e4bb3b383476c8784ef9ed6b0482f",
     "summary": "A book chapter focused on computer applications, popular music.",
     "tags": [
       "computer applications",
@@ -822,7 +851,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Waśkiewicz, M., and Adam Rosiński. 2023. \"Computer Applications for Popular Music Composers in Creative Work and Teaching.\" Przestrzenie akustyki 2. Professional Acoustics. 2.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/computer-applications-popular-music-composers.pdf"
   },
   {
     "slug": "musical-training-grouping-galloping-rhythm",
@@ -835,7 +865,7 @@ export const publications: PublicationRecord[] = [
     "book": "Przestrzenie akustyki. Professional Acoustics",
     "pages": "53–70",
     "isbn": "978-83-8100-258-5",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://open.icm.edu.pl/items/f85b4889-3c58-462e-9fb9-58c451b092f3",
     "summary": "A book chapter focused on musical training, perceptual grouping.",
     "tags": [
       "musical training",
@@ -849,7 +879,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2021. \"The Influence of Musical Training on the Perceptual Grouping of ABA–ABA Sound Sequences into a Galloping Rhythm.\" Przestrzenie akustyki. Professional Acoustics.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/musical-training-grouping-galloping-rhythm.pdf"
   },
   {
     "slug": "perception-of-sound-via-auditory-image-analysis",
@@ -862,7 +893,7 @@ export const publications: PublicationRecord[] = [
     "book": "Humanitarian Corpus, Issue 35, Vol. 2",
     "pages": "101–107",
     "isbn": "978-966-949-567-9",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://open.icm.edu.pl/handle/123456789/20470",
     "summary": "A book chapter focused on auditory image, philosophy of music.",
     "tags": [
       "auditory image",
@@ -875,7 +906,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2020. \"Perception of Sound via Auditory Image Analysis, made in the Conceptual Context of the Philosophy of Music.\" Humanitarian Corpus, Issue 35, Vol. 2.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/perception-of-sound-via-auditory-image-analysis.pdf"
   },
   {
     "slug": "architectural-acoustics-sonic-identity-of-churches",
@@ -888,7 +920,7 @@ export const publications: PublicationRecord[] = [
     "book": "II Sobór Watykański (1962-1965) i jego wpływ na Kościół katolicki. Perspektywa tradycjonalistyczna",
     "pages": "86–101",
     "isbn": "978-83-65982-11-7",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://open.icm.edu.pl/items/8ec6bd74-5d93-4bbd-9583-ca27697ee6ef",
     "summary": "A book chapter focused on architectural acoustics, churches.",
     "tags": [
       "architectural acoustics",
@@ -901,7 +933,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2018. \"The Role of Architectural Acoustics in Shaping the Sonic Identity of Churches.\" II Sobór Watykański (1962-1965) i jego wpływ na Kościół katolicki. Perspektywa tradycjonalistyczna.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/architectural-acoustics-sonic-identity-of-churches.pdf"
   },
   {
     "slug": "interactive-systems-contemporary-music-education",
@@ -914,7 +947,7 @@ export const publications: PublicationRecord[] = [
     "book": "Problematyka kształcenia muzycznego na poziomie studiów wyższych w zmieniającym się obrazie zjawisk kulturowych",
     "pages": "131–140",
     "isbn": "978-83-946827-0-5",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://bazawiedzy.uwm.edu.pl/resultList.seam?aq=.%3AUWM64db4e1373834a9985615d1d0fb724c1%2C%40id%21%3DUWM64db4e1373834a9985615d1d0fb724c1&lang=pl&pn=1&ps=20&r=publication&showRel=false&t=simple",
     "summary": "A book chapter focused on interactive systems, music education.",
     "tags": [
       "interactive systems",
@@ -927,7 +960,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2017. \"The Application of Interactive Systems in Contemporary Music Education.\" Problematyka kształcenia muzycznego na poziomie studiów wyższych w zmieniającym się obrazie zjawisk kulturowych.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/interactive-systems-contemporary-music-education.pdf"
   },
   {
     "slug": "virtual-sound-sources-binaural-recordings",
@@ -940,7 +974,7 @@ export const publications: PublicationRecord[] = [
     "book": "Nowe trendy w naukach inżynieryjnych 4, t. II",
     "pages": "9–18",
     "isbn": "978-83-63058-30-2",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://open.icm.edu.pl/items/eced7246-d706-4aa6-adf2-350b429fcd05",
     "summary": "A book chapter focused on binaural, virtual sources.",
     "tags": [
       "binaural",
@@ -954,7 +988,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2013. \"Localisation of Virtual Sound Sources in Binaural Recordings.\" Nowe trendy w naukach inżynieryjnych 4, t. II.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/virtual-sound-sources-binaural-recordings.pdf"
   },
   {
     "slug": "virtual-instruments-timbre-perception",
@@ -981,7 +1016,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2013. \"The Role of Virtual Instruments in the Development of Timbre Perception.\" Nowe trendy w naukach humanistycznych i społeczno-ekonomicznych 4, t. I.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/virtual-instruments-timbre-perception.pdf"
   },
   {
     "slug": "mastering-art-of-shaping-timbre",
@@ -994,7 +1030,7 @@ export const publications: PublicationRecord[] = [
     "book": "Młodzi naukowcy dla polskiej nauki. Cz. X: Nauki inżynieryjne, t. I",
     "pages": "11–17",
     "isbn": "978-83-63058-27-2",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://open.icm.edu.pl/items/7a7809ce-bbbb-456f-83ec-a998fe3bc645",
     "summary": "A book chapter focused on mastering, timbre.",
     "tags": [
       "mastering",
@@ -1008,7 +1044,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2013. \"Mastering as the Art of Shaping the Timbre of Musical Works.\" Młodzi naukowcy dla polskiej nauki. Cz. X: Nauki inżynieryjne, t. I.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/mastering-art-of-shaping-timbre.pdf"
   },
   {
     "slug": "vocal-improvisation-jazz-arrangements",
@@ -1021,7 +1058,7 @@ export const publications: PublicationRecord[] = [
     "book": "Młodzi naukowcy dla polskiej nauki. Cz. XII: Nauki humanistyczne i społeczno-ekonomiczne, t. I",
     "pages": "9–16",
     "isbn": "978-83-63058-29-6",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://open.icm.edu.pl/items/7d966ee6-655d-4f5a-86ea-9cad1798cbb4",
     "summary": "A book chapter focused on jazz, vocal improvisation.",
     "tags": [
       "jazz",
@@ -1035,7 +1072,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2013. \"Vocal Improvisation in Jazz Arrangements as a Form of Creative Practice in Music Schools.\" Młodzi naukowcy dla polskiej nauki. Cz. XII: Nauki humanistyczne i społeczno-ekonomiczne, t. I.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/vocal-improvisation-jazz-arrangements.pdf"
   },
   {
     "slug": "acoustics-of-sacred-spaces-speech-intelligibility",
@@ -1048,7 +1086,7 @@ export const publications: PublicationRecord[] = [
     "book": "Muzyka sakralna w europejskim przekazie kulturowym. Historia – kryteria – współczesność",
     "pages": "85–103",
     "isbn": "978-83-936400-2-7",
-    "href": "https://adamrosinski.com/publications/",
+    "href": "https://open.icm.edu.pl/items/b3214e96-56c5-41b7-a799-553ff0fdce2b",
     "summary": "A book chapter focused on sacred spaces, speech intelligibility.",
     "tags": [
       "sacred spaces",
@@ -1061,7 +1099,8 @@ export const publications: PublicationRecord[] = [
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
     "citation": "Rosiński, Adam. 2012. \"The Acoustics of Sacred Spaces and Speech Intelligibility.\" Muzyka sakralna w europejskim przekazie kulturowym. Historia – kryteria – współczesność.",
-    "sourceVerified": false
+    "sourceVerified": false,
+    "pdfHref": "/pdfs/publications/acoustics-of-sacred-spaces-speech-intelligibility.pdf"
   }
 ];
 
