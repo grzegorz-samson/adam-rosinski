@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-labelledby="title desc">
+  <title id="title">Placeholder mark for Audio Engineering Society</title>
+  <desc id="desc">A non-official technical node motif with AES initials.</desc>
+  <rect width="220" height="220" rx="48" fill="#061525"/>
+  <path d="M64 152 110 48l46 104H64Z" fill="none" stroke="#8fb7ff" stroke-width="5" stroke-linejoin="round" opacity="0.88"/>
+  <path d="M75 132h70M88 102h44M99 76h22" stroke="#d9e7ff" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+  <circle cx="64" cy="152" r="7" fill="#8fb7ff"/>
+  <circle cx="110" cy="48" r="7" fill="#8fb7ff"/>
+  <circle cx="156" cy="152" r="7" fill="#8fb7ff"/>
+  <path d="M43 68c44 16 90 16 134 0M43 178c44-15 90-15 134 0" fill="none" stroke="#8fb7ff" stroke-width="2" opacity="0.26"/>
+  <text x="110" y="130" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="47" font-weight="850" fill="#f8fbff" letter-spacing="3">AES</text>
+  <text x="110" y="158" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#d9e7ff" letter-spacing="2.7">AUDIO NETWORK</text>
+</svg>

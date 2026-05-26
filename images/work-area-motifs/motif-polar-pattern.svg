@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 560" role="img" aria-label="Polar pattern motif">
+  <defs><radialGradient id="halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#67e8f9" stop-opacity=".25"/><stop offset="1" stop-color="#67e8f9" stop-opacity="0"/></radialGradient></defs>
+  <rect width="560" height="560" fill="url(#halo)"/>
+  <g transform="translate(280 280)" fill="none">
+    <g stroke="white" stroke-opacity=".13"><circle r="72"/><circle r="136"/><circle r="200"/><path d="M-220 0h440M0-220v440M-155-155l310 310M-155 155l310-310"/></g>
+    <path d="M0-205C105-205 190-118 190-12c0 122-92 196-190 196S-190 110-190-12C-190-118-105-205 0-205Z" fill="rgba(103,232,249,.07)" stroke="#67e8f9" stroke-width="4"/>
+    <path d="M0-172C66-172 124-119 124-52c0 71-53 108-124 154C-71 56-124 19-124-52c0-67 58-120 124-120Z" stroke="#fbbf24" stroke-width="3" stroke-opacity=".78"/>
+  </g>
+</svg>

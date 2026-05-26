@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 520" role="img" aria-label="Ellipsoid microphone motif">
+  <defs>
+    <linearGradient id="shell" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset=".48" stop-color="#334155"/>
+      <stop offset="1" stop-color="#030712"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#67e8f9"/>
+      <stop offset="1" stop-color="#fbbf24"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="520" fill="none"/>
+  <ellipse cx="360" cy="260" rx="260" ry="132" fill="url(#shell)" stroke="rgba(255,255,255,.22)"/>
+  <g stroke="rgba(255,255,255,.13)" fill="none">
+    <ellipse cx="360" cy="260" rx="218" ry="96"/>
+    <path d="M110 260h500M360 128v264"/>
+    <path d="M179 188c106 62 254 62 362 0M179 332c106-62 254-62 362 0"/>
+  </g>
+  <g>
+    <circle cx="164" cy="260" r="27" fill="#020617" stroke="url(#accent)" stroke-width="2"/>
+    <circle cx="262" cy="224" r="25" fill="#020617" stroke="url(#accent)" stroke-width="2"/>
+    <circle cx="360" cy="212" r="25" fill="#020617" stroke="url(#accent)" stroke-width="2"/>
+    <circle cx="458" cy="224" r="25" fill="#020617" stroke="url(#accent)" stroke-width="2"/>
+    <circle cx="556" cy="260" r="27" fill="#020617" stroke="url(#accent)" stroke-width="2"/>
+    <g fill="#fbbf24" opacity=".85">
+      <circle cx="164" cy="260" r="4"/><circle cx="262" cy="224" r="4"/><circle cx="360" cy="212" r="4"/><circle cx="458" cy="224" r="4"/><circle cx="556" cy="260" r="4"/>
+    </g>
+  </g>
+</svg>

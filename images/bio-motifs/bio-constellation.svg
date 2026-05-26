@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280" role="img" aria-labelledby="title desc">
+  <title id="title">Research constellation</title>
+  <desc id="desc">Network of biographical research fields.</desc>
+  <defs>
+    <linearGradient id="stroke" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#67e8f9"/>
+      <stop offset="0.52" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#fbbf24"/>
+    </linearGradient>
+    <radialGradient id="node" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#67e8f9" stop-opacity="0.62"/>
+    </radialGradient>
+  </defs>
+  <rect width="720" height="280" rx="28" fill="#05070b" opacity="0.08"/>
+  <g stroke="url(#stroke)" stroke-opacity="0.42" stroke-width="1.4" fill="none">
+    <path d="M76 176L164 91l111 57 116-86 116 93 139-49"/>
+    <path d="M164 91l61 119 166-148 10 147 106-54 53 77"/>
+    <path d="M76 176l149 34 176-1 159 23 86-126"/>
+  </g>
+  <g font-family="Inter, Arial, sans-serif" font-size="14" fill="#d4d4d8">
+    <g transform="translate(76 176)"><circle r="9" fill="url(#node)"/><text x="16" y="5">perception</text></g>
+    <g transform="translate(164 91)"><circle r="9" fill="url(#node)"/><text x="16" y="5">doctorate</text></g>
+    <g transform="translate(225 210)"><circle r="9" fill="url(#node)"/><text x="16" y="5">studio</text></g>
+    <g transform="translate(275 148)"><circle r="9" fill="url(#node)"/><text x="16" y="5">technology</text></g>
+    <g transform="translate(391 62)"><circle r="9" fill="url(#node)"/><text x="16" y="5">publishing</text></g>
+    <g transform="translate(401 209)"><circle r="9" fill="url(#node)"/><text x="16" y="5">teaching</text></g>
+    <g transform="translate(507 155)"><circle r="9" fill="url(#node)"/><text x="16" y="5">reviewing</text></g>
+    <g transform="translate(560 232)"><circle r="9" fill="url(#node)"/><text x="16" y="5">networks</text></g>
+    <g transform="translate(646 106)"><circle r="9" fill="url(#node)"/><text x="-94" y="-14">practice</text></g>
+  </g>
+</svg>
