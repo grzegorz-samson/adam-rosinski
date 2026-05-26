@@ -78,12 +78,11 @@ const workAreas = [
   },
 ];
 
-const motifFor = {
-  array: "/images/work-area-motifs/motif-circular-array.svg",
-  ellipsoid: "/images/work-area-motifs/motif-spherical-capsule.svg",
-  pipeline: "/images/work-area-motifs/motif-research-pipeline.svg",
-  polar: "/images/work-area-motifs/motif-polar-pattern.svg",
-};
+const heroMotifs = [
+  "/images/work-area-motifs/motif-circular-array.svg",
+  "/images/work-area-motifs/motif-spherical-capsule.svg",
+  "/images/work-area-motifs/motif-polar-pattern.svg",
+];
 
 const applicationBuckets = [
   {
@@ -125,6 +124,11 @@ const applicationBuckets = [
 
   <div class="hero-visual" aria-hidden="true">
     <img src={withBase("/images/work-area-motifs/motif-technical-grid.svg")} alt="" loading="eager" />
+    <div class="hero-motif-stack">
+      {heroMotifs.map((motif, index) => (
+        <img class={`hero-motif hero-motif-${index + 1}`} src={withBase(motif)} alt="" loading="eager" />
+      ))}
+    </div>
     <div class="hero-orbit hero-orbit-one"></div>
     <div class="hero-orbit hero-orbit-two"></div>
     <div class="hero-chip hero-chip-a">perception</div>
@@ -150,9 +154,8 @@ const applicationBuckets = [
         class="prototype-card"
         style={`--accent: ${item.accent}; --accent-2: ${item.accent2}; background-image: radial-gradient(circle at top right, color-mix(in srgb, ${item.accent} 24%, transparent), transparent 36%);`}
       >
-        <div class="prototype-media is-gradient-media">
+        <div class:list={["prototype-media", item.id === "circular-audio-array" && "is-cover-media"]}>
           <img src={withBase(item.image)} alt={item.imageAlt} loading="lazy" />
-          <img class="prototype-motif" src={withBase(motifFor[item.visualMotif])} alt="" loading="lazy" />
         </div>
         <div class="prototype-copy">
           <div class="prototype-labels">
@@ -187,7 +190,9 @@ const applicationBuckets = [
               <ArrowUpRight size={15} stroke-width={1.8} aria-hidden="true" />
             </a>
           ) : (
-            <p class="source-note">{item.sourceNote}</p>
+            <button type="button" class="article-link article-link-placeholder" disabled>
+              <span>Placeholder link</span>
+            </button>
           )}
         </div>
       </article>
@@ -509,13 +514,47 @@ const applicationBuckets = [
       #070b12;
   }
 
-  .hero-visual img {
+  .hero-visual > img {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     opacity: 0.56;
+  }
+
+  .hero-motif-stack {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .hero-motif {
+    position: absolute;
+    display: block;
+    width: min(68%, 25rem);
+    filter: drop-shadow(0 26px 42px rgba(0, 0, 0, 0.34));
+    mix-blend-mode: screen;
+  }
+
+  .hero-motif-1 {
+    right: -8%;
+    top: 5%;
+    opacity: 0.86;
+  }
+
+  .hero-motif-2 {
+    left: -8%;
+    bottom: -4%;
+    width: min(58%, 21rem);
+    opacity: 0.62;
+  }
+
+  .hero-motif-3 {
+    right: 18%;
+    bottom: 12%;
+    width: min(42%, 15rem);
+    opacity: 0.5;
   }
 
   .hero-orbit {
@@ -709,7 +748,7 @@ const applicationBuckets = [
   .prototype-media {
     position: relative;
     isolation: isolate;
-    min-height: 32rem;
+    min-height: 100%;
     overflow: hidden;
     background:
       radial-gradient(circle at 72% 24%, color-mix(in srgb, var(--accent) 46%, transparent) 0%, transparent 34%),
@@ -735,13 +774,9 @@ const applicationBuckets = [
     filter: saturate(0.98) contrast(1.06) drop-shadow(0 22px 34px rgba(0, 0, 0, 0.34));
   }
 
-  .prototype-motif {
-    position: absolute;
-    right: -3rem;
-    bottom: -2rem;
-    width: min(72%, 30rem);
-    opacity: 0.64;
-    mix-blend-mode: screen;
+  .prototype-media.is-cover-media > img:first-child {
+    object-fit: cover;
+    padding: 0;
   }
 
   .prototype-copy {
@@ -821,11 +856,10 @@ const applicationBuckets = [
     padding: 0.72rem 0.92rem;
   }
 
-  .source-note {
-    border-left: 2px solid var(--accent);
-    padding-left: 0.9rem;
-    color: #aab4c4 !important;
-    font-size: 0.9rem;
+  .article-link-placeholder {
+    border: 0;
+    cursor: not-allowed;
+    opacity: 0.72;
   }
 
   .flow-card {
@@ -888,10 +922,14 @@ const applicationBuckets = [
   .application-card::after {
     content: "";
     position: absolute;
-    inset: auto -30% -45% 20%;
-    height: 10rem;
+    inset: auto -22% -28% -8%;
+    height: 13rem;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(103, 232, 249, 0.18), transparent 65%);
+    background: radial-gradient(ellipse at center, rgba(103, 232, 249, 0.2), rgba(103, 232, 249, 0.08) 42%, transparent 74%);
+    filter: blur(18px);
+    opacity: 0.9;
+    mask-image: linear-gradient(180deg, transparent 0%, black 26%, black 72%, transparent 100%);
+    pointer-events: none;
   }
 
   .application-index {
@@ -920,7 +958,8 @@ const applicationBuckets = [
     }
 
     .prototype-media {
-      min-height: 24rem;
+      aspect-ratio: 1;
+      min-height: 0;
     }
 
     .flow-card ol,
@@ -951,7 +990,8 @@ const applicationBuckets = [
     }
 
     .prototype-media {
-      min-height: 19rem;
+      aspect-ratio: 1;
+      min-height: 0;
     }
 
     .hero-copy,

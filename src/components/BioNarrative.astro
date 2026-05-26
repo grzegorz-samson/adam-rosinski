@@ -10,6 +10,7 @@ import Palette from "@lucide/astro/icons/palette";
 import Radio from "@lucide/astro/icons/radio";
 import Network from "@lucide/astro/icons/network";
 import Sparkles from "@lucide/astro/icons/sparkles";
+import ChevronDown from "@lucide/astro/icons/chevron-down";
 import Quote from "@lucide/astro/icons/quote";
 import { biographyChapters, biographyTimeline } from "../data/biography";
 import { withBase } from "../utils/withBase";
@@ -27,6 +28,20 @@ const icons = {
   Network,
   Sparkles,
 };
+
+function getChapterLinkHref(href: string) {
+  return href.startsWith("http") ? href : withBase(href);
+}
+
+function getChapterLinkTheme(href: string) {
+  if (href.startsWith("/work-areas")) return "emerald";
+  if (href.startsWith("/publications")) return "violet";
+  if (href.startsWith("/editorial-roles")) return "slate";
+  if (href.startsWith("/audio-demonstrator")) return "amber";
+  if (href.startsWith("/music-label")) return "cyan";
+  if (href.startsWith("/pdfs/cv") || href.startsWith("/bio-plus") || href.startsWith("/about")) return "red";
+  return "cyan";
+}
 ---
 
 <section id="biographical-map" class="bio-map-section" aria-labelledby="bio-map-title">
@@ -78,8 +93,25 @@ const icons = {
 
             <p class="bio-chapter-summary">{chapter.summary}</p>
 
-            <div class="bio-chip-row">
-              {chapter.chips.map((chip) => <span>{chip}</span>)}
+            <div class="bio-chip-line">
+              <div class="bio-chip-row">
+                {chapter.chips.map((chip) => <span>{chip}</span>)}
+              </div>
+
+              {chapter.links && chapter.links.length > 0 && (
+                <div class="bio-related-links" aria-label={`Related links for ${chapter.title}`}>
+                  {chapter.links.map((link) => (
+                    <a
+                      href={getChapterLinkHref(link.href)}
+                      class={`bio-link-${getChapterLinkTheme(link.href)}`}
+                      target={link.href.endsWith(".pdf") || link.href.startsWith("http") ? "_blank" : undefined}
+                      rel={link.href.endsWith(".pdf") || link.href.startsWith("http") ? "noreferrer" : undefined}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div class="bio-pull-note">
@@ -87,11 +119,14 @@ const icons = {
               <p>{chapter.pull}</p>
             </div>
 
-            <div class="bio-fulltext">
+            <details class="bio-fulltext" open>
+              <summary class="bio-toggle-arrow" aria-label={`Toggle chapter text: ${chapter.title}`}>
+                <ChevronDown size={18} stroke-width={1.8} aria-hidden="true" />
+              </summary>
               <div class="bio-fulltext-copy">
                 {chapter.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
               </div>
-            </div>
+            </details>
           </article>
         );
       })}
@@ -369,12 +404,20 @@ const icons = {
     line-height: 1.8;
   }
 
-  .bio-chip-row {
+  .bio-chip-line {
     position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .bio-chip-row {
     display: flex;
     flex-wrap: wrap;
     gap: 0.55rem;
-    margin-top: 1rem;
+    min-width: 0;
   }
 
   .bio-chip-row span {
@@ -414,22 +457,129 @@ const icons = {
     line-height: 1.65;
   }
 
+  .bio-related-links {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.55rem;
+    flex: 0 1 auto;
+  }
+
+  .bio-related-links a {
+    --bio-link-rgb: 103, 232, 249;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(var(--bio-link-rgb), 0.22);
+    border-radius: 999px;
+    background: rgba(var(--bio-link-rgb), 0.075);
+    color: rgb(var(--bio-link-rgb));
+    padding: 0.45rem 0.72rem;
+    font-size: 0.8rem;
+    font-weight: 750;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      background 180ms ease,
+      color 180ms ease;
+  }
+
+  .bio-related-links a::after {
+    content: "↗";
+    margin-left: 0.42rem;
+    font-size: 0.82em;
+    opacity: 0.72;
+  }
+
+  .bio-related-links a:hover {
+    border-color: rgba(var(--bio-link-rgb), 0.48);
+    background: rgba(var(--bio-link-rgb), 0.14);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+
+  .bio-related-links a.bio-link-emerald {
+    --bio-link-rgb: 110, 236, 188;
+  }
+
+  .bio-related-links a.bio-link-violet {
+    --bio-link-rgb: 182, 173, 255;
+  }
+
+  .bio-related-links a.bio-link-slate {
+    --bio-link-rgb: 208, 214, 228;
+  }
+
+  .bio-related-links a.bio-link-amber {
+    --bio-link-rgb: 255, 199, 112;
+  }
+
+  .bio-related-links a.bio-link-cyan {
+    --bio-link-rgb: 134, 227, 255;
+  }
+
+  .bio-related-links a.bio-link-red {
+    --bio-link-rgb: 255, 112, 112;
+  }
+
   .bio-fulltext {
     position: relative;
     margin-top: 1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.09);
-    padding-top: 0.25rem;
+    padding-top: 1rem;
+  }
+
+  .bio-fulltext summary {
+    float: right;
+    margin: 0 0 0.6rem 1rem;
+    cursor: pointer;
+    list-style: none;
+    padding: 0;
+  }
+
+  .bio-fulltext summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .bio-fulltext summary svg {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.045);
+    color: #e5e7eb;
+    padding: 0.42rem;
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      background 180ms ease,
+      color 180ms ease;
+  }
+
+  .bio-fulltext summary:hover svg {
+    border-color: rgba(103, 232, 249, 0.36);
+    background: rgba(103, 232, 249, 0.09);
+    color: #fff;
+  }
+
+  .bio-fulltext[open] summary svg {
+    transform: rotate(180deg);
   }
 
   .bio-fulltext-copy {
-    padding-top: 0.9rem;
-    max-width: 78ch;
+    max-width: min(100%, 96ch);
   }
 
   .bio-fulltext-copy p {
     color: #d4d4d8;
     font-size: 1rem;
     line-height: 1.96;
+    text-align: justify;
+    text-wrap: pretty;
   }
 
   .bio-fulltext-copy p + p {
@@ -528,6 +678,14 @@ const icons = {
 
     .bio-chapter-head {
       display: grid;
+    }
+
+    .bio-chip-line {
+      display: grid;
+    }
+
+    .bio-related-links {
+      justify-content: flex-start;
     }
   }
 </style>

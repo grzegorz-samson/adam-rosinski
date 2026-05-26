@@ -11,7 +11,6 @@ export type Invention = {
   image: string;
   imageAlt: string;
   articleHref?: string;
-  sourceNote?: string;
   relatedAreas: string[];
   tags: string[];
   innovationPoints: string[];
@@ -32,11 +31,9 @@ export const inventions: Invention[] = [
       "A large-scale circular audio environment for experiments in multichannel listening, spatial perception, and situated sound practice.",
     status: "article-related",
     publicLabel: "Authorial prototype",
-    image: "/images/inventions/circular-audio-array-transparent.png",
+    image: "/images/inventions/circular-audio-array.webp",
     imageAlt:
       "Large black circular multichannel audio array suspended above a seated listener.",
-    sourceNote:
-      "Replace the temporary Open ICM bitstream link with a stable public record URL before publishing a source CTA.",
     relatedAreas: ["Perception", "Space", "Authorial Prototypes", "Artistic Research"],
     tags: ["immersive audio", "multichannel listening", "spatial system"],
     innovationPoints: [

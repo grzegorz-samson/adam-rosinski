@@ -5,7 +5,7 @@
     </linearGradient>
   </defs>
   <rect width="900" height="240" fill="none"/>
-  <path d="M60 120 C 205 24, 300 216, 450 120 S 695 24, 840 120" fill="none" stroke="url(#flow)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M60 120 C 205 24, 300 216, 450 120 S 695 216, 840 120" fill="none" stroke="url(#flow)" stroke-width="4" stroke-linecap="round"/>
   <g fill="#020617" stroke="url(#flow)" stroke-width="3">
     <circle cx="60" cy="120" r="18"/><circle cx="255" cy="120" r="18"/><circle cx="450" cy="120" r="18"/><circle cx="645" cy="120" r="18"/><circle cx="840" cy="120" r="18"/>
   </g>
