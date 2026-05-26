@@ -3,6 +3,7 @@ import BaseLayout from "./BaseLayout.astro";
 import AudioWaveform from "@lucide/astro/icons/audio-waveform";
 import Disc3 from "@lucide/astro/icons/disc-3";
 import UserRound from "@lucide/astro/icons/user-round";
+import UserRoundPlus from "@lucide/astro/icons/user-round-plus";
 import Radar from "@lucide/astro/icons/radar";
 import Headphones from "@lucide/astro/icons/headphones";
 import BookOpen from "@lucide/astro/icons/book-open";
@@ -25,6 +26,7 @@ function isActive(href: string) {
 
 const navIcons = {
   "/about": UserRound,
+  "/bio-plus": UserRoundPlus,
   "/work-areas": Radar,
   "/audio-demonstrator": Headphones,
   "/publications": BookOpen,
@@ -35,6 +37,7 @@ const navIcons = {
 
 const navThemes = {
   "/about": "cyan",
+  "/bio-plus": "red",
   "/work-areas": "emerald",
   "/audio-demonstrator": "amber",
   "/publications": "violet",
@@ -203,6 +206,10 @@ const navThemes = {
     color: rgba(208, 214, 228, 0.94);
   }
 
+  .alt-nav-link-red {
+    color: rgba(255, 112, 112, 0.95);
+  }
+
   .alt-nav-link-cyan:hover,
   .alt-nav-link-cyan.is-active {
     text-shadow:
@@ -236,6 +243,13 @@ const navThemes = {
     text-shadow:
       0 0 14px rgba(161, 161, 170, 0.26),
       0 0 26px rgba(161, 161, 170, 0.14);
+  }
+
+  .alt-nav-link-red:hover,
+  .alt-nav-link-red.is-active {
+    text-shadow:
+      0 0 14px rgba(248, 113, 113, 0.4),
+      0 0 28px rgba(220, 38, 38, 0.22);
   }
 
   .alt-nav-link svg,

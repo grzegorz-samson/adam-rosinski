@@ -1,0 +1,533 @@
+---
+import Brain from "@lucide/astro/icons/brain";
+import AudioWaveform from "@lucide/astro/icons/audio-waveform";
+import BookOpen from "@lucide/astro/icons/book-open";
+import GraduationCap from "@lucide/astro/icons/graduation-cap";
+import WavesHorizontal from "@lucide/astro/icons/waves-horizontal";
+import PenLine from "@lucide/astro/icons/pen-line";
+import Building2 from "@lucide/astro/icons/building-2";
+import Palette from "@lucide/astro/icons/palette";
+import Radio from "@lucide/astro/icons/radio";
+import Network from "@lucide/astro/icons/network";
+import Sparkles from "@lucide/astro/icons/sparkles";
+import Quote from "@lucide/astro/icons/quote";
+import { biographyChapters, biographyTimeline } from "../data/biography";
+import { withBase } from "../utils/withBase";
+
+const icons = {
+  Brain,
+  AudioWaveform,
+  BookOpen,
+  GraduationCap,
+  WavesHorizontal,
+  PenLine,
+  Building2,
+  Palette,
+  Radio,
+  Network,
+  Sparkles,
+};
+---
+
+<section id="biographical-map" class="bio-map-section" aria-labelledby="bio-map-title">
+  <div class="bio-map-heading">
+    <div>
+      <p class="bio-eyebrow">Extended profile</p>
+      <h2 id="bio-map-title">Research in sound.</h2>
+    </div>
+    <div class="bio-heading-constellation" aria-hidden="true">
+      <img src={withBase("/images/bio-motifs/bio-constellation.svg")} alt="" loading="lazy" />
+    </div>
+  </div>
+
+  <div class="bio-map-layout">
+    <aside class="bio-map-sidebar" aria-label="Biography navigation">
+      <div class="bio-sidebar-card">
+        <span class="bio-sidebar-label">Profile sections</span>
+        <nav>
+          {biographyChapters.map((chapter, index) => (
+            <a href={`#${chapter.id}`}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              {chapter.title}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      <div class="bio-sidebar-card bio-signal-card">
+        <img src={withBase("/images/bio-motifs/bio-timeline-signal.svg")} alt="Abstract signal timeline" loading="lazy" />
+        <span>Profile arc</span>
+        <strong>Research → technology → practice → public exchange</strong>
+      </div>
+    </aside>
+
+    <div class="bio-chapter-stack">
+      {biographyChapters.map((chapter, index) => {
+        const Icon = icons[chapter.icon as keyof typeof icons] ?? Brain;
+        return (
+          <article id={chapter.id} class:list={["bio-chapter", `bio-chapter-${chapter.accent}`]}>
+            <div class="bio-chapter-head">
+              <div class="bio-chapter-icon">
+                <Icon size={20} stroke-width={1.8} aria-hidden="true" />
+              </div>
+              <div>
+                <span>{chapter.eyebrow}</span>
+                <h3>{chapter.title}</h3>
+              </div>
+            </div>
+
+            <p class="bio-chapter-summary">{chapter.summary}</p>
+
+            <div class="bio-chip-row">
+              {chapter.chips.map((chip) => <span>{chip}</span>)}
+            </div>
+
+            <div class="bio-pull-note">
+              <Quote size={17} stroke-width={1.8} aria-hidden="true" />
+              <p>{chapter.pull}</p>
+            </div>
+
+            <div class="bio-fulltext">
+              <div class="bio-fulltext-copy">
+                {chapter.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<section class="bio-timeline-section" aria-labelledby="bio-timeline-title">
+  <div class="bio-timeline-header">
+    <p class="bio-eyebrow">At a glance</p>
+    <h2 id="bio-timeline-title">Five lines of development</h2>
+    <p>
+      A compact overview of the main continuities running through the biography: formation,
+      perception research, recording technology, institutional work, and scholarly exchange.
+    </p>
+  </div>
+
+  <div class="bio-timeline-grid">
+    {biographyTimeline.map((item, index) => (
+      <article class="bio-timeline-card">
+        <span class="bio-timeline-number">{String(index + 1).padStart(2, "0")}</span>
+        <small>{item.period}</small>
+        <h3>{item.title}</h3>
+        <p>{item.text}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .bio-map-section,
+  .bio-timeline-section {
+    padding: 3.2rem 0 4.5rem;
+  }
+
+  .bio-map-heading,
+  .bio-timeline-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.78fr);
+    gap: 2rem;
+    align-items: end;
+    margin-bottom: 1.5rem;
+  }
+
+  .bio-eyebrow {
+    margin: 0 0 0.9rem;
+    color: #67e8f9;
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+  }
+
+  .bio-map-heading h2,
+  .bio-timeline-header h2 {
+    max-width: 68rem;
+    color: #fff;
+    font-size: clamp(2rem, 4.6vw, 4.1rem);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
+  .bio-map-heading p,
+  .bio-timeline-header p {
+    color: #aeb7c5;
+    line-height: 1.8;
+  }
+
+  .bio-heading-constellation {
+    min-height: 13rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-radius: 28px;
+    background:
+      linear-gradient(135deg, rgba(5, 7, 11, 0.72), rgba(5, 7, 11, 0.34)),
+      radial-gradient(circle at 72% 22%, rgba(103, 232, 249, 0.2), transparent 46%),
+      radial-gradient(circle at 22% 80%, rgba(167, 139, 250, 0.14), transparent 48%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 18px 48px rgba(0, 0, 0, 0.24);
+    backdrop-filter: blur(10px);
+  }
+
+  .bio-heading-constellation img {
+    width: 100%;
+    height: 100%;
+    min-height: 13rem;
+    object-fit: contain;
+    opacity: 0.9;
+    mix-blend-mode: screen;
+  }
+
+  .bio-map-layout {
+    display: grid;
+    grid-template-columns: minmax(250px, 0.34fr) minmax(0, 1fr);
+    gap: 1.2rem;
+    align-items: start;
+  }
+
+  .bio-map-sidebar {
+    position: sticky;
+    top: 6rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .bio-sidebar-card,
+  .bio-chapter,
+  .bio-timeline-card {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.045);
+    box-shadow: 0 20px 68px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(18px);
+  }
+
+  .bio-sidebar-card {
+    overflow: hidden;
+    border-radius: 24px;
+    padding: 1rem;
+  }
+
+  .bio-sidebar-label {
+    display: block;
+    margin-bottom: 0.7rem;
+    color: #8cdfff;
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .bio-sidebar-card nav {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .bio-sidebar-card nav a {
+    display: grid;
+    grid-template-columns: 2.3rem minmax(0, 1fr);
+    gap: 0.55rem;
+    align-items: baseline;
+    border-radius: 14px;
+    color: #cbd5e1;
+    padding: 0.52rem 0.55rem;
+    text-decoration: none;
+    font-size: 0.87rem;
+    line-height: 1.25;
+    transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+  }
+
+  .bio-sidebar-card nav a:hover {
+    background: rgba(103, 232, 249, 0.08);
+    color: #fff;
+    transform: translateX(2px);
+  }
+
+  .bio-sidebar-card nav a span {
+    color: #67e8f9;
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.76rem;
+  }
+
+  .bio-signal-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 0.85rem;
+  }
+
+  .bio-signal-card > span {
+    display: block;
+    color: #aeb7c5;
+    font-size: 0.84rem;
+  }
+
+  .bio-signal-card strong {
+    display: block;
+    margin-top: 0.4rem;
+    color: #fff;
+    line-height: 1.35;
+  }
+
+  .bio-chapter-stack {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .bio-chapter {
+    position: relative;
+    overflow: hidden;
+    border-radius: 28px;
+    padding: clamp(1.15rem, 2.5vw, 2rem);
+    scroll-margin-top: 6rem;
+  }
+
+  .bio-chapter::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 3px;
+    background: linear-gradient(90deg, rgba(103, 232, 249, 0.86), transparent 68%);
+  }
+
+  .bio-chapter::after {
+    content: "";
+    position: absolute;
+    right: -8rem;
+    top: -9rem;
+    width: 18rem;
+    height: 18rem;
+    border-radius: 999px;
+    background: rgba(103, 232, 249, 0.1);
+    filter: blur(9px);
+    pointer-events: none;
+  }
+
+  .bio-chapter-violet::before { background: linear-gradient(90deg, rgba(167, 139, 250, 0.9), transparent 68%); }
+  .bio-chapter-violet::after { background: rgba(167, 139, 250, 0.12); }
+  .bio-chapter-emerald::before { background: linear-gradient(90deg, rgba(110, 231, 183, 0.86), transparent 68%); }
+  .bio-chapter-emerald::after { background: rgba(110, 231, 183, 0.1); }
+  .bio-chapter-amber::before { background: linear-gradient(90deg, rgba(251, 191, 36, 0.86), transparent 68%); }
+  .bio-chapter-amber::after { background: rgba(251, 191, 36, 0.1); }
+
+  .bio-chapter-head {
+    position: relative;
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+  }
+
+  .bio-chapter-icon {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: 2.8rem;
+    height: 2.8rem;
+    border: 1px solid rgba(103, 232, 249, 0.24);
+    border-radius: 999px;
+    background: rgba(103, 232, 249, 0.08);
+    color: #67e8f9;
+  }
+
+  .bio-chapter-violet .bio-chapter-icon { border-color: rgba(167, 139, 250, 0.28); background: rgba(167, 139, 250, 0.08); color: #c4b5fd; }
+  .bio-chapter-emerald .bio-chapter-icon { border-color: rgba(110, 231, 183, 0.28); background: rgba(110, 231, 183, 0.08); color: #6ee7b7; }
+  .bio-chapter-amber .bio-chapter-icon { border-color: rgba(251, 191, 36, 0.28); background: rgba(251, 191, 36, 0.08); color: #fbbf24; }
+
+  .bio-chapter-head span {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: #aeb7c5;
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .bio-chapter h3 {
+    color: #fff;
+    font-size: clamp(1.35rem, 2.4vw, 2.05rem);
+    line-height: 1.08;
+    letter-spacing: -0.026em;
+  }
+
+  .bio-chapter-summary {
+    position: relative;
+    margin-top: 1rem;
+    max-width: 70rem;
+    color: #cbd5e1;
+    font-size: 1.02rem;
+    line-height: 1.8;
+  }
+
+  .bio-chip-row {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin-top: 1rem;
+  }
+
+  .bio-chip-row span {
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.045);
+    color: #e5e7eb;
+    padding: 0.38rem 0.62rem;
+    font-size: 0.78rem;
+    line-height: 1;
+  }
+
+  .bio-pull-note {
+    position: relative;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    margin-top: 1.15rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    background: rgba(5, 7, 11, 0.34);
+    padding: 1rem;
+    color: #dbeafe;
+  }
+
+  .bio-pull-note svg {
+    flex: 0 0 auto;
+    color: #67e8f9;
+    margin-top: 0.15rem;
+  }
+
+  .bio-chapter-violet .bio-pull-note svg { color: #c4b5fd; }
+  .bio-chapter-emerald .bio-pull-note svg { color: #6ee7b7; }
+  .bio-chapter-amber .bio-pull-note svg { color: #fbbf24; }
+
+  .bio-pull-note p {
+    line-height: 1.65;
+  }
+
+  .bio-fulltext {
+    position: relative;
+    margin-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.09);
+    padding-top: 0.25rem;
+  }
+
+  .bio-fulltext-copy {
+    padding-top: 0.9rem;
+    max-width: 78ch;
+  }
+
+  .bio-fulltext-copy p {
+    color: #d4d4d8;
+    font-size: 1rem;
+    line-height: 1.96;
+  }
+
+  .bio-fulltext-copy p + p {
+    margin-top: 1.15rem;
+  }
+
+  .bio-timeline-section {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .bio-timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .bio-timeline-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    padding: 1.1rem;
+  }
+
+  .bio-timeline-card::after {
+    content: "";
+    position: absolute;
+    left: 1.1rem;
+    right: 1.1rem;
+    top: 3.1rem;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(103, 232, 249, 0.5), transparent);
+  }
+
+  .bio-timeline-number {
+    color: #67e8f9;
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.8rem;
+    font-weight: 800;
+  }
+
+  .bio-timeline-card small {
+    display: block;
+    margin-top: 1.3rem;
+    color: #aeb7c5;
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .bio-timeline-card h3 {
+    margin-top: 0.55rem;
+    color: #fff;
+    font-size: 1.08rem;
+    line-height: 1.25;
+  }
+
+  .bio-timeline-card p {
+    margin-top: 0.65rem;
+    color: #aeb7c5;
+    font-size: 0.91rem;
+    line-height: 1.65;
+  }
+
+  @media (max-width: 1120px) {
+    .bio-map-heading,
+    .bio-timeline-header,
+    .bio-map-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .bio-map-sidebar {
+      position: static;
+    }
+
+    .bio-sidebar-card nav {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bio-timeline-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 720px) {
+    .bio-map-section,
+    .bio-timeline-section {
+      padding: 2.4rem 0 3.25rem;
+    }
+
+    .bio-sidebar-card nav,
+    .bio-timeline-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .bio-chapter-head {
+      display: grid;
+    }
+  }
+</style>
