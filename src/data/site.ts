@@ -20,6 +20,6 @@ export const navigation = [
   { label: "Work Areas", href: "/work-areas" },
   { label: "For Students", href: "/audio-demonstrator" },
   { label: "Publications", href: "/publications" },
-  { label: "Editorial", href: "/editorial-roles" },
+  { label: "Editorial", href: "/publications#editorial" },
   { label: "Label", href: "/music-label" },
 ];

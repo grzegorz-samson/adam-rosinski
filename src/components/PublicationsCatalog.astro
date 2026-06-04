@@ -52,7 +52,7 @@ const sections = [
     accent: "#FFB347",
     accent2: "#FF8A00",
   },
-];
+].filter((section) => section.items.length > 0);
 
 function getDetailLines(publication: PublicationRecord): string[] {
   const lines: string[] = [];

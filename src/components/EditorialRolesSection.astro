@@ -15,6 +15,12 @@ import { editorialIntro, editorialReviewAreas, editorialRoles } from "../data/ed
 import { publicationsByCategory } from "../data/publications";
 import { withBase } from "../utils/withBase";
 
+interface Props {
+  sectionId?: string;
+}
+
+const { sectionId = "editorial" } = Astro.props as Props;
+
 const organizationRoles = editorialRoles.filter((role) => role.kind === "Professional Organisation");
 
 const motifIcons = {
@@ -31,11 +37,11 @@ const reviewIcons = {
 };
 ---
 
-<section class="editorial-section">
+<section id={sectionId} class="editorial-section" aria-labelledby="editorial-title">
   <div class="editorial-hero">
     <div class="editorial-hero-copy">
       <p class="alt-kicker">Editorial work / professional service</p>
-      <h1>{editorialIntro.title}</h1>
+      <h1 id="editorial-title">{editorialIntro.title}</h1>
       <p>{editorialIntro.description}</p>
 
       <div class="editorial-hero-pills" aria-label="Editorial page highlights">
@@ -65,9 +71,9 @@ const reviewIcons = {
     </aside>
   </div>
 
-  <div class="editorial-service-heading">
+  <div id="editorial-service" class="editorial-service-heading">
     <p class="alt-kicker">Professional service</p>
-    <h2>Institutions and professional environments</h2>
+    <h2 id="editorial-service-title">Institutions and professional environments</h2>
     <p>
       The service layer is presented as a set of institution cards: each one has its own visual accent,
       a neutral public label, and a motif connected with acoustics, signal flow, or professional audio networks.
@@ -127,9 +133,10 @@ const reviewIcons = {
     kicker="Editorial publications"
     title="Special issues and edited volumes"
     description="Publication-backed editorial work stays connected with the visual language of the publications page, while this subpage adds a more institutional layer around editing, service, and professional networks."
+    id="editorial-publications"
   />
 
-  <section class="review-section" aria-labelledby="review-section-title">
+  <section id="editorial-review" class="review-section" aria-labelledby="review-section-title">
     <div class="review-section-heading">
       <p class="alt-kicker">Peer review activity</p>
       <h2 id="review-section-title">Review and publishing support areas</h2>
@@ -168,6 +175,7 @@ const reviewIcons = {
 <style>
   .editorial-section {
     padding: 2rem 0 5rem;
+    scroll-margin-top: 8.5rem;
   }
 
   .editorial-hero {

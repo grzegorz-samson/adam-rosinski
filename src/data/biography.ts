@@ -117,8 +117,8 @@ export const biographyChapters: BiographyChapter[] = [
     pull: "The publication profile is shaped by a consistent commitment to the broad circulation of research on music, sound and perception.",
     links: [
       { label: "Books", href: "/publications#selected-publications" },
-      { label: "Editorial publications", href: "/publications#editorial-work" },
-      { label: "Editorial roles", href: "/editorial-roles" },
+      { label: "Editorial publications", href: "/publications#editorial-publications" },
+      { label: "Editorial roles", href: "/publications#editorial" },
     ],
   },
   {
@@ -134,8 +134,8 @@ export const biographyChapters: BiographyChapter[] = [
     chips: ["peer review", "quadruple-blind", "research quality"],
     pull: "Review work contributes to the methodological and substantive standards of international research on music and sound.",
     links: [
-      { label: "Peer review areas", href: "/editorial-roles#review-section-title" },
-      { label: "Editorial page", href: "/editorial-roles" },
+      { label: "Peer review areas", href: "/publications#editorial-review" },
+      { label: "Editorial page", href: "/publications#editorial" },
     ],
   },
   {
@@ -202,8 +202,8 @@ export const biographyChapters: BiographyChapter[] = [
     chips: ["AAS", "AES", "IEEE", "ACM", "PTA", "PSRD"],
     pull: "The network of organisations reflects the interdisciplinary scope of the work: from auditory science and acoustics to engineering and music analysis.",
     links: [
-      { label: "Professional service", href: "/editorial-roles" },
-      { label: "Editorial publications", href: "/editorial-roles#editorial-work-publications-title" },
+      { label: "Professional service", href: "/publications#editorial-service" },
+      { label: "Editorial publications", href: "/publications#editorial-publications" },
     ],
   },
   {
@@ -221,7 +221,7 @@ export const biographyChapters: BiographyChapter[] = [
     links: [
       { label: "Work areas", href: "/work-areas" },
       { label: "Publications", href: "/publications" },
-      { label: "Editorial", href: "/editorial-roles" },
+      { label: "Editorial", href: "/publications#editorial" },
     ],
   },
 ];

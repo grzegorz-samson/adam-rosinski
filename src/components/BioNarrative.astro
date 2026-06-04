@@ -35,6 +35,7 @@ function getChapterLinkHref(href: string) {
 
 function getChapterLinkTheme(href: string) {
   if (href.startsWith("/work-areas")) return "emerald";
+  if (href.startsWith("/publications#editorial")) return "slate";
   if (href.startsWith("/publications")) return "violet";
   if (href.startsWith("/editorial-roles")) return "slate";
   if (href.startsWith("/audio-demonstrator")) return "amber";

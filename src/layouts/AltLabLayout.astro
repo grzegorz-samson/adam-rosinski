@@ -26,12 +26,17 @@ function isActive(href: string) {
   return activePath === href;
 }
 
+function getNavKey(href: string) {
+  return href.split("#")[0];
+}
+
 const navIcons = {
   "/about": UserRound,
   "/bio-plus": UserRoundPlus,
   "/work-areas": Radar,
   "/audio-demonstrator": Headphones,
   "/publications": BookOpen,
+  "/publications#editorial": Newspaper,
   "/editorial-roles": Newspaper,
   "/music-label": Disc3,
   "/contact": Mail,
@@ -43,6 +48,7 @@ const navThemes = {
   "/work-areas": "emerald",
   "/audio-demonstrator": "amber",
   "/publications": "violet",
+  "/publications#editorial": "slate",
   "/editorial-roles": "slate",
   "/music-label": "cyan",
   "/contact": "cyan",
@@ -78,14 +84,21 @@ const mobileNavigation = [...navigation, { label: "Contact", href: "/contact" }]
 
       <nav class="alt-nav-links" aria-label="Site navigation">
         {navigation.map((item) => {
-          const Icon = navIcons[item.href as keyof typeof navIcons];
+          const navKey = getNavKey(item.href);
+          const Icon =
+            navIcons[item.href as keyof typeof navIcons] ??
+            navIcons[navKey as keyof typeof navIcons];
 
           return (
             <a
               href={withBase(item.href)}
               class:list={[
                 "alt-nav-link",
-                `alt-nav-link-${navThemes[item.href as keyof typeof navThemes] ?? "slate"}`,
+                `alt-nav-link-${
+                  navThemes[item.href as keyof typeof navThemes] ??
+                  navThemes[navKey as keyof typeof navThemes] ??
+                  "slate"
+                }`,
                 isActive(item.href) && "is-active",
               ]}
             >
@@ -124,14 +137,21 @@ const mobileNavigation = [...navigation, { label: "Contact", href: "/contact" }]
     >
       <nav class="alt-nav-mobile-links" aria-label="Mobile site navigation">
         {mobileNavigation.map((item) => {
-          const Icon = navIcons[item.href as keyof typeof navIcons];
+          const navKey = getNavKey(item.href);
+          const Icon =
+            navIcons[item.href as keyof typeof navIcons] ??
+            navIcons[navKey as keyof typeof navIcons];
 
           return (
             <a
               href={withBase(item.href)}
               class:list={[
                 "alt-nav-mobile-link",
-                `alt-nav-link-${navThemes[item.href as keyof typeof navThemes] ?? "slate"}`,
+                `alt-nav-link-${
+                  navThemes[item.href as keyof typeof navThemes] ??
+                  navThemes[navKey as keyof typeof navThemes] ??
+                  "slate"
+                }`,
                 isActive(item.href) && "is-active",
               ]}
               data-mobile-nav-link
@@ -574,11 +594,13 @@ const mobileNavigation = [...navigation, { label: "Contact", href: "/contact" }]
 
     .alt-nav-mobile-links {
       display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 0.5rem;
     }
 
     .alt-nav-mobile-link {
       width: 100%;
+      min-width: 0;
       justify-content: flex-start;
       padding: 0.95rem 1rem;
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -668,6 +690,10 @@ const mobileNavigation = [...navigation, { label: "Contact", href: "/contact" }]
 
     .alt-nav-toggle-label {
       display: none;
+    }
+
+    .alt-nav-mobile-links {
+      grid-template-columns: 1fr;
     }
   }
 </style>
