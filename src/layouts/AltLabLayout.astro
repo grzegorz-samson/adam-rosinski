@@ -9,6 +9,8 @@ import Headphones from "@lucide/astro/icons/headphones";
 import BookOpen from "@lucide/astro/icons/book-open";
 import Newspaper from "@lucide/astro/icons/newspaper";
 import Mail from "@lucide/astro/icons/mail";
+import Menu from "@lucide/astro/icons/menu";
+import X from "@lucide/astro/icons/x";
 import { navigation, site } from "../data/site";
 import { withBase } from "../utils/withBase";
 
@@ -43,16 +45,36 @@ const navThemes = {
   "/publications": "violet",
   "/editorial-roles": "slate",
   "/music-label": "cyan",
+  "/contact": "cyan",
 };
+
+const mobileNavigation = [...navigation, { label: "Contact", href: "/contact" }];
 ---
 
 <BaseLayout title={title} description={description} bodyClass="alt-lab">
-  <header class="alt-nav">
+  <header class="alt-nav" data-mobile-nav-root>
     <div class="alt-shell alt-nav-inner">
       <a href={withBase("/")} class="alt-wordmark">
         <AudioWaveform size={16} stroke-width={1.75} aria-hidden="true" />
         <span>{site.name}</span>
       </a>
+
+      <button
+        type="button"
+        class="alt-nav-toggle"
+        aria-expanded="false"
+        aria-controls="alt-mobile-nav-panel"
+        aria-label="Open navigation"
+        data-mobile-nav-toggle
+      >
+        <span class="alt-nav-toggle-icon alt-nav-toggle-icon-menu" aria-hidden="true">
+          <Menu size={18} stroke-width={1.9} />
+        </span>
+        <span class="alt-nav-toggle-icon alt-nav-toggle-icon-close" aria-hidden="true">
+          <X size={18} stroke-width={1.9} />
+        </span>
+        <span class="alt-nav-toggle-label">Menu</span>
+      </button>
 
       <nav class="alt-nav-links" aria-label="Site navigation">
         {navigation.map((item) => {
@@ -81,12 +103,129 @@ const navThemes = {
         </a>
       </div>
     </div>
+
   </header>
+
+  <div class="alt-nav-mobile-layer" data-mobile-nav-layer>
+    <button
+      type="button"
+      class="alt-nav-overlay"
+      aria-label="Close navigation"
+      hidden
+      tabindex="-1"
+      data-mobile-nav-overlay
+    ></button>
+
+    <div
+      id="alt-mobile-nav-panel"
+      class="alt-nav-mobile-panel alt-shell"
+      hidden
+      data-mobile-nav-panel
+    >
+      <nav class="alt-nav-mobile-links" aria-label="Mobile site navigation">
+        {mobileNavigation.map((item) => {
+          const Icon = navIcons[item.href as keyof typeof navIcons];
+
+          return (
+            <a
+              href={withBase(item.href)}
+              class:list={[
+                "alt-nav-mobile-link",
+                `alt-nav-link-${navThemes[item.href as keyof typeof navThemes] ?? "slate"}`,
+                isActive(item.href) && "is-active",
+              ]}
+              data-mobile-nav-link
+            >
+              <Icon size={16} stroke-width={1.75} aria-hidden="true" />
+              <span>{item.label}</span>
+            </a>
+          );
+        })}
+      </nav>
+    </div>
+  </div>
 
   <main class="alt-shell">
     <slot />
   </main>
 </BaseLayout>
+
+<script>
+  const MOBILE_NAV_BREAKPOINT = 920;
+
+  function setupAltMobileNav() {
+    const root = document.querySelector("[data-mobile-nav-root]");
+    if (!(root instanceof HTMLElement)) return;
+
+    const toggle = root.querySelector("[data-mobile-nav-toggle]");
+    const panel = document.querySelector("[data-mobile-nav-panel]");
+    const overlay = document.querySelector("[data-mobile-nav-overlay]");
+    const links = document.querySelectorAll("[data-mobile-nav-link]");
+
+    if (
+      !(toggle instanceof HTMLButtonElement) ||
+      !(panel instanceof HTMLElement) ||
+      !(overlay instanceof HTMLButtonElement)
+    ) {
+      return;
+    }
+
+    const updatePanelOffset = () => {
+      document.documentElement.style.setProperty(
+        "--alt-mobile-nav-offset",
+        `${root.getBoundingClientRect().bottom + 10}px`,
+      );
+    };
+
+    const setOpen = (isOpen) => {
+      root.dataset.mobileNavOpen = isOpen ? "true" : "false";
+      toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      toggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+      if (isOpen) updatePanelOffset();
+      panel.hidden = !isOpen;
+      overlay.hidden = !isOpen;
+      document.body.classList.toggle("alt-mobile-nav-open", isOpen);
+    };
+
+    const close = () => setOpen(false);
+    const toggleOpen = () => setOpen(root.dataset.mobileNavOpen !== "true");
+
+    toggle.addEventListener("click", toggleOpen);
+    overlay.addEventListener("click", close);
+
+    links.forEach((link) => {
+      link.addEventListener("click", close);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && root.dataset.mobileNavOpen === "true") {
+        close();
+        toggle.focus();
+      }
+    });
+
+    const mediaQuery = window.matchMedia(`(min-width: ${MOBILE_NAV_BREAKPOINT + 1}px)`);
+    const handleViewportChange = () => {
+      if (mediaQuery.matches) close();
+      if (!panel.hidden) updatePanelOffset();
+    };
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", handleViewportChange);
+    } else {
+      mediaQuery.addListener(handleViewportChange);
+    }
+
+    window.addEventListener("resize", handleViewportChange);
+    window.addEventListener("scroll", () => {
+      if (!panel.hidden) updatePanelOffset();
+    });
+
+    setOpen(false);
+  }
+
+  setupAltMobileNav();
+</script>
 
 <style is:global>
   body.alt-lab {
@@ -105,6 +244,10 @@ const navThemes = {
     background-size: 34px 34px;
     mask-image: none;
     opacity: 0.9;
+  }
+
+  body.alt-mobile-nav-open {
+    overflow: hidden;
   }
 
   .alt-shell {
@@ -131,13 +274,17 @@ const navThemes = {
 
   .alt-wordmark,
   .alt-nav-link,
-  .alt-nav-cta {
+  .alt-nav-cta,
+  .alt-nav-toggle,
+  .alt-nav-mobile-link {
     font-family: "JetBrains Mono", "Consolas", monospace;
   }
 
   .alt-wordmark,
   .alt-nav-link,
-  .alt-nav-cta {
+  .alt-nav-cta,
+  .alt-nav-toggle,
+  .alt-nav-mobile-link {
     display: inline-flex;
     align-items: center;
     gap: 0.55rem;
@@ -163,6 +310,69 @@ const navThemes = {
     display: flex;
     align-items: center;
     gap: 0.78rem;
+  }
+
+  .alt-nav-toggle,
+  .alt-nav-overlay,
+  .alt-nav-mobile-panel {
+    display: none;
+  }
+
+  .alt-nav-mobile-layer {
+    position: relative;
+    z-index: 44;
+  }
+
+  .alt-nav-toggle {
+    appearance: none;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background:
+      linear-gradient(180deg, rgba(17, 24, 39, 0.92), rgba(8, 12, 20, 0.92)),
+      rgba(5, 7, 11, 0.88);
+    color: rgba(228, 232, 240, 0.96);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    line-height: 1;
+    text-transform: uppercase;
+    padding: 0.8rem 0.95rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition:
+      color 180ms ease,
+      border-color 180ms ease,
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .alt-nav-toggle:hover {
+    color: #fff;
+    border-color: rgba(134, 227, 255, 0.32);
+    transform: translateY(-1px);
+    box-shadow:
+      0 0 18px rgba(86, 216, 255, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .alt-nav-toggle:focus-visible,
+  .alt-nav-mobile-link:focus-visible,
+  .alt-nav-link:focus-visible,
+  .alt-nav-cta:focus-visible,
+  .alt-wordmark:focus-visible {
+    outline: 2px solid rgba(134, 227, 255, 0.9);
+    outline-offset: 3px;
+  }
+
+  .alt-nav-toggle-icon-close {
+    display: none;
+  }
+
+  .alt-nav[data-mobile-nav-open="true"] .alt-nav-toggle-icon-menu {
+    display: none;
+  }
+
+  .alt-nav[data-mobile-nav-open="true"] .alt-nav-toggle-icon-close {
+    display: inline-flex;
   }
 
   .alt-nav-link {
@@ -254,7 +464,9 @@ const navThemes = {
 
   .alt-nav-link svg,
   .alt-nav-cta svg,
-  .alt-wordmark svg {
+  .alt-wordmark svg,
+  .alt-nav-toggle svg,
+  .alt-nav-mobile-link svg {
     flex: 0 0 auto;
     opacity: 0.78;
   }
@@ -262,7 +474,9 @@ const navThemes = {
   .alt-nav-link:hover svg,
   .alt-nav-link.is-active svg,
   .alt-nav-cta svg,
-  .alt-nav-cta:hover svg {
+  .alt-nav-cta:hover svg,
+  .alt-nav-mobile-link:hover svg,
+  .alt-nav-mobile-link.is-active svg {
     opacity: 1;
   }
 
@@ -302,25 +516,158 @@ const navThemes = {
       0 0 26px rgba(86, 216, 255, 0.18);
   }
 
-  @media (max-width: 1080px) {
-    .alt-nav-links {
+  @media (max-width: 1180px) {
+    .alt-nav-inner {
+      gap: 0.9rem;
+    }
+
+    .alt-nav-links,
+    .alt-nav-actions {
+      gap: 0.58rem;
+    }
+
+    .alt-nav-link,
+    .alt-nav-cta {
+      font-size: 0.88rem;
+    }
+  }
+
+  @media (max-width: 920px) {
+    .alt-shell {
+      width: min(100% - 1.5rem, 1280px);
+    }
+
+    .alt-nav-links,
+    .alt-nav-actions {
+      display: none;
+    }
+
+    .alt-nav-toggle {
+      display: inline-flex;
+      justify-content: center;
+      flex: 0 0 auto;
+    }
+
+    .alt-nav-mobile-panel {
+      position: fixed;
+      top: var(--alt-mobile-nav-offset, 5rem);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 45;
+      display: block;
+      width: min(100% - 1.5rem, 1280px);
+      padding: 0.85rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 1.35rem;
+      background:
+        linear-gradient(180deg, rgba(13, 18, 30, 0.98), rgba(7, 10, 18, 0.98)),
+        rgba(5, 7, 11, 0.97);
+      box-shadow:
+        0 22px 50px rgba(0, 0, 0, 0.42),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(20px);
+    }
+
+    .alt-nav-mobile-panel[hidden] {
+      display: none;
+    }
+
+    .alt-nav-mobile-links {
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .alt-nav-mobile-link {
+      width: 100%;
+      justify-content: flex-start;
+      padding: 0.95rem 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.025);
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background-color 180ms ease,
+        color 180ms ease,
+        text-shadow 180ms ease;
+    }
+
+    .alt-nav-mobile-link:hover,
+    .alt-nav-mobile-link.is-active {
+      transform: translateY(-1px);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .alt-nav-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 44;
+      display: block;
+      border: 0;
+      background:
+        radial-gradient(circle at top, rgba(86, 216, 255, 0.12), transparent 34%),
+        rgba(3, 5, 10, 0.72);
+      backdrop-filter: blur(6px);
+      cursor: pointer;
+    }
+
+    .alt-nav-overlay[hidden] {
       display: none;
     }
   }
 
   @media (max-width: 720px) {
-    .alt-shell {
-      width: min(100% - 1.5rem, 1280px);
-    }
-
     .alt-nav-inner {
-      flex-direction: column;
-      align-items: flex-start;
+      padding: 0.9rem 0;
     }
 
-    .alt-nav-actions {
-      width: 100%;
-      flex-wrap: wrap;
+    .alt-wordmark {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      min-width: 0;
+    }
+
+    .alt-wordmark span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .alt-nav-toggle {
+      padding: 0.76rem 0.88rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+    }
+
+    .alt-nav-mobile-panel {
+      width: min(100% - 1rem, 1280px);
+      padding: 0.7rem;
+      border-radius: 1.15rem;
+    }
+
+    .alt-nav-mobile-link {
+      font-size: 0.88rem;
+      padding: 0.9rem 0.92rem;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .alt-nav-inner {
+      gap: 0.7rem;
+    }
+
+    .alt-wordmark {
+      font-size: 0.73rem;
+      letter-spacing: 0.12em;
+    }
+
+    .alt-nav-toggle-label {
+      display: none;
     }
   }
 </style>
