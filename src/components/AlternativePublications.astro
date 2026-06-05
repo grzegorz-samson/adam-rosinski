@@ -184,7 +184,7 @@ function hasExternalSourceLink(href: string): boolean {
   const activeAnimations = new WeakSet();
 
   function getColumnCount() {
-    if (window.innerWidth <= 720) return 1;
+    if (window.innerWidth <= 720) return 2;
     if (window.innerWidth <= 1080) return 2;
     return 4;
   }
@@ -216,7 +216,7 @@ function hasExternalSourceLink(href: string): boolean {
   }
 
   function getStageColumnStart() {
-    if (window.innerWidth <= 720) return "auto";
+    if (window.innerWidth <= 720) return "1";
     return "1";
   }
 
@@ -866,19 +866,68 @@ function hasExternalSourceLink(href: string): boolean {
 
   @media (max-width: 720px) {
     .alt-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .alt-publication-card[open],
     .alt-publication-card.is-staging-open,
     .alt-publication-card.is-expanding-open {
-      grid-column: auto;
+      grid-column: span 2;
+      grid-template-columns: var(--book-summary-width, 8.5rem) minmax(0, 1fr);
+      gap: 0.9rem;
+      align-items: start;
+    }
+
+    .alt-publication-card.is-staging-open {
       grid-template-columns: 1fr;
+      gap: 0;
+      align-items: start;
+    }
+
+    .alt-publication-card.is-expanding-open .alt-publication-expanded {
+      grid-column: 2;
+      grid-row: 1;
+      max-height: 0;
+      opacity: 0;
+      transform: translateX(-18px);
+      padding-top: 0;
+    }
+
+    .alt-publication-card[open] .alt-publication-summary,
+    .alt-publication-card.is-staging-open .alt-publication-summary,
+    .alt-publication-card.is-expanding-open .alt-publication-summary {
+      align-self: stretch;
     }
 
     .alt-publication-card[open]:not(.is-expanding-open) .alt-publication-expanded {
-      grid-column: 1;
-      grid-row: auto;
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .alt-publication-copy {
+      margin-top: 0.75rem;
+    }
+
+    .alt-publication-card h3 {
+      font-size: 1.08rem;
+      line-height: 1.2;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .alt-publication-card {
+      padding: 0.9rem;
+      border-radius: 22px;
+    }
+
+    .alt-meta {
+      gap: 0.5rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+    }
+
+    .alt-cover-frame {
+      border-radius: 18px;
     }
   }
 

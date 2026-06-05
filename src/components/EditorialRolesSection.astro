@@ -83,13 +83,28 @@ const reviewIcons = {
   <div class="organization-grid">
     {organizationRoles.map((role) => {
       const Icon = motifIcons[role.visualMotif] ?? BadgeCheck;
+      const useHorizontalLogo =
+        role.slug === "society-for-music-analysis" || role.slug === "fsnt-not";
+      const useWhiteLogoFrame =
+        role.slug === "american-auditory-society" ||
+        role.slug === "society-for-music-analysis" ||
+        role.slug === "fsnt-not" ||
+        role.slug === "society-for-music-perception-and-cognition" ||
+        role.slug === "cognitive-science-society";
       const roleStyle = [
         `--role-accent: ${role.accent}`,
         `--role-accent-2: ${role.accent2 ?? role.accent}`,
       ].join("; ");
 
       return (
-        <article class:list={["organization-card", `is-${role.visualMotif}`]} style={roleStyle}>
+        <article
+          class:list={[
+            "organization-card",
+            `is-${role.visualMotif}`,
+            useHorizontalLogo && "organization-card-horizontal-logo",
+          ]}
+          style={roleStyle}
+        >
           <div class="organization-card-orbit" aria-hidden="true"></div>
 
           <div class="organization-card-topline">
@@ -102,8 +117,8 @@ const reviewIcons = {
           </div>
 
           <div class="organization-card-main">
-            {role.logo && (
-              <div class="organization-logo-frame">
+            {role.logo && !useHorizontalLogo && (
+              <div class:list={["organization-logo-frame", useWhiteLogoFrame && "organization-logo-frame-on-white"]}>
                 <img src={withBase(role.logo)} alt="" loading="lazy" />
               </div>
             )}
@@ -115,6 +130,17 @@ const reviewIcons = {
               </div>
               <h3>{role.title}</h3>
               <p class="organization-native-name">{role.institution}</p>
+              {role.logo && useHorizontalLogo && (
+                <div
+                  class:list={[
+                    "organization-logo-frame",
+                    "organization-logo-frame-horizontal",
+                    useWhiteLogoFrame && "organization-logo-frame-on-white",
+                  ]}
+                >
+                  <img src={withBase(role.logo)} alt="" loading="lazy" />
+                </div>
+              )}
             </div>
           </div>
 
@@ -518,6 +544,34 @@ const reviewIcons = {
     object-position: center;
   }
 
+  .organization-logo-frame-horizontal {
+    width: min(100%, 17rem);
+    height: auto;
+    min-height: 4.6rem;
+    margin-top: 0.9rem;
+    padding: 0.7rem 0.85rem;
+    justify-items: start;
+    border-radius: 20px;
+  }
+
+  .organization-logo-frame-horizontal img {
+    width: 100%;
+    max-width: 100%;
+    max-height: 4rem;
+    height: auto;
+    object-fit: contain;
+    object-position: left center;
+  }
+
+  .organization-logo-frame-on-white {
+    background: #fff;
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .organization-card-horizontal-logo .organization-card-main {
+    align-items: flex-start;
+  }
+
   .organization-card-meta {
     gap: 0.45rem;
     color: color-mix(in srgb, var(--role-accent) 74%, white 26%);
@@ -621,10 +675,13 @@ const reviewIcons = {
   }
 
   @media (max-width: 1080px) {
-    .editorial-hero,
+    .editorial-hero {
+      grid-template-columns: 1fr;
+    }
+
     .organization-grid,
     .review-area-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .organization-card {
@@ -650,6 +707,11 @@ const reviewIcons = {
     .organization-card-main {
       align-items: flex-start;
       flex-direction: column;
+    }
+
+    .organization-grid,
+    .review-area-grid {
+      grid-template-columns: 1fr;
     }
 
     .organization-logo-frame {

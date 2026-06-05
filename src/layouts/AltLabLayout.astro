@@ -125,15 +125,6 @@ const mobileNavigation = [...navigation, { label: "Contact", href: "/contact" }]
   </header>
 
   <div class="alt-nav-mobile-layer" data-mobile-nav-layer>
-    <button
-      type="button"
-      class="alt-nav-overlay"
-      aria-label="Close navigation"
-      hidden
-      tabindex="-1"
-      data-mobile-nav-overlay
-    ></button>
-
     <div
       id="alt-mobile-nav-panel"
       class="alt-nav-mobile-panel alt-shell"
@@ -184,39 +175,26 @@ const mobileNavigation = [...navigation, { label: "Contact", href: "/contact" }]
 
     const toggle = root.querySelector("[data-mobile-nav-toggle]");
     const panel = document.querySelector("[data-mobile-nav-panel]");
-    const overlay = document.querySelector("[data-mobile-nav-overlay]");
     const links = document.querySelectorAll("[data-mobile-nav-link]");
 
     if (
       !(toggle instanceof HTMLButtonElement) ||
-      !(panel instanceof HTMLElement) ||
-      !(overlay instanceof HTMLButtonElement)
+      !(panel instanceof HTMLElement)
     ) {
       return;
     }
-
-    const updatePanelOffset = () => {
-      document.documentElement.style.setProperty(
-        "--alt-mobile-nav-offset",
-        `${root.getBoundingClientRect().bottom + 10}px`,
-      );
-    };
 
     const setOpen = (isOpen) => {
       root.dataset.mobileNavOpen = isOpen ? "true" : "false";
       toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
       toggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
-      if (isOpen) updatePanelOffset();
       panel.hidden = !isOpen;
-      overlay.hidden = !isOpen;
-      document.body.classList.toggle("alt-mobile-nav-open", isOpen);
     };
 
     const close = () => setOpen(false);
     const toggleOpen = () => setOpen(root.dataset.mobileNavOpen !== "true");
 
     toggle.addEventListener("click", toggleOpen);
-    overlay.addEventListener("click", close);
 
     links.forEach((link) => {
       link.addEventListener("click", close);
@@ -232,7 +210,6 @@ const mobileNavigation = [...navigation, { label: "Contact", href: "/contact" }]
     const mediaQuery = window.matchMedia(`(min-width: ${MOBILE_NAV_BREAKPOINT + 1}px)`);
     const handleViewportChange = () => {
       if (mediaQuery.matches) close();
-      if (!panel.hidden) updatePanelOffset();
     };
 
     if (typeof mediaQuery.addEventListener === "function") {
@@ -242,9 +219,6 @@ const mobileNavigation = [...navigation, { label: "Contact", href: "/contact" }]
     }
 
     window.addEventListener("resize", handleViewportChange);
-    window.addEventListener("scroll", () => {
-      if (!panel.hidden) updatePanelOffset();
-    });
 
     setOpen(false);
   }
@@ -269,10 +243,6 @@ const mobileNavigation = [...navigation, { label: "Contact", href: "/contact" }]
     background-size: 34px 34px;
     mask-image: none;
     opacity: 0.9;
-  }
-
-  body.alt-mobile-nav-open {
-    overflow: hidden;
   }
 
   .alt-shell {
@@ -338,45 +308,46 @@ const mobileNavigation = [...navigation, { label: "Contact", href: "/contact" }]
   }
 
   .alt-nav-toggle,
-  .alt-nav-overlay,
   .alt-nav-mobile-panel {
     display: none;
   }
 
   .alt-nav-mobile-layer {
-    position: relative;
-    z-index: 44;
+    position: sticky;
+    top: 0;
+    z-index: 41;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
   }
 
   .alt-nav-toggle {
     appearance: none;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    background:
-      linear-gradient(180deg, rgba(17, 24, 39, 0.92), rgba(8, 12, 20, 0.92)),
-      rgba(5, 7, 11, 0.88);
-    color: rgba(228, 232, 240, 0.96);
-    font-size: 0.76rem;
+    border: 0;
+    background: transparent;
+    color: #c6cad5;
+    font-size: 0.96rem;
     font-weight: 700;
-    letter-spacing: 0.16em;
+    letter-spacing: 0;
     line-height: 1;
-    text-transform: uppercase;
-    padding: 0.8rem 0.95rem;
-    border-radius: 999px;
+    padding: 0.42rem 0.2rem;
+    border-radius: 0;
     cursor: pointer;
     transition:
       color 180ms ease,
-      border-color 180ms ease,
       transform 180ms ease,
-      box-shadow 180ms ease;
+      text-shadow 180ms ease,
+      opacity 180ms ease;
+    opacity: 0.94;
   }
 
   .alt-nav-toggle:hover {
     color: #fff;
-    border-color: rgba(134, 227, 255, 0.32);
     transform: translateY(-1px);
-    box-shadow:
-      0 0 18px rgba(86, 216, 255, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    opacity: 1;
+    text-shadow:
+      0 0 14px rgba(86, 216, 255, 0.34),
+      0 0 26px rgba(86, 216, 255, 0.18);
   }
 
   .alt-nav-toggle:focus-visible,
@@ -574,78 +545,75 @@ const mobileNavigation = [...navigation, { label: "Contact", href: "/contact" }]
     }
 
     .alt-nav-mobile-panel {
-      position: fixed;
-      top: var(--alt-mobile-nav-offset, 5rem);
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 45;
+      position: relative;
+      top: 0.7rem;
+      z-index: 41;
       display: block;
       width: min(100% - 1.5rem, 1280px);
+      margin: 0 auto;
       padding: 0.85rem;
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 1.35rem;
       background:
-        linear-gradient(180deg, rgba(13, 18, 30, 0.98), rgba(7, 10, 18, 0.98)),
-        rgba(5, 7, 11, 0.97);
+        linear-gradient(180deg, rgba(13, 13, 14, 0.98), rgba(6, 6, 7, 0.98)),
+        rgba(4, 4, 5, 0.97);
       box-shadow:
         0 22px 50px rgba(0, 0, 0, 0.42),
         inset 0 1px 0 rgba(255, 255, 255, 0.04);
       backdrop-filter: blur(20px);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform-origin: top center;
+      transition:
+        opacity 220ms ease,
+        transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 220ms ease;
     }
 
     .alt-nav-mobile-panel[hidden] {
-      display: none;
+      display: block;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-12px) scale(0.985);
     }
 
     .alt-nav-mobile-links {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      display: flex;
+      flex-wrap: wrap;
       gap: 0.5rem;
     }
 
     .alt-nav-mobile-link {
-      width: 100%;
-      min-width: 0;
+      width: auto;
+      min-width: max-content;
       justify-content: flex-start;
-      padding: 0.95rem 1rem;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 1rem;
-      background: rgba(255, 255, 255, 0.025);
+      padding: 0.42rem 0.2rem;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
       font-size: 0.92rem;
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0;
       text-decoration: none;
       transition:
         transform 180ms ease,
-        border-color 180ms ease,
-        background-color 180ms ease,
         color 180ms ease,
+        opacity 180ms ease,
         text-shadow 180ms ease;
+      opacity: 0.94;
     }
 
     .alt-nav-mobile-link:hover,
     .alt-nav-mobile-link.is-active {
       transform: translateY(-1px);
       color: #fff;
-      border-color: rgba(255, 255, 255, 0.18);
-      background: rgba(255, 255, 255, 0.05);
+      opacity: 1;
     }
 
-    .alt-nav-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 44;
-      display: block;
-      border: 0;
-      background:
-        radial-gradient(circle at top, rgba(86, 216, 255, 0.12), transparent 34%),
-        rgba(3, 5, 10, 0.72);
-      backdrop-filter: blur(6px);
-      cursor: pointer;
-    }
-
-    .alt-nav-overlay[hidden] {
-      display: none;
+    .alt-nav-mobile-layer {
+      min-height: 0;
     }
   }
 
@@ -666,12 +634,12 @@ const mobileNavigation = [...navigation, { label: "Contact", href: "/contact" }]
     }
 
     .alt-nav-toggle {
-      padding: 0.76rem 0.88rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
+      padding: 0.42rem 0.2rem;
+      font-size: 0.92rem;
     }
 
     .alt-nav-mobile-panel {
+      top: 0.5rem;
       width: min(100% - 1rem, 1280px);
       padding: 0.7rem;
       border-radius: 1.15rem;
@@ -679,7 +647,7 @@ const mobileNavigation = [...navigation, { label: "Contact", href: "/contact" }]
 
     .alt-nav-mobile-link {
       font-size: 0.88rem;
-      padding: 0.9rem 0.92rem;
+      padding: 0.42rem 0.2rem;
     }
   }
 
@@ -695,10 +663,6 @@ const mobileNavigation = [...navigation, { label: "Contact", href: "/contact" }]
 
     .alt-nav-toggle-label {
       display: none;
-    }
-
-    .alt-nav-mobile-links {
-      grid-template-columns: 1fr;
     }
   }
 </style>

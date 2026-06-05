@@ -151,10 +151,20 @@ const applicationBuckets = [
   <div class="prototype-grid">
     {publicInventions.map((item) => (
       <article
-        class="prototype-card"
+        class:list={[
+          "prototype-card",
+          item.id === "spherical-microphone-prototype" && "prototype-card-reversed",
+        ]}
         style={`--accent: ${item.accent}; --accent-2: ${item.accent2}; background-image: radial-gradient(circle at top right, color-mix(in srgb, ${item.accent} 24%, transparent), transparent 36%);`}
       >
-        <div class:list={["prototype-media", item.id === "circular-audio-array" && "is-cover-media"]}>
+        <div
+          class:list={[
+            "prototype-media",
+            item.id === "circular-audio-array" && "prototype-media-white-matte prototype-media-matte-array",
+            item.id === "spherical-microphone-prototype" &&
+              "prototype-media-white-matte prototype-media-matte-spherical",
+          ]}
+        >
           <img src={withBase(item.image)} alt={item.imageAlt} loading="lazy" />
         </div>
         <div class="prototype-copy">
@@ -745,6 +755,18 @@ const applicationBuckets = [
     border-radius: 34px;
   }
 
+  .prototype-card-reversed {
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+  }
+
+  .prototype-card-reversed .prototype-media {
+    order: 2;
+  }
+
+  .prototype-card-reversed .prototype-copy {
+    order: 1;
+  }
+
   .prototype-media {
     position: relative;
     isolation: isolate;
@@ -774,9 +796,27 @@ const applicationBuckets = [
     filter: saturate(0.98) contrast(1.06) drop-shadow(0 22px 34px rgba(0, 0, 0, 0.34));
   }
 
-  .prototype-media.is-cover-media > img:first-child {
-    object-fit: cover;
-    padding: 0;
+  .prototype-media-white-matte {
+    background: var(--media-matte, #ffffff);
+  }
+
+  .prototype-media-white-matte::before {
+    display: none;
+  }
+
+  .prototype-media-white-matte > img:first-child {
+    object-fit: contain;
+    object-position: center;
+    padding: clamp(0.35rem, 1.8vw, 1rem);
+    filter: saturate(0.98) contrast(1.02);
+  }
+
+  .prototype-media-matte-array {
+    --media-matte: rgb(253, 253, 253);
+  }
+
+  .prototype-media-matte-spherical {
+    --media-matte: rgb(254, 254, 254);
   }
 
   .prototype-copy {
