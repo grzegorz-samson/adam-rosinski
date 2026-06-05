@@ -57,7 +57,12 @@ const navThemes = {
 const mobileNavigation = [...navigation, { label: "Contact", href: "/contact" }];
 ---
 
-<BaseLayout title={title} description={description} bodyClass="alt-lab">
+<BaseLayout
+  title={title}
+  description={description}
+  bodyClass="alt-lab"
+  justifyExtendedText={site.typography.justifyExtendedText}
+>
   <header class="alt-nav" data-mobile-nav-root>
     <div class="alt-shell alt-nav-inner">
       <a href={withBase("/")} class="alt-wordmark">

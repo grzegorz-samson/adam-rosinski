@@ -177,3 +177,45 @@ a {
 .alt-link-with-icon:hover svg {
   transform: translateX(2px);
 }
+
+body.justify-extended-text :where(
+  .alt-copy p,
+  .alt-copy-block p,
+  .alt-role,
+  .alt-lead,
+  .alt-heading > p:last-child,
+  .alt-publication-expanded > p,
+  .alt-source-line,
+  .bio-lead,
+  .bio-chapter-summary,
+  .bio-timeline-header > p:last-child,
+  .catalog-heading > p:last-child,
+  .catalog-group-copy > p,
+  .catalog-summary-text,
+  .catalog-detail-list p,
+  .editorial-publications-heading > p:last-child,
+  .editorial-publication-summary-text,
+  .editorial-publication-detail-list p,
+  .editorial-hero-copy > p:last-of-type,
+  .editorial-service-heading > p:last-of-type,
+  .review-section-heading > p:last-of-type,
+  .organization-description,
+  .review-area-card > p:last-of-type,
+  .hero-copy > p:not(.kicker),
+  .section-head > p:not(.kicker),
+  .lead,
+  .prototype-copy > p,
+  .label-hero > div:first-child > p:last-child,
+  .label-heading > p,
+  .release-copy > p,
+  .alt-biography-copy p,
+  .bio-fulltext-copy p,
+  .bio-timeline-card p
+) {
+  text-align: justify;
+  text-wrap: pretty;
+}
+
+body.justify-extended-text :where(.no-justify, .no-justify *) {
+  text-align: left !important;
+}
