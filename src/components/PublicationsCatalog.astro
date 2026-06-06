@@ -20,9 +20,10 @@ interface Props {
   journalArticles: PublicationRecord[];
   editorialWork: PublicationRecord[];
   bookChapters: PublicationRecord[];
+  editorialPublicationCount?: number;
 }
 
-const { monographs, journalArticles, editorialWork, bookChapters } = Astro.props;
+const { monographs, journalArticles, editorialWork, bookChapters, editorialPublicationCount = 0 } = Astro.props;
 
 const sections = [
   {
@@ -146,6 +147,19 @@ function hasExternalSourceLink(href: string): boolean {
         </a>
       );
     })}
+    {editorialPublicationCount > 0 && (
+      <a
+        href="#editorial-publications"
+        class="catalog-chip"
+        style="--catalog-chip-accent: #34D399; --catalog-chip-accent-2: #12D6D6;"
+      >
+        <span class="catalog-chip-label">
+          <LibraryBig size={15} stroke-width={1.85} aria-hidden="true" />
+          <span>Editorial publications</span>
+        </span>
+        <span class="catalog-chip-count">{editorialPublicationCount}</span>
+      </a>
+    )}
   </nav>
 
   <div class="catalog-groups">

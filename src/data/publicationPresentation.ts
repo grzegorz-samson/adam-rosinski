@@ -7,7 +7,7 @@ const polishTitleOverrides: Record<string, string> = {
     "Psychoakustyczne konteksty strumieniowania percepcyjnego w muzyce",
   "computer-technology-in-music-recording-and-production": "Wykorzystanie komputera w realizacji nagrań muzycznych",
   "digital-technology-in-sacred-buildings": "Zastosowanie technologii cyfrowej w przestrzeni fizycznej budynków sakralnych",
-  "sound-localisation-visual-impairment": "Lokalizacja dźwięku u osób z dysfunkcją wzroku",
+  "sound-localisation-visual-impairment": "Przestrzenna lokalizacja dźwięku u osób z niepełnosprawnością wzrokową",
   "cyberculture-and-digital-creative-practices":
     "Cyberkultura i cyfrowe praktyki twórcze jako trendy społeczeństwa multimedialnego",
   "computer-as-multimedia-tool-in-music-teacher-practice":

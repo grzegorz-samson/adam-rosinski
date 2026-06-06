@@ -36,6 +36,8 @@ export const inventions: Invention[] = [
       "Large black circular multichannel audio array suspended above a seated listener.",
     relatedAreas: ["Perception", "Space", "Authorial Prototypes", "Artistic Research"],
     tags: ["immersive audio", "multichannel listening", "spatial system"],
+    articleHref:
+      "https://ejournals.eu/czasopismo/niepelnosprawnosc/artykul/przestrzenna-lokalizacja-dzwieku-u-osob-z-niepelnosprawnoscia-wzrokowa",
     innovationPoints: [
       "circular listening architecture",
       "speaker and microphone array visual language",

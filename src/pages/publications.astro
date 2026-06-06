@@ -14,10 +14,7 @@ const publicationCount =
   publicationsByCategory.journalArticles.length +
   publicationsByCategory.bookChapters.length;
 
-const editorialCount =
-  publicationsByCategory.editorialWork.length +
-  editorialRoles.length +
-  editorialReviewAreas.length;
+const editorialCount = publicationsByCategory.editorialWork.length;
 ---
 
 <AltLabLayout
@@ -30,8 +27,8 @@ const editorialCount =
       <p class="alt-kicker">Publications hub</p>
       <h1 id="publications-hub-nav-title">Publications and editorial</h1>
       <p>
-        One page now brings together bibliographic output, editorial publications, professional organisations,
-        and review-related scholarly service.
+        One page now brings together bibliographic output, editorial publications, scholarly associations,
+        and reviewing activity.
       </p>
     </div>
 
@@ -65,6 +62,7 @@ const editorialCount =
       journalArticles={publicationsByCategory.journalArticles}
       editorialWork={[]}
       bookChapters={publicationsByCategory.bookChapters}
+      editorialPublicationCount={publicationsByCategory.editorialWork.length}
     />
   </section>
 
