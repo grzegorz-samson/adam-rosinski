@@ -8,7 +8,7 @@ const { title } = Astro.props;
 
 <section class="alt-page-section">
   <div class="alt-page-panel">
-    <h1>{title}</h1>
+    <h1 class="page-hero-title">{title}</h1>
   </div>
 </section>
 
@@ -26,11 +26,4 @@ const { title } = Astro.props;
     box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
   }
 
-  h1 {
-    color: #fff;
-    font-size: clamp(2.4rem, 6vw, 4.8rem);
-    line-height: 1.02;
-    letter-spacing: -0.03em;
-    text-wrap: balance;
-  }
 </style>

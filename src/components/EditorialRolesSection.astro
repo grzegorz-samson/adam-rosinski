@@ -41,7 +41,7 @@ const reviewIcons = {
   <div class="editorial-hero">
     <div class="editorial-hero-copy">
       <p class="alt-kicker">Editorial work / professional service</p>
-      <h1 id="editorial-title">{editorialIntro.title}</h1>
+      <h1 id="editorial-title" class="page-hero-title">{editorialIntro.title}</h1>
       <p>{editorialIntro.description}</p>
 
       <div class="editorial-hero-pills" aria-label="Editorial page highlights">
@@ -261,11 +261,6 @@ const reviewIcons = {
   }
 
   .editorial-hero h1 {
-    color: #fff;
-    font-size: clamp(2.3rem, 5.3vw, 4.8rem);
-    line-height: 0.97;
-    letter-spacing: -0.05em;
-    text-wrap: pretty;
   }
 
   .editorial-hero-copy > p:last-of-type {

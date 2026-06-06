@@ -76,6 +76,14 @@ a {
   text-wrap: balance;
 }
 
+.page-hero-title {
+  color: #fff;
+  font-size: clamp(1.85rem, 4vw, 3.6rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+  text-wrap: pretty;
+}
+
 .hero-orb {
   position: absolute;
   inset: auto auto 10% 5%;
