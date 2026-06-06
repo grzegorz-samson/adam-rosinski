@@ -5,6 +5,12 @@ import BadgeInfo from "@lucide/astro/icons/badge-info";
 import ExternalLink from "@lucide/astro/icons/external-link";
 import { quickLinks } from "../data/links";
 
+interface Props {
+  compactTopSpacing?: boolean;
+}
+
+const { compactTopSpacing = false } = Astro.props as Props;
+
 const profileIcons = {
   ORCID: FingerprintPattern,
   "Google Scholar": GraduationCap,
@@ -12,7 +18,7 @@ const profileIcons = {
 };
 ---
 
-<section id="profiles-alt" class="alt-section">
+<section id="profiles-alt" class:list={["alt-section", compactTopSpacing && "alt-section-compact-top"]}>
   <div class="alt-heading">
     <h2>Research Visibility</h2>
     <p>External research profiles provide direct access to publications, scholarly records, and indexed academic output.</p>
@@ -41,6 +47,10 @@ const profileIcons = {
 <style>
   .alt-section {
     padding: 4.5rem 0;
+  }
+
+  .alt-section-compact-top {
+    padding-top: 1.8rem;
   }
 
   .alt-heading {
@@ -125,6 +135,12 @@ const profileIcons = {
   @media (max-width: 1080px) {
     .alt-grid {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .alt-section-compact-top {
+      padding-top: 1.6rem;
     }
   }
 </style>

@@ -84,6 +84,16 @@ a {
   text-wrap: pretty;
 }
 
+.alt-kicker,
+.catalog-kicker,
+.editorial-publications-kicker {
+  color: #67e8f9;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
 .hero-orb {
   position: absolute;
   inset: auto auto 10% 5%;
