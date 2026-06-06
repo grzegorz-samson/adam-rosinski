@@ -21,7 +21,7 @@ export const navigation = [
   { label: "Bio", href: "/bio" },
   { label: "Bio+", href: "/bio-plus" },
   { label: "Work Areas", href: "/work-areas" },
-  { label: "For Students", href: "/audio-demonstrator" },
+  { label: "For Students", href: "/for-students" },
   { label: "Publications", href: "/publications" },
   { label: "Label", href: "/music-label" },
 ];

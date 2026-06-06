@@ -100,7 +100,7 @@ export const biographyChapters: BiographyChapter[] = [
     pull: "Recording practice is treated not as a separate craft, but as a research environment for studying space, localisation and listening.",
     links: [
       { label: "Authorial prototypes", href: "/work-areas#authorial-prototypes" },
-      { label: "Audio demonstrator", href: "/audio-demonstrator#audio-demo-alt" },
+      { label: "Audio demonstrator", href: "/for-students#audio-demo-alt" },
     ],
   },
   {
@@ -152,7 +152,7 @@ export const biographyChapters: BiographyChapter[] = [
     pull: "The institutional work links academic teaching with technical infrastructure and the practical conditions of music production education.",
     links: [
       { label: "Applications matrix", href: "/work-areas#applications-matrix" },
-      { label: "For students", href: "/audio-demonstrator#audio-demo-alt" },
+      { label: "For students", href: "/for-students#audio-demo-alt" },
     ],
   },
   {
