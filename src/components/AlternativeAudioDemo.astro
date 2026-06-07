@@ -7,7 +7,7 @@ import VolumeX from "@lucide/astro/icons/volume-x";
   <div class="alt-module audio-visualizer-module">
     <div class="alt-head">
       <div>
-        <h3>Audio generator</h3>
+        <h3 class="page-hero-title">Audio generator</h3>
       </div>
 
       <button class="alt-button alt-button-primary alt-demo-toggle" type="button" aria-label="Enable sound">
@@ -248,7 +248,7 @@ import VolumeX from "@lucide/astro/icons/volume-x";
 
 <style>
   .alt-section {
-    padding: 4.5rem 0;
+    padding: var(--page-top-spacing-default) 0 4.5rem;
   }
 
   .alt-module {
@@ -271,7 +271,6 @@ import VolumeX from "@lucide/astro/icons/volume-x";
     align-items: center;
   }
 
-  .alt-head h3,
   .alt-panel-visual h3 {
     color: #fff;
     font-size: 1.32rem;

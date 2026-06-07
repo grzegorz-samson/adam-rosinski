@@ -10,6 +10,8 @@
   --cyan: #67e8f9;
   --amber: #fbbf24;
   --emerald: #6ee7b7;
+  --page-top-spacing-default: 2rem;
+  --page-top-spacing-compact: 1.2rem;
 }
 
 html {
