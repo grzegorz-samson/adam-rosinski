@@ -5,7 +5,6 @@ export const site = {
     "I connect auditory perception research with recording practice, spatial listening, and the design of sonic working conditions.",
   shortBio:
     "My work develops at the intersection of research, studio practice, and new technologies, with a focus on listening, acoustic space, multichannel recording, and music education.",
-  email: "adam.rosinski@uwm.edu.pl",
   typography: {
     justifyExtendedText: true,
   },

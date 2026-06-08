@@ -1,24 +1,28 @@
 ---
-interface Props {
-  emailCodes: {
-    local: string;
-    domain: string;
-    tld: string;
-  };
-}
-
-const { emailCodes } = Astro.props as Props;
+const isDev = process.env.NODE_ENV !== "production";
+const contactEndpoint =
+  process.env.PUBLIC_CONTACT_FORM_ENDPOINT ??
+  (isDev ? "http://127.0.0.1:8787/contact" : "");
+const turnstileSiteKey =
+  process.env.PUBLIC_TURNSTILE_SITE_KEY ??
+  (isDev ? "1x00000000000000000000AA" : "");
+const isConfigured = Boolean(contactEndpoint && turnstileSiteKey);
 ---
 
 <section class="contact-form-panel">
   <div class="contact-form-panel__intro">
     <h3>Contact form</h3>
     <p>
-      This form opens your mail application with a prefilled draft addressed to Adam Rosiński.
+      Messages sent here are delivered through a protected form flow and go directly to Adam Rosiński's contact inbox.
     </p>
   </div>
 
-  <form class="contact-form" data-contact-form data-local-codes={emailCodes.local} data-domain-codes={emailCodes.domain} data-tld-codes={emailCodes.tld}>
+  <form
+    class="contact-form"
+    data-contact-form
+    data-contact-endpoint={contactEndpoint}
+    data-form-configured={isConfigured ? "true" : "false"}
+  >
     <div class="contact-form__grid">
       <label>
         <span>Name</span>
@@ -41,52 +45,182 @@ const { emailCodes } = Astro.props as Props;
       <textarea name="message" rows="7" maxlength="4000" required></textarea>
     </label>
 
-    <div class="contact-form__actions">
-      <button type="submit" class="contact-form__submit">Compose email</button>
+    <div class="contact-form__honeypot" aria-hidden="true">
+      <label>
+        <span>Website</span>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" />
+      </label>
     </div>
+
+    <input type="hidden" name="startedAt" value="" />
+
+    {turnstileSiteKey ? (
+      <div class="contact-form__verification">
+        <div class="contact-form__verification-copy">
+          <span class="contact-form__verification-kicker">Verification</span>
+        </div>
+        <div class="contact-form__turnstile">
+          <div
+            class="cf-turnstile"
+            data-sitekey={turnstileSiteKey}
+            data-theme="dark"
+            data-size="flexible"
+            data-language="en"
+          ></div>
+        </div>
+      </div>
+    ) : (
+      <p class="contact-form__status contact-form__status--error">
+        Contact form verification is not configured yet.
+      </p>
+    )}
+
+    <div class="contact-form__actions">
+      <button type="submit" class="contact-form__submit" data-default-label="Send Message">
+        Send Message
+      </button>
+    </div>
+
+    <p class="contact-form__status" data-contact-form-status hidden role="status" aria-live="polite"></p>
+
+    {!isConfigured && (
+      <p class="contact-form__config-note">
+        This build is missing the contact form endpoint configuration.
+      </p>
+    )}
   </form>
 </section>
 
-<script type="module">
-  const decodeCodes = (encoded) =>
-    encoded
-      .split("-")
-      .map((value) => Number.parseInt(value, 10))
-      .filter((value) => Number.isFinite(value))
-      .map((value) => String.fromCharCode(value))
-      .join("");
+{turnstileSiteKey && (
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+)}
 
+<script type="module">
+  const MIN_FORM_AGE_MS = 1500;
   const forms = document.querySelectorAll("[data-contact-form]");
 
   for (const form of forms) {
     if (!(form instanceof HTMLFormElement) || form.dataset.bound === "true") continue;
     form.dataset.bound = "true";
 
-    form.addEventListener("submit", (event) => {
+    const endpoint = form.dataset.contactEndpoint ?? "";
+    const statusNode = form.querySelector("[data-contact-form-status]");
+    const submitButton = form.querySelector(".contact-form__submit");
+    const startedAtField = form.elements.namedItem("startedAt");
+
+    if (
+      !(statusNode instanceof HTMLElement) ||
+      !(submitButton instanceof HTMLButtonElement) ||
+      !(startedAtField instanceof HTMLInputElement)
+    ) {
+      continue;
+    }
+
+    const defaultButtonLabel = submitButton.dataset.defaultLabel ?? submitButton.textContent?.trim() ?? "Send message";
+
+    const setStatus = (state, message = "") => {
+      form.dataset.state = state;
+      statusNode.textContent = message;
+      statusNode.hidden = !message;
+      statusNode.className = `contact-form__status${state === "success" ? " contact-form__status--success" : ""}${state === "error" ? " contact-form__status--error" : ""}`;
+    };
+
+    const setSubmitting = (isSubmitting) => {
+      form.dataset.submitting = isSubmitting ? "true" : "false";
+      submitButton.disabled = isSubmitting;
+      submitButton.textContent = isSubmitting ? "Sending..." : defaultButtonLabel;
+    };
+
+    const refreshStartedAt = () => {
+      startedAtField.value = String(Date.now());
+    };
+
+    const resetTurnstile = () => {
+      if (window.turnstile && typeof window.turnstile.reset === "function") {
+        try {
+          window.turnstile.reset();
+        } catch {
+          // Ignore widget reset failures; the next interaction can still re-run verification.
+        }
+      }
+    };
+
+    refreshStartedAt();
+
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
 
       if (!form.reportValidity()) return;
-
-      const local = decodeCodes(form.dataset.localCodes ?? "");
-      const domain = decodeCodes(form.dataset.domainCodes ?? "");
-      const tld = decodeCodes(form.dataset.tldCodes ?? "");
-      const to = `${local}@${domain}.${tld}`;
+      if (!endpoint) {
+        setStatus("error", "The contact form is temporarily unavailable. Please try again later.");
+        return;
+      }
 
       const formData = new FormData(form);
-      const name = String(formData.get("name") ?? "").trim();
-      const replyTo = String(formData.get("replyTo") ?? "").trim();
-      const subject = String(formData.get("subject") ?? "").trim();
-      const message = String(formData.get("message") ?? "").trim();
+      const website = String(formData.get("website") ?? "").trim();
+      const turnstileToken = String(formData.get("cf-turnstile-response") ?? "").trim();
+      const startedAt = Number.parseInt(String(formData.get("startedAt") ?? "0"), 10);
 
-      const body = [
-        `Name: ${name}`,
-        `Email: ${replyTo}`,
-        "",
-        message,
-      ].join("\n");
+      if (website.length > 0) {
+        setStatus("error", "The message could not be verified. Please refresh and try again.");
+        resetTurnstile();
+        refreshStartedAt();
+        return;
+      }
 
-      const mailtoUrl = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      window.location.href = mailtoUrl;
+      if (!Number.isFinite(startedAt) || Date.now() - startedAt < MIN_FORM_AGE_MS) {
+        setStatus("error", "Please wait a moment and submit the form again.");
+        resetTurnstile();
+        refreshStartedAt();
+        return;
+      }
+
+      if (!turnstileToken) {
+        setStatus("error", "Please complete the verification step before sending your message.");
+        return;
+      }
+
+      const payload = {
+        name: String(formData.get("name") ?? "").trim(),
+        replyTo: String(formData.get("replyTo") ?? "").trim(),
+        subject: String(formData.get("subject") ?? "").trim(),
+        message: String(formData.get("message") ?? "").trim(),
+        turnstileToken,
+        website,
+      };
+
+      setStatus("idle");
+      setSubmitting(true);
+
+      try {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await response.json().catch(() => null);
+
+        if (!response.ok || !result?.ok) {
+          setStatus("error", result?.message ?? "The message could not be sent right now. Please try again later.");
+          resetTurnstile();
+          refreshStartedAt();
+          return;
+        }
+
+        form.reset();
+        refreshStartedAt();
+        resetTurnstile();
+        setStatus("success", result.message ?? "Your message has been sent.");
+      } catch {
+        setStatus("error", "The message could not be sent right now. Please try again later.");
+        resetTurnstile();
+        refreshStartedAt();
+      } finally {
+        setSubmitting(false);
+      }
     });
   }
 </script>
@@ -114,9 +248,14 @@ const { emailCodes } = Astro.props as Props;
   }
 
   .contact-form {
+    position: relative;
     display: grid;
     gap: 1rem;
     margin-top: 1.4rem;
+  }
+
+  .contact-form[data-submitting="true"] {
+    pointer-events: none;
   }
 
   .contact-form__grid {
@@ -159,9 +298,75 @@ const { emailCodes } = Astro.props as Props;
     min-height: 11rem;
   }
 
+  .contact-form__honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .contact-form__verification {
+    position: relative;
+    display: grid;
+    gap: 0.7rem;
+    border-radius: 22px;
+    background: rgb(49, 49, 49);
+    padding: 0.9rem 0.9rem 0.95rem;
+    isolation: isolate;
+  }
+
+  .contact-form__verification::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.03) 22%,
+      rgba(86, 216, 255, 0.12) 48%,
+      rgba(255, 255, 255, 0.02) 72%,
+      rgba(255, 255, 255, 0.1)
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .contact-form__verification-copy {
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .contact-form__verification-kicker {
+    color: #ffffff;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .contact-form__turnstile {
+    min-height: 4.8rem;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.015);
+    padding: 0.1rem;
+  }
+
   .contact-form__actions {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
   }
 
   .contact-form__submit {
@@ -176,8 +381,32 @@ const { emailCodes } = Astro.props as Props;
     transition: transform 180ms ease, opacity 180ms ease;
   }
 
+  .contact-form__submit:disabled {
+    opacity: 0.7;
+    cursor: progress;
+  }
+
   .contact-form__submit:hover {
     transform: translateY(-1px);
+  }
+
+  .contact-form__status,
+  .contact-form__config-note {
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  .contact-form__status {
+    color: #cbd5e1;
+  }
+
+  .contact-form__status--success {
+    color: #9ae6b4;
+  }
+
+  .contact-form__status--error,
+  .contact-form__config-note {
+    color: #fda4af;
   }
 
   @media (max-width: 720px) {

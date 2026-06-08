@@ -1,29 +1,22 @@
 ---
 import ContactMailForm from "./ContactMailForm.astro";
-import { site } from "../data/site";
 
 interface Props {
   showForm?: boolean;
 }
 
 const { showForm = false } = Astro.props as Props;
-const [localPart = "", host = ""] = site.email.split("@");
-const hostParts = host.split(".");
-const tld = hostParts.pop() ?? "";
-const domain = hostParts.join(".");
-const toCodes = (value: string) => Array.from(value).map((char) => char.charCodeAt(0)).join("-");
 ---
 
 <section id="contact-alt" class="alt-footer">
   <div class="alt-grid" data-has-form={showForm ? "true" : "false"}>
     <div class="alt-copy-block">
       <h2>Research collaboration, consultation, artistic projects, and teaching-related work.</h2>
-      <div class="alt-email-line">
-        <span class="alt-email-label">Contact email</span>
-        <span class="alt-email-placeholder">[email placeholder]</span>
-      </div>
+      <p class="alt-contact-note">
+        Use the protected contact form for research enquiries, teaching-related questions, editorial exchange, and project collaboration.
+      </p>
     </div>
-    {showForm && <ContactMailForm emailCodes={{ local: toCodes(localPart), domain: toCodes(domain), tld: toCodes(tld) }} />}
+    {showForm && <ContactMailForm />}
   </div>
 </section>
 
@@ -52,7 +45,7 @@ const toCodes = (value: string) => Array.from(value).map((char) => char.charCode
     text-wrap: balance;
   }
 
-  p {
+  .alt-contact-note {
     margin-top: 1rem;
     color: #a1a1aa;
     line-height: 1.85;
@@ -62,32 +55,6 @@ const toCodes = (value: string) => Array.from(value).map((char) => char.charCode
     display: grid;
     gap: 1rem;
     align-content: start;
-  }
-
-  .alt-email-line {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.7rem;
-    flex-wrap: wrap;
-    color: #a1a1aa;
-  }
-
-  .alt-email-label {
-    font-size: 0.92rem;
-    line-height: 1.4;
-  }
-
-  .alt-email-placeholder {
-    display: inline-flex;
-    align-items: center;
-    min-height: 2rem;
-    padding: 0.32rem 0.75rem;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.05);
-    color: #dbe4ef;
-    font-size: 0.84rem;
-    line-height: 1;
   }
 
   @media (max-width: 960px) {

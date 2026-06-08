@@ -6,3 +6,7 @@ export/
 .pages-publish-*/
 scripts/archive-zip/
 .playwright-cli/
+.env
+.env.local
+workers/contact-form/.dev.vars
+workers/contact-form/.wrangler/

@@ -15,6 +15,23 @@ npm run dev
 npm run build
 ```
 
+## Contact form
+
+The public contact form uses:
+
+- Cloudflare Turnstile
+- Cloudflare Worker on `workers.dev`
+- Resend for mail delivery
+
+Frontend build-time variables:
+
+```bash
+PUBLIC_CONTACT_FORM_ENDPOINT=https://<worker-subdomain>.workers.dev/contact
+PUBLIC_TURNSTILE_SITE_KEY=<turnstile-site-key>
+```
+
+Worker setup lives in `workers/contact-form/`.
+
 ## GitHub Pages
 
 This repository is configured for project-style GitHub Pages deployments:
