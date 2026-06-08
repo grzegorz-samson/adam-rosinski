@@ -1,10 +1,10 @@
 ---
-const isDev = process.env.NODE_ENV !== "production";
+const isDev = import.meta.env.DEV;
 const contactEndpoint =
-  process.env.PUBLIC_CONTACT_FORM_ENDPOINT ??
+  import.meta.env.PUBLIC_CONTACT_FORM_ENDPOINT ??
   (isDev ? "http://127.0.0.1:8787/contact" : "");
 const turnstileSiteKey =
-  process.env.PUBLIC_TURNSTILE_SITE_KEY ??
+  import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ??
   (isDev ? "1x00000000000000000000AA" : "");
 const isConfigured = Boolean(contactEndpoint && turnstileSiteKey);
 ---
@@ -98,6 +98,16 @@ const isConfigured = Boolean(contactEndpoint && turnstileSiteKey);
 <script type="module">
   const MIN_FORM_AGE_MS = 1500;
   const forms = document.querySelectorAll("[data-contact-form]");
+  const validationMessages = {
+    name: "Please fill out this field.",
+    replyTo: {
+      valueMissing: "Please enter your email address.",
+      typeMismatch: "Please enter a valid email address.",
+      badInput: "Please enter a valid email address.",
+    },
+    subject: "Please fill out this field.",
+    message: "Please fill out this field.",
+  };
 
   for (const form of forms) {
     if (!(form instanceof HTMLFormElement) || form.dataset.bound === "true") continue;
@@ -107,6 +117,12 @@ const isConfigured = Boolean(contactEndpoint && turnstileSiteKey);
     const statusNode = form.querySelector("[data-contact-form-status]");
     const submitButton = form.querySelector(".contact-form__submit");
     const startedAtField = form.elements.namedItem("startedAt");
+    const controls = Array.from(form.elements).filter(
+      (element) =>
+        element instanceof HTMLInputElement ||
+        element instanceof HTMLTextAreaElement ||
+        element instanceof HTMLSelectElement,
+    );
 
     if (
       !(statusNode instanceof HTMLElement) ||
@@ -114,6 +130,43 @@ const isConfigured = Boolean(contactEndpoint && turnstileSiteKey);
       !(startedAtField instanceof HTMLInputElement)
     ) {
       continue;
+    }
+
+    const applyValidationMessage = (control) => {
+      if (!(control instanceof HTMLInputElement || control instanceof HTMLTextAreaElement)) return;
+      const config = validationMessages[control.name];
+      if (!config) {
+        control.setCustomValidity("");
+        return;
+      }
+
+      if (control.validity.valueMissing) {
+        const message = typeof config === "string" ? config : config.valueMissing;
+        control.setCustomValidity(message ?? "Please fill out this field.");
+        return;
+      }
+
+      if (typeof config === "object") {
+        if (control.validity.typeMismatch) {
+          control.setCustomValidity(config.typeMismatch ?? "Please enter a valid value.");
+          return;
+        }
+
+        if (control.validity.badInput) {
+          control.setCustomValidity(config.badInput ?? "Please enter a valid value.");
+          return;
+        }
+      }
+
+      control.setCustomValidity("");
+    };
+
+    for (const control of controls) {
+      const syncValidationMessage = () => applyValidationMessage(control);
+
+      control.addEventListener("invalid", syncValidationMessage);
+      control.addEventListener("input", () => control.setCustomValidity(""));
+      control.addEventListener("change", () => control.setCustomValidity(""));
     }
 
     const defaultButtonLabel = submitButton.dataset.defaultLabel ?? submitButton.textContent?.trim() ?? "Send message";
@@ -149,6 +202,10 @@ const isConfigured = Boolean(contactEndpoint && turnstileSiteKey);
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
+
+      for (const control of controls) {
+        applyValidationMessage(control);
+      }
 
       if (!form.reportValidity()) return;
       if (!endpoint) {
@@ -309,38 +366,14 @@ const isConfigured = Boolean(contactEndpoint && turnstileSiteKey);
   }
 
   .contact-form__verification {
-    position: relative;
     display: grid;
     gap: 0.7rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 22px;
-    background: rgb(49, 49, 49);
+    background:
+      linear-gradient(180deg, rgba(10, 12, 17, 0.52), rgba(7, 9, 13, 0.34)),
+      radial-gradient(circle at top right, rgba(86, 216, 255, 0.08), transparent 42%);
     padding: 0.9rem 0.9rem 0.95rem;
-    isolation: isolate;
-  }
-
-  .contact-form__verification::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.12),
-      rgba(255, 255, 255, 0.03) 22%,
-      rgba(86, 216, 255, 0.12) 48%,
-      rgba(255, 255, 255, 0.02) 72%,
-      rgba(255, 255, 255, 0.1)
-    );
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    mask-composite: exclude;
-    pointer-events: none;
   }
 
   .contact-form__verification-copy {
@@ -349,7 +382,7 @@ const isConfigured = Boolean(contactEndpoint && turnstileSiteKey);
   }
 
   .contact-form__verification-kicker {
-    color: #ffffff;
+    color: #56d8ff;
     font-family: "JetBrains Mono", monospace;
     font-size: 0.72rem;
     font-weight: 700;
