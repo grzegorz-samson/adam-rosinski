@@ -87,7 +87,7 @@ const keywords = [
     display: grid;
     grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
     gap: 2rem;
-    align-items: start;
+    align-items: stretch;
   }
 
   .alt-about-title {
@@ -194,10 +194,12 @@ const keywords = [
 
   .alt-profile-figure {
     margin: 0;
+    height: 100%;
   }
 
   .alt-profile-card {
     position: relative;
+    height: 100%;
     min-height: 34rem;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.1);
