@@ -22,6 +22,7 @@ const isConfigured = Boolean(contactEndpoint && turnstileSiteKey);
     data-contact-form
     data-contact-endpoint={contactEndpoint}
     data-form-configured={isConfigured ? "true" : "false"}
+    data-turnstile-site-key={turnstileSiteKey}
   >
     <div class="contact-form__grid">
       <label>
@@ -55,18 +56,12 @@ const isConfigured = Boolean(contactEndpoint && turnstileSiteKey);
     <input type="hidden" name="startedAt" value="" />
 
     {turnstileSiteKey ? (
-      <div class="contact-form__verification">
+      <div class="contact-form__verification" data-contact-verification data-active="false" hidden>
         <div class="contact-form__verification-copy">
           <span class="contact-form__verification-kicker">Verification</span>
         </div>
         <div class="contact-form__turnstile">
-          <div
-            class="cf-turnstile"
-            data-sitekey={turnstileSiteKey}
-            data-theme="dark"
-            data-size="flexible"
-            data-language="en"
-          ></div>
+          <div data-contact-turnstile></div>
         </div>
       </div>
     ) : (
@@ -114,9 +109,12 @@ const isConfigured = Boolean(contactEndpoint && turnstileSiteKey);
     form.dataset.bound = "true";
 
     const endpoint = form.dataset.contactEndpoint ?? "";
+    const siteKey = form.dataset.turnstileSiteKey ?? "";
     const statusNode = form.querySelector("[data-contact-form-status]");
     const submitButton = form.querySelector(".contact-form__submit");
     const startedAtField = form.elements.namedItem("startedAt");
+    const verificationNode = form.querySelector("[data-contact-verification]");
+    const turnstileMount = form.querySelector("[data-contact-turnstile]");
     const controls = Array.from(form.elements).filter(
       (element) =>
         element instanceof HTMLInputElement ||
@@ -131,6 +129,39 @@ const isConfigured = Boolean(contactEndpoint && turnstileSiteKey);
     ) {
       continue;
     }
+
+    let widgetId = null;
+    let widgetRequested = false;
+
+    const showVerification = () => {
+      if (!(verificationNode instanceof HTMLElement)) return;
+      verificationNode.hidden = false;
+      verificationNode.dataset.active = "true";
+    };
+
+    const renderTurnstile = () => {
+      if (widgetRequested || !(turnstileMount instanceof HTMLElement)) return;
+      widgetRequested = true;
+      showVerification();
+
+      const attemptRender = () => {
+        if (!window.turnstile || typeof window.turnstile.render !== "function") {
+          window.setTimeout(attemptRender, 120);
+          return;
+        }
+
+        if (turnstileMount.childElementCount > 0 || widgetId !== null) return;
+
+        widgetId = window.turnstile.render(turnstileMount, {
+          sitekey: siteKey,
+          theme: "dark",
+          size: "flexible",
+          language: "en",
+        });
+      };
+
+      attemptRender();
+    };
 
     const applyValidationMessage = (control) => {
       if (!(control instanceof HTMLInputElement || control instanceof HTMLTextAreaElement)) return;
@@ -164,6 +195,17 @@ const isConfigured = Boolean(contactEndpoint && turnstileSiteKey);
     for (const control of controls) {
       const syncValidationMessage = () => applyValidationMessage(control);
 
+      if (
+        (control instanceof HTMLInputElement || control instanceof HTMLTextAreaElement) &&
+        control.name !== "website" &&
+        control.name !== "startedAt"
+      ) {
+        const revealVerification = () => renderTurnstile();
+        control.addEventListener("focus", revealVerification, { once: true });
+        control.addEventListener("input", revealVerification, { once: true });
+        control.addEventListener("change", revealVerification, { once: true });
+      }
+
       control.addEventListener("invalid", syncValidationMessage);
       control.addEventListener("input", () => control.setCustomValidity(""));
       control.addEventListener("change", () => control.setCustomValidity(""));
@@ -189,9 +231,9 @@ const isConfigured = Boolean(contactEndpoint && turnstileSiteKey);
     };
 
     const resetTurnstile = () => {
-      if (window.turnstile && typeof window.turnstile.reset === "function") {
+      if (window.turnstile && typeof window.turnstile.reset === "function" && widgetId !== null) {
         try {
-          window.turnstile.reset();
+          window.turnstile.reset(widgetId);
         } catch {
           // Ignore widget reset failures; the next interaction can still re-run verification.
         }
@@ -202,6 +244,8 @@ const isConfigured = Boolean(contactEndpoint && turnstileSiteKey);
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
+
+      renderTurnstile();
 
       for (const control of controls) {
         applyValidationMessage(control);
@@ -233,6 +277,7 @@ const isConfigured = Boolean(contactEndpoint && turnstileSiteKey);
       }
 
       if (!turnstileToken) {
+        showVerification();
         setStatus("error", "Please complete the verification step before sending your message.");
         return;
       }
