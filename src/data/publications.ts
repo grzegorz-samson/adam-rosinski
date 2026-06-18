@@ -9,6 +9,7 @@ export interface PublicationRecord {
   tags: string[];
   relatedAreas: string[];
   href: string;
+  extraLinks?: { label: string; href: string }[];
   pdfHref: string | null;
   sourceNote?: string;
   publisher?: string;
@@ -781,7 +782,14 @@ export const publications: PublicationRecord[] = [
     "book": "20th International Conference on Cognition and Exploratory Learning in the Digital Age (CELDA 2023) Proceedings",
     "pages": "321–328",
     "isbn": "978-989-8704-52-8",
-    "href": "https://eric.ed.gov/?id=ED636612",
+    "doi": "10.33965/CELDA2023_202306L039",
+    "href": "https://doi.org/10.33965/CELDA2023_202306L039",
+    "extraLinks": [
+      {
+        "label": "ERIC",
+        "href": "https://eric.ed.gov/?id=ED636612"
+      }
+    ],
     "summary": "A book chapter focused on keyboard, timbre.",
     "tags": [
       "keyboard",
@@ -794,7 +802,7 @@ export const publications: PublicationRecord[] = [
     ],
     "featured": false,
     "cover": "/images/placeholder-studio.svg",
-    "citation": "Rosiński, Adam. 2023. \"Keyboard as a Stimulator in Timbre Recognition Training.\" 20th International Conference on Cognition and Exploratory Learning in the Digital Age (CELDA 2023) Proceedings.",
+    "citation": "Rosiński, Adam. 2023. \"Keyboard as a Stimulator in Timbre Recognition Training.\" 20th International Conference on Cognition and Exploratory Learning in the Digital Age (CELDA 2023) Proceedings. https://doi.org/10.33965/CELDA2023_202306L039.",
     "sourceVerified": false,
     "pdfHref": "/pdfs/publications/keyboard-as-a-stimulator-in-timbre-recognition-training.pdf"
   },

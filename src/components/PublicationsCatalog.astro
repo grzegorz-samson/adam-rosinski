@@ -277,18 +277,28 @@ function hasExternalSourceLink(href: string): boolean {
                   </div>
 
                   <div class="catalog-links">
-                    {publication.pdfHref && (
-                      <a href={withBase(publication.pdfHref)} target="_blank" rel="noreferrer" class="catalog-link alt-link-with-icon">
-                        <span>PDF</span>
-                        <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
-                      </a>
-                    )}
-                    {hasExternalSource && (
-                      <a href={publication.href} target="_blank" rel="noreferrer" class="catalog-link alt-link-with-icon">
-                        <span>Source</span>
-                        <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
-                      </a>
-                    )}
+                    <div class="catalog-links-left">
+                      {publication.pdfHref && (
+                        <a href={withBase(publication.pdfHref)} target="_blank" rel="noreferrer" class="catalog-link alt-link-with-icon">
+                          <span>PDF</span>
+                          <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
+                        </a>
+                      )}
+                    </div>
+                    <div class="catalog-links-right">
+                      {publication.extraLinks?.map((link) => (
+                        <a href={link.href} target="_blank" rel="noreferrer" class="catalog-link alt-link-with-icon">
+                          <span>{link.label}</span>
+                          <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
+                        </a>
+                      ))}
+                      {hasExternalSource && (
+                        <a href={publication.href} target="_blank" rel="noreferrer" class="catalog-link alt-link-with-icon">
+                          <span>Source</span>
+                          <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </details>
@@ -850,6 +860,19 @@ function hasExternalSourceLink(href: string): boolean {
     gap: 0.8rem;
     padding: 0.95rem 0 1.2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .catalog-links-left,
+  .catalog-links-right {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .catalog-links-right {
+    justify-content: flex-end;
+    margin-left: auto;
   }
 
   .catalog-link {

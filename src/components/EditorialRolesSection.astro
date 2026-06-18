@@ -11,7 +11,9 @@ import SearchCheck from "@lucide/astro/icons/search-check";
 import Sparkles from "@lucide/astro/icons/sparkles";
 import WavesHorizontal from "@lucide/astro/icons/waves-horizontal";
 import EditorialWorkCatalog from "./EditorialWorkCatalog.astro";
+import PeerReviewSection from "./PeerReviewSection.astro";
 import { editorialIntro, editorialReviewAreas, editorialRoles } from "../data/editorialRoles";
+import { peerReviewCounts } from "../data/peerReviews";
 import { publicationsByCategory } from "../data/publications";
 import { withBase } from "../utils/withBase";
 
@@ -65,8 +67,8 @@ const reviewIcons = {
         <span>scholarly associations</span>
       </div>
       <div class="editorial-hero-metric">
-        <strong>{editorialReviewAreas.length}</strong>
-        <span>reviewing activity areas</span>
+        <strong>{peerReviewCounts.total}</strong>
+        <span>documented review records</span>
       </div>
     </aside>
   </div>
@@ -167,8 +169,8 @@ const reviewIcons = {
       <p class="alt-kicker">Reviewing activity</p>
       <h2 id="review-section-title">Reviewing and publishing support areas</h2>
       <p>
-        This section intentionally describes areas of activity rather than naming specific journals or publishers.
-        Named venues can be added later only after they are confirmed from public or internal documentation.
+        Reviewing activity is presented first through broader support areas and then through a documented record of
+        reviewed works grouped by year and publication type.
       </p>
     </div>
 
@@ -195,6 +197,8 @@ const reviewIcons = {
         );
       })}
     </div>
+
+    <PeerReviewSection sectionId="editorial-peer-review-records" />
   </section>
 </section>
 

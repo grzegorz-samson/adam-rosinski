@@ -10,3 +10,4 @@ scripts/archive-zip/
 .env.local
 workers/contact-form/.dev.vars
 workers/contact-form/.wrangler/
+.localhost-server/

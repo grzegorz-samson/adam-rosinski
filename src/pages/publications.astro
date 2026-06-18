@@ -7,6 +7,7 @@ import PublicationsCatalog from "../components/PublicationsCatalog.astro";
 import AlternativeProfiles from "../components/AlternativeProfiles.astro";
 import EditorialRolesSection from "../components/EditorialRolesSection.astro";
 import { editorialReviewAreas, editorialRoles } from "../data/editorialRoles";
+import { peerReviewCounts } from "../data/peerReviews";
 import { publicationsByCategory, selectedPublications } from "../data/publications";
 
 const publicationCount =
@@ -14,7 +15,7 @@ const publicationCount =
   publicationsByCategory.journalArticles.length +
   publicationsByCategory.bookChapters.length;
 
-const editorialCount = publicationsByCategory.editorialWork.length;
+const editorialCount = publicationsByCategory.editorialWork.length + peerReviewCounts.total;
 ---
 
 <AltLabLayout
