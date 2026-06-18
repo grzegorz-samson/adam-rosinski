@@ -10,9 +10,6 @@ export interface PeerReviewRecord {
   volume?: string;
   issn?: string;
   isbn?: string;
-  visualAsset?: string;
-  visualAccent?: string;
-  visualAccent2?: string;
 }
 
 export const peerReviewKindLabels: Record<PeerReviewKind, string> = {
@@ -30,9 +27,6 @@ export const peerReviews: PeerReviewRecord[] = [
     kind: "conference-paper",
     volume: "Vol. 48",
     issn: "1069-7977",
-    visualAsset: "/images/peer-review-strips/online-games-perceptual-learning.svg",
-    visualAccent: "#67e8f9",
-    visualAccent2: "#a78bfa",
   },
   {
     slug: "generating-acoustic-signals-referential-aesthetic-goals",

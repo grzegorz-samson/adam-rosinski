@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-ad3d8fcd desc-ad3d8fcd">
+  <title id="title-ad3d8fcd">Eye Movements are like Gestures in the Creation of Informal Algorithms — peer-review visual strip</title>
+  <desc id="desc-ad3d8fcd">Eye movements tracing an informal algorithm through decision blocks.</desc>
+
+  <defs>
+    <linearGradient id="fade-ad3d8fcd" x1="0" x2="1"><stop offset="0%" stop-color="#A78BFA" stop-opacity="0"/><stop offset="36%" stop-color="#A78BFA" stop-opacity=".06"/><stop offset="100%" stop-color="#56D8FF" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-ad3d8fcd" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#56D8FF" stop-opacity=".28"/><stop offset="55%" stop-color="#A78BFA" stop-opacity=".08"/><stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/></radialGradient>
+    <filter id="soft-ad3d8fcd" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-ad3d8fcd" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#A78BFA" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-ad3d8fcd" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#56D8FF" opacity=".22"/></pattern>
+    <marker id="arrow-ad3d8fcd" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#56D8FF" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-ad3d8fcd)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-ad3d8fcd)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-ad3d8fcd)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-ad3d8fcd)" opacity=".35"/>
+  <g><g fill="none" stroke="#A78BFA"><rect x="500" y="40" width="90" height="34" rx="7"/><rect x="646" y="40" width="90" height="34" rx="7"/><rect x="572" y="108" width="90" height="34" rx="7"/><path d="M590 57H646M691 74L636 108M545 74L590 108"/></g><path d="M518 56C558 30 620 82 670 54S752 48 806 92" fill="none" stroke="#56D8FF" stroke-width="2"/><g fill="#56D8FF" filter="url(#soft-ad3d8fcd)"><circle cx="518" cy="56" r="4"/><circle cx="670" cy="54" r="4"/><circle cx="806" cy="92" r="4"/></g><path d="M788 84l18 8-18 8" fill="none" stroke="#56D8FF"/></g>
+</svg>

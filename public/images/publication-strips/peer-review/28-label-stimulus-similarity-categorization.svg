@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-bcef7443 desc-bcef7443">
+  <title id="title-bcef7443">Label Similarity and Stimulus Similarity Interact in Categorization — peer-review visual strip</title>
+  <desc id="desc-bcef7443">Label and stimulus clusters intersecting in a categorization field.</desc>
+
+  <defs>
+    <linearGradient id="fade-bcef7443" x1="0" x2="1"><stop offset="0%" stop-color="#A78BFA" stop-opacity="0"/><stop offset="36%" stop-color="#A78BFA" stop-opacity=".06"/><stop offset="100%" stop-color="#56D8FF" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-bcef7443" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#56D8FF" stop-opacity=".28"/><stop offset="55%" stop-color="#A78BFA" stop-opacity=".08"/><stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/></radialGradient>
+    <filter id="soft-bcef7443" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-bcef7443" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#A78BFA" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-bcef7443" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#56D8FF" opacity=".22"/></pattern>
+    <marker id="arrow-bcef7443" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#56D8FF" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-bcef7443)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-bcef7443)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-bcef7443)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-bcef7443)" opacity=".35"/>
+  <g><g fill="none" stroke="#A78BFA"><circle cx="570" cy="78" r="42"/><circle cx="650" cy="108" r="48"/></g><g fill="none" stroke="#56D8FF"><rect x="730" y="42" width="92" height="34" rx="8"/><rect x="730" y="94" width="92" height="34" rx="8"/></g><path d="M610 76C662 64 682 58 730 58M674 112C696 112 710 112 730 112" fill="none" stroke="#56D8FF" marker-end="url(#arrow-bcef7443)"/><circle cx="660" cy="55" r="3" fill="#56D8FF" opacity=".37"/><circle cx="569" cy="79" r="3" fill="#56D8FF" opacity=".42"/><circle cx="535" cy="98" r="5" fill="#56D8FF" opacity=".48"/><circle cx="631" cy="137" r="4" fill="#56D8FF" opacity=".50"/><circle cx="617" cy="59" r="2" fill="#56D8FF" opacity=".82"/><circle cx="626" cy="52" r="2" fill="#56D8FF" opacity=".75"/><circle cx="552" cy="82" r="4" fill="#56D8FF" opacity=".44"/><circle cx="549" cy="51" r="4" fill="#56D8FF" opacity=".61"/><circle cx="579" cy="48" r="3" fill="#56D8FF" opacity=".69"/><circle cx="609" cy="67" r="4" fill="#56D8FF" opacity=".46"/></g>
+</svg>

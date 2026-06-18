@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-484a113f desc-484a113f">
+  <title id="title-484a113f">Identifying Cognitive Processes and Neural Substrates of Spatial Transformation in a Mental Folding Task with Cognitive Modeling — peer-review visual strip</title>
+  <desc id="desc-484a113f">A folded spatial object transformed through a cognitive-model pathway.</desc>
+
+  <defs>
+    <linearGradient id="fade-484a113f" x1="0" x2="1"><stop offset="0%" stop-color="#A78BFA" stop-opacity="0"/><stop offset="36%" stop-color="#A78BFA" stop-opacity=".06"/><stop offset="100%" stop-color="#56D8FF" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-484a113f" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#56D8FF" stop-opacity=".28"/><stop offset="55%" stop-color="#A78BFA" stop-opacity=".08"/><stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/></radialGradient>
+    <filter id="soft-484a113f" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-484a113f" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#A78BFA" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-484a113f" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#56D8FF" opacity=".22"/></pattern>
+    <marker id="arrow-484a113f" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#56D8FF" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-484a113f)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-484a113f)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-484a113f)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-484a113f)" opacity=".35"/>
+  <g><path d="M520 118L580 44L650 70L610 142Z" fill="#A78BFA" opacity=".08" stroke="#A78BFA"/><path d="M580 44L610 142M650 70L520 118M580 44L690 38L752 92L650 70" fill="none" stroke="#56D8FF"/><path d="M672 126l64-52 74 40-58 42Z" fill="none" stroke="#A78BFA"/><path d="M640 90C680 90 700 96 722 104" fill="none" stroke="#56D8FF" marker-end="url(#arrow-484a113f)"/></g>
+</svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-318815fd desc-318815fd">
+  <title id="title-318815fd">Wyzwania dla tłumacza tekstów podręczników do gry na flecie poprzecznym. Studium przypadku na podstawie tłumaczenia w parze językowej niemiecki-polski — peer-review visual strip</title>
+  <desc id="desc-318815fd">A flute aligned with parallel German and Polish text structures.</desc>
+
+  <defs>
+    <linearGradient id="fade-318815fd" x1="0" x2="1"><stop offset="0%" stop-color="#FFB347" stop-opacity="0"/><stop offset="36%" stop-color="#FFB347" stop-opacity=".06"/><stop offset="100%" stop-color="#34D399" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-318815fd" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#34D399" stop-opacity=".28"/><stop offset="55%" stop-color="#FFB347" stop-opacity=".08"/><stop offset="100%" stop-color="#FFB347" stop-opacity="0"/></radialGradient>
+    <filter id="soft-318815fd" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-318815fd" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#FFB347" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-318815fd" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#34D399" opacity=".22"/></pattern>
+    <marker id="arrow-318815fd" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#34D399" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-318815fd)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-318815fd)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-318815fd)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-318815fd)" opacity=".35"/>
+  <g><path d="M486 88H704M520 76v24M548 76v24M576 76v24M604 76v24M632 76v24M660 76v24" stroke="#FFB347" stroke-width="2"/><circle cx="716" cy="88" r="12" fill="none" stroke="#FFB347"/><path d="M500 42h124M500 58h94M500 122h132M500 138h104" stroke="#34D399"/><path d="M646 50H790M646 130H790" stroke="#FFB347" stroke-opacity=".4"/><path d="M714 58L760 116M760 58L714 116" stroke="#34D399" opacity=".5"/></g>
+</svg>

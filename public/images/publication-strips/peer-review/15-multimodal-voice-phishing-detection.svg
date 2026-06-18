@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-c308bb2d desc-c308bb2d">
+  <title id="title-c308bb2d">A Multimodal Voice Phishing Detection System Integrating Text and Audio Analysis — peer-review visual strip</title>
+  <desc id="desc-c308bb2d">Voice and text streams passing through a multimodal phishing detector.</desc>
+
+  <defs>
+    <linearGradient id="fade-c308bb2d" x1="0" x2="1"><stop offset="0%" stop-color="#56D8FF" stop-opacity="0"/><stop offset="36%" stop-color="#56D8FF" stop-opacity=".06"/><stop offset="100%" stop-color="#34D399" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-c308bb2d" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#34D399" stop-opacity=".28"/><stop offset="55%" stop-color="#56D8FF" stop-opacity=".08"/><stop offset="100%" stop-color="#56D8FF" stop-opacity="0"/></radialGradient>
+    <filter id="soft-c308bb2d" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-c308bb2d" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#56D8FF" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-c308bb2d" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#34D399" opacity=".22"/></pattern>
+    <marker id="arrow-c308bb2d" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#34D399" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-c308bb2d)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-c308bb2d)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-c308bb2d)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-c308bb2d)" opacity=".35"/>
+  <g><path d="M450 67 L480 75 L510 109 L540 82 L570 77 L600 66 L630 87" fill="none" stroke="#56D8FF" stroke-width="2"/><g fill="none" stroke="#34D399"><rect x="674" y="44" width="144" height="92" rx="14"/><path d="M700 66h84M700 84h64M700 102h76"/></g><path d="M654 88H674" stroke="#34D399" marker-end="url(#arrow-c308bb2d)"/><path d="M748 56l25 10v24c0 19-10 32-25 40-15-8-25-21-25-40V66Z" fill="#56D8FF" opacity=".13" stroke="#56D8FF"/><path d="M748 72v26M748 110v2" stroke="#56D8FF" stroke-width="4" stroke-linecap="round"/></g>
+</svg>

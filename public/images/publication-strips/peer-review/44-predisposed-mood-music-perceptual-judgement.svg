@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-8ecb23d5 desc-8ecb23d5">
+  <title id="title-8ecb23d5">Predisposed Mood and Music in Perceptual Judgement Task — peer-review visual strip</title>
+  <desc id="desc-8ecb23d5">A predisposed mood baseline interacting with musical perceptual judgements.</desc>
+
+  <defs>
+    <linearGradient id="fade-8ecb23d5" x1="0" x2="1"><stop offset="0%" stop-color="#A78BFA" stop-opacity="0"/><stop offset="36%" stop-color="#A78BFA" stop-opacity=".06"/><stop offset="100%" stop-color="#56D8FF" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-8ecb23d5" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#56D8FF" stop-opacity=".28"/><stop offset="55%" stop-color="#A78BFA" stop-opacity=".08"/><stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/></radialGradient>
+    <filter id="soft-8ecb23d5" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-8ecb23d5" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#A78BFA" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-8ecb23d5" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#56D8FF" opacity=".22"/></pattern>
+    <marker id="arrow-8ecb23d5" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#56D8FF" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-8ecb23d5)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-8ecb23d5)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-8ecb23d5)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-8ecb23d5)" opacity=".35"/>
+  <g><path d="M480 112C540 112 580 112 628 112" stroke="#A78BFA" stroke-width="3"/><path d="M480 82 L510 66 L540 98 L570 95 L600 73 L630 106 L660 113 L690 75 L720 84 L750 98 L780 86 L810 75 L840 80" fill="none" stroke="#56D8FF" stroke-width="2.2"/><path d="M650 42C690 28 730 44 750 76C770 108 804 120 838 112" fill="none" stroke="#A78BFA"/><g fill="#56D8FF"><circle cx="650" cy="88" r="5"/><circle cx="750" cy="76" r="5"/><circle cx="838" cy="112" r="5"/></g></g>
+</svg>

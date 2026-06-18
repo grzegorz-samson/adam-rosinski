@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-8b7aae86 desc-8b7aae86">
+  <title id="title-8b7aae86">Local–Global Association Between Pitch and Chord Identification Strategies — peer-review visual strip</title>
+  <desc id="desc-8b7aae86">Local pitch points converging into a global chord structure.</desc>
+
+  <defs>
+    <linearGradient id="fade-8b7aae86" x1="0" x2="1"><stop offset="0%" stop-color="#A78BFA" stop-opacity="0"/><stop offset="36%" stop-color="#A78BFA" stop-opacity=".06"/><stop offset="100%" stop-color="#56D8FF" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-8b7aae86" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#56D8FF" stop-opacity=".28"/><stop offset="55%" stop-color="#A78BFA" stop-opacity=".08"/><stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/></radialGradient>
+    <filter id="soft-8b7aae86" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-8b7aae86" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#A78BFA" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-8b7aae86" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#56D8FF" opacity=".22"/></pattern>
+    <marker id="arrow-8b7aae86" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#56D8FF" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-8b7aae86)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-8b7aae86)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-8b7aae86)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-8b7aae86)" opacity=".35"/>
+  <g><g stroke="#A78BFA" fill="none"><path d="M500 120V56M526 120V72M552 120V44M578 120V84"/><circle cx="500" cy="52" r="5" fill="#A78BFA"/><circle cx="526" cy="68" r="5" fill="#A78BFA"/><circle cx="552" cy="40" r="5" fill="#A78BFA"/><circle cx="578" cy="80" r="5" fill="#A78BFA"/></g><path d="M600 88C650 88 672 90 708 90" stroke="#56D8FF" marker-end="url(#arrow-8b7aae86)"/><g fill="none" stroke="#56D8FF"><circle cx="758" cy="90" r="50"/><path d="M758 40L800 114L716 114Z"/></g><g fill="#56D8FF"><circle cx="758" cy="40" r="5"/><circle cx="800" cy="114" r="5"/><circle cx="716" cy="114" r="5"/></g></g>
+</svg>
