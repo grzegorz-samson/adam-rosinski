@@ -18,6 +18,18 @@ export const peerReviewKindLabels: Record<PeerReviewKind, string> = {
   "book-chapter": "Book chapter",
 };
 
+export const peerReviewKindPluralLabels: Record<PeerReviewKind, string> = {
+  "journal-manuscript": "Journal manuscripts",
+  "conference-paper": "Conference papers / proceedings",
+  "book-chapter": "Book chapters",
+};
+
+export const peerReviewKindOrder: PeerReviewKind[] = [
+  "journal-manuscript",
+  "conference-paper",
+  "book-chapter",
+];
+
 export const peerReviews: PeerReviewRecord[] = [
   {
     slug: "online-games-for-perceptual-learning",
@@ -487,7 +499,21 @@ export const peerReviewYears = [...new Set(peerReviews.map((review) => review.re
 
 export const peerReviewsByYear = peerReviewYears.map((year) => ({
   year,
-  reviews: peerReviews.filter((review) => review.reviewYear === year),
+  ...(() => {
+    const yearlyReviews = peerReviews.filter((review) => review.reviewYear === year);
+    const groups = peerReviewKindOrder
+      .map((kind) => ({
+        kind,
+        label: peerReviewKindPluralLabels[kind],
+        reviews: yearlyReviews.filter((review) => review.kind === kind),
+      }))
+      .filter((group) => group.reviews.length > 0);
+
+    return {
+      reviews: groups.flatMap((group) => group.reviews),
+      groups,
+    };
+  })(),
 }));
 
 export const peerReviewCounts = {

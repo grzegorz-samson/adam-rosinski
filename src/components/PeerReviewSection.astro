@@ -75,7 +75,7 @@ const kindShortLabels: Record<PeerReviewKind, string> = {
   </div>
 
   <div class="peer-review-years">
-    {peerReviewsByYear.map(({ year, reviews }, yearIndex) => (
+    {peerReviewsByYear.map(({ year, reviews, groups }, yearIndex) => (
       <details class="peer-review-year" open={yearIndex === 0}>
         <summary>
           <span class="peer-review-year-heading">
@@ -92,43 +92,63 @@ const kindShortLabels: Record<PeerReviewKind, string> = {
         </summary>
 
         <ol class="peer-review-list">
-          {reviews.map((review, reviewIndex) => {
-            const Icon = kindIcons[review.kind];
-            const identifier = review.issn
-              ? `ISSN ${review.issn}`
-              : review.isbn
-                ? `ISBN ${review.isbn}`
-                : undefined;
-            const strip = getPeerReviewStrip(review);
-            const stripStyle = [
-              `--peer-review-strip-svg: url("${withBase(strip.asset)}")`,
-              `--peer-accent: ${strip.accent}`,
-              `--peer-accent-2: ${strip.accent2}`,
-            ].join("; ");
+          {groups.map((group, groupIndex) => {
+            const GroupIcon = kindIcons[group.kind];
+            const groupStartIndex = groups
+              .slice(0, groupIndex)
+              .reduce((total, currentGroup) => total + currentGroup.reviews.length, 0);
 
             return (
-              <li class:list={["peer-review-item", `is-${review.kind}`]} style={stripStyle}>
-                <span class="peer-review-index" aria-hidden="true">
-                  {String(reviewIndex + 1).padStart(2, "0")}
-                </span>
-                <div class="peer-review-item-main">
-                  <div class="peer-review-item-topline">
-                    <span class="peer-review-kind">
-                      <Icon size={14} stroke-width={1.85} aria-hidden="true" />
-                      {kindShortLabels[review.kind]}
-                    </span>
-                    {review.publicationYear && review.publicationYear !== review.reviewYear && (
-                      <span class="peer-review-publication-year">Publication: {review.publicationYear}</span>
-                    )}
-                  </div>
-                  <h4>{review.title}</h4>
-                  <p>
-                    <span>{review.venue}</span>
-                    {review.volume && <span>{review.volume}</span>}
-                    {identifier && <span>{identifier}</span>}
-                  </p>
-                </div>
-              </li>
+              <>
+                <li class:list={["peer-review-group-heading", `is-${group.kind}`]}>
+                  <span>
+                    <GroupIcon size={14} stroke-width={1.85} aria-hidden="true" />
+                    {group.label}
+                  </span>
+                  <strong>{group.reviews.length}</strong>
+                </li>
+
+                {group.reviews.map((review, reviewIndex) => {
+                  const Icon = kindIcons[review.kind];
+                  const identifier = review.issn
+                    ? `ISSN ${review.issn}`
+                    : review.isbn
+                      ? `ISBN ${review.isbn}`
+                      : undefined;
+                  const strip = getPeerReviewStrip(review);
+                  const stripStyle = [
+                    `--peer-review-strip-svg: url("${withBase(strip.asset)}")`,
+                    `--peer-accent: ${strip.accent}`,
+                    `--peer-accent-2: ${strip.accent2}`,
+                  ].join("; ");
+                  const displayIndex = groupStartIndex + reviewIndex + 1;
+
+                  return (
+                    <li class:list={["peer-review-item", `is-${review.kind}`]} style={stripStyle}>
+                      <span class="peer-review-index" aria-hidden="true">
+                        {String(displayIndex).padStart(2, "0")}
+                      </span>
+                      <div class="peer-review-item-main">
+                        <div class="peer-review-item-topline">
+                          <span class="peer-review-kind">
+                            <Icon size={14} stroke-width={1.85} aria-hidden="true" />
+                            {kindShortLabels[review.kind]}
+                          </span>
+                          {review.publicationYear && review.publicationYear !== review.reviewYear && (
+                            <span class="peer-review-publication-year">Publication: {review.publicationYear}</span>
+                          )}
+                        </div>
+                        <h4>{review.title}</h4>
+                        <p>
+                          <span>{review.venue}</span>
+                          {review.volume && <span>{review.volume}</span>}
+                          {identifier && <span>{identifier}</span>}
+                        </p>
+                      </div>
+                    </li>
+                  );
+                })}
+              </>
             );
           })}
         </ol>
@@ -387,16 +407,57 @@ const kindShortLabels: Record<PeerReviewKind, string> = {
     border-top: 1px solid rgba(255, 255, 255, 0.075);
   }
 
+  .peer-review-group-heading {
+    --peer-accent: #56d8ff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 0.25rem 0.55rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.075);
+    color: color-mix(in srgb, var(--peer-accent) 78%, white 22%);
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .peer-review-group-heading:first-child {
+    border-top: 0;
+  }
+
+  .peer-review-group-heading span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .peer-review-group-heading strong {
+    color: #f6f8fb;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+
+  .peer-review-group-heading.is-conference-paper {
+    --peer-accent: #a78bfa;
+  }
+
+  .peer-review-group-heading.is-book-chapter {
+    --peer-accent: #ffb347;
+  }
+
   .peer-review-item::before {
     position: absolute;
-    inset: 0;
+    inset: -0.28rem -3.2rem -0.28rem 0;
     z-index: 0;
     content: "";
     pointer-events: none;
     background-image: var(--peer-review-strip-svg);
     background-repeat: no-repeat;
     background-position: right center;
-    background-size: auto 100%;
+    background-size: auto 112%;
     opacity: 0.82;
     filter: brightness(0.96) contrast(1.13) saturate(0.86);
     transform-origin: right center;
@@ -422,7 +483,7 @@ const kindShortLabels: Record<PeerReviewKind, string> = {
 
   .peer-review-item:hover::before {
     opacity: 0.94;
-    transform: translateX(-0.3rem) scale(1.025);
+    transform: translateX(-0.18rem) scale(1.025);
   }
 
   .peer-review-item.is-conference-paper {
