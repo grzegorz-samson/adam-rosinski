@@ -1,0 +1,128 @@
+[
+  {
+    "id": "acoustical-society-of-america",
+    "name": "Acoustical Society of America",
+    "shortName": "ASA",
+    "asset": "/images/organizations/memberships/acoustical-society-of-america.svg",
+    "type": "local animated editorial SVG mark",
+    "officialLogo": false,
+    "note": "Animated local editorial SVG mark; not an official organisation logo."
+  },
+  {
+    "id": "american-auditory-society",
+    "name": "American Auditory Society",
+    "shortName": "AAS",
+    "asset": "/images/organizations/memberships/american-auditory-society.svg",
+    "type": "local animated editorial SVG mark",
+    "officialLogo": false,
+    "note": "Animated local editorial SVG mark; not an official organisation logo."
+  },
+  {
+    "id": "association-for-computing-machinery",
+    "name": "Association for Computing Machinery",
+    "shortName": "ACM",
+    "asset": "/images/organizations/memberships/association-for-computing-machinery.svg",
+    "type": "local animated editorial SVG mark",
+    "officialLogo": false,
+    "note": "Animated local editorial SVG mark; not an official organisation logo."
+  },
+  {
+    "id": "audio-engineering-society",
+    "name": "Audio Engineering Society",
+    "shortName": "AES",
+    "asset": "/images/organizations/memberships/audio-engineering-society.svg",
+    "type": "local animated editorial SVG mark",
+    "officialLogo": false,
+    "note": "Animated local editorial SVG mark; not an official organisation logo."
+  },
+  {
+    "id": "cognitive-science-society",
+    "name": "Cognitive Science Society",
+    "shortName": "CSS",
+    "asset": "/images/organizations/memberships/cognitive-science-society.svg",
+    "type": "local animated editorial SVG mark",
+    "officialLogo": false,
+    "note": "Animated local editorial SVG mark; not an official organisation logo."
+  },
+  {
+    "id": "european-acoustics-association",
+    "name": "European Acoustics Association",
+    "shortName": "EAA",
+    "asset": "/images/organizations/memberships/european-acoustics-association.svg",
+    "type": "local animated editorial SVG mark",
+    "officialLogo": false,
+    "note": "Animated local editorial SVG mark; not an official organisation logo."
+  },
+  {
+    "id": "fsnt-not",
+    "name": "Federation of Scientific and Technical Associations – Supreme Technical Organization",
+    "shortName": "FSNT-NOT",
+    "asset": "/images/organizations/memberships/fsnt-not.svg",
+    "type": "local animated editorial SVG mark",
+    "officialLogo": false,
+    "note": "Animated local editorial SVG mark; not an official organisation logo."
+  },
+  {
+    "id": "ieee",
+    "name": "Institute of Electrical and Electronics Engineers",
+    "shortName": "IEEE",
+    "asset": "/images/organizations/memberships/ieee.svg",
+    "type": "local animated editorial SVG mark",
+    "officialLogo": false,
+    "note": "Animated local editorial SVG mark; not an official organisation logo."
+  },
+  {
+    "id": "polish-acoustical-society",
+    "name": "Polish Acoustical Society",
+    "shortName": "PTA",
+    "asset": "/images/organizations/memberships/polish-acoustical-society.svg",
+    "type": "local animated editorial SVG mark",
+    "officialLogo": false,
+    "note": "Animated local editorial SVG mark; not an official organisation logo."
+  },
+  {
+    "id": "polish-association-of-sound-engineers",
+    "name": "Polish Association of Sound Engineers",
+    "shortName": "PSRD",
+    "asset": "/images/organizations/memberships/polish-association-of-sound-engineers.svg",
+    "type": "local animated editorial SVG mark",
+    "officialLogo": false,
+    "note": "Animated local editorial SVG mark; not an official organisation logo."
+  },
+  {
+    "id": "society-for-music-analysis",
+    "name": "Society for Music Analysis",
+    "shortName": "SMA",
+    "asset": "/images/organizations/memberships/society-for-music-analysis.svg",
+    "type": "local animated editorial SVG mark",
+    "officialLogo": false,
+    "note": "Animated local editorial SVG mark; not an official organisation logo."
+  },
+  {
+    "id": "society-for-music-perception-and-cognition",
+    "name": "Society for Music Perception and Cognition",
+    "shortName": "SMPC",
+    "asset": "/images/organizations/memberships/society-for-music-perception-and-cognition.svg",
+    "type": "local animated editorial SVG mark",
+    "officialLogo": false,
+    "note": "Animated local editorial SVG mark; not an official organisation logo."
+  },
+  {
+    "id": "society-for-music-production-research",
+    "name": "Society for Music Production Research",
+    "shortName": "SMPR",
+    "asset": "/images/organizations/memberships/society-for-music-production-research.svg",
+    "type": "local animated editorial SVG mark",
+    "officialLogo": false,
+    "note": "Animated local editorial SVG mark; not an official organisation logo."
+  },
+  {
+    "id": "society-for-music-theory",
+    "name": "Society for Music Theory",
+    "shortName": "SMT",
+    "asset": "/images/organizations/memberships/society-for-music-theory.svg",
+    "type": "local animated editorial SVG mark",
+    "officialLogo": false,
+    "note": "Animated local editorial SVG mark; not an official organisation logo."
+  }
+]
