@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-7da19ea8 desc-7da19ea8">
+  <title id="title-7da19ea8">Acoustic Feature Excitation-and-Aggregation Network based on Multi-Task Learning for Speech Emotion Recognition — peer-review visual strip</title>
+  <desc id="desc-7da19ea8">Acoustic features excited and aggregated by a multi-task speech-emotion network.</desc>
+
+  <defs>
+    <linearGradient id="fade-7da19ea8" x1="0" x2="1"><stop offset="0%" stop-color="#56D8FF" stop-opacity="0"/><stop offset="36%" stop-color="#56D8FF" stop-opacity=".06"/><stop offset="100%" stop-color="#34D399" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-7da19ea8" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#34D399" stop-opacity=".28"/><stop offset="55%" stop-color="#56D8FF" stop-opacity=".08"/><stop offset="100%" stop-color="#56D8FF" stop-opacity="0"/></radialGradient>
+    <filter id="soft-7da19ea8" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-7da19ea8" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#56D8FF" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-7da19ea8" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#34D399" opacity=".22"/></pattern>
+    <marker id="arrow-7da19ea8" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#34D399" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-7da19ea8)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-7da19ea8)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-7da19ea8)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-7da19ea8)" opacity=".35"/>
+  <g><g stroke="#56D8FF" stroke-opacity=".45"><path d="M500 48L690 54"/><path d="M550 48L738 54"/><path d="M600 48L786 54"/><path d="M650 48L690 90"/><path d="M500 92L738 90"/><path d="M550 92L786 90"/><path d="M600 92L690 126"/><path d="M650 92L738 126"/><path d="M500 136L786 126"/><path d="M550 136L690 162"/><path d="M600 136L738 162"/><path d="M650 136L786 162"/></g><g fill="#56D8FF"><circle cx="500" cy="48" r="4"/><circle cx="550" cy="48" r="4"/><circle cx="600" cy="48" r="4"/><circle cx="650" cy="48" r="4"/><circle cx="500" cy="92" r="4"/><circle cx="550" cy="92" r="4"/><circle cx="600" cy="92" r="4"/><circle cx="650" cy="92" r="4"/><circle cx="500" cy="136" r="4"/><circle cx="550" cy="136" r="4"/><circle cx="600" cy="136" r="4"/><circle cx="650" cy="136" r="4"/></g><g fill="#34D399"><circle cx="690" cy="54" r="5"/><circle cx="738" cy="54" r="5"/><circle cx="786" cy="54" r="5"/><circle cx="690" cy="90" r="5"/><circle cx="738" cy="90" r="5"/><circle cx="786" cy="90" r="5"/><circle cx="690" cy="126" r="5"/><circle cx="738" cy="126" r="5"/><circle cx="786" cy="126" r="5"/></g><path d="M790 52C816 66 826 94 812 120" fill="none" stroke="#34D399" stroke-width="3"/><path d="M804 58l12 8-10 10M814 116l-10 8-10-10" fill="none" stroke="#34D399"/></g>
+</svg>

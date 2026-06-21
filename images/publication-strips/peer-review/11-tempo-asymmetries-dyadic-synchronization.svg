@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-f55d64a5 desc-f55d64a5">
+  <title id="title-f55d64a5">Individual Tempo Asymmetries and Coupling Dynamics in Dyadic Musical Synchronization — peer-review visual strip</title>
+  <desc id="desc-f55d64a5">Two coupled oscillators with asymmetric tempi converging in synchronization.</desc>
+
+  <defs>
+    <linearGradient id="fade-f55d64a5" x1="0" x2="1"><stop offset="0%" stop-color="#A78BFA" stop-opacity="0"/><stop offset="36%" stop-color="#A78BFA" stop-opacity=".06"/><stop offset="100%" stop-color="#56D8FF" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-f55d64a5" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#56D8FF" stop-opacity=".28"/><stop offset="55%" stop-color="#A78BFA" stop-opacity=".08"/><stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/></radialGradient>
+    <filter id="soft-f55d64a5" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-f55d64a5" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#A78BFA" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-f55d64a5" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#56D8FF" opacity=".22"/></pattern>
+    <marker id="arrow-f55d64a5" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#56D8FF" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-f55d64a5)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-f55d64a5)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-f55d64a5)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-f55d64a5)" opacity=".35"/>
+  <g><circle cx="570" cy="90" r="42" fill="none" stroke="#A78BFA"/><circle cx="760" cy="90" r="42" fill="none" stroke="#56D8FF"/><path d="M528 90C544 52 570 52 612 90S674 128 718 90S744 52 802 90" fill="none" stroke="#A78BFA" stroke-width="2"/><path d="M612 76C646 58 674 58 718 76" fill="none" stroke="#56D8FF" stroke-dasharray="5 6"/><g fill="#56D8FF"><circle cx="570" cy="90" r="5"/><circle cx="760" cy="90" r="5"/></g></g>
+</svg>

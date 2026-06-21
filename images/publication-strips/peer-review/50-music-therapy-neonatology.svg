@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-272ce72d desc-272ce72d">
+  <title id="title-272ce72d">Muzykoterapia w neonatologii – wymiar społeczny, kulturowy i medyczny — peer-review visual strip</title>
+  <desc id="desc-272ce72d">A neonatal vital trace gently coupled with a therapeutic music envelope.</desc>
+
+  <defs>
+    <linearGradient id="fade-272ce72d" x1="0" x2="1"><stop offset="0%" stop-color="#FFB347" stop-opacity="0"/><stop offset="36%" stop-color="#FFB347" stop-opacity=".06"/><stop offset="100%" stop-color="#34D399" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-272ce72d" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#34D399" stop-opacity=".28"/><stop offset="55%" stop-color="#FFB347" stop-opacity=".08"/><stop offset="100%" stop-color="#FFB347" stop-opacity="0"/></radialGradient>
+    <filter id="soft-272ce72d" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-272ce72d" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#FFB347" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-272ce72d" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#34D399" opacity=".22"/></pattern>
+    <marker id="arrow-272ce72d" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#34D399" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-272ce72d)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-272ce72d)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-272ce72d)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-272ce72d)" opacity=".35"/>
+  <g><path d="M486 96H540L552 66L570 124L588 88H640" fill="none" stroke="#FFB347" stroke-width="2"/><path d="M648 96C676 62 706 126 736 90S790 64 836 98" fill="none" stroke="#34D399" stroke-width="2.2"/><path d="M710 48c20-18 50-4 50 22 0 30-50 52-50 52s-50-22-50-52c0-26 30-40 50-22Z" fill="#34D399" opacity=".12" stroke="#34D399"/><circle cx="710" cy="82" r="12" fill="none" stroke="#FFB347"/></g>
+</svg>

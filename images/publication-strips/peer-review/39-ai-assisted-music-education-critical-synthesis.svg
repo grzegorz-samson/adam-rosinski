@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-a6dff8ee desc-a6dff8ee">
+  <title id="title-a6dff8ee">Artificial intelligence-assisted music education: a critical synthesis of challenges and opportunities — peer-review visual strip</title>
+  <desc id="desc-a6dff8ee">An AI processor joining notation, teaching, and opportunity-risk pathways.</desc>
+
+  <defs>
+    <linearGradient id="fade-a6dff8ee" x1="0" x2="1"><stop offset="0%" stop-color="#56D8FF" stop-opacity="0"/><stop offset="36%" stop-color="#56D8FF" stop-opacity=".06"/><stop offset="100%" stop-color="#34D399" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-a6dff8ee" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#34D399" stop-opacity=".28"/><stop offset="55%" stop-color="#56D8FF" stop-opacity=".08"/><stop offset="100%" stop-color="#56D8FF" stop-opacity="0"/></radialGradient>
+    <filter id="soft-a6dff8ee" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-a6dff8ee" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#56D8FF" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-a6dff8ee" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#34D399" opacity=".22"/></pattern>
+    <marker id="arrow-a6dff8ee" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#34D399" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-a6dff8ee)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-a6dff8ee)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-a6dff8ee)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-a6dff8ee)" opacity=".35"/>
+  <g><rect x="590" y="42" width="106" height="96" rx="16" fill="none" stroke="#56D8FF"/><path d="M614 66h58v48h-58Z" fill="none" stroke="#34D399"/><path d="M610 32v10M632 32v10M654 32v10M676 32v10M610 138v10M632 138v10M654 138v10M676 138v10" stroke="#56D8FF"/><path d="M500 116q16-34 32 0t32 0" fill="none" stroke="#34D399" stroke-width="2"/><path d="M704 68H820M704 92H786M704 116H836" stroke="#56D8FF"/><circle cx="792" cy="92" r="24" fill="none" stroke="#34D399" stroke-dasharray="4 5"/></g>
+</svg>

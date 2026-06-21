@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-b6f90136 desc-b6f90136">
+  <title id="title-b6f90136">Word Integration Across Sentence Boundaries in Third and Fourth Age Adults: Evidence from Eye-Tracking during Reading — peer-review visual strip</title>
+  <desc id="desc-b6f90136">Reading lines with eye-tracking fixations and cross-sentence saccades.</desc>
+
+  <defs>
+    <linearGradient id="fade-b6f90136" x1="0" x2="1"><stop offset="0%" stop-color="#A78BFA" stop-opacity="0"/><stop offset="36%" stop-color="#A78BFA" stop-opacity=".06"/><stop offset="100%" stop-color="#56D8FF" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-b6f90136" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#56D8FF" stop-opacity=".28"/><stop offset="55%" stop-color="#A78BFA" stop-opacity=".08"/><stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/></radialGradient>
+    <filter id="soft-b6f90136" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-b6f90136" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#A78BFA" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-b6f90136" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#56D8FF" opacity=".22"/></pattern>
+    <marker id="arrow-b6f90136" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#56D8FF" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-b6f90136)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-b6f90136)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-b6f90136)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-b6f90136)" opacity=".35"/>
+  <g><path d="M500 48H800" stroke="#A78BFA" stroke-opacity=".35"/><path d="M500 71H752" stroke="#A78BFA" stroke-opacity=".35"/><path d="M500 94H800" stroke="#A78BFA" stroke-opacity=".35"/><path d="M500 117H752" stroke="#A78BFA" stroke-opacity=".35"/><path d="M500 140H800" stroke="#A78BFA" stroke-opacity=".35"/><path d="M522 50C554 42 584 44 614 50S668 64 704 72S750 96 790 98" fill="none" stroke="#56D8FF" stroke-width="2"/><g fill="#56D8FF" filter="url(#soft-b6f90136)"><circle cx="522" cy="50" r="4"/><circle cx="614" cy="50" r="4"/><circle cx="704" cy="72" r="4"/><circle cx="790" cy="98" r="4"/></g><path d="M790 98C746 120 684 124 620 116" fill="none" stroke="#56D8FF" stroke-dasharray="4 6"/></g>
+</svg>

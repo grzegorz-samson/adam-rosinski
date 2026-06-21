@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-51ea63a5 desc-51ea63a5">
+  <title id="title-51ea63a5">A cognitive-computational model of comfort categorization in civil aviation propeller aircraft — peer-review visual strip</title>
+  <desc id="desc-51ea63a5">A propeller-aircraft model connected to graded comfort-category nodes.</desc>
+
+  <defs>
+    <linearGradient id="fade-51ea63a5" x1="0" x2="1"><stop offset="0%" stop-color="#A78BFA" stop-opacity="0"/><stop offset="36%" stop-color="#A78BFA" stop-opacity=".06"/><stop offset="100%" stop-color="#56D8FF" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-51ea63a5" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#56D8FF" stop-opacity=".28"/><stop offset="55%" stop-color="#A78BFA" stop-opacity=".08"/><stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/></radialGradient>
+    <filter id="soft-51ea63a5" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-51ea63a5" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#A78BFA" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-51ea63a5" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#56D8FF" opacity=".22"/></pattern>
+    <marker id="arrow-51ea63a5" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#56D8FF" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-51ea63a5)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-51ea63a5)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-51ea63a5)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-51ea63a5)" opacity=".35"/>
+  <g><path d="M518 88h160l54-34h24l-22 34 62 10v10l-62 8 22 34h-24l-54-34H518l-30-14v-8Z" fill="none" stroke="#A78BFA"/><circle cx="508" cy="98" r="28" fill="none" stroke="#56D8FF"/><path d="M508 70v56M480 98h56" stroke="#56D8FF"/><g fill="none" stroke="#56D8FF" stroke-opacity=".55"><circle cx="754" cy="52" r="8"/><circle cx="786" cy="74" r="8"/><circle cx="808" cy="106" r="8"/><circle cx="786" cy="138" r="8"/></g></g>
+</svg>

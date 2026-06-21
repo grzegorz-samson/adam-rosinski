@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-a55fd984 desc-a55fd984">
+  <title id="title-a55fd984">Leoš Janáček – Šárka — peer-review visual strip</title>
+  <desc id="desc-a55fd984">An operatic stage, dramatic arc, and score-like melodic contour.</desc>
+
+  <defs>
+    <linearGradient id="fade-a55fd984" x1="0" x2="1"><stop offset="0%" stop-color="#56D8FF" stop-opacity="0"/><stop offset="36%" stop-color="#56D8FF" stop-opacity=".06"/><stop offset="100%" stop-color="#34D399" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-a55fd984" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#34D399" stop-opacity=".28"/><stop offset="55%" stop-color="#56D8FF" stop-opacity=".08"/><stop offset="100%" stop-color="#56D8FF" stop-opacity="0"/></radialGradient>
+    <filter id="soft-a55fd984" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-a55fd984" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#56D8FF" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-a55fd984" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#34D399" opacity=".22"/></pattern>
+    <marker id="arrow-a55fd984" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#34D399" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-a55fd984)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-a55fd984)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-a55fd984)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-a55fd984)" opacity=".35"/>
+  <g><path d="M500 138V54C552 30 610 30 662 54V138" fill="none" stroke="#56D8FF"/><path d="M516 138C548 106 584 120 614 84S662 62 690 94S742 120 800 56" fill="none" stroke="#34D399" stroke-width="2.4"/><path d="M512 64C556 84 610 84 652 64" fill="none" stroke="#56D8FF"/><g fill="#34D399" opacity=".65"><circle cx="614" cy="84" r="5"/><circle cx="690" cy="94" r="5"/><circle cx="800" cy="56" r="5"/></g></g>
+</svg>

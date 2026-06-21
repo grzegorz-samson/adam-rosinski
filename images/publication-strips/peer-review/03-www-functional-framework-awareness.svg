@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-60b4ce5b desc-60b4ce5b">
+  <title id="title-60b4ce5b">WWW: Why-Where-What; A Functional Framework for Flow and Switching in Awareness — peer-review visual strip</title>
+  <desc id="desc-60b4ce5b">Three linked Why, Where, and What nodes with switching paths in awareness.</desc>
+
+  <defs>
+    <linearGradient id="fade-60b4ce5b" x1="0" x2="1"><stop offset="0%" stop-color="#A78BFA" stop-opacity="0"/><stop offset="36%" stop-color="#A78BFA" stop-opacity=".06"/><stop offset="100%" stop-color="#56D8FF" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-60b4ce5b" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#56D8FF" stop-opacity=".28"/><stop offset="55%" stop-color="#A78BFA" stop-opacity=".08"/><stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/></radialGradient>
+    <filter id="soft-60b4ce5b" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-60b4ce5b" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#A78BFA" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-60b4ce5b" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#56D8FF" opacity=".22"/></pattern>
+    <marker id="arrow-60b4ce5b" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#56D8FF" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-60b4ce5b)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-60b4ce5b)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-60b4ce5b)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-60b4ce5b)" opacity=".35"/>
+  <g><g fill="none" stroke="#A78BFA" stroke-width="1.4"><circle cx="570" cy="88" r="28"/><circle cx="690" cy="55" r="28"/><circle cx="790" cy="112" r="28"/></g><g fill="#56D8FF" font-family="monospace" font-size="17" font-weight="700" text-anchor="middle"><text x="570" y="94">WHY</text><text x="690" y="61">WHERE</text><text x="790" y="118">WHAT</text></g><path d="M598 82C630 74 642 62 661 58M716 67C744 78 756 91 766 101M604 100C660 135 718 137 762 122" fill="none" stroke="#56D8FF" marker-end="url(#arrow-60b4ce5b)"/></g>
+</svg>

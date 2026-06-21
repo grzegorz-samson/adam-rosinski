@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-ecb053e4 desc-ecb053e4">
+  <title id="title-ecb053e4">Inspiracje naturą w twórczości Andrzeja Karałowa — peer-review visual strip</title>
+  <desc id="desc-ecb053e4">Organic branching forms transformed into a musical waveform.</desc>
+
+  <defs>
+    <linearGradient id="fade-ecb053e4" x1="0" x2="1"><stop offset="0%" stop-color="#FFB347" stop-opacity="0"/><stop offset="36%" stop-color="#FFB347" stop-opacity=".06"/><stop offset="100%" stop-color="#34D399" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-ecb053e4" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#34D399" stop-opacity=".28"/><stop offset="55%" stop-color="#FFB347" stop-opacity=".08"/><stop offset="100%" stop-color="#FFB347" stop-opacity="0"/></radialGradient>
+    <filter id="soft-ecb053e4" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-ecb053e4" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#FFB347" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-ecb053e4" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#34D399" opacity=".22"/></pattern>
+    <marker id="arrow-ecb053e4" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#34D399" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-ecb053e4)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-ecb053e4)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-ecb053e4)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-ecb053e4)" opacity=".35"/>
+  <g><path d="M566 142C582 112 580 82 572 46M572 84C544 72 526 58 510 42M576 104C606 88 626 70 642 48M574 68C600 58 620 44 634 30" fill="none" stroke="#FFB347" stroke-width="2"/><path d="M620 126C654 94 686 132 718 96S774 56 832 88" fill="none" stroke="#34D399" stroke-width="2.4"/><g fill="#34D399" opacity=".65"><circle cx="718" cy="96" r="4"/><circle cx="832" cy="88" r="4"/></g><circle cx="562" cy="79" r="4" fill="#FFB347" opacity=".74"/><circle cx="607" cy="71" r="3" fill="#FFB347" opacity=".54"/><circle cx="522" cy="64" r="5" fill="#FFB347" opacity=".56"/><circle cx="609" cy="126" r="5" fill="#FFB347" opacity=".37"/><circle cx="546" cy="101" r="3" fill="#FFB347" opacity=".76"/><circle cx="544" cy="33" r="4" fill="#FFB347" opacity=".76"/><circle cx="603" cy="76" r="2" fill="#FFB347" opacity=".44"/><circle cx="531" cy="81" r="5" fill="#FFB347" opacity=".82"/></g>
+</svg>

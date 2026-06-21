@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-3bcad239 desc-3bcad239">
+  <title id="title-3bcad239">The Cognitive Complexity of Rule Changes — peer-review visual strip</title>
+  <desc id="desc-3bcad239">Branching rule cards and transitions indicating cognitive switching cost.</desc>
+
+  <defs>
+    <linearGradient id="fade-3bcad239" x1="0" x2="1"><stop offset="0%" stop-color="#A78BFA" stop-opacity="0"/><stop offset="36%" stop-color="#A78BFA" stop-opacity=".06"/><stop offset="100%" stop-color="#56D8FF" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-3bcad239" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#56D8FF" stop-opacity=".28"/><stop offset="55%" stop-color="#A78BFA" stop-opacity=".08"/><stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/></radialGradient>
+    <filter id="soft-3bcad239" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-3bcad239" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#A78BFA" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-3bcad239" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#56D8FF" opacity=".22"/></pattern>
+    <marker id="arrow-3bcad239" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#56D8FF" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-3bcad239)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-3bcad239)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-3bcad239)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-3bcad239)" opacity=".35"/>
+  <g><rect x="486" y="40" width="72" height="34" rx="8" fill="none" stroke="#A78BFA" stroke-opacity=".40"/><rect x="578" y="40" width="72" height="34" rx="8" fill="none" stroke="#A78BFA" stroke-opacity=".48"/><rect x="670" y="40" width="72" height="34" rx="8" fill="none" stroke="#A78BFA" stroke-opacity=".56"/><rect x="486" y="98" width="72" height="34" rx="8" fill="none" stroke="#A78BFA" stroke-opacity=".64"/><rect x="578" y="98" width="72" height="34" rx="8" fill="none" stroke="#A78BFA" stroke-opacity=".72"/><rect x="670" y="98" width="72" height="34" rx="8" fill="none" stroke="#A78BFA" stroke-opacity=".80"/><path d="M558 57H578M650 57H670M558 115H578M650 115H670M522 74V98M614 74V98M706 74V98" stroke="#56D8FF" marker-end="url(#arrow-3bcad239)"/><path d="M756 50h64v82h-64Z" fill="none" stroke="#56D8FF"/><path d="M770 68h36M770 86h24M770 104h42" stroke="#56D8FF"/></g>
+</svg>

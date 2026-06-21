@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-9487a62d desc-9487a62d">
+  <title id="title-9487a62d">A Bayesian Grid-free Framework with Global Optimization for Three-Dimensional Acoustic Source Imaging — peer-review visual strip</title>
+  <desc id="desc-9487a62d">A three-dimensional acoustic grid with probabilistic source rays and a localized emitter.</desc>
+
+  <defs>
+    <linearGradient id="fade-9487a62d" x1="0" x2="1"><stop offset="0%" stop-color="#56D8FF" stop-opacity="0"/><stop offset="36%" stop-color="#56D8FF" stop-opacity=".06"/><stop offset="100%" stop-color="#34D399" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-9487a62d" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#34D399" stop-opacity=".28"/><stop offset="55%" stop-color="#56D8FF" stop-opacity=".08"/><stop offset="100%" stop-color="#56D8FF" stop-opacity="0"/></radialGradient>
+    <filter id="soft-9487a62d" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-9487a62d" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#56D8FF" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-9487a62d" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#34D399" opacity=".22"/></pattern>
+    <marker id="arrow-9487a62d" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#34D399" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-9487a62d)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-9487a62d)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-9487a62d)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-9487a62d)" opacity=".35"/>
+  <g><path d="M520 42L520 138" stroke="#56D8FF" stroke-opacity=".18"/><path d="M554 42L554 138" stroke="#56D8FF" stroke-opacity=".18"/><path d="M588 42L588 138" stroke="#56D8FF" stroke-opacity=".18"/><path d="M622 42L622 138" stroke="#56D8FF" stroke-opacity=".18"/><path d="M656 42L656 138" stroke="#56D8FF" stroke-opacity=".18"/><path d="M690 42L690 138" stroke="#56D8FF" stroke-opacity=".18"/><path d="M724 42L724 138" stroke="#56D8FF" stroke-opacity=".18"/><path d="M758 42L758 138" stroke="#56D8FF" stroke-opacity=".18"/><path d="M500 50L820 50" stroke="#56D8FF" stroke-opacity=".18"/><path d="M500 72L820 72" stroke="#56D8FF" stroke-opacity=".18"/><path d="M500 94L820 94" stroke="#56D8FF" stroke-opacity=".18"/><path d="M500 116L820 116" stroke="#56D8FF" stroke-opacity=".18"/><path d="M500 138L820 138" stroke="#56D8FF" stroke-opacity=".18"/><path d="M520 138L630 92L820 92M630 92V32" fill="none" stroke="#56D8FF" stroke-opacity=".45"/><g stroke="#34D399" stroke-opacity=".6"><path d="M548 126L718 68"/><path d="M590 52L718 68"/><path d="M796 118L718 68"/></g><circle cx="718" cy="68" r="8" fill="#34D399" filter="url(#soft-9487a62d)"/><circle cx="718" cy="68" r="28" fill="none" stroke="#34D399" stroke-dasharray="4 5"/></g>
+</svg>

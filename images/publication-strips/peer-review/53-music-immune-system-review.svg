@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-9c25f601 desc-9c25f601">
+  <title id="title-9c25f601">Wpływ oddziaływania muzyką na układ odpornościowy w warunkach prawidłowych i patologicznych – przegląd badań doświadczalnych i klinicznych — peer-review visual strip</title>
+  <desc id="desc-9c25f601">Musical oscillations interacting with immune-cell and biological-response networks.</desc>
+
+  <defs>
+    <linearGradient id="fade-9c25f601" x1="0" x2="1"><stop offset="0%" stop-color="#FFB347" stop-opacity="0"/><stop offset="36%" stop-color="#FFB347" stop-opacity=".06"/><stop offset="100%" stop-color="#34D399" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-9c25f601" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#34D399" stop-opacity=".28"/><stop offset="55%" stop-color="#FFB347" stop-opacity=".08"/><stop offset="100%" stop-color="#FFB347" stop-opacity="0"/></radialGradient>
+    <filter id="soft-9c25f601" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-9c25f601" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#FFB347" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-9c25f601" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#34D399" opacity=".22"/></pattern>
+    <marker id="arrow-9c25f601" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#34D399" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-9c25f601)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-9c25f601)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-9c25f601)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-9c25f601)" opacity=".35"/>
+  <g><path d="M450 92 L480 78 L510 93 L540 112 L570 91 L600 112 L630 96" fill="none" stroke="#FFB347" stroke-width="2"/><g fill="none" stroke="#34D399"><circle cx="716" cy="62" r="24"/><circle cx="792" cy="94" r="30"/><circle cx="700" cy="132" r="20"/></g><g stroke="#34D399"><path d="M716 62L760 96"/><path d="M716 62L703 102"/><path d="M716 62L708 38"/><path d="M716 62L659 52"/><path d="M716 62L716 73"/><path d="M716 62L689 36"/><path d="M716 62L704 82"/></g><circle cx="710" cy="60" r="3" fill="#FFB347" opacity=".44"/><circle cx="825" cy="93" r="3" fill="#FFB347" opacity=".61"/><circle cx="699" cy="111" r="2" fill="#FFB347" opacity=".61"/><circle cx="716" cy="136" r="2" fill="#FFB347" opacity=".53"/><circle cx="720" cy="67" r="4" fill="#FFB347" opacity=".69"/><circle cx="770" cy="44" r="3" fill="#FFB347" opacity=".45"/><circle cx="755" cy="61" r="2" fill="#FFB347" opacity=".36"/><circle cx="788" cy="103" r="4" fill="#FFB347" opacity=".65"/><circle cx="757" cy="127" r="3" fill="#FFB347" opacity=".40"/><circle cx="794" cy="120" r="3" fill="#FFB347" opacity=".66"/><circle cx="829" cy="54" r="2" fill="#FFB347" opacity=".48"/><circle cx="730" cy="134" r="4" fill="#FFB347" opacity=".82"/></g>
+</svg>

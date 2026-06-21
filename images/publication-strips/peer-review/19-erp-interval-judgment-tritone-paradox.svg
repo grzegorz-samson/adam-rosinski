@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-c3ee5e91 desc-c3ee5e91">
+  <title id="title-c3ee5e91">ERP Responses of Interval Judgment in the Tritone Paradox — peer-review visual strip</title>
+  <desc id="desc-c3ee5e91">ERP response traces around a tritone interval and ambiguous pitch circle.</desc>
+
+  <defs>
+    <linearGradient id="fade-c3ee5e91" x1="0" x2="1"><stop offset="0%" stop-color="#A78BFA" stop-opacity="0"/><stop offset="36%" stop-color="#A78BFA" stop-opacity=".06"/><stop offset="100%" stop-color="#56D8FF" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-c3ee5e91" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#56D8FF" stop-opacity=".28"/><stop offset="55%" stop-color="#A78BFA" stop-opacity=".08"/><stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/></radialGradient>
+    <filter id="soft-c3ee5e91" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-c3ee5e91" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#A78BFA" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-c3ee5e91" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#56D8FF" opacity=".22"/></pattern>
+    <marker id="arrow-c3ee5e91" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#56D8FF" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-c3ee5e91)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-c3ee5e91)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-c3ee5e91)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-c3ee5e91)" opacity=".35"/>
+  <g><path d="M488 112C530 108 544 36 570 118S612 58 638 108S684 48 718 110" fill="none" stroke="#A78BFA" stroke-width="2"/><circle cx="778" cy="88" r="52" fill="none" stroke="#56D8FF"/><path d="M778 36L822 113L734 113Z" fill="none" stroke="#56D8FF"/><path d="M778 88L812 58" stroke="#A78BFA" stroke-width="3"/><circle cx="778" cy="88" r="5" fill="#A78BFA"/></g>
+</svg>

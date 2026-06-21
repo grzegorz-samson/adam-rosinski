@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-ec15af07 desc-ec15af07">
+  <title id="title-ec15af07">Różne możliwości wykorzystania muzyki we wspomaganiu leczenia — peer-review visual strip</title>
+  <desc id="desc-ec15af07">A music waveform entering multiple therapeutic-support pathways.</desc>
+
+  <defs>
+    <linearGradient id="fade-ec15af07" x1="0" x2="1"><stop offset="0%" stop-color="#FFB347" stop-opacity="0"/><stop offset="36%" stop-color="#FFB347" stop-opacity=".06"/><stop offset="100%" stop-color="#34D399" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-ec15af07" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#34D399" stop-opacity=".28"/><stop offset="55%" stop-color="#FFB347" stop-opacity=".08"/><stop offset="100%" stop-color="#FFB347" stop-opacity="0"/></radialGradient>
+    <filter id="soft-ec15af07" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-ec15af07" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#FFB347" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-ec15af07" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#34D399" opacity=".22"/></pattern>
+    <marker id="arrow-ec15af07" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#34D399" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-ec15af07)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-ec15af07)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-ec15af07)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-ec15af07)" opacity=".35"/>
+  <g><path d="M450 83 L480 73 L510 77 L540 71 L570 73 L600 114 L630 109" fill="none" stroke="#FFB347" stroke-width="2.2"/><path d="M650 90H694" stroke="#34D399" marker-end="url(#arrow-ec15af07)"/><g fill="none" stroke="#34D399"><circle cx="742" cy="54" r="22"/><circle cx="798" cy="90" r="22"/><circle cx="742" cy="130" r="22"/></g><path d="M718 90L734 68M718 90L776 90M718 90L734 116" stroke="#34D399"/><path d="M734 54h16M742 46v16M790 90h16M798 82v16M734 130h16M742 122v16" stroke="#FFB347"/></g>
+</svg>

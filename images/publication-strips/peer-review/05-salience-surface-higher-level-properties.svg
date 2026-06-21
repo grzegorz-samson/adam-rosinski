@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-8508eb86 desc-8508eb86">
+  <title id="title-8508eb86">Salience of Surface versus Higher-level Properties in Spatial Comparison at Different Levels of Scene Similarity — peer-review visual strip</title>
+  <desc id="desc-8508eb86">Nested scene surfaces and higher-level structures compared across similarity fields.</desc>
+
+  <defs>
+    <linearGradient id="fade-8508eb86" x1="0" x2="1"><stop offset="0%" stop-color="#A78BFA" stop-opacity="0"/><stop offset="36%" stop-color="#A78BFA" stop-opacity=".06"/><stop offset="100%" stop-color="#56D8FF" stop-opacity=".24"/></linearGradient>
+    <radialGradient id="glow-8508eb86" cx="76%" cy="50%" r="60%"><stop offset="0%" stop-color="#56D8FF" stop-opacity=".28"/><stop offset="55%" stop-color="#A78BFA" stop-opacity=".08"/><stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/></radialGradient>
+    <filter id="soft-8508eb86" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="2.1" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid-8508eb86" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#A78BFA" stroke-opacity=".11" stroke-width="1"/></pattern>
+    <pattern id="dots-8508eb86" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="#56D8FF" opacity=".22"/></pattern>
+    <marker id="arrow-8508eb86" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#56D8FF" opacity=".75"/></marker>
+  </defs>
+
+  <rect x="470" y="18" width="390" height="144" fill="url(#dots-8508eb86)" opacity=".28"/>
+  <rect x="500" y="26" width="340" height="126" fill="url(#grid-8508eb86)" opacity=".18"/>
+  <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-8508eb86)" opacity=".9"/>
+  <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-8508eb86)" opacity=".35"/>
+  <g><g fill="none"><rect x="500" y="42" width="126" height="94" rx="12" stroke="#A78BFA"/><rect x="522" y="60" width="82" height="56" rx="8" stroke="#A78BFA" stroke-opacity=".45"/><path d="M518 111l24-25 20 14 22-26 20 18" stroke="#56D8FF"/></g><g fill="none"><rect x="690" y="34" width="148" height="110" rx="14" stroke="#56D8FF"/><circle cx="738" cy="76" r="22" stroke="#A78BFA"/><path d="M702 121C736 91 770 95 824 60" stroke="#56D8FF"/></g><path d="M626 88H688" stroke="#56D8FF" marker-end="url(#arrow-8508eb86)"/></g>
+</svg>
