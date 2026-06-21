@@ -1,6 +1,7 @@
 ---
 import BookOpenCheck from "@lucide/astro/icons/book-open-check";
 import ChevronDown from "@lucide/astro/icons/chevron-down";
+import ExternalLink from "@lucide/astro/icons/external-link";
 import FileSearch from "@lucide/astro/icons/file-search";
 import Network from "@lucide/astro/icons/network";
 import SearchCheck from "@lucide/astro/icons/search-check";
@@ -137,13 +138,81 @@ const kindShortLabels: Record<PeerReviewKind, string> = {
                           {review.publicationYear && review.publicationYear !== review.reviewYear && (
                             <span class="peer-review-publication-year">Publication: {review.publicationYear}</span>
                           )}
+                          {review.titleStatus && review.titleStatus !== "Original English title" && (
+                            <span class="peer-review-title-status">{review.titleStatus}</span>
+                          )}
                         </div>
                         <h4>{review.title}</h4>
+                        {review.originalTitle && (
+                          <p class="peer-review-original-title">
+                            <span>Original Polish title</span>
+                            {review.originalTitle}
+                          </p>
+                        )}
+                        {review.finalTitle && (
+                          <p class="peer-review-final-title">
+                            <span>Published title</span>
+                            {review.finalTitle}
+                          </p>
+                        )}
                         <p>
                           <span>{review.venue}</span>
                           {review.volume && <span>{review.volume}</span>}
                           {identifier && <span>{identifier}</span>}
                         </p>
+                        {(review.sourceLinks?.length || review.href || review.secondaryHref || review.translationNotice) && (
+                          <div class="peer-review-supporting-row">
+                            {review.translationNotice && (
+                              <span class="peer-review-translation-note">{review.translationNotice}</span>
+                            )}
+                            {review.sourceLinks?.length ? (
+                              <span class="peer-review-source-links">
+                                {review.sourceLinks.map((link) => (
+                                  <a
+                                    href={link.href}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    class:list={[
+                                      "peer-review-source-link",
+                                      "alt-link-with-icon",
+                                      link.primary && "is-primary-source",
+                                    ]}
+                                  >
+                                    <span>{link.label}</span>
+                                    <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
+                                  </a>
+                                ))}
+                              </span>
+                            ) : (
+                              (review.href || review.secondaryHref) && (
+                                <span class="peer-review-source-links">
+                                  {review.secondaryHref && (
+                                    <a
+                                      href={review.secondaryHref}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      class="peer-review-source-link alt-link-with-icon"
+                                    >
+                                      <span>{review.secondarySourceLabel ?? "Additional source"}</span>
+                                      <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
+                                    </a>
+                                  )}
+                                {review.href && (
+                                  <a
+                                    href={review.href}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    class="peer-review-source-link alt-link-with-icon is-primary-source"
+                                  >
+                                    <span>{review.sourceLabel ?? "Source"}</span>
+                                    <ExternalLink size={15} stroke-width={1.8} aria-hidden="true" />
+                                  </a>
+                                )}
+                              </span>
+                              )
+                            )}
+                          </div>
+                        )}
                       </div>
                     </li>
                   );
@@ -522,7 +591,8 @@ const kindShortLabels: Record<PeerReviewKind, string> = {
   }
 
   .peer-review-kind,
-  .peer-review-publication-year {
+  .peer-review-publication-year,
+  .peer-review-title-status {
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
@@ -543,10 +613,17 @@ const kindShortLabels: Record<PeerReviewKind, string> = {
     background: color-mix(in srgb, var(--peer-accent) 7%, rgba(255, 255, 255, 0.035));
   }
 
-  .peer-review-publication-year {
+  .peer-review-publication-year,
+  .peer-review-title-status {
     padding: 0.34rem 0.48rem;
     color: #c7d0dc;
     background: rgba(255, 255, 255, 0.055);
+  }
+
+  .peer-review-title-status {
+    border: 1px solid color-mix(in srgb, var(--peer-accent) 18%, rgba(255, 255, 255, 0.1));
+    color: color-mix(in srgb, var(--peer-accent) 70%, white 30%);
+    background: color-mix(in srgb, var(--peer-accent) 6%, rgba(255, 255, 255, 0.035));
   }
 
   .peer-review-item h4 {
@@ -569,10 +646,76 @@ const kindShortLabels: Record<PeerReviewKind, string> = {
     line-height: 1.5;
   }
 
-  .peer-review-item p span:not(:first-child)::before {
+  .peer-review-item p:not(.peer-review-original-title, .peer-review-final-title) span:not(:first-child)::before {
     margin-right: 0.7rem;
     color: color-mix(in srgb, var(--peer-accent) 62%, transparent);
     content: "•";
+  }
+
+  .peer-review-original-title,
+  .peer-review-final-title {
+    display: block;
+    margin-top: 0.32rem;
+    max-width: 44rem;
+    color: #aeb8c6;
+    font-size: 0.76rem;
+    line-height: 1.55;
+  }
+
+  .peer-review-original-title span,
+  .peer-review-final-title span {
+    display: inline-flex;
+    margin-right: 0.42rem;
+    color: color-mix(in srgb, var(--peer-accent) 76%, white 24%);
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .peer-review-supporting-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.55rem 0.8rem;
+    margin-top: 0.65rem;
+    padding: 0.95rem 0 0;
+  }
+
+  .peer-review-translation-note {
+    max-width: 40rem;
+    color: #7f8a99;
+    font-size: 0.7rem;
+    line-height: 1.45;
+  }
+
+  .peer-review-source-links {
+    display: inline-flex;
+    order: -1;
+    flex: 0 0 100%;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.8rem;
+    justify-content: flex-start;
+    margin-left: 0;
+  }
+
+  .peer-review-source-link {
+    color: color-mix(in srgb, var(--peer-accent) 80%, white 20%);
+    font-size: 1rem;
+    line-height: 1;
+    text-decoration: none;
+    transition: color 160ms ease;
+  }
+
+  .peer-review-source-link:hover {
+    color: #f6f8fb;
+  }
+
+  .peer-review-source-link.is-primary-source {
+    color: color-mix(in srgb, var(--peer-accent) 80%, white 20%);
   }
 
   .peer-review-note {
@@ -647,6 +790,15 @@ const kindShortLabels: Record<PeerReviewKind, string> = {
 
     .peer-review-item::after {
       background: linear-gradient(90deg, rgba(2, 7, 13, 0.995) 0%, rgba(2, 7, 13, 0.94) 72%, rgba(2, 7, 13, 0.62) 100%);
+    }
+
+    .peer-review-supporting-row {
+      display: grid;
+      justify-content: stretch;
+    }
+
+    .peer-review-source-links {
+      margin-left: 0;
     }
 
     .peer-review-list {

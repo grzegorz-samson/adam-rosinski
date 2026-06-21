@@ -1,8 +1,20 @@
+import { peerReviewAudit } from "./peerReviewAudit.generated";
+import { peerReviewLinkAudit, type PeerReviewSourceLink } from "./peerReviewLinks.generated";
+
 export type PeerReviewKind = "journal-manuscript" | "conference-paper" | "book-chapter";
+
+export type PeerReviewTitleStatus =
+  | "Original English title"
+  | "Official English title variant"
+  | "Unofficial English translation";
 
 export interface PeerReviewRecord {
   slug: string;
   title: string;
+  originalTitle?: string;
+  finalTitle?: string;
+  titleStatus?: PeerReviewTitleStatus;
+  translationNotice?: string;
   reviewYear: number;
   venue: string;
   kind: PeerReviewKind;
@@ -10,6 +22,13 @@ export interface PeerReviewRecord {
   volume?: string;
   issn?: string;
   isbn?: string;
+  doi?: string;
+  href?: string;
+  sourceLabel?: string;
+  secondaryHref?: string;
+  secondarySourceLabel?: string;
+  sourceLinks?: PeerReviewSourceLink[];
+  confidence?: "high" | "medium" | "low";
 }
 
 export const peerReviewKindLabels: Record<PeerReviewKind, string> = {
@@ -30,7 +49,7 @@ export const peerReviewKindOrder: PeerReviewKind[] = [
   "book-chapter",
 ];
 
-export const peerReviews: PeerReviewRecord[] = [
+const peerReviewBaseRecords: PeerReviewRecord[] = [
   {
     slug: "online-games-for-perceptual-learning",
     title: "Online Games for Perceptual Learning: Assessing Acquired Affective Connotations of Sounds",
@@ -492,6 +511,129 @@ export const peerReviews: PeerReviewRecord[] = [
     isbn: "978-83-66489-99-8",
   },
 ];
+
+type PeerReviewAuditRecord = (typeof peerReviewAudit)[keyof typeof peerReviewAudit];
+
+const getTitleStatus = (status?: string): PeerReviewTitleStatus | undefined => {
+  if (!status) {
+    return undefined;
+  }
+
+  if (status.includes("UNOFFICIAL")) {
+    return "Unofficial English translation";
+  }
+
+  if (status.includes("OFFICIAL")) {
+    return "Official English title variant";
+  }
+
+  if (status.includes("original-English")) {
+    return "Original English title";
+  }
+
+  return undefined;
+};
+
+const getSourceLabel = (review: PeerReviewRecord, audit: PeerReviewAuditRecord): string | undefined => {
+  if ("doi" in audit && audit.doi) {
+    return audit.doi.startsWith("10.20944/") ? "Preprint DOI" : "DOI";
+  }
+
+  if (!("public_url" in audit) || !audit.public_url) {
+    return undefined;
+  }
+
+  if (review.kind === "book-chapter") {
+    return review.isbn ? "Publisher PDF / ISBN" : "Publisher PDF";
+  }
+
+  if (audit.public_url.includes("escholarship.org")) {
+    return "Proceedings record";
+  }
+
+  return "Source";
+};
+
+const getSecondarySourceLabel = (href?: string): string | undefined => {
+  if (!href) {
+    return undefined;
+  }
+
+  if (href.includes("preprints.org")) {
+    return "Preprint";
+  }
+
+  if (href.includes("wydawnictwo-tygiel.pl")) {
+    return "Publisher PDF";
+  }
+
+  if (href.includes("mdpi.com") || href.includes("journal.hep.com.cn")) {
+    return "Publisher page";
+  }
+
+  return "Additional source";
+};
+
+const getAuditHref = (audit: PeerReviewAuditRecord): string | undefined => {
+  if ("doi" in audit && audit.doi) {
+    return `https://doi.org/${audit.doi}`;
+  }
+
+  return "public_url" in audit ? audit.public_url : undefined;
+};
+
+export const peerReviews: PeerReviewRecord[] = peerReviewBaseRecords.map((review) => {
+  const audit = peerReviewAudit[review.slug as keyof typeof peerReviewAudit];
+  const linkAudit = peerReviewLinkAudit[review.slug];
+
+  if (!audit) {
+    return {
+      ...review,
+      sourceLinks: linkAudit?.links ? [...linkAudit.links] : undefined,
+    };
+  }
+
+  const title = audit.english_title ?? review.title;
+  const titleStatus = getTitleStatus(audit.english_title_status);
+  const href = getAuditHref(audit);
+  const publicUrl = "public_url" in audit ? audit.public_url : undefined;
+  const secondaryFromAudit = "secondary_url" in audit ? audit.secondary_url : undefined;
+  const secondaryHref = secondaryFromAudit ?? (href && publicUrl && publicUrl !== href ? publicUrl : undefined);
+  const sourceLinks = linkAudit?.links ? [...linkAudit.links] : undefined;
+  const primaryLink = sourceLinks?.find((link) => link.primary) ?? sourceLinks?.[0];
+  const secondaryLink = sourceLinks?.find((link) => link.href !== primaryLink?.href);
+  const publicationYear =
+    "publication_year_verified" in audit && audit.publication_year_verified
+      ? audit.publication_year_verified
+      : review.publicationYear;
+
+  return {
+    ...review,
+    title,
+    originalTitle: title !== review.title ? review.title : undefined,
+    finalTitle:
+      "matched_publication_title" in audit && audit.matched_publication_title !== title
+        ? audit.matched_publication_title
+        : undefined,
+    titleStatus,
+    translationNotice:
+      titleStatus === "Unofficial English translation"
+        ? "Unofficial English translation prepared for this website; no official English title was identified."
+        : undefined,
+    publicationYear,
+    isbn:
+      review.slug === "flute-textbook-translation"
+        ? "978-83-67104-87-6"
+        : review.isbn,
+    doi: "doi" in audit ? audit.doi : undefined,
+    href: primaryLink?.href ?? href,
+    sourceLabel: primaryLink?.label ?? getSourceLabel(review, audit),
+    secondaryHref: secondaryLink?.href ?? secondaryHref,
+    secondarySourceLabel: secondaryLink?.label ?? getSecondarySourceLabel(secondaryHref),
+    sourceLinks,
+    confidence: audit.confidence,
+  };
+});
 
 export const peerReviewYears = [...new Set(peerReviews.map((review) => review.reviewYear))].sort(
   (a, b) => b - a,
