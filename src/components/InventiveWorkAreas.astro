@@ -78,12 +78,6 @@ const workAreas = [
   },
 ];
 
-const heroMotifs = [
-  "/images/work-area-motifs/motif-circular-array.svg",
-  "/images/work-area-motifs/motif-spherical-capsule.svg",
-  "/images/work-area-motifs/motif-polar-pattern.svg",
-];
-
 const applicationBuckets = [
   {
     title: "Studio and field recording",
@@ -125,9 +119,111 @@ const applicationBuckets = [
   <div class="hero-visual" aria-hidden="true">
     <img src={withBase("/images/work-area-motifs/motif-technical-grid.svg")} alt="" loading="eager" />
     <div class="hero-motif-stack">
-      {heroMotifs.map((motif, index) => (
-        <img class={`hero-motif hero-motif-${index + 1}`} src={withBase(motif)} alt="" loading="eager" />
-      ))}
+      <svg class="hero-motif hero-motif-1" viewBox="0 0 720 520" focusable="false">
+        <defs>
+          <radialGradient id="hero-array-glow" cx="50%" cy="50%" r="60%">
+            <stop offset="0" stop-color="#67e8f9" stop-opacity=".28"></stop>
+            <stop offset=".55" stop-color="#34d399" stop-opacity=".09"></stop>
+            <stop offset="1" stop-color="#020617" stop-opacity="0"></stop>
+          </radialGradient>
+          <linearGradient id="hero-array-line" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#67e8f9"></stop>
+            <stop offset=".5" stop-color="#a7f3d0"></stop>
+            <stop offset="1" stop-color="#fbbf24"></stop>
+          </linearGradient>
+        </defs>
+        <rect width="720" height="520" fill="url(#hero-array-glow)"></rect>
+        <g fill="none" stroke="white" stroke-opacity=".12">
+          <path d="M98 260c0-76 117-138 262-138s262 62 262 138-117 138-262 138S98 336 98 260Z"></path>
+          <path d="M146 260c0-52 96-94 214-94s214 42 214 94-96 94-214 94-214-42-214-94Z"></path>
+          <path d="M360 122v276M98 260h524"></path>
+        </g>
+        <path id="hero-array-orbit-path" d="M98 260c0-76 117-138 262-138s262 62 262 138-117 138-262 138S98 336 98 260Z" fill="none" opacity="0"></path>
+        <g class="hero-array-dots" fill="url(#hero-array-line)">
+          <circle r="5"><animateMotion dur="54s" repeatCount="indefinite"><mpath href="#hero-array-orbit-path"></mpath></animateMotion></circle>
+          <circle r="4"><animateMotion dur="54s" begin="-3.86s" repeatCount="indefinite"><mpath href="#hero-array-orbit-path"></mpath></animateMotion></circle>
+          <circle r="4"><animateMotion dur="54s" begin="-7.71s" repeatCount="indefinite"><mpath href="#hero-array-orbit-path"></mpath></animateMotion></circle>
+          <circle r="4"><animateMotion dur="54s" begin="-11.57s" repeatCount="indefinite"><mpath href="#hero-array-orbit-path"></mpath></animateMotion></circle>
+          <circle r="5"><animateMotion dur="54s" begin="-15.43s" repeatCount="indefinite"><mpath href="#hero-array-orbit-path"></mpath></animateMotion></circle>
+          <circle r="4"><animateMotion dur="54s" begin="-19.29s" repeatCount="indefinite"><mpath href="#hero-array-orbit-path"></mpath></animateMotion></circle>
+          <circle r="4"><animateMotion dur="54s" begin="-23.14s" repeatCount="indefinite"><mpath href="#hero-array-orbit-path"></mpath></animateMotion></circle>
+          <circle r="5"><animateMotion dur="54s" begin="-27s" repeatCount="indefinite"><mpath href="#hero-array-orbit-path"></mpath></animateMotion></circle>
+          <circle r="4"><animateMotion dur="54s" begin="-30.86s" repeatCount="indefinite"><mpath href="#hero-array-orbit-path"></mpath></animateMotion></circle>
+          <circle r="4"><animateMotion dur="54s" begin="-34.71s" repeatCount="indefinite"><mpath href="#hero-array-orbit-path"></mpath></animateMotion></circle>
+          <circle r="5"><animateMotion dur="54s" begin="-38.57s" repeatCount="indefinite"><mpath href="#hero-array-orbit-path"></mpath></animateMotion></circle>
+          <circle r="4"><animateMotion dur="54s" begin="-42.43s" repeatCount="indefinite"><mpath href="#hero-array-orbit-path"></mpath></animateMotion></circle>
+          <circle r="4"><animateMotion dur="54s" begin="-46.29s" repeatCount="indefinite"><mpath href="#hero-array-orbit-path"></mpath></animateMotion></circle>
+          <circle r="4"><animateMotion dur="54s" begin="-50.14s" repeatCount="indefinite"><mpath href="#hero-array-orbit-path"></mpath></animateMotion></circle>
+        </g>
+      </svg>
+
+      <svg class="hero-motif hero-motif-2" viewBox="0 0 720 520" focusable="false">
+        <defs>
+          <linearGradient id="hero-capsule-shell" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#111827"></stop>
+            <stop offset=".48" stop-color="#334155"></stop>
+            <stop offset="1" stop-color="#030712"></stop>
+          </linearGradient>
+          <linearGradient id="hero-capsule-accent" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#67e8f9"></stop>
+            <stop offset="1" stop-color="#fbbf24"></stop>
+          </linearGradient>
+        </defs>
+        <rect width="720" height="520" fill="none"></rect>
+        <ellipse cx="360" cy="260" rx="260" ry="132" fill="url(#hero-capsule-shell)" stroke="rgba(255,255,255,.22)"></ellipse>
+        <g stroke="rgba(255,255,255,.13)" fill="none">
+          <ellipse cx="360" cy="260" rx="218" ry="96"></ellipse>
+          <path d="M110 260h500M360 128v264"></path>
+          <path d="M179 188c106 62 254 62 362 0M179 332c106-62 254-62 362 0"></path>
+        </g>
+        <path
+          class="hero-capsule-signal-path"
+          d="M164 260 C 206 236, 226 229, 262 224 S 326 212, 360 212 S 425 218, 458 224 S 522 246, 556 260"
+          fill="none"
+          stroke="url(#hero-capsule-accent)"
+          stroke-width="3"
+          stroke-linecap="round"
+          pathLength="1"
+        ></path>
+        <g class="hero-capsule-nodes">
+          <circle class="hero-capsule-ring hero-capsule-ring-1" cx="164" cy="260" r="27" fill="#020617" stroke="url(#hero-capsule-accent)" stroke-width="2"></circle>
+          <circle class="hero-capsule-ring hero-capsule-ring-2" cx="262" cy="224" r="25" fill="#020617" stroke="url(#hero-capsule-accent)" stroke-width="2"></circle>
+          <circle class="hero-capsule-ring hero-capsule-ring-3" cx="360" cy="212" r="25" fill="#020617" stroke="url(#hero-capsule-accent)" stroke-width="2"></circle>
+          <circle class="hero-capsule-ring hero-capsule-ring-4" cx="458" cy="224" r="25" fill="#020617" stroke="url(#hero-capsule-accent)" stroke-width="2"></circle>
+          <circle class="hero-capsule-ring hero-capsule-ring-5" cx="556" cy="260" r="27" fill="#020617" stroke="url(#hero-capsule-accent)" stroke-width="2"></circle>
+          <g fill="#fbbf24" opacity=".85">
+            <circle class="hero-capsule-core hero-capsule-ring-1" cx="164" cy="260" r="4"></circle>
+            <circle class="hero-capsule-core hero-capsule-ring-2" cx="262" cy="224" r="4"></circle>
+            <circle class="hero-capsule-core hero-capsule-ring-3" cx="360" cy="212" r="4"></circle>
+            <circle class="hero-capsule-core hero-capsule-ring-4" cx="458" cy="224" r="4"></circle>
+            <circle class="hero-capsule-core hero-capsule-ring-5" cx="556" cy="260" r="4"></circle>
+          </g>
+        </g>
+      </svg>
+
+      <svg class="hero-motif hero-motif-3" viewBox="0 0 560 560" focusable="false">
+        <defs>
+          <radialGradient id="hero-polar-halo" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="#67e8f9" stop-opacity=".25"></stop>
+            <stop offset="1" stop-color="#67e8f9" stop-opacity="0"></stop>
+          </radialGradient>
+        </defs>
+        <rect width="560" height="560" fill="url(#hero-polar-halo)"></rect>
+        <g transform="translate(280 280)" fill="none">
+          <g stroke="white" stroke-opacity=".13">
+            <circle r="72"></circle><circle r="136"></circle><circle r="200"></circle>
+            <path d="M-220 0h440M0-220v440M-155-155l310 310M-155 155l310-310"></path>
+          </g>
+          <path class="hero-polar-lobe" d="M0-205C105-205 190-118 190-12c0 122-92 196-190 196S-190 110-190-12C-190-118-105-205 0-205Z" fill="rgba(103,232,249,.07)" stroke="#67e8f9" stroke-width="4"></path>
+          <path class="hero-polar-inner" d="M0-172C66-172 124-119 124-52c0 71-53 108-124 154C-71 56-124 19-124-52c0-67 58-120 124-120Z" stroke="#fbbf24" stroke-width="3" stroke-opacity=".78"></path>
+          <g class="hero-polar-points" fill="#67e8f9">
+            <circle class="hero-polar-point hero-polar-point-1" cx="0" cy="-172" r="5"></circle>
+            <circle class="hero-polar-point hero-polar-point-2" cx="124" cy="-52" r="5"></circle>
+            <circle class="hero-polar-point hero-polar-point-3" cx="0" cy="102" r="5"></circle>
+            <circle class="hero-polar-point hero-polar-point-4" cx="-124" cy="-52" r="5"></circle>
+          </g>
+        </g>
+      </svg>
     </div>
     <div class="hero-orbit hero-orbit-one"></div>
     <div class="hero-orbit hero-orbit-two"></div>
@@ -226,7 +322,11 @@ const applicationBuckets = [
           {workAreas.map((area, index) => {
             const Icon = area.icon;
             return (
-              <article class={`mode-card ${index === 0 ? "is-active" : ""}`} data-work-mode-card={area.key}>
+              <article
+                id={`work-area-${area.key}`}
+                class={`mode-card ${index === 0 ? "is-active" : ""}`}
+                data-work-mode-card={area.key}
+              >
                 <button
                   type="button"
                   class="mode-trigger"
@@ -326,11 +426,46 @@ const applicationBuckets = [
     <h2 id="flow-title">A practical chain from listening theory to custom systems.</h2>
   </div>
 
-  <div class="flow-card">
-    <img src={withBase("/images/work-area-motifs/motif-research-pipeline.svg")} alt="" loading="lazy" />
+  <div class="flow-card" data-flow-card>
+    <svg
+      class="flow-svg"
+      viewBox="0 0 900 240"
+      role="img"
+      aria-label="Research to prototype flow motif"
+    >
+      <defs>
+        <linearGradient id="work-flow-gradient" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#67e8f9"></stop>
+          <stop offset=".5" stop-color="#a78bfa"></stop>
+          <stop offset="1" stop-color="#fbbf24"></stop>
+        </linearGradient>
+      </defs>
+      <rect width="900" height="240" fill="none"></rect>
+      <path
+        d="M60 120 C 205 24, 300 216, 450 120 S 695 216, 840 120"
+        fill="none"
+        stroke="url(#work-flow-gradient)"
+        stroke-width="4"
+        stroke-linecap="round"
+      ></path>
+      <g class="flow-svg-dots" stroke="url(#work-flow-gradient)" stroke-width="3">
+        <circle data-flow-dot="0" class="flow-svg-dot" cx="60" cy="120" r="18" tabindex="0" role="button" aria-label="Highlight listening research"></circle>
+        <circle data-flow-dot="1" class="flow-svg-dot" cx="255" cy="120" r="18" tabindex="0" role="button" aria-label="Highlight spatial model"></circle>
+        <circle data-flow-dot="2" class="flow-svg-dot" cx="450" cy="120" r="18" tabindex="0" role="button" aria-label="Highlight prototype design"></circle>
+        <circle data-flow-dot="3" class="flow-svg-dot" cx="645" cy="120" r="18" tabindex="0" role="button" aria-label="Highlight recording scenario"></circle>
+        <circle data-flow-dot="4" class="flow-svg-dot" cx="840" cy="120" r="18" tabindex="0" role="button" aria-label="Highlight artistic research use"></circle>
+      </g>
+      <g class="flow-svg-cores">
+        <circle data-flow-core="0" cx="60" cy="120" r="4"></circle>
+        <circle data-flow-core="1" cx="255" cy="120" r="4"></circle>
+        <circle data-flow-core="2" cx="450" cy="120" r="4"></circle>
+        <circle data-flow-core="3" cx="645" cy="120" r="4"></circle>
+        <circle data-flow-core="4" cx="840" cy="120" r="4"></circle>
+      </g>
+    </svg>
     <ol>
-      {researchToPrototypeFlow.map((step) => (
-        <li>
+      {researchToPrototypeFlow.map((step, index) => (
+        <li data-flow-step={String(index)} tabindex="0">
           <strong>{step.title}</strong>
           <span>{step.text}</span>
         </li>
@@ -402,7 +537,61 @@ const applicationBuckets = [
     setMode("perception");
   };
 
+  const initResearchFlow = () => {
+    const flow = document.querySelector("[data-flow-card]");
+    if (!flow || flow.dataset.bound === "true") return;
+    flow.dataset.bound = "true";
+
+    const dots = Array.from(flow.querySelectorAll("[data-flow-dot]"));
+    const cores = Array.from(flow.querySelectorAll("[data-flow-core]"));
+    const steps = Array.from(flow.querySelectorAll("[data-flow-step]"));
+
+    if (!dots.length || !steps.length) return;
+
+    const clearFlow = () => {
+      dots.forEach((dot) => dot.classList.remove("is-active"));
+      cores.forEach((core) => core.classList.remove("is-active"));
+      steps.forEach((step) => step.classList.remove("is-active"));
+    };
+
+    const setFlow = (index) => {
+      clearFlow();
+      const key = String(index);
+      flow.querySelector(`[data-flow-dot="${key}"]`)?.classList.add("is-active");
+      flow.querySelector(`[data-flow-core="${key}"]`)?.classList.add("is-active");
+      flow.querySelector(`[data-flow-step="${key}"]`)?.classList.add("is-active");
+    };
+
+    dots.forEach((dot) => {
+      const index = dot.getAttribute("data-flow-dot");
+      dot.addEventListener("mouseenter", () => setFlow(index));
+      dot.addEventListener("focus", () => setFlow(index));
+      dot.addEventListener("click", () => setFlow(index));
+      dot.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        setFlow(index);
+      });
+    });
+
+    cores.forEach((core) => {
+      const index = core.getAttribute("data-flow-core");
+      core.addEventListener("mouseenter", () => setFlow(index));
+      core.addEventListener("focus", () => setFlow(index));
+    });
+
+    steps.forEach((step) => {
+      const index = step.getAttribute("data-flow-step");
+      step.addEventListener("mouseenter", () => setFlow(index));
+      step.addEventListener("focus", () => setFlow(index));
+    });
+
+    flow.addEventListener("mouseleave", clearFlow);
+    setFlow(0);
+  };
+
   initInventiveWorkAreas();
+  initResearchFlow();
 </script>
 
 <style>
@@ -499,17 +688,60 @@ const applicationBuckets = [
     border-radius: 999px;
     font-weight: 800;
     padding: 0.78rem 1rem;
+    transition: box-shadow 180ms ease, border-color 180ms ease, filter 180ms ease, transform 180ms ease;
   }
 
   .primary-link {
     background: linear-gradient(135deg, #67e8f9, #a78bfa 52%, #fbbf24);
     color: #020617;
+    box-shadow: 0 10px 28px rgba(103, 232, 249, 0.18);
   }
 
   .secondary-link {
     border: 1px solid rgba(255, 255, 255, 0.12);
     color: #e5e7eb;
     background: rgba(255, 255, 255, 0.045);
+  }
+
+  .primary-link:hover,
+  .primary-link:focus-visible,
+  .secondary-link:hover,
+  .secondary-link:focus-visible {
+    transform: translateY(-2px);
+    filter: saturate(1.14) brightness(1.08);
+  }
+
+  .primary-link:hover,
+  .primary-link:focus-visible {
+    box-shadow:
+      0 16px 38px rgba(103, 232, 249, 0.28),
+      0 0 0 1px rgba(255, 255, 255, 0.18);
+  }
+
+  .secondary-link:hover,
+  .secondary-link:focus-visible {
+    border-color: rgba(103, 232, 249, 0.42);
+    background:
+      radial-gradient(circle at top right, rgba(103, 232, 249, 0.16), transparent 48%),
+      rgba(255, 255, 255, 0.065);
+    box-shadow:
+      0 16px 38px rgba(103, 232, 249, 0.16),
+      0 0 0 1px rgba(103, 232, 249, 0.12);
+  }
+
+  .primary-link:active,
+  .secondary-link:active {
+    transform: translateY(0) scale(0.985);
+    filter: saturate(1.08) brightness(0.98);
+  }
+
+  .primary-link svg {
+    transition: transform 180ms ease;
+  }
+
+  .primary-link:hover svg,
+  .primary-link:focus-visible svg {
+    transform: translate(2px, -2px);
   }
 
   .hero-visual {
@@ -564,6 +796,127 @@ const applicationBuckets = [
     bottom: 12%;
     width: min(42%, 15rem);
     opacity: 0.5;
+  }
+
+  .hero-array-dots {
+    filter: drop-shadow(0 0 6px rgba(103, 232, 249, 0.28));
+  }
+
+  .hero-array-dots circle {
+    animation: hero-array-node-breathe 6s ease-in-out infinite;
+  }
+
+  .hero-array-dots circle:nth-child(3n + 1) {
+    animation-delay: -1.2s;
+  }
+
+  .hero-array-dots circle:nth-child(3n + 2) {
+    animation-delay: -2.4s;
+  }
+
+  .hero-capsule-ring,
+  .hero-capsule-core,
+  .hero-polar-point {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .hero-capsule-ring,
+  .hero-capsule-core {
+    animation: hero-capsule-pulse 12s ease-in-out infinite;
+  }
+
+  .hero-capsule-ring-2 { animation-delay: -2.4s; }
+  .hero-capsule-ring-3 { animation-delay: -4.8s; }
+  .hero-capsule-ring-4 { animation-delay: -7.2s; }
+  .hero-capsule-ring-5 { animation-delay: -9.6s; }
+
+  .hero-capsule-signal-path {
+    opacity: 0.74;
+    stroke-dasharray: 0.16 0.84;
+    stroke-dashoffset: 1;
+    filter: drop-shadow(0 0 9px rgba(251, 191, 36, 0.34));
+    animation: hero-capsule-signal 12s linear infinite;
+  }
+
+  .hero-polar-lobe,
+  .hero-polar-inner {
+    animation: hero-polar-line-glow 8s ease-in-out infinite;
+  }
+
+  .hero-polar-inner {
+    animation-delay: -2.2s;
+  }
+
+  .hero-polar-point {
+    opacity: 0.38;
+    animation: hero-polar-point-flash 7.2s ease-in-out infinite;
+  }
+
+  .hero-polar-point-2 { animation-delay: -1.8s; }
+  .hero-polar-point-3 { animation-delay: -3.6s; }
+  .hero-polar-point-4 { animation-delay: -5.4s; }
+
+  @keyframes hero-array-node-breathe {
+    0%, 100% {
+      filter: drop-shadow(0 0 0 rgba(103, 232, 249, 0));
+      opacity: 0.78;
+    }
+
+    44%, 56% {
+      filter: drop-shadow(0 0 8px rgba(103, 232, 249, 0.58));
+      opacity: 1;
+    }
+  }
+
+  @keyframes hero-capsule-pulse {
+    0%, 100% {
+      filter: drop-shadow(0 0 0 rgba(251, 191, 36, 0));
+      opacity: 0.62;
+      transform: scale(1);
+    }
+
+    8%, 18% {
+      filter: drop-shadow(0 0 13px rgba(251, 191, 36, 0.74));
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+
+  @keyframes hero-capsule-signal {
+    from {
+      stroke-dashoffset: 1;
+    }
+
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes hero-polar-line-glow {
+    0%, 100% {
+      filter: drop-shadow(0 0 0 rgba(103, 232, 249, 0));
+      opacity: 0.72;
+    }
+
+    46%, 58% {
+      filter: drop-shadow(0 0 10px rgba(103, 232, 249, 0.48));
+      opacity: 1;
+    }
+  }
+
+  @keyframes hero-polar-point-flash {
+    0%, 100% {
+      filter: drop-shadow(0 0 0 rgba(103, 232, 249, 0));
+      opacity: 0.28;
+      transform: scale(0.92);
+    }
+
+    42%, 54% {
+      filter: drop-shadow(0 0 9px rgba(103, 232, 249, 0.78));
+      opacity: 1;
+      transform: scale(1.35);
+    }
   }
 
   .hero-orbit {
@@ -893,12 +1246,48 @@ const applicationBuckets = [
     color: #020617;
     font-weight: 900;
     padding: 0.72rem 0.92rem;
+    box-shadow: 0 10px 28px color-mix(in srgb, var(--accent) 24%, transparent);
+    transition: box-shadow 180ms ease, filter 180ms ease, transform 180ms ease;
+  }
+
+  .article-link:hover,
+  .article-link:focus-visible {
+    transform: translateY(-2px);
+    filter: saturate(1.14) brightness(1.08);
+    box-shadow:
+      0 16px 38px color-mix(in srgb, var(--accent) 34%, transparent),
+      0 0 0 1px color-mix(in srgb, var(--accent) 42%, rgba(255, 255, 255, 0.12));
+  }
+
+  .article-link:active {
+    transform: translateY(0) scale(0.985);
+    filter: saturate(1.08) brightness(0.98);
+    box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 24%, transparent);
+  }
+
+  .article-link:hover svg,
+  .article-link:focus-visible svg {
+    transform: translate(2px, -2px);
+  }
+
+  .article-link svg {
+    transition: transform 180ms ease;
   }
 
   .article-link-placeholder {
     border: 0;
     cursor: not-allowed;
     opacity: 0.72;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .article-link-placeholder:hover,
+  .article-link-placeholder:focus-visible,
+  .article-link-placeholder:active {
+    filter: none;
+    transform: none;
+    box-shadow: none;
   }
 
   .flow-card {
@@ -908,11 +1297,41 @@ const applicationBuckets = [
     padding: clamp(1.1rem, 3vw, 1.7rem);
   }
 
-  .flow-card > img {
+  .flow-svg {
     display: block;
     width: min(100%, 54rem);
     margin: 0 auto 0.5rem;
     opacity: 0.92;
+  }
+
+  .flow-svg-dot,
+  .flow-svg-cores circle {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: fill 180ms ease, opacity 180ms ease, filter 180ms ease, transform 180ms ease;
+  }
+
+  .flow-svg-dot {
+    fill: #020617;
+    cursor: pointer;
+  }
+
+  .flow-svg-dot.is-active {
+    fill: #67e8f9;
+    filter: drop-shadow(0 0 14px rgba(103, 232, 249, 0.72));
+    transform: scale(1.12);
+  }
+
+  .flow-svg-cores circle {
+    fill: white;
+    opacity: 0.76;
+    pointer-events: none;
+  }
+
+  .flow-svg-cores circle.is-active {
+    fill: #020617;
+    opacity: 1;
+    transform: scale(1.18);
   }
 
   .flow-card ol {
@@ -929,6 +1348,19 @@ const applicationBuckets = [
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.045);
     padding: 1rem;
+    outline: none;
+    transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  }
+
+  .flow-card li:hover,
+  .flow-card li:focus-visible,
+  .flow-card li.is-active {
+    transform: translateY(-2px);
+    border-color: rgba(103, 232, 249, 0.42);
+    background:
+      radial-gradient(circle at top right, rgba(103, 232, 249, 0.14), transparent 48%),
+      rgba(103, 232, 249, 0.07);
+    box-shadow: 0 16px 42px rgba(0, 0, 0, 0.28);
   }
 
   .flow-card strong {
@@ -956,6 +1388,8 @@ const applicationBuckets = [
     min-height: 15rem;
     border-radius: 26px;
     padding: 1.2rem;
+    outline: none;
+    transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
   }
 
   .application-card::after {
@@ -969,6 +1403,23 @@ const applicationBuckets = [
     opacity: 0.9;
     mask-image: linear-gradient(180deg, transparent 0%, black 26%, black 72%, transparent 100%);
     pointer-events: none;
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  .application-card:hover,
+  .application-card:focus-within {
+    transform: translateY(-3px);
+    border-color: rgba(103, 232, 249, 0.34);
+    background:
+      radial-gradient(circle at top right, rgba(103, 232, 249, 0.12), transparent 46%),
+      rgba(255, 255, 255, 0.06);
+    box-shadow: 0 28px 82px rgba(0, 0, 0, 0.38);
+  }
+
+  .application-card:hover::after,
+  .application-card:focus-within::after {
+    opacity: 1;
+    transform: translateY(-0.35rem) scale(1.04);
   }
 
   .application-index {
@@ -1045,4 +1496,18 @@ const applicationBuckets = [
       padding: 1.15rem;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-array-dots animateMotion,
+    .hero-array-dots circle,
+    .hero-capsule-ring,
+    .hero-capsule-core,
+    .hero-capsule-signal-path,
+    .hero-polar-lobe,
+    .hero-polar-inner,
+    .hero-polar-point {
+      animation: none;
+    }
+  }
 </style>
+

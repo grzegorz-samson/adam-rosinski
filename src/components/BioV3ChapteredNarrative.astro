@@ -9,7 +9,9 @@ import Building2 from "@lucide/astro/icons/building-2";
 import Radio from "@lucide/astro/icons/radio";
 import Network from "@lucide/astro/icons/network";
 import Sparkles from "@lucide/astro/icons/sparkles";
-import { biographyV3Chapters, getBiographyV3ChapterParagraphs } from "../data/biographyV3";
+import { biographyV3Chapters } from "../data/biographyV3";
+import { originalBiographyParagraphs } from "../data/biographyOriginal";
+import { linkBiographyV3Paragraph } from "../data/biographyV3Links";
 import { withBase } from "../utils/withBase";
 
 const icons = {
@@ -54,8 +56,37 @@ const icons = {
           ))}
         </nav>
 
-        <div class="bio-v3-signal" aria-hidden="true">
-          <img src={withBase("/images/bio-motifs/bio-timeline-signal.svg")} alt="" loading="lazy" />
+        <div class="bio-v3-signal" aria-hidden="true" data-bio-v3-signal>
+          <svg viewBox="0 0 520 220" focusable="false">
+            <defs>
+              <linearGradient id="bio-v3-signal-gradient" x1="0" x2="1" y1="0" y2="0">
+                <stop offset="0" stop-color="#67e8f9"></stop>
+                <stop offset="0.45" stop-color="#6ee7b7"></stop>
+                <stop offset="0.75" stop-color="#c4b5fd"></stop>
+                <stop offset="1" stop-color="#fbbf24"></stop>
+              </linearGradient>
+            </defs>
+            <rect width="520" height="220" rx="26" fill="#ffffff" opacity="0.035"></rect>
+            <g stroke="#fff" stroke-opacity="0.08" stroke-width="1">
+              <path d="M40 44h440M40 88h440M40 132h440M40 176h440"></path>
+              <path d="M84 30v160M172 30v160M260 30v160M348 30v160M436 30v160"></path>
+            </g>
+            <path
+              d="M38 139c28-67 61-87 98-60s54 77 96 52 49-98 91-80 44 91 90 77 51-75 70-95"
+              fill="none"
+              stroke="url(#bio-v3-signal-gradient)"
+              stroke-width="5"
+              stroke-linecap="round"
+            ></path>
+            <g class="bio-v3-signal-dots" stroke="url(#bio-v3-signal-gradient)" stroke-width="4">
+              <circle class="bio-v3-signal-dot is-active" data-bio-v3-signal-dot cx="38" cy="139" r="8"></circle>
+              <circle class="bio-v3-signal-dot" data-bio-v3-signal-dot cx="136" cy="79" r="8"></circle>
+              <circle class="bio-v3-signal-dot" data-bio-v3-signal-dot cx="232" cy="131" r="8"></circle>
+              <circle class="bio-v3-signal-dot" data-bio-v3-signal-dot cx="323" cy="51" r="8"></circle>
+              <circle class="bio-v3-signal-dot" data-bio-v3-signal-dot cx="413" cy="128" r="8"></circle>
+              <circle class="bio-v3-signal-dot" data-bio-v3-signal-dot cx="483" cy="33" r="8"></circle>
+            </g>
+          </svg>
         </div>
       </div>
     </aside>
@@ -63,7 +94,10 @@ const icons = {
     <div class="bio-v3-chapters">
       {biographyV3Chapters.map((chapter) => {
         const Icon = icons[chapter.icon as keyof typeof icons] ?? Brain;
-        const paragraphs = getBiographyV3ChapterParagraphs(chapter);
+        const paragraphs = chapter.paragraphIndexes.map((paragraphIndex) => ({
+          paragraphIndex,
+          text: originalBiographyParagraphs[paragraphIndex],
+        }));
 
         return (
           <article
@@ -83,7 +117,33 @@ const icons = {
             </header>
 
             <div class="bio-v3-chapter-copy">
-              {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+              {paragraphs.map(({ paragraphIndex, text }) => (
+                <p>
+                  {linkBiographyV3Paragraph(text, paragraphIndex).map((segment) => {
+                    if (!segment.link) return segment.text;
+
+                    const href =
+                      segment.link.kind === "internal"
+                        ? withBase(segment.link.href)
+                        : segment.link.href;
+
+                    return (
+                      <a
+                        href={href}
+                        class:list={[
+                          "bio-v3-inline-link",
+                          segment.link.kind === "external" && "bio-v3-inline-link-external",
+                        ]}
+                        target={segment.link.kind === "external" ? "_blank" : undefined}
+                        rel={segment.link.kind === "external" ? "noreferrer" : undefined}
+                        title={segment.link.title}
+                      >
+                        {segment.text}
+                      </a>
+                    );
+                  })}
+                </p>
+              ))}
             </div>
           </article>
         );
@@ -100,6 +160,7 @@ const icons = {
     const sidebar = root.querySelector("[data-bio-v3-sidebar]");
     const links = Array.from(root.querySelectorAll("[data-bio-v3-link]"));
     const chapters = Array.from(root.querySelectorAll("[data-bio-v3-chapter]"));
+    const signalDots = Array.from(root.querySelectorAll("[data-bio-v3-signal-dot]"));
 
     if (!(sidebar instanceof HTMLElement) || links.length === 0 || chapters.length === 0) return;
 
@@ -118,6 +179,17 @@ const icons = {
       const progress = links.length > 1 ? (activeIndex / (links.length - 1)) * 100 : 100;
       sidebar.style.setProperty("--bio-v3-progress", `${progress}%`);
 
+      if (signalDots.length > 0) {
+        const activeDotIndex =
+          links.length > 1
+            ? Math.round((activeIndex / (links.length - 1)) * (signalDots.length - 1))
+            : signalDots.length - 1;
+
+        signalDots.forEach((dot, index) => {
+          dot.classList.toggle("is-active", index <= activeDotIndex);
+        });
+      }
+
       links.forEach((link) => {
         const isActive = link.getAttribute("data-bio-v3-link") === id;
         link.classList.toggle("is-active", isActive);
@@ -131,11 +203,49 @@ const icons = {
 
     const updateActiveChapter = () => {
       ticking = false;
-      const readingLine = Math.min(window.innerHeight * 0.34, 300);
+      const scrollBottom = window.scrollY + window.innerHeight;
+      const documentHeight = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight,
+      );
+
+      if (documentHeight - scrollBottom <= 8) {
+        const lastChapter = chapters[chapters.length - 1];
+        const lastId = lastChapter?.getAttribute("data-bio-v3-chapter");
+        if (lastId) setActive(lastId);
+        return;
+      }
+
+      const readingLine = Math.min(window.innerHeight * 0.52, 420);
       let current = chapters[0];
+      let closestDistance = Number.POSITIVE_INFINITY;
+      const lastChapter = chapters[chapters.length - 1];
+      const lastRect = lastChapter?.getBoundingClientRect();
+
+      if (lastChapter && lastRect) {
+        const visibleHeight = Math.max(
+          0,
+          Math.min(lastRect.bottom, window.innerHeight) - Math.max(lastRect.top, 0),
+        );
+        const visibleRatio = visibleHeight / Math.max(lastRect.height, 1);
+        if (visibleRatio >= 0.55 || lastRect.bottom <= window.innerHeight + 24) {
+          const lastId = lastChapter.getAttribute("data-bio-v3-chapter");
+          if (lastId) setActive(lastId);
+          return;
+        }
+      }
 
       chapters.forEach((chapter) => {
-        if (chapter.getBoundingClientRect().top <= readingLine) current = chapter;
+        const rect = chapter.getBoundingClientRect();
+        const isVisible = rect.bottom >= 0 && rect.top <= window.innerHeight;
+        if (!isVisible) return;
+
+        const chapterCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(chapterCenter - readingLine);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          current = chapter;
+        }
       });
 
       const id = current.getAttribute("data-bio-v3-chapter");
@@ -319,11 +429,24 @@ const icons = {
     padding-top: 0.85rem;
   }
 
-  .bio-v3-signal img {
+  .bio-v3-signal svg {
     display: block;
     width: 100%;
     height: auto;
     opacity: 0.78;
+  }
+
+  .bio-v3-signal-dot {
+    fill: #05070b;
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: fill 220ms ease, filter 220ms ease, transform 220ms ease;
+  }
+
+  .bio-v3-signal-dot.is-active {
+    fill: #67e8f9;
+    filter: drop-shadow(0 0 7px rgba(103, 232, 249, 0.72));
+    transform: scale(1.12);
   }
 
   .bio-v3-chapters {
@@ -473,6 +596,7 @@ const icons = {
     color: #d4d4d8;
     font-size: 1rem;
     line-height: 1.96;
+    text-align: justify;
     text-wrap: pretty;
   }
 
@@ -544,5 +668,30 @@ const icons = {
     .bio-v3-timeline-node {
       transition: none;
     }
+  }
+
+  .bio-v3-inline-link {
+    color: #a7f3ff;
+    text-decoration-line: underline;
+    text-decoration-color: rgba(103, 232, 249, 0.64);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+    transition: color 160ms ease, text-decoration-color 160ms ease;
+  }
+
+  .bio-v3-inline-link:hover,
+  .bio-v3-inline-link:focus-visible {
+    color: #ecfeff;
+    text-decoration-color: #67e8f9;
+  }
+
+  .bio-v3-inline-link:focus-visible {
+    outline: 2px solid rgba(103, 232, 249, 0.72);
+    outline-offset: 3px;
+  }
+
+  .bio-v3-inline-link-external {
+    color: #bae6fd;
+    text-decoration-style: dotted;
   }
 </style>

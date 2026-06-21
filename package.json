@@ -9,7 +9,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "import:pdfs": "node scripts/import-publication-pdfs.mjs"
+    "import:pdfs": "node scripts/import-publication-pdfs.mjs",
+    "verify:bio-v3-links": "node scripts/verify-bio-v3-hyperlinks.mjs"
   },
   "dependencies": {
     "@lucide/astro": "^1.14.0",

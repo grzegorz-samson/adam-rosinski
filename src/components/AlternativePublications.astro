@@ -108,7 +108,7 @@ function hasExternalSourceLink(href: string): boolean {
       ].join("; ");
 
       return (
-        <details class="alt-publication-card" style={themeStyle}>
+        <details id={`publication-${publication.slug}`} class="alt-publication-card" style={themeStyle}>
           <summary class="alt-publication-summary">
             <div class="alt-cover-link">
               <div class="alt-cover-frame">

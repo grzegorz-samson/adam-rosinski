@@ -29,5 +29,50 @@ const {
   </head>
   <body class:list={[bodyClass, justifyExtendedText && "justify-extended-text"]}>
     <slot />
+
+    <script>
+      function revealCurrentHashTarget() {
+        if (!window.location.hash) return;
+
+        let targetId = window.location.hash.slice(1);
+        try {
+          targetId = decodeURIComponent(targetId);
+        } catch {
+          // Keep the raw hash when it is not valid URI-encoded text.
+        }
+
+        const target = document.getElementById(targetId);
+        if (!(target instanceof HTMLElement)) return;
+
+        const details =
+          target instanceof HTMLDetailsElement ? target : target.closest("details");
+        if (details instanceof HTMLDetailsElement) details.open = true;
+
+        const workAreaCard = target.matches("[data-work-mode-card]")
+          ? target
+          : target.closest("[data-work-mode-card]");
+        if (workAreaCard instanceof HTMLElement) {
+          const key = workAreaCard.getAttribute("data-work-mode-card");
+          const trigger = key
+            ? document.querySelector(`[data-work-mode="${CSS.escape(key)}"]`)
+            : null;
+          if (trigger instanceof HTMLButtonElement) trigger.click();
+        }
+
+        window.requestAnimationFrame(() => {
+          const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          target.scrollIntoView({
+            block: "center",
+            behavior: reduceMotion ? "auto" : "smooth",
+          });
+          target.classList.add("is-linked-target");
+          window.setTimeout(() => target.classList.remove("is-linked-target"), 2200);
+        });
+      }
+
+      window.addEventListener("hashchange", revealCurrentHashTarget);
+      window.addEventListener("load", revealCurrentHashTarget, { once: true });
+      document.addEventListener("astro:page-load", revealCurrentHashTarget);
+    </script>
   </body>
 </html>

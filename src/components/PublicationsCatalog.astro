@@ -188,6 +188,7 @@ function hasExternalSourceLink(href: string): boolean {
 
             return (
               <details
+                id={`publication-${publication.slug}`}
                 class:list={[
                   "catalog-item",
                   "publication-row",

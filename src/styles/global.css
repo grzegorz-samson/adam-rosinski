@@ -239,3 +239,38 @@ body.justify-extended-text :where(
 body.justify-extended-text :where(.no-justify, .no-justify *) {
   text-align: left !important;
 }
+
+/* Deep-link targets opened from Bio v3 and other internal navigation. */
+[id].is-linked-target {
+  scroll-margin-top: 7rem;
+  animation: linked-target-pulse 2.2s ease-out;
+}
+
+.alt-publication-card,
+.catalog-item,
+.editorial-publication-item,
+.organization-card,
+.mode-card {
+  scroll-margin-top: 7rem;
+}
+
+@keyframes linked-target-pulse {
+  0%, 100% {
+    outline: 0 solid rgba(103, 232, 249, 0);
+    box-shadow: inherit;
+  }
+
+  18% {
+    outline: 2px solid rgba(103, 232, 249, 0.82);
+    outline-offset: 5px;
+    box-shadow: 0 0 0 8px rgba(103, 232, 249, 0.1), 0 24px 80px rgba(0, 0, 0, 0.38);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [id].is-linked-target {
+    animation: none;
+    outline: 2px solid rgba(103, 232, 249, 0.72);
+    outline-offset: 5px;
+  }
+}

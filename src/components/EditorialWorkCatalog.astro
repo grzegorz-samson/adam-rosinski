@@ -103,7 +103,11 @@ function hasExternalSourceLink(href: string): boolean {
       ].join("; ");
 
       return (
-        <details class="editorial-publication-item publication-row" style={stripStyle}>
+        <details
+          id={`publication-${publication.slug}`}
+          class="editorial-publication-item publication-row"
+          style={stripStyle}
+        >
           <summary class="editorial-publication-summary">
             <div class="editorial-publication-main">
               <PublicationVisual
