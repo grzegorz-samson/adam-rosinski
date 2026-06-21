@@ -196,7 +196,7 @@ const reviewIcons = {
         ].join("; ");
 
         return (
-          <article class:list={["review-area-card", `is-${area.visualMotif}`]} style={areaStyle}>
+          <article class:list={["review-area-card", `is-${area.visualMotif}`]} style={areaStyle} tabindex="0">
             <div class="review-area-icon">
               <Icon size={18} stroke-width={1.8} aria-hidden="true" />
             </div>
@@ -704,6 +704,12 @@ const reviewIcons = {
     background:
       radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--review-accent) 16%, transparent), transparent 36%),
       rgba(255, 255, 255, 0.04);
+    outline: none;
+    transition:
+      border-color 220ms ease,
+      box-shadow 220ms ease,
+      background 220ms ease,
+      transform 220ms ease;
   }
 
   .review-area-card::before {
@@ -713,6 +719,29 @@ const reviewIcons = {
     border-radius: 999px;
     background: repeating-radial-gradient(circle, color-mix(in srgb, var(--review-accent) 24%, transparent) 0 1px, transparent 1px 18px);
     opacity: 0.58;
+    transform: translate3d(0, 0, 0) scale(1);
+    transition:
+      opacity 220ms ease,
+      transform 220ms ease;
+  }
+
+  .review-area-card:hover,
+  .review-area-card:focus-visible {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--review-accent) 34%, rgba(255, 255, 255, 0.16));
+    background:
+      radial-gradient(circle at 16% 0%, color-mix(in srgb, var(--review-accent) 23%, transparent), transparent 38%),
+      radial-gradient(circle at 92% 18%, color-mix(in srgb, var(--review-accent-2) 13%, transparent), transparent 30%),
+      rgba(255, 255, 255, 0.052);
+    box-shadow:
+      0 24px 70px rgba(0, 0, 0, 0.38),
+      0 0 42px color-mix(in srgb, var(--review-accent) 10%, transparent);
+  }
+
+  .review-area-card:hover::before,
+  .review-area-card:focus-visible::before {
+    opacity: 0.82;
+    transform: translate3d(-0.35rem, -0.25rem, 0) scale(1.08);
   }
 
   .review-area-icon {
@@ -725,6 +754,19 @@ const reviewIcons = {
     border-radius: 18px;
     color: var(--review-accent);
     background: color-mix(in srgb, var(--review-accent) 9%, rgba(255, 255, 255, 0.045));
+    transition:
+      border-color 220ms ease,
+      background 220ms ease,
+      box-shadow 220ms ease,
+      transform 220ms ease;
+  }
+
+  .review-area-card:hover .review-area-icon,
+  .review-area-card:focus-visible .review-area-icon {
+    transform: translateY(-1px) scale(1.04);
+    border-color: color-mix(in srgb, var(--review-accent) 52%, rgba(255, 255, 255, 0.18));
+    background: color-mix(in srgb, var(--review-accent) 15%, rgba(255, 255, 255, 0.06));
+    box-shadow: 0 0 24px color-mix(in srgb, var(--review-accent) 16%, transparent);
   }
 
   .review-area-label {

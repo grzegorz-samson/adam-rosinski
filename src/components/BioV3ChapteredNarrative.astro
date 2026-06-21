@@ -135,7 +135,7 @@ const icons = {
                           segment.link.kind === "external" && "bio-v3-inline-link-external",
                         ]}
                         target={segment.link.kind === "external" ? "_blank" : undefined}
-                        rel={segment.link.kind === "external" ? "noreferrer" : undefined}
+                        rel={segment.link.kind === "external" ? "noopener noreferrer" : undefined}
                         title={segment.link.title}
                       >
                         {segment.text}
