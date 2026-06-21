@@ -19,6 +19,7 @@ export const site = {
 export const navigation = [
   { label: "Bio", href: "/bio" },
   { label: "Bio+", href: "/bio-plus" },
+  { label: "Bio v3", href: "/bio-v3" },
   { label: "Work Areas", href: "/work-areas" },
   { label: "For Students", href: "/for-students" },
   { label: "Publications", href: "/publications" },
