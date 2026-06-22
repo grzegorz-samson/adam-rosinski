@@ -7,6 +7,7 @@ import Network from "@lucide/astro/icons/network";
 import Radio from "@lucide/astro/icons/radio";
 import WavesHorizontal from "@lucide/astro/icons/waves-horizontal";
 import EditorialWorkCatalog from "./EditorialWorkCatalog.astro";
+import PeerReviewSection from "./PeerReviewSection.astro";
 import { editorialIntro, editorialRoles } from "../data/editorialRoles";
 import { organizationAnimatedBackgrounds } from "../data/organizationAnimatedBackgrounds";
 import { publicationsByCategory } from "../data/publications";
@@ -161,12 +162,19 @@ const motifIcons = {
     id="editorial-publications"
   />
 
+  <div class="editorial-peer-review-records">
+    <PeerReviewSection sectionId="editorial-peer-review-records" />
+  </div>
 </section>
 
 <style>
   .editorial-section {
     padding: 2rem 0 5rem;
     scroll-margin-top: 8.5rem;
+  }
+
+  .editorial-peer-review-records {
+    margin-top: 4.5rem;
   }
 
   .editorial-hero {
