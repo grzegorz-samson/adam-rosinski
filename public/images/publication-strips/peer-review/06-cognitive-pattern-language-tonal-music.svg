@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-a6f20ddb desc-a6f20ddb">
   <title id="title-a6f20ddb">A Cognitive Pattern Language for Tonal Music Representation — peer-review visual strip</title>
-  <desc id="desc-a6f20ddb">A pitch-class network and repeated tonal grammar modules.</desc>
+  <desc id="desc-a6f20ddb">Concentric pitch-class rings and repeated tonal grammar modules.</desc>
 
   <defs>
     <linearGradient id="fade-a6f20ddb" x1="0" x2="1"><stop offset="0%" stop-color="#A78BFA" stop-opacity="0"/><stop offset="36%" stop-color="#A78BFA" stop-opacity=".06"/><stop offset="100%" stop-color="#56D8FF" stop-opacity=".24"/></linearGradient>
@@ -15,5 +15,19 @@
   <rect x="500" y="26" width="340" height="126" fill="url(#grid-a6f20ddb)" opacity=".18"/>
   <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-a6f20ddb)" opacity=".9"/>
   <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-a6f20ddb)" opacity=".35"/>
-  <g><circle cx="710" cy="90" r="70" fill="none" stroke="#A78BFA" stroke-opacity=".65"/><path d="M710 20L745 151L649 55L778 55L675 151Z" fill="none" stroke="#56D8FF" stroke-width="1.5"/><circle cx="710.0" cy="20.0" r="4" fill="#56D8FF" opacity=".45"/><circle cx="745.0" cy="29.4" r="4" fill="#56D8FF" opacity=".57"/><circle cx="770.6" cy="55.0" r="4" fill="#56D8FF" opacity=".69"/><circle cx="780.0" cy="90.0" r="4" fill="#56D8FF" opacity=".81"/><circle cx="770.6" cy="125.0" r="4" fill="#56D8FF" opacity=".45"/><circle cx="745.0" cy="150.6" r="4" fill="#56D8FF" opacity=".57"/><circle cx="710.0" cy="160.0" r="4" fill="#56D8FF" opacity=".69"/><circle cx="675.0" cy="150.6" r="4" fill="#56D8FF" opacity=".81"/><circle cx="649.4" cy="125.0" r="4" fill="#56D8FF" opacity=".45"/><circle cx="640.0" cy="90.0" r="4" fill="#56D8FF" opacity=".57"/><circle cx="649.4" cy="55.0" r="4" fill="#56D8FF" opacity=".69"/><circle cx="675.0" cy="29.4" r="4" fill="#56D8FF" opacity=".81"/><g stroke="#A78BFA" stroke-opacity=".35"><rect x="488" y="48" width="78" height="18" rx="5"/><rect x="488" y="78" width="106" height="18" rx="5"/><rect x="488" y="108" width="90" height="18" rx="5"/></g></g>
+  <g>
+    <circle cx="710" cy="90" r="68" fill="none" stroke="#A78BFA" stroke-opacity=".65"/>
+    <circle cx="710" cy="90" r="42" fill="none" stroke="#56D8FF" stroke-opacity=".52" stroke-dasharray="5 7"/>
+    <path d="M658 64A60 60 0 0 1 762 64M658 116A60 60 0 0 0 762 116" fill="none" stroke="#56D8FF" stroke-width="1.5" stroke-linecap="round"/>
+    <g fill="#56D8FF">
+      <circle cx="710" cy="22" r="4" opacity=".5"/><circle cx="744" cy="31" r="4" opacity=".68"/>
+      <circle cx="769" cy="56" r="4" opacity=".82"/><circle cx="778" cy="90" r="4" opacity=".62"/>
+      <circle cx="769" cy="124" r="4" opacity=".5"/><circle cx="744" cy="149" r="4" opacity=".68"/>
+      <circle cx="710" cy="158" r="4" opacity=".82"/><circle cx="676" cy="149" r="4" opacity=".62"/>
+      <circle cx="651" cy="124" r="4" opacity=".5"/><circle cx="642" cy="90" r="4" opacity=".68"/>
+      <circle cx="651" cy="56" r="4" opacity=".82"/><circle cx="676" cy="31" r="4" opacity=".62"/>
+    </g>
+    <circle cx="710" cy="90" r="7" fill="#A78BFA" opacity=".72"/>
+    <g fill="none" stroke="#A78BFA" stroke-opacity=".35"><rect x="488" y="48" width="78" height="18" rx="5"/><rect x="488" y="78" width="106" height="18" rx="5"/><rect x="488" y="108" width="90" height="18" rx="5"/></g>
+  </g>
 </svg>
