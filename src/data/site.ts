@@ -20,6 +20,5 @@ export const navigation = [
   { label: "Bio", href: "/bio" },
   { label: "Publications", href: "/publications" },
   { label: "Work Areas", href: "/work-areas" },
-  { label: "For Students", href: "/for-students" },
   { label: "Label", href: "/music-label" },
 ];
