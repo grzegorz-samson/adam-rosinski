@@ -6,12 +6,9 @@ import AlternativePublications from "../components/AlternativePublications.astro
 import PublicationsCatalog from "../components/PublicationsCatalog.astro";
 import AlternativeProfiles from "../components/AlternativeProfiles.astro";
 import EditorialRolesSection from "../components/EditorialRolesSection.astro";
-import { publicationsByCategory, selectedPublications } from "../data/publications";
+import { publications, publicationsByCategory, selectedPublications } from "../data/publications";
 
-const publicationCount =
-  publicationsByCategory.monographs.length +
-  publicationsByCategory.journalArticles.length +
-  publicationsByCategory.bookChapters.length;
+const publicationCount = publications.length;
 
 const editorialCount = publicationsByCategory.editorialWork.length;
 ---
