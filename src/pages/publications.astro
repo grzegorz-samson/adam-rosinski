@@ -6,8 +6,6 @@ import AlternativePublications from "../components/AlternativePublications.astro
 import PublicationsCatalog from "../components/PublicationsCatalog.astro";
 import AlternativeProfiles from "../components/AlternativeProfiles.astro";
 import EditorialRolesSection from "../components/EditorialRolesSection.astro";
-import { editorialReviewAreas, editorialRoles } from "../data/editorialRoles";
-import { peerReviewCounts } from "../data/peerReviews";
 import { publicationsByCategory, selectedPublications } from "../data/publications";
 
 const publicationCount =
@@ -15,7 +13,7 @@ const publicationCount =
   publicationsByCategory.journalArticles.length +
   publicationsByCategory.bookChapters.length;
 
-const editorialCount = publicationsByCategory.editorialWork.length + peerReviewCounts.total;
+const editorialCount = publicationsByCategory.editorialWork.length;
 ---
 
 <AltLabLayout
@@ -28,8 +26,7 @@ const editorialCount = publicationsByCategory.editorialWork.length + peerReviewC
       <p class="alt-kicker">Publications hub</p>
       <h1 id="publications-hub-nav-title" class="page-hero-title">Publications and editorial</h1>
       <p>
-        One page now brings together bibliographic output, editorial publications, scholarly associations,
-        and reviewing activity.
+        One page now brings together bibliographic output, editorial publications, and scholarly associations.
       </p>
     </div>
 

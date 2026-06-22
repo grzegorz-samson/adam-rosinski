@@ -1,20 +1,14 @@
 ---
 import AudioWaveform from "@lucide/astro/icons/audio-waveform";
 import BadgeCheck from "@lucide/astro/icons/badge-check";
-import BookOpenCheck from "@lucide/astro/icons/book-open-check";
 import Building2 from "@lucide/astro/icons/building-2";
 import ExternalLink from "@lucide/astro/icons/external-link";
-import FileSearch from "@lucide/astro/icons/file-search";
 import Network from "@lucide/astro/icons/network";
 import Radio from "@lucide/astro/icons/radio";
-import SearchCheck from "@lucide/astro/icons/search-check";
-import Sparkles from "@lucide/astro/icons/sparkles";
 import WavesHorizontal from "@lucide/astro/icons/waves-horizontal";
 import EditorialWorkCatalog from "./EditorialWorkCatalog.astro";
-import PeerReviewSection from "./PeerReviewSection.astro";
-import { editorialIntro, editorialReviewAreas, editorialRoles } from "../data/editorialRoles";
+import { editorialIntro, editorialRoles } from "../data/editorialRoles";
 import { organizationAnimatedBackgrounds } from "../data/organizationAnimatedBackgrounds";
-import { peerReviewCounts } from "../data/peerReviews";
 import { publicationsByCategory } from "../data/publications";
 import { withBase } from "../utils/withBase";
 
@@ -33,11 +27,6 @@ const motifIcons = {
   constellation: Network,
 };
 
-const reviewIcons = {
-  journal: FileSearch,
-  book: BookOpenCheck,
-  field: Sparkles,
-};
 ---
 
 <section id={sectionId} class="editorial-section" aria-labelledby="editorial-title">
@@ -50,7 +39,6 @@ const reviewIcons = {
       <div class="editorial-hero-pills" aria-label="Editorial page highlights">
         <span>Editorial publications</span>
         <span>Scholarly associations</span>
-        <span>Reviewing activity</span>
       </div>
     </div>
 
@@ -66,10 +54,6 @@ const reviewIcons = {
       <div class="editorial-hero-metric">
         <strong>{organizationRoles.length}</strong>
         <span>scholarly associations</span>
-      </div>
-      <div class="editorial-hero-metric">
-        <strong>{peerReviewCounts.total}</strong>
-        <span>documented review records</span>
       </div>
     </aside>
   </div>
@@ -177,42 +161,6 @@ const reviewIcons = {
     id="editorial-publications"
   />
 
-  <section id="editorial-review" class="review-section" aria-labelledby="review-section-title">
-    <div class="review-section-heading">
-      <p class="alt-kicker">Reviewing activity</p>
-      <h2 id="review-section-title">Reviewing and publishing support areas</h2>
-      <p>
-        Reviewing activity is presented first through broader support areas and then through a documented record of
-        reviewed works grouped by year and publication type.
-      </p>
-    </div>
-
-    <div class="review-area-grid">
-      {editorialReviewAreas.map((area) => {
-        const Icon = reviewIcons[area.icon] ?? SearchCheck;
-        const areaStyle = [
-          `--review-accent: ${area.accent}`,
-          `--review-accent-2: ${area.accent2 ?? area.accent}`,
-        ].join("; ");
-
-        return (
-          <article class:list={["review-area-card", `is-${area.visualMotif}`]} style={areaStyle} tabindex="0">
-            <div class="review-area-icon">
-              <Icon size={18} stroke-width={1.8} aria-hidden="true" />
-            </div>
-            <p class="review-area-label">{area.publicLabel}</p>
-            <h3>{area.title}</h3>
-            <p>{area.description}</p>
-            <div class="review-area-tags">
-              {area.tags.map((tag) => <span>{tag}</span>)}
-            </div>
-          </article>
-        );
-      })}
-    </div>
-
-    <PeerReviewSection sectionId="editorial-peer-review-records" />
-  </section>
 </section>
 
 <style>
@@ -296,8 +244,7 @@ const reviewIcons = {
   }
 
   .editorial-hero-pills span,
-  .organization-card-label,
-  .review-area-label {
+  .organization-card-label {
     display: inline-flex;
     align-items: center;
     width: fit-content;
@@ -370,14 +317,12 @@ const reviewIcons = {
     line-height: 1.4;
   }
 
-  .editorial-service-heading,
-  .review-section-heading {
+  .editorial-service-heading {
     max-width: 60rem;
     margin: 4.5rem 0 1.5rem;
   }
 
-  .editorial-service-heading h2,
-  .review-section-heading h2 {
+  .editorial-service-heading h2 {
     color: #fff;
     font-size: clamp(2rem, 4vw, 3.25rem);
     line-height: 1.02;
@@ -385,8 +330,7 @@ const reviewIcons = {
     text-wrap: balance;
   }
 
-  .editorial-service-heading p:last-child,
-  .review-section-heading p:last-child {
+  .editorial-service-heading p:last-child {
     margin-top: 1rem;
     color: #aeb7c6;
     line-height: 1.85;
@@ -398,8 +342,7 @@ const reviewIcons = {
     gap: 1rem;
   }
 
-  .organization-card,
-  .review-area-card {
+  .organization-card {
     position: relative;
     isolation: isolate;
     overflow: hidden;
@@ -425,8 +368,7 @@ const reviewIcons = {
   }
 
   .organization-card::before,
-  .organization-card::after,
-  .review-area-card::before {
+  .organization-card::after {
     position: absolute;
     content: "";
     pointer-events: none;
@@ -527,8 +469,7 @@ const reviewIcons = {
   .organization-card-topline,
   .organization-card-main,
   .organization-card-meta,
-  .organization-tags,
-  .review-area-tags {
+  .organization-tags {
     display: flex;
     align-items: center;
   }
@@ -637,8 +578,7 @@ const reviewIcons = {
     text-transform: uppercase;
   }
 
-  .organization-card h3,
-  .review-area-card h3 {
+  .organization-card h3 {
     margin-top: 0.55rem;
     color: #fff;
     font-size: clamp(1.45rem, 2.3vw, 2rem);
@@ -654,8 +594,7 @@ const reviewIcons = {
     line-height: 1.45;
   }
 
-  .organization-description,
-  .review-area-card p:not(.review-area-label) {
+  .organization-description {
     position: relative;
     z-index: 2;
     margin-top: 1.2rem;
@@ -663,8 +602,7 @@ const reviewIcons = {
     line-height: 1.72;
   }
 
-  .organization-tags,
-  .review-area-tags {
+  .organization-tags {
     position: relative;
     z-index: 2;
     flex-wrap: wrap;
@@ -672,8 +610,7 @@ const reviewIcons = {
     margin-top: 1.2rem;
   }
 
-  .organization-tags span,
-  .review-area-tags span {
+  .organization-tags span {
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 999px;
     padding: 0.34rem 0.6rem;
@@ -683,105 +620,12 @@ const reviewIcons = {
     background: rgba(255, 255, 255, 0.045);
   }
 
-  .review-section {
-    margin-top: 4.5rem;
-  }
-
-  .review-section-heading {
-    margin-top: 0;
-  }
-
-  .review-area-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-  }
-
-  .review-area-card {
-    --role-accent: var(--review-accent);
-    --role-accent-2: var(--review-accent-2);
-    min-height: 19rem;
-    background:
-      radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--review-accent) 16%, transparent), transparent 36%),
-      rgba(255, 255, 255, 0.04);
-    outline: none;
-    transition:
-      border-color 220ms ease,
-      box-shadow 220ms ease,
-      background 220ms ease,
-      transform 220ms ease;
-  }
-
-  .review-area-card::before {
-    inset: auto -4rem -6rem auto;
-    width: 15rem;
-    height: 15rem;
-    border-radius: 999px;
-    background: repeating-radial-gradient(circle, color-mix(in srgb, var(--review-accent) 24%, transparent) 0 1px, transparent 1px 18px);
-    opacity: 0.58;
-    transform: translate3d(0, 0, 0) scale(1);
-    transition:
-      opacity 220ms ease,
-      transform 220ms ease;
-  }
-
-  .review-area-card:hover,
-  .review-area-card:focus-visible {
-    transform: translateY(-3px);
-    border-color: color-mix(in srgb, var(--review-accent) 34%, rgba(255, 255, 255, 0.16));
-    background:
-      radial-gradient(circle at 16% 0%, color-mix(in srgb, var(--review-accent) 23%, transparent), transparent 38%),
-      radial-gradient(circle at 92% 18%, color-mix(in srgb, var(--review-accent-2) 13%, transparent), transparent 30%),
-      rgba(255, 255, 255, 0.052);
-    box-shadow:
-      0 24px 70px rgba(0, 0, 0, 0.38),
-      0 0 42px color-mix(in srgb, var(--review-accent) 10%, transparent);
-  }
-
-  .review-area-card:hover::before,
-  .review-area-card:focus-visible::before {
-    opacity: 0.82;
-    transform: translate3d(-0.35rem, -0.25rem, 0) scale(1.08);
-  }
-
-  .review-area-icon {
-    display: grid;
-    place-items: center;
-    width: 2.8rem;
-    height: 2.8rem;
-    margin-bottom: 1.1rem;
-    border: 1px solid color-mix(in srgb, var(--review-accent) 34%, rgba(255, 255, 255, 0.1));
-    border-radius: 18px;
-    color: var(--review-accent);
-    background: color-mix(in srgb, var(--review-accent) 9%, rgba(255, 255, 255, 0.045));
-    transition:
-      border-color 220ms ease,
-      background 220ms ease,
-      box-shadow 220ms ease,
-      transform 220ms ease;
-  }
-
-  .review-area-card:hover .review-area-icon,
-  .review-area-card:focus-visible .review-area-icon {
-    transform: translateY(-1px) scale(1.04);
-    border-color: color-mix(in srgb, var(--review-accent) 52%, rgba(255, 255, 255, 0.18));
-    background: color-mix(in srgb, var(--review-accent) 15%, rgba(255, 255, 255, 0.06));
-    box-shadow: 0 0 24px color-mix(in srgb, var(--review-accent) 16%, transparent);
-  }
-
-  .review-area-label {
-    border-color: color-mix(in srgb, var(--review-accent) 26%, rgba(255, 255, 255, 0.12));
-    color: color-mix(in srgb, var(--review-accent-2) 84%, white 16%);
-    background: color-mix(in srgb, var(--review-accent) 8%, rgba(255, 255, 255, 0.045));
-  }
-
   @media (max-width: 1080px) {
     .editorial-hero {
       grid-template-columns: 1fr;
     }
 
-    .organization-grid,
-    .review-area-grid {
+    .organization-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
@@ -796,8 +640,7 @@ const reviewIcons = {
     }
 
     .editorial-hero,
-    .organization-card,
-    .review-area-card {
+    .organization-card {
       border-radius: 24px;
     }
 
@@ -810,8 +653,7 @@ const reviewIcons = {
       flex-direction: column;
     }
 
-    .organization-grid,
-    .review-area-grid {
+    .organization-grid {
       grid-template-columns: 1fr;
     }
 
