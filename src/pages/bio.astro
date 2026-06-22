@@ -1,14 +1,15 @@
 ---
 import AltLabLayout from "../layouts/AltLabLayout.astro";
 import AlternativeAbout from "../components/AlternativeAbout.astro";
-import AlternativeBiographyLongform from "../components/AlternativeBiographyLongform.astro";
+import BioV3ChapteredNarrative from "../components/BioV3ChapteredNarrative.astro";
 ---
 
 <AltLabLayout
   title="Bio | Adam Rosiński"
-  description="Research profile developed between listening theory, technology, and recording practice."
+  description="The original biographical text arranged into navigable chapters with a timeline-style table of contents."
   activePath="/bio"
+  justifyExtendedText
 >
   <AlternativeAbout />
-  <AlternativeBiographyLongform />
+  <BioV3ChapteredNarrative />
 </AltLabLayout>

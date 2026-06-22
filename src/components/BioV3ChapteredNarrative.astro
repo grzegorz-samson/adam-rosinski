@@ -44,7 +44,7 @@ const icons = {
 
           {biographyV3Chapters.map((chapter, index) => (
             <a
-              href={withBase(`/bio-v3#${chapter.id}`)}
+              href={withBase(`/bio#${chapter.id}`)}
               class:list={["bio-v3-timeline-link", index === 0 && "is-active"]}
               data-bio-v3-link={chapter.id}
               aria-current={index === 0 ? "location" : undefined}

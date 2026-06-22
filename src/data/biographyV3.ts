@@ -13,7 +13,7 @@ export type BiographyV3Chapter = {
 };
 
 /**
- * Navigation-only structure for /bio-v3.
+ * Navigation-only structure for /bio.
  *
  * Titles and labels organise the existing biography. The chapter body always
  * comes directly from originalBiographyParagraphs and is never rewritten.

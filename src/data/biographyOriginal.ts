@@ -1,5 +1,5 @@
 /**
- * Canonical source for the original long-form biography shown on /bio.
+ * Canonical source for the chaptered biography shown on /bio.
  *
  * Content invariant: do not edit, paraphrase, reorder, or typographically
  * normalise these strings without explicit editorial approval.

@@ -3,7 +3,6 @@ import BaseLayout from "./BaseLayout.astro";
 import AudioWaveform from "@lucide/astro/icons/audio-waveform";
 import Disc3 from "@lucide/astro/icons/disc-3";
 import UserRound from "@lucide/astro/icons/user-round";
-import UserRoundPlus from "@lucide/astro/icons/user-round-plus";
 import Radar from "@lucide/astro/icons/radar";
 import Headphones from "@lucide/astro/icons/headphones";
 import BookOpen from "@lucide/astro/icons/book-open";
@@ -33,8 +32,6 @@ function getNavKey(href: string) {
 const navIcons = {
   "/about": UserRound,
   "/bio": UserRound,
-  "/bio-plus": UserRoundPlus,
-  "/bio-v3": UserRoundPlus,
   "/work-areas": Radar,
   "/for-students": Headphones,
   "/audio-demonstrator": Headphones,
@@ -48,8 +45,6 @@ const navIcons = {
 const navThemes = {
   "/about": "cyan",
   "/bio": "cyan",
-  "/bio-plus": "red",
-  "/bio-v3": "violet",
   "/work-areas": "emerald",
   "/for-students": "amber",
   "/audio-demonstrator": "amber",

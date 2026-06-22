@@ -15,7 +15,7 @@ export interface BiographyV3TextSegment {
 }
 
 /**
- * Navigation layer for /bio-v3.
+ * Navigation layer for /bio.
  *
  * The exact visible phrases are matched against the canonical text stored in
  * biographyOriginal.ts. No biography sentence is rewritten or normalised.
