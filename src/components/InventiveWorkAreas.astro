@@ -311,11 +311,11 @@ const applicationBuckets = [
     <div class="map-grid">
       <div>
         <p class="kicker">Interactive map</p>
-        <h2 id="work-map-title">Six connected areas, one design field.</h2>
+        <h2 id="work-map-title">Six connected areas, one research practice.</h2>
         <p class="lead">
-          The original work-area structure is extended with authorial prototypes and artistic
-          research, so the page shows not only topics, but also how research becomes a device,
-          recording scenario, or listening environment.
+          Adam Rosiński’s work connects auditory perception, recording, spatial audio, education,
+          authorial prototypes, and artistic research. Across these areas, scholarly inquiry develops
+          into audio systems, recording methods, and listening environments.
         </p>
 
         <div class="mode-list" data-work-mode-buttons>
@@ -1318,7 +1318,7 @@ const applicationBuckets = [
   .flow-svg-cores circle {
     transform-box: fill-box;
     transform-origin: center;
-    transition: fill 180ms ease, opacity 180ms ease, filter 180ms ease, transform 180ms ease;
+    transition: fill 180ms ease, stroke 180ms ease, opacity 180ms ease, filter 180ms ease, transform 180ms ease;
   }
 
   .flow-svg-dot {
@@ -1328,6 +1328,7 @@ const applicationBuckets = [
 
   .flow-svg-dot.is-active {
     fill: #67e8f9;
+    stroke: transparent;
     filter: drop-shadow(0 0 14px rgba(103, 232, 249, 0.72));
     transform: scale(1.12);
   }
