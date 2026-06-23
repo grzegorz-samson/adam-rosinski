@@ -145,6 +145,7 @@ const editorialCount = publicationsByCategory.editorialWork.length;
 
   .publications-hub-nav {
     display: grid;
+    overflow: hidden;
     gap: 1.35rem;
     margin: var(--page-top-spacing-default) 0 1rem;
     padding: 1.2rem 1.25rem;
@@ -159,7 +160,7 @@ const editorialCount = publicationsByCategory.editorialWork.length;
 
   .publications-hub-hero {
     display: grid;
-    grid-template-columns: minmax(0, 1.08fr) minmax(19rem, 0.92fr);
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 30rem);
     gap: clamp(1.5rem, 4vw, 3.5rem);
     align-items: center;
   }
@@ -171,7 +172,12 @@ const editorialCount = publicationsByCategory.editorialWork.length;
   .publications-hub-graphic {
     position: relative;
     min-width: 0;
-    margin: -1.35rem -1rem -1.25rem 0;
+    width: 100%;
+    max-width: 30rem;
+    margin: 0;
+    justify-self: end;
+    overflow: hidden;
+    isolation: isolate;
     opacity: 0.94;
     pointer-events: none;
     -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 100%);
@@ -290,7 +296,9 @@ const editorialCount = publicationsByCategory.editorialWork.length;
 
     .publications-hub-graphic {
       width: min(100%, 39rem);
-      margin: -1rem auto -2rem;
+      max-width: 32rem;
+      margin: 0 auto;
+      justify-self: center;
       -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
       mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
     }
@@ -303,10 +311,8 @@ const editorialCount = publicationsByCategory.editorialWork.length;
     }
 
     .publications-hub-graphic {
-      width: 118%;
-      margin-left: -9%;
-      margin-right: -9%;
-      margin-bottom: -1.5rem;
+      width: 100%;
+      margin: 0 auto;
     }
 
     .publications-main-section :global(#selected-publications.alt-section) {
