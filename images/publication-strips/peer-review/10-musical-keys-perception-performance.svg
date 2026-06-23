@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-e4b4a638 desc-e4b4a638">
   <title id="title-e4b4a638">Musical Keys Diverge in Perception but Not in Performance — peer-review visual strip</title>
-  <desc id="desc-e4b4a638">A keyboard ring with separate perception and performance trajectories.</desc>
+  <desc id="desc-e4b4a638">A keyboard with diverging perception and converging performance trajectories.</desc>
 
   <defs>
     <linearGradient id="fade-e4b4a638" x1="0" x2="1"><stop offset="0%" stop-color="#A78BFA" stop-opacity="0"/><stop offset="36%" stop-color="#A78BFA" stop-opacity=".06"/><stop offset="100%" stop-color="#56D8FF" stop-opacity=".24"/></linearGradient>
@@ -15,5 +15,17 @@
   <rect x="500" y="26" width="340" height="126" fill="url(#grid-e4b4a638)" opacity=".18"/>
   <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-e4b4a638)" opacity=".9"/>
   <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-e4b4a638)" opacity=".35"/>
-  <g><rect x="480" y="105" width="17" height="38" rx="2" fill="none" stroke="#A78BFA" stroke-opacity=".38"/><rect x="499" y="105" width="17" height="38" rx="2" fill="none" stroke="#A78BFA" stroke-opacity=".60"/><rect x="518" y="105" width="17" height="38" rx="2" fill="none" stroke="#A78BFA" stroke-opacity=".38"/><rect x="537" y="105" width="17" height="38" rx="2" fill="none" stroke="#A78BFA" stroke-opacity=".60"/><rect x="556" y="105" width="17" height="38" rx="2" fill="none" stroke="#A78BFA" stroke-opacity=".38"/><rect x="575" y="105" width="17" height="38" rx="2" fill="none" stroke="#A78BFA" stroke-opacity=".60"/><rect x="594" y="105" width="17" height="38" rx="2" fill="none" stroke="#A78BFA" stroke-opacity=".38"/><rect x="613" y="105" width="17" height="38" rx="2" fill="none" stroke="#A78BFA" stroke-opacity=".60"/><rect x="632" y="105" width="17" height="38" rx="2" fill="none" stroke="#A78BFA" stroke-opacity=".38"/><rect x="651" y="105" width="17" height="38" rx="2" fill="none" stroke="#A78BFA" stroke-opacity=".60"/><rect x="670" y="105" width="17" height="38" rx="2" fill="none" stroke="#A78BFA" stroke-opacity=".38"/><rect x="689" y="105" width="17" height="38" rx="2" fill="none" stroke="#A78BFA" stroke-opacity=".60"/><circle cx="755" cy="84" r="58" fill="none" stroke="#56D8FF"/><path d="M755 26L788 132L704 66L806 66L722 132Z" fill="none" stroke="#56D8FF"/><path d="M486 76C556 42 624 52 690 74" fill="none" stroke="#A78BFA"/><path d="M486 90C566 120 624 118 696 94" fill="none" stroke="#56D8FF"/></g>
+  <g>
+    <g fill="none" stroke="#A78BFA"><rect x="480" y="105" width="17" height="38" rx="2" stroke-opacity=".38"/><rect x="499" y="105" width="17" height="38" rx="2" stroke-opacity=".60"/><rect x="518" y="105" width="17" height="38" rx="2" stroke-opacity=".38"/><rect x="537" y="105" width="17" height="38" rx="2" stroke-opacity=".60"/><rect x="556" y="105" width="17" height="38" rx="2" stroke-opacity=".38"/><rect x="575" y="105" width="17" height="38" rx="2" stroke-opacity=".60"/><rect x="594" y="105" width="17" height="38" rx="2" stroke-opacity=".38"/><rect x="613" y="105" width="17" height="38" rx="2" stroke-opacity=".60"/><rect x="632" y="105" width="17" height="38" rx="2" stroke-opacity=".38"/><rect x="651" y="105" width="17" height="38" rx="2" stroke-opacity=".60"/><rect x="670" y="105" width="17" height="38" rx="2" stroke-opacity=".38"/><rect x="689" y="105" width="17" height="38" rx="2" stroke-opacity=".60"/></g>
+    <path d="M486 76C556 42 624 52 690 74" fill="none" stroke="#A78BFA"/>
+    <path d="M486 90C566 120 624 118 696 94" fill="none" stroke="#56D8FF"/>
+    <g fill="none" stroke-linecap="round" stroke-width="2">
+      <path d="M724 58C758 58 779 40 816 34" stroke="#A78BFA"/>
+      <path d="M724 58C758 58 779 76 816 82" stroke="#56D8FF"/>
+      <path d="M724 126C758 108 785 108 816 126" stroke="#A78BFA"/>
+      <path d="M724 126C758 144 785 144 816 126" stroke="#56D8FF"/>
+    </g>
+    <g fill="#56D8FF"><circle cx="724" cy="58" r="5"/><circle cx="816" cy="34" r="4" opacity=".72"/><circle cx="816" cy="82" r="4" opacity=".72"/><circle cx="816" cy="126" r="5"/></g>
+    <circle cx="724" cy="126" r="5" fill="#A78BFA"/>
+  </g>
 </svg>

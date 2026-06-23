@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" preserveAspectRatio="xMaxYMid meet" role="img" aria-labelledby="title-f55d64a5 desc-f55d64a5">
   <title id="title-f55d64a5">Individual Tempo Asymmetries and Coupling Dynamics in Dyadic Musical Synchronization — peer-review visual strip</title>
-  <desc id="desc-f55d64a5">Two coupled oscillators with asymmetric tempi converging in synchronization.</desc>
+  <desc id="desc-f55d64a5">Two asymmetric pulse trains linked by coupling arcs and converging in synchronization.</desc>
 
   <defs>
     <linearGradient id="fade-f55d64a5" x1="0" x2="1"><stop offset="0%" stop-color="#A78BFA" stop-opacity="0"/><stop offset="36%" stop-color="#A78BFA" stop-opacity=".06"/><stop offset="100%" stop-color="#56D8FF" stop-opacity=".24"/></linearGradient>
@@ -15,5 +15,14 @@
   <rect x="500" y="26" width="340" height="126" fill="url(#grid-f55d64a5)" opacity=".18"/>
   <ellipse cx="710" cy="90" rx="186" ry="72" fill="url(#glow-f55d64a5)" opacity=".9"/>
   <path d="M330 160H900V20C794 40 722 24 644 42C554 63 472 50 330 78Z" fill="url(#fade-f55d64a5)" opacity=".35"/>
-  <g><circle cx="570" cy="90" r="42" fill="none" stroke="#A78BFA"/><circle cx="760" cy="90" r="42" fill="none" stroke="#56D8FF"/><path d="M528 90C544 52 570 52 612 90S674 128 718 90S744 52 802 90" fill="none" stroke="#A78BFA" stroke-width="2"/><path d="M612 76C646 58 674 58 718 76" fill="none" stroke="#56D8FF" stroke-dasharray="5 6"/><g fill="#56D8FF"><circle cx="570" cy="90" r="5"/><circle cx="760" cy="90" r="5"/></g></g>
+  <g>
+    <path d="M494 58H826M494 122H826" fill="none" stroke="#A78BFA" stroke-opacity=".28" stroke-width="1.5"/>
+    <g fill="#A78BFA"><circle cx="520" cy="58" r="5"/><circle cx="582" cy="58" r="5"/><circle cx="650" cy="58" r="5"/><circle cx="724" cy="58" r="5"/><circle cx="806" cy="58" r="5"/></g>
+    <g fill="#56D8FF"><circle cx="520" cy="122" r="5"/><circle cx="595" cy="122" r="5"/><circle cx="668" cy="122" r="5"/><circle cx="735" cy="122" r="5"/><circle cx="806" cy="122" r="5"/></g>
+    <g fill="none" stroke="#56D8FF" stroke-opacity=".48" stroke-width="1.5" stroke-dasharray="4 6">
+      <path d="M582 62C582 82 595 98 595 118"/><path d="M650 62C650 82 668 98 668 118"/><path d="M724 62C724 82 735 98 735 118"/>
+    </g>
+    <path d="M806 58V122" fill="none" stroke="#56D8FF" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="806" cy="90" r="7" fill="#56D8FF" opacity=".78"/>
+  </g>
 </svg>
