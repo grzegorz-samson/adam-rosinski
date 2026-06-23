@@ -1,0 +1,206 @@
+<svg
+  class="bio-portrait-field"
+  viewBox="0 0 720 720"
+  aria-hidden="true"
+  focusable="false"
+>
+  <defs>
+    <radialGradient id="bio-portrait-field-halo" cx="50%" cy="42%" r="58%">
+      <stop offset="0" stop-color="#67e8f9" stop-opacity="0.28"></stop>
+      <stop offset="0.45" stop-color="#8b7dff" stop-opacity="0.11"></stop>
+      <stop offset="1" stop-color="#05070b" stop-opacity="0"></stop>
+    </radialGradient>
+    <linearGradient id="bio-portrait-field-line" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#67e8f9" stop-opacity="0.95"></stop>
+      <stop offset="0.55" stop-color="#c4b5fd" stop-opacity="0.65"></stop>
+      <stop offset="1" stop-color="#fbbf24" stop-opacity="0.72"></stop>
+    </linearGradient>
+    <filter id="bio-portrait-field-soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7"></feGaussianBlur>
+    </filter>
+  </defs>
+
+  <circle class="bio-portrait-field-halo" cx="360" cy="360" r="305" fill="url(#bio-portrait-field-halo)"></circle>
+
+  <g class="bio-portrait-field-rings" fill="none" stroke="url(#bio-portrait-field-line)" stroke-linecap="round">
+    <circle class="bio-portrait-field-ring bio-portrait-field-ring-1" cx="360" cy="360" r="265" stroke-opacity="0.18" stroke-width="2" stroke-dasharray="4 18"></circle>
+    <circle class="bio-portrait-field-ring bio-portrait-field-ring-2" cx="360" cy="360" r="218" stroke-opacity="0.22" stroke-width="1.5" stroke-dasharray="2 13"></circle>
+    <circle class="bio-portrait-field-ring bio-portrait-field-ring-3" cx="360" cy="360" r="168" stroke-opacity="0.28" stroke-width="1.3"></circle>
+    <circle class="bio-portrait-field-ring bio-portrait-field-ring-4" cx="360" cy="360" r="112" stroke-opacity="0.36" stroke-width="1.2" stroke-dasharray="1 9"></circle>
+  </g>
+
+  <g fill="none" stroke="url(#bio-portrait-field-line)" stroke-linecap="round">
+    <path
+      class="bio-portrait-field-signal bio-portrait-field-signal-1"
+      pathLength="1"
+      d="M96 360c94-122 194-162 304-122s176 123 224 122"
+      stroke-width="3"
+      stroke-opacity="0.72"
+    ></path>
+    <path
+      class="bio-portrait-field-signal bio-portrait-field-signal-2"
+      pathLength="1"
+      d="M134 446c82-64 158-80 242-49s137 40 210-17"
+      stroke-width="2"
+      stroke-opacity="0.48"
+    ></path>
+    <path
+      class="bio-portrait-field-signal bio-portrait-field-signal-3"
+      pathLength="1"
+      d="M182 274c86 24 142 18 205-23s116-34 171 9"
+      stroke-width="2"
+      stroke-opacity="0.42"
+    ></path>
+  </g>
+
+  <g class="bio-portrait-field-nodes" fill="#67e8f9">
+    <circle class="bio-portrait-field-node bio-portrait-field-node-1" cx="187" cy="263" r="5"></circle>
+    <circle class="bio-portrait-field-node bio-portrait-field-node-2" cx="312" cy="228" r="4"></circle>
+    <circle class="bio-portrait-field-node bio-portrait-field-node-3" cx="461" cy="255" r="5"></circle>
+    <circle class="bio-portrait-field-node bio-portrait-field-node-4" cx="587" cy="363" r="4"></circle>
+    <circle class="bio-portrait-field-node bio-portrait-field-node-5" cx="506" cy="451" r="5"></circle>
+    <circle class="bio-portrait-field-node bio-portrait-field-node-6" cx="351" cy="493" r="4"></circle>
+    <circle class="bio-portrait-field-node bio-portrait-field-node-7" cx="206" cy="445" r="5"></circle>
+  </g>
+
+  <g class="bio-portrait-field-axis" opacity="0.58" stroke="#fff" stroke-width="1">
+    <path d="M360 96v528" opacity="0.1"></path>
+    <path d="M96 360h528" opacity="0.1"></path>
+    <path d="M173 173l374 374" opacity="0.08"></path>
+    <path d="M547 173L173 547" opacity="0.08"></path>
+  </g>
+
+  <circle class="bio-portrait-field-core-glow" cx="360" cy="360" r="44" fill="#67e8f9" opacity="0.18" filter="url(#bio-portrait-field-soft)"></circle>
+  <circle class="bio-portrait-field-core" cx="360" cy="360" r="9" fill="#fff" opacity="0.85"></circle>
+</svg>
+
+<style>
+  .bio-portrait-field {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .bio-portrait-field-rings {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: bio-portrait-field-rotate 46s linear infinite;
+  }
+
+  .bio-portrait-field-ring,
+  .bio-portrait-field-node,
+  .bio-portrait-field-core,
+  .bio-portrait-field-core-glow,
+  .bio-portrait-field-halo {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .bio-portrait-field-ring {
+    animation: bio-portrait-field-ring-breathe 9s ease-in-out infinite;
+  }
+
+  .bio-portrait-field-ring-2 { animation-delay: -2.25s; }
+  .bio-portrait-field-ring-3 { animation-delay: -4.5s; }
+  .bio-portrait-field-ring-4 { animation-delay: -6.75s; }
+
+  .bio-portrait-field-signal {
+    stroke-dasharray: 0.2 0.8;
+    stroke-dashoffset: 1;
+    animation: bio-portrait-field-signal-travel 15s linear infinite;
+  }
+
+  .bio-portrait-field-signal-2 {
+    animation-duration: 19s;
+    animation-direction: reverse;
+  }
+
+  .bio-portrait-field-signal-3 {
+    animation-duration: 22s;
+  }
+
+  .bio-portrait-field-node {
+    opacity: 0.42;
+    animation: bio-portrait-field-node-pulse 7s ease-in-out infinite;
+  }
+
+  .bio-portrait-field-node-2 { animation-delay: -1s; }
+  .bio-portrait-field-node-3 { animation-delay: -2s; }
+  .bio-portrait-field-node-4 { animation-delay: -3s; }
+  .bio-portrait-field-node-5 { animation-delay: -4s; }
+  .bio-portrait-field-node-6 { animation-delay: -5s; }
+  .bio-portrait-field-node-7 { animation-delay: -6s; }
+
+  .bio-portrait-field-halo,
+  .bio-portrait-field-core-glow {
+    animation: bio-portrait-field-halo-pulse 10s ease-in-out infinite;
+  }
+
+  .bio-portrait-field-core {
+    animation: bio-portrait-field-core-pulse 5.4s ease-in-out infinite;
+  }
+
+  @keyframes bio-portrait-field-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes bio-portrait-field-ring-breathe {
+    0%, 100% { opacity: 0.58; transform: scale(0.992); }
+    50% { opacity: 1; transform: scale(1.012); }
+  }
+
+  @keyframes bio-portrait-field-signal-travel {
+    from { stroke-dashoffset: 1; }
+    to { stroke-dashoffset: 0; }
+  }
+
+  @keyframes bio-portrait-field-node-pulse {
+    0%, 100% {
+      opacity: 0.34;
+      transform: scale(0.86);
+      filter: drop-shadow(0 0 0 rgba(103, 232, 249, 0));
+    }
+    46%, 58% {
+      opacity: 1;
+      transform: scale(1.42);
+      filter: drop-shadow(0 0 9px rgba(103, 232, 249, 0.86));
+    }
+  }
+
+  @keyframes bio-portrait-field-halo-pulse {
+    0%, 100% { opacity: 0.72; transform: scale(0.94); }
+    50% { opacity: 1; transform: scale(1.05); }
+  }
+
+  @keyframes bio-portrait-field-core-pulse {
+    0%, 100% {
+      opacity: 0.72;
+      transform: scale(0.88);
+      filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.34));
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.22);
+      filter: drop-shadow(0 0 11px rgba(103, 232, 249, 0.82));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bio-portrait-field-rings,
+    .bio-portrait-field-ring,
+    .bio-portrait-field-signal,
+    .bio-portrait-field-node,
+    .bio-portrait-field-halo,
+    .bio-portrait-field-core-glow,
+    .bio-portrait-field-core {
+      animation: none;
+    }
+
+    .bio-portrait-field-signal {
+      stroke-dasharray: none;
+      stroke-dashoffset: 0;
+    }
+  }
+</style>

@@ -6,6 +6,7 @@ import AlternativePublications from "../components/AlternativePublications.astro
 import PublicationsCatalog from "../components/PublicationsCatalog.astro";
 import AlternativeProfiles from "../components/AlternativeProfiles.astro";
 import EditorialRolesSection from "../components/EditorialRolesSection.astro";
+import PublicationsHeroGraphic from "../components/PublicationsHeroGraphic.astro";
 import { publications, publicationsByCategory, selectedPublications } from "../data/publications";
 
 const publicationCount = publications.length;
@@ -19,12 +20,18 @@ const editorialCount = publicationsByCategory.editorialWork.length;
   activePath="/publications"
 >
   <section class="publications-hub-nav" aria-labelledby="publications-hub-nav-title" data-publications-hub>
-    <div class="publications-hub-copy">
-      <p class="alt-kicker">Publications hub</p>
-      <h1 id="publications-hub-nav-title" class="page-hero-title">Publications and editorial</h1>
-      <p>
-        One page now brings together bibliographic output, editorial publications, and scholarly associations.
-      </p>
+    <div class="publications-hub-hero">
+      <div class="publications-hub-copy">
+        <p class="alt-kicker">Publications hub</p>
+        <h1 id="publications-hub-nav-title" class="page-hero-title">Publications and editorial</h1>
+        <p>
+          One page now brings together bibliographic output, editorial publications, and scholarly associations.
+        </p>
+      </div>
+
+      <div class="publications-hub-graphic" aria-hidden="true">
+        <PublicationsHeroGraphic />
+      </div>
     </div>
 
     <nav class="publications-hub-toggle" aria-label="Toggle between publications and editorial sections">
@@ -150,8 +157,35 @@ const editorialCount = publicationsByCategory.editorialWork.length;
     backdrop-filter: blur(16px);
   }
 
+  .publications-hub-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(19rem, 0.92fr);
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: center;
+  }
+
   .publications-hub-copy {
     max-width: 62rem;
+  }
+
+  .publications-hub-graphic {
+    position: relative;
+    min-width: 0;
+    margin: -1.35rem -1rem -1.25rem 0;
+    opacity: 0.94;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 100%);
+  }
+
+  .publications-hub-graphic::after {
+    content: "";
+    position: absolute;
+    inset: 12% 4% 10% 16%;
+    z-index: -1;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(103, 232, 249, 0.12), transparent 68%);
+    filter: blur(22px);
   }
 
   .publications-hub-copy h1 {
@@ -245,10 +279,34 @@ const editorialCount = publicationsByCategory.editorialWork.length;
     padding-top: 1.8rem;
   }
 
+  @media (max-width: 920px) {
+    .publications-hub-hero {
+      grid-template-columns: 1fr;
+    }
+
+    .publications-hub-copy {
+      max-width: 48rem;
+    }
+
+    .publications-hub-graphic {
+      width: min(100%, 39rem);
+      margin: -1rem auto -2rem;
+      -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+      mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+    }
+  }
+
   @media (max-width: 680px) {
     .publications-hub-nav {
       padding: 1rem;
       border-radius: 24px;
+    }
+
+    .publications-hub-graphic {
+      width: 118%;
+      margin-left: -9%;
+      margin-right: -9%;
+      margin-bottom: -1.5rem;
     }
 
     .publications-main-section :global(#selected-publications.alt-section) {

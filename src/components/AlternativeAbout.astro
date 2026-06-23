@@ -3,6 +3,7 @@ import ExternalLink from "@lucide/astro/icons/external-link";
 import FileText from "@lucide/astro/icons/file-text";
 import { site } from "../data/site";
 import { withBase } from "../utils/withBase";
+import BioPortraitField from "./BioPortraitField.astro";
 
 const keywords = [
   "musical acoustics",
@@ -65,7 +66,9 @@ const keywords = [
           loading="lazy"
         />
       </picture>
-      <img class="alt-profile-orbit" src={withBase("/images/bio-motifs/bio-portrait-field.svg")} alt="" loading="lazy" aria-hidden="true" />
+      <div class="alt-profile-orbit" aria-hidden="true">
+        <BioPortraitField />
+      </div>
       <picture class="alt-profile-silhouette" aria-hidden="true">
         <source
           srcset={`${withBase("/images/bio/adam-rosinski-bio-silhouette-720.webp")} 720w, ${withBase("/images/bio/adam-rosinski-bio-silhouette-960.webp")} 960w`}
@@ -243,9 +246,15 @@ const keywords = [
     z-index: 2;
     width: 62%;
     height: auto;
-    object-fit: contain;
     opacity: 0.54;
     mix-blend-mode: screen;
+    pointer-events: none;
+    filter: drop-shadow(0 0 18px rgba(103, 232, 249, 0.08));
+    transition: opacity 220ms ease;
+  }
+
+  .alt-profile-card:hover .alt-profile-orbit {
+    opacity: 0.66;
   }
 
   .alt-profile-silhouette {
@@ -271,6 +280,12 @@ const keywords = [
     .alt-profile-card {
       max-width: 32rem;
       min-height: 24rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .alt-profile-orbit {
+      transition: none;
     }
   }
 
